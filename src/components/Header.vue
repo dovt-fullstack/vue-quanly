@@ -41,17 +41,21 @@ export default defineComponent({
   setup() {
     const authStore = useAuthStore();
     const handleClickLogout = () => {
-      if (authStore.user) {
-        return authStore.logout(authStore.user.userName).catch(error => {
-          if (error.response.status === 401) {
-            message.error("Lỗi! Đăng xuất không thành công.");
-          } else {
-            message.error(`Lỗi! ${error.response.statusText}`);
-          }
-        });
-      } else {
-        message.error("Lỗi! Hệ thống không tìm thấy thông tin người dùng.");
-      }
+      localStorage.removeItem('auth')
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('token')
+      // if (authStore.user) {
+
+      //   return authStore.logout(authStore.user.userName).catch(error => {
+      //     if (error.response.status === 401) {
+      //       message.error("Lỗi! Đăng xuất không thành công.");
+      //     } else {
+      //       message.error(`Lỗi! ${error.response.statusText}`);
+      //     }
+      //   });
+      // } else {
+      //   message.error("Lỗi! Hệ thống không tìm thấy thông tin người dùng.");
+      // }
     };
     return {
       authStore,

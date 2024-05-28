@@ -95,10 +95,29 @@ const adminRoutes = [
         component: () => import("../views/users/storeAll.vue"),
       },
       {
+        path: "danh-sach-san-pham",
+        name: "admin-danh-san-pham",
+        meta: { title: "Dánh sách sản phẩm" },
+        component: () => import("../views/users/storeProduct.vue"),
+      },
+      {
         path: "thanh-vien/them-moi",
         name: "admin-users-create",
         meta: { title: "Thêm mới - Thành viên" },
         component: () => import("../views/users/create.vue"),
+      },
+
+      {
+        path: "product-type/them-moi",
+        name: "admin-product-type-create",
+        meta: { title: "Thêm mới - product-type" },
+        component: () => import("../views/users/createProductType.vue"),
+      },
+      {
+        path: "product/them-moi",
+        name: "admin-product-create",
+        meta: { title: "Thêm mới - product" },
+        component: () => import("../views/users/createProduct.vue"),
       },
       {
         path: "danh-sach-store/them-moi",
