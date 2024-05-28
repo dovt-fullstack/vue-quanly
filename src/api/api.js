@@ -12,7 +12,6 @@ const instance = axios.create({
   },
   responseType: "json",
 });
-//
 instance.interceptors.request.use(
   (config) => {
     const token = TokenService.getLocalAccessToken();
