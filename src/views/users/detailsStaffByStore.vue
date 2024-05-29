@@ -60,13 +60,13 @@
               <span>{{ index + 1 }}</span>
             </template>
             <template v-if="column.key === 'userName'">
-              <span>{{ record.storeName }}</span>
+              <span>{{ record.customerName }}</span>
             </template>
             <template v-if="column.key === 'fullName'">
-              <span>{{ record.phoneNumber }}</span>
+              <span>{{ record.customerPhoneNumber }}</span>
             </template>
             <template v-if="column.key === 'email'">
-              <span>{{ record.storeType }}</span>
+              <span>{{ record.totalOrder }}</span>
             </template>
 
             <template v-if="column.key === 'action' && authStoreClaim !== null">
@@ -173,6 +173,7 @@ export default defineComponent({
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
     const router = useRouter();
     const route = useRoute();
+    const id = route.params.id;
     const errors = ref([]);
     const users = ref([]);
     const pageParam = reactive({
@@ -190,7 +191,7 @@ export default defineComponent({
         key: "index",
       },
       {
-        title: "Tên cửa hàng",
+        title: "Tên nhân viên",
         dataIndex: "userName",
         key: "userName",
       },
@@ -200,7 +201,7 @@ export default defineComponent({
         key: "fullName",
       },
       {
-        title: "Loại",
+        title: "Số lượng order",
         key: "email",
       },
 
@@ -214,7 +215,7 @@ export default defineComponent({
     const getUsers = (args) => {
       axios
         .get(
-          "https://charismatic-friendship-production.up.railway.app/api/v1/admin/store/view"
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/customer/view`
         )
         .then((response) => {
           console.log(response.data.data, "response");

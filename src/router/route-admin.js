@@ -16,7 +16,7 @@ const adminRoutes = [
         meta: { title: "Yêu cầu cấp nhãn" },
         component: () => import("../views/requestdcdlabels/index.vue"),
       },
-   
+
       {
         path: "yeu-cau-cap-nhan/them-moi",
         name: "admin-requestdcdlabels-create",
@@ -47,7 +47,6 @@ const adminRoutes = [
         meta: { title: "Chi tiết - sản phẩm" },
         component: () => import("../views/users/detailsProduct.vue"),
       },
-
 
       {
         path: "ket-qua-do/sua/:id/:recordingDate",
@@ -115,13 +114,25 @@ const adminRoutes = [
         meta: { title: "Thêm mới - Thành viên" },
         component: () => import("../views/users/create.vue"),
       },
-
+      {
+        path: "store/info-them-moi",
+        name: "store/info-them-moi",
+        meta: { title: "Thêm mới - info store" },
+        component: () => import("../views/users/createInfoStore.vue"),
+      },
       {
         path: "product-type/them-moi",
         name: "admin-product-type-create",
         meta: { title: "Thêm mới - product-type" },
         component: () => import("../views/users/createProductType.vue"),
       },
+      {
+        path: "store/staff/:id",
+        name: "admin-store-all-staff",
+        meta: { title: "Thêm mới - product-type" },
+        component: () => import("../views/users/detailsStaffByStore.vue"),
+      },
+
       {
         path: "product/them-moi",
         name: "admin-product-create",
