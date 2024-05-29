@@ -3,7 +3,7 @@
         <div class="row mb-3">
             <div class="col-6">
                 <a-breadcrumb>
-                    <a-breadcrumb-item>Cửa hàng</a-breadcrumb-item>
+                    <a-breadcrumb-item>Sản phẩm của Cửa hàng</a-breadcrumb-item>
                 </a-breadcrumb>
             </div>
             <div class="col-6 d-flex justify-content-end">
@@ -25,33 +25,6 @@
 
             </div>
         </div>
-        <!-- <div class="row">
-            <div class="col-12">
-                <a-form @keyup.enter="clickFrmFilter($event)" layout="inline" class="p-3 border">
-                    <div class="col-3">
-                        <label for="exampleFormControlInput1" class="form-label">Tài khoản</label>
-                        <a-form-item>
-                            <a-input v-model:value="pageParam.userName" placeholder="Username"
-                                class="form-control form-control-sm" size="small"></a-input>
-                        </a-form-item>
-                    </div>
-                    <div class="col-3">
-                        <label for="exampleFormControlInput1" class="form-label">.</label>
-                        <a-form-item>
-                           <a-button v-on:click="clickFrmFilter($event)" class="bg-success text-light btn btn-sm"
-                                size="small" type="button" html-type="button">
-                                Tìm kiếm
-                            </a-button> 
-                            <a-button v-on:click="clickFrmFilter($event)" class="bg-success text-light btn btn-sm"
-                                size="small" type="submit" html-type="button">
-                                Tìm kiếm
-                            </a-button>
-                        </a-form-item>
-                    </div>
-                </a-form>
-
-            </div>
-        </div> -->
         <div class="row">
             <div class="col-12">
                 <a-table :dataSource="users" :columns="columns" :scroll="{ x: 576 }" :pagination=false>
@@ -71,17 +44,15 @@
                        
                         <template v-if="column.key === 'action' && authStoreClaim !== null">
                             <a-space warp>
-                                <!-- <router-link :to="{ name: 'admin-users-edit', params: { id: record.id } }"> -->
+                                <router-link :to="{ name: 'admin-product-edit', params: { id: record.id } }">
                                     <a-button type="dashed" class="me-2 text-primary" size="small" title="Sửa">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a-button>
-                                <!-- </router-link> -->
+                                </router-link>
                             </a-space>
-                            <a-popconfirm title="Bạn muốn Khóa bản ghi này?" ok-text="Yes" cancel-text="No"
-                                @confirm="confirmBanned(record.id)">
-                                <a-button title="Khóa" type="dashed" size="small" shape="" class="me-2 text-warning"><i
-                                        class="fa-solid fa-lock"></i></a-button>
-                            </a-popconfirm>
+                            <router-link :to="{ name: 'admin-chi-tiet-san-pham', params: { id: record.productId } }">
+                                <a-button title="Khóa" type="dashed" size="small" shape="" class="me-2 text-warning">xem </a-button>
+                                </router-link>
                             <a-popconfirm title="Dữ liệu sẽ không thể phục hồi, bạn muốn xóa bản ghi này?" ok-text="Yes"
                                 cancel-text="No" @confirm="confirmRemove(record.id)">
                                 <a-button title="Xóa" type="dashed" size="small" shape="" danger><i
@@ -115,10 +86,16 @@ export default defineComponent({
     setup() {
         useMenu().onSelectedKeys(["admin-users"]);
         const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+
         const router = useRouter();
         const route = useRoute();
         const errors = ref([]);
         const users = ref([]);
+        const storeId = route.params.id;
+        console.log(storeId,'storeId')
+        const storeId2 = ref(route.params.id);
+        console.log(storeId2._value,'storeId2')
+
         const pageParam = reactive({
             current: (Object.keys(route.query).length > 0) ? route.query.PageNumber : 1,
             pageNumber: (Object.keys(route.query).length > 0) ? route.query.PageNumber : 1,
@@ -155,7 +132,7 @@ export default defineComponent({
         ];
 
         const getUsers = (args) => {
-            axios.get('https://charismatic-friendship-production.up.railway.app/api/v1/management/1/product/view').then((response) => {
+            axios.get(`https://charismatic-friendship-production.up.railway.app/api/v1/management/${storeId2._value}/product/view`).then((response) => {
                 console.log(response.data.data, 'response')
                 users.value = response.data.data;
             }).catch((error) => {

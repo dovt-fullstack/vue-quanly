@@ -16,6 +16,7 @@ const adminRoutes = [
         meta: { title: "Yêu cầu cấp nhãn" },
         component: () => import("../views/requestdcdlabels/index.vue"),
       },
+   
       {
         path: "yeu-cau-cap-nhan/them-moi",
         name: "admin-requestdcdlabels-create",
@@ -40,6 +41,14 @@ const adminRoutes = [
         meta: { title: "Thêm mới - Kết quả đo" },
         component: () => import("../views/measurementresultdatas/create.vue"),
       },
+      {
+        path: "san-pham/chi-tiet/:id",
+        name: "admin-chi-tiet-san-pham",
+        meta: { title: "Chi tiết - sản phẩm" },
+        component: () => import("../views/users/detailsProduct.vue"),
+      },
+
+
       {
         path: "ket-qua-do/sua/:id/:recordingDate",
         name: "admin-measurementresultdatas-edit",
@@ -95,9 +104,9 @@ const adminRoutes = [
         component: () => import("../views/users/storeAll.vue"),
       },
       {
-        path: "danh-sach-san-pham",
-        name: "admin-danh-san-pham",
-        meta: { title: "Dánh sách sản phẩm" },
+        path: "ProductByStore/:id",
+        name: "ProductByStore",
+        meta: { title: "ProductByStore" },
         component: () => import("../views/users/storeProduct.vue"),
       },
       {
@@ -119,6 +128,14 @@ const adminRoutes = [
         meta: { title: "Thêm mới - product" },
         component: () => import("../views/users/createProduct.vue"),
       },
+
+      {
+        path: "product/edit/:id",
+        name: "admin-product-edit",
+        meta: { title: "sửa - product" },
+        component: () => import("../views/users/editProduct.vue"),
+      },
+
       {
         path: "danh-sach-store/them-moi",
         name: "admin-store-create",
@@ -192,6 +209,24 @@ const adminRoutes = [
     name: "register",
     meta: { title: "Đăng ký" },
     component: () => import("../views/auths/register.vue"),
+  },
+  {
+    path: "/trang-chu",
+    name: "trang-chu",
+    meta: { title: "Trang chủ" },
+    component: () => import("../views/home/homeLayout.vue"),
+  },
+  {
+    path: "/trang-chu/chi-tiet-san-pham/:id",
+    name: "trang-chu-chi-tiet-san-pham",
+    meta: { title: "Trang chủ" },
+    component: () => import("../views/home/DetailsProductHome.vue"),
+  },
+  {
+    path: "/trang-chu/gio-hang",
+    name: "trang-chu-gio-hang",
+    meta: { title: "Giỏ hàng" },
+    component: () => import("../views/home/cartView.vue"),
   },
   {
     path: "/404",

@@ -18,7 +18,7 @@
 
                 </a-button>
                 <a-button type="primary" title="Thêm mới">
-                     <router-link :to="{ name: 'admin-store-create' }">
+                    <router-link :to="{ name: 'admin-store-create' }">
                         <i class="fa-solid fa-plus"></i>
                     </router-link>
                 </a-button>
@@ -68,19 +68,22 @@
                         <template v-if="column.key === 'email'">
                             <span>{{ record.storeType }}</span>
                         </template>
-                       
+
                         <template v-if="column.key === 'action' && authStoreClaim !== null">
                             <a-space warp>
                                 <!-- <router-link :to="{ name: 'admin-users-edit', params: { id: record.id } }"> -->
-                                    <a-button type="dashed" class="me-2 text-primary" size="small" title="Sửa">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a-button>
+                                <a-button type="dashed" class="me-2 text-primary" size="small" title="Sửa">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a-button>
                                 <!-- </router-link> -->
                             </a-space>
-                            <a-popconfirm title="Bạn muốn Khóa bản ghi này?" ok-text="Yes" cancel-text="No"
-                                @confirm="confirmBanned(record.id)">
-                                <a-button title="Khóa" type="dashed" size="small" shape="" class="me-2 text-warning"><i
-                                        class="fa-solid fa-lock"></i></a-button>
+                            <a-popconfirm title="Bạn muốn Khóa bản ghi này?" ok-text="Yes" cancel-text="No">
+                                <router-link :to="{ name: 'ProductByStore', params: { id: record.storeId } }">
+                                    <a-button title="Khóa" type="dashed" size="small" shape=""
+                                        class="me-2 text-warning">
+                                        <i class="fa-solid fa-lock"></i>
+                                    </a-button>
+                                </router-link>
                             </a-popconfirm>
                             <a-popconfirm title="Dữ liệu sẽ không thể phục hồi, bạn muốn xóa bản ghi này?" ok-text="Yes"
                                 cancel-text="No" @confirm="confirmRemove(record.id)">
@@ -146,7 +149,7 @@ export default defineComponent({
                 title: "Loại",
                 key: "email",
             },
-            
+
             {
                 title: "Tác vụ",
                 key: "action",

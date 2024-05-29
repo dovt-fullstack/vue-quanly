@@ -10,7 +10,7 @@
           <p @click="navigateTo('admin-store')" style="padding-left: 5px;padding-top: 10px;">Danh sách sửa hàng</p>
           <p @click="navigateTo('admin-product-type-create')" style="padding-left: 5px;padding-top: 10px;">Thêm product type</p>
           <p @click="navigateTo('admin-product-create')" style="padding-left: 5px;padding-top: 10px;">Thêm product</p>
-          <p @click="navigateTo('admin-danh-san-pham')" style="padding-left: 5px;padding-top: 10px;">danh sách sp của cửa hàng</p>
+          <!-- <p @click="navigateTo('admin-danh-san-pham')" style="padding-left: 5px;padding-top: 10px;">danh sách sp của cửa hàng</p> -->
           <template #header>
             <div>BẢNG ĐIỀU KHIỂN</div>
           </template>
