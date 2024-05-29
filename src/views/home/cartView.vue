@@ -726,12 +726,12 @@
                                 <a style="background:#000;margin-top:5px;"
                                     href="//www.dmca.com/Protection/Status.aspx?ID=fb224c55-eb25-4914-8540-4f94b9c3013d"
                                     rel="noreferrer nofollow" title="DMCA.com Protection Status" class="dmca-badge">
-                                    <img src="/Content/img/dmca.png" alt="DMCA.com Protection Status" width="75"
+                                    <img src="https://denled.com/Content/img/dmca.png" alt="DMCA.com Protection Status" width="75"
                                         height="24"></a>
                                 <a style="background:#000;margin-top:5px;"
                                     href="http://online.gov.vn/Home/WebDetails/85212" target="_blank"
                                     title="Đã thông báo bộ công thương" rel="nofollow"><img
-                                        src="/Content/img/dathongbao.png" width="69" height="35"
+                                        src="https://denled.com/Content/img/dathongbao.png" width="69" height="35"
                                         alt="Đã thông báo bộ công thương"></a>
                             </div>
                         </div>

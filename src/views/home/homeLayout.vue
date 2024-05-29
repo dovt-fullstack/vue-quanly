@@ -573,7 +573,7 @@
                             <div class="owl-item" style="width: 1263px;">
                                 <div class="item">
                                     <a href="" title="">
-                                        <img src="/Data/upload/files/Adv/Slide/banner2.jpg"
+                                        <img src="https://denled.com/Data/upload/files/1(5).png"
                                             data-src="/Data/upload/files/Adv/Slide/banner2.jpg" alt="">
                                     </a>
                                 </div>
@@ -581,7 +581,7 @@
                             <div class="owl-item" style="width: 1263px;">
                                 <div class="item">
                                     <a href="" title="">
-                                        <img src="/Data/upload/files/Banner%20web/banner%201.png"
+                                        <img src="https://denled.com/Data/upload/files/1(5).png"
                                             data-src="/Data/upload/files/Banner%20web/banner%201.png" alt="">
                                     </a>
                                 </div>
@@ -613,20 +613,7 @@
                         </div>
                     </div>
 
-
-
-
-
-
-
-
-
-                    <div class="owl-controls clickable">
-                        <div class="owl-buttons">
-                            <div class="owl-prev"><i></i></div>
-                            <div class="owl-next"><i></i></div>
-                        </div>
-                    </div>
+                   
                 </div>
              
 
@@ -760,24 +747,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-                        <div class="owl-controls clickable">
-                            <div class="owl-buttons">
-                                <div class="owl-prev"><i></i></div>
-                                <div class="owl-next"><i></i></div>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -800,9 +770,7 @@
 
                     </div>
                 </div>
-
                 <ul class="pb Product">
-
                     <li class="pi">
                         <a title="Bóng đèn LED 25w Tuýp T8 1m2 vỏ nhôm"
                             href="/den-led-tuyp/den-led-tuyp-22w-t8-2835-120">
@@ -815,11 +783,8 @@
                             <h3 itemprop="name">Bóng đèn LED 25w Tuýp T8 1m2 vỏ nhôm</h3>
                             <strong>96.000₫<i>-20%</i><u>120.000₫</u></strong>
                             <span class="s s5">(2 nhận xét)</span>
-
-
                         </a>
                     </li>
-
                     <li class="pi">
                         <a title="Đèn led âm trần 15W TD-1508 GX LIGHTING"
                             href="/den-led-am-tran/den-led-am-tran-tron-15w-td-1508-gx-lighting">
@@ -1721,25 +1686,25 @@
 
                 <ul class="wrap">
                     <li>
-                        <i><img src="/Content/img/Home/hoi.png" title="Hỏi chúng tôi"></i>
+                        <i><img src="https://denled.com/Content/img/Home/hoi.png" title="Hỏi chúng tôi"></i>
                         <span>Hỏi chúng tôi</span>
                         <p>Nếu bạn không chắc chắn về những thiết bị nào phù hợp với bạn và nhà của bạn, chỉ cần liên hệ
                             với chúng tôi và để được nhóm hỗ trợ khách hàng trực tuyến của chúng tôi đưa ra đề xuất cho
                             bạn.</p>
                     </li>
                     <li>
-                        <i><img src="/Content/img/Home/tim.png" title="Hỏi chúng tôi"></i>
+                        <i><img src="https://denled.com/Content/img/Home/tim.png" title="Hỏi chúng tôi"></i>
                         <span>Tìm sản phẩm</span>
                         <p>Với nhiều sản phẩm để lựa chọn, đây là một nơi tuyệt vời để bắt đầu dự án của bạn.</p>
                     </li>
                     <li>
-                        <i><img src="/Content/img/Home/loca.png" title="Hỏi chúng tôi"></i>
+                        <i><img src="https://denled.com/Content/img/Home/loca.png" title="Hỏi chúng tôi"></i>
                         <span>Ghé thăm cửa hàng</span>
                         <p>Chào mừng bạn đến với các cửa hàng đèn led hàng đầu Việt Nam - trưng bày đầy đủ các thiết bị
                             đèn, quạt, điện thông minh.</p>
                     </li>
                     <li>
-                        <i><img src="/Content/img/Home/dichvu.png" title="Hỏi chúng tôi"></i>
+                        <i><img src="https://denled.com/Content/img/Home/dichvu.png" title="Hỏi chúng tôi"></i>
                         <span>Dịch vụ của chúng tôi</span>
                         <p>Dịch vụ khách hàng là nền tảng trong hoạt động kinh doanh của chúng tôi và chúng tôi nỗ lực
                             hết sức để cung cấp trải nghiệm tuyệt đối tốt nhất cho khách hàng.</p>
@@ -1776,13 +1741,13 @@
                                 <a style="background:#000;margin-top:5px;"
                                     href="//www.dmca.com/Protection/Status.aspx?ID=fb224c55-eb25-4914-8540-4f94b9c3013d"
                                     rel="noreferrer nofollow" title="DMCA.com Protection Status" class="dmca-badge">
-                                    <img src="/Content/img/dmca.png" alt="DMCA.com Protection Status" width="75"
+                                    <img src="https://denled.com/Content/img/dmca.png" alt="DMCA.com Protection Status" width="75"
                                         height="24"></a>
                               
                                 <a style="background:#000;margin-top:5px;"
                                     href="http://online.gov.vn/Home/WebDetails/85212" target="_blank"
                                     title="Đã thông báo bộ công thương" rel="nofollow"><img
-                                        src="/Content/img/dathongbao.png" width="69" height="35"
+                                        src="https://denled.com/Content/img/dathongbao.png" width="69" height="35"
                                         alt="Đã thông báo bộ công thương"></a>
                             </div>
                         </div>
