@@ -159,8 +159,8 @@ const adminRoutes = [
         component: () => import("../views/users/createInfoStore.vue"),
       },
       {
-        path: "product-type/them-moi",
-        name: "admin-product-type-create",
+        path: "product-type/them-moi/:id",
+        name: "product-type/them-moi",
         meta: { title: "Thêm mới - product-type" },
         component: () => import("../views/users/createProductType.vue"),
       },

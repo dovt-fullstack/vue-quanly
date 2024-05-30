@@ -8,7 +8,6 @@
           <p @click="navigateTo('admin-member-create')">Đăng kí user</p>
           <p @click="navigateTo('admin-manager-create')">Đăng kí manager</p>
           <p @click="navigateTo('admin-store')">Danh sách sửa hàng</p>
-          <p @click="navigateTo('admin-product-type-create')">Thêm product type</p>
           <p @click="navigateTo('store/info-them-moi')">Thêm info store</p>
         </div>
       </div>

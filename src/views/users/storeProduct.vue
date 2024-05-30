@@ -8,12 +8,10 @@
             </div>
             <div class="col-6 d-flex justify-content-end">
                 <a-button class="me-2">
+                    <router-link :to="{ name: 'product-type/them-moi' , params:{id :storeId2 } }">
+                    product type
+                </router-link>
 
-                    <i class="fa-solid fa-vials"></i>
-
-                </a-button>
-                <a-button class="me-2">
-                    <i class="fa-solid fa-vial-virus"></i>
                 </a-button>
                 <a-button type="primary" title="Thêm mới">
                     <router-link :to="{ name: 'product/them-moi' , params:{id :storeId2 } }">

@@ -4,10 +4,14 @@
       <div class="col-12">
         <a-breadcrumb>
           <a-breadcrumb-item>
-            <router-link :to="{ name: 'admin-dashboards' }">Trang chủ</router-link>
+            <router-link :to="{ name: 'admin-dashboards' }"
+              >Trang chủ</router-link
+            >
           </a-breadcrumb-item>
           <a-breadcrumb-item>
-            <router-link :to="{ name: 'admin-users' }">Product type</router-link>
+            <router-link :to="{ name: 'admin-users' }"
+              >Product type</router-link
+            >
           </a-breadcrumb-item>
           <a-breadcrumb-item>Thêm mới</a-breadcrumb-item>
         </a-breadcrumb>
@@ -15,17 +19,28 @@
       </div>
       <div class="col-12 col-sm-12 mb-3">
         <!-- @submit.prevent="createUsers()" -->
-        <a-form class="p-3" name="custom-validation" ref="formRef" :model="formState" :rules="rules" v-bind="layout"
-          @finish="createUsers()">
+        <a-form
+          class="p-3"
+          name="custom-validation"
+          ref="formRef"
+          :model="formState"
+          :rules="rules"
+          v-bind="layout"
+          @finish="createUsers()"
+        >
           <div class="row">
             <div class="col-12 col-sm-9">
               <a-form-item ref="userName" label="name" required name="userName">
                 <a-input v-model:value="formState.userName" />
-                <small v-if="errors && errors.UserName" class="text-danger">{{ errors.UserName[0] }}</small>
+                <small v-if="errors && errors.UserName" class="text-danger">{{
+                  errors.UserName[0]
+                }}</small>
               </a-form-item>
-              <a-form-item ref="fullName" label="avatar"  name="fullName">
+              <a-form-item ref="fullName" label="avatar" name="fullName">
                 <input type="file" @change="handleFileUpload" />
-                <small v-if="errors && errors.FullName" class="text-danger">{{ errors.FullName[0] }}</small>
+                <small v-if="errors && errors.FullName" class="text-danger">{{
+                  errors.FullName[0]
+                }}</small>
               </a-form-item>
               <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
                 <a-button class="me-0 me-sm-2 mb-3 mb-sm-0">
@@ -33,8 +48,14 @@
                     <span>Quay lại</span>
                   </router-link>
                 </a-button>
-                <a-button class="me-0 me-sm-2 mb-3 mb-sm-0 bg-info text-light" @click="resetForm">Reset</a-button>
-                <a-button type="primary" html-type="submit" class="bg-success">Lưu</a-button>
+                <a-button
+                  class="me-0 me-sm-2 mb-3 mb-sm-0 bg-info text-light"
+                  @click="resetForm"
+                  >Reset</a-button
+                >
+                <a-button type="primary" html-type="submit" class="bg-success"
+                  >Lưu</a-button
+                >
               </a-form-item>
             </div>
           </div>
@@ -45,19 +66,19 @@
 </template>
 <script>
 import { onMounted, defineComponent, ref, reactive, toRefs } from "vue";
-import { useRouter } from "vue-router";
-import { message } from 'ant-design-vue';
-import { DeleteOutlined } from '@ant-design/icons-vue';
+import { useRoute, useRouter } from "vue-router";
+import { message } from "ant-design-vue";
+import { DeleteOutlined } from "@ant-design/icons-vue";
 import { useMenu } from "../../stores/use-menu.js";
-import ApiViewData from '../../api/ApiViewData.js';
-import BaseCommon from '../../api/BaseCommon.js';
-import ApiUser from '../../api/ApiUser.js';
+import ApiViewData from "../../api/ApiViewData.js";
+import BaseCommon from "../../api/BaseCommon.js";
+import ApiUser from "../../api/ApiUser.js";
 import { useAuthStore } from "../../stores/auth.store.js";
 import axios from "axios";
 
 export default defineComponent({
   components: {
-    DeleteOutlined
+    DeleteOutlined,
   },
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
@@ -70,25 +91,27 @@ export default defineComponent({
     });
     const errors = ref({});
     const formRef = ref();
+    const route = useRoute();
+    const id = route.params.id;
     const formState = reactive({
-      userName: '',
-      fullName: '',
-      avatarFile:''
+      userName: "",
+      fullName: "",
+      avatarFile: "",
     });
-    const fileAvatar = ref(null)
+    const fileAvatar = ref(null);
     let validatePass = async (rule, value) => {
-      if (value === '') {
-        return Promise.reject('Please input the password');
+      if (value === "") {
+        return Promise.reject("Please input the password");
       } else {
-        if (formState.rePassWord !== '') {
-          formRef.value.validateFields('rePassWord');
+        if (formState.rePassWord !== "") {
+          formRef.value.validateFields("rePassWord");
         }
         return Promise.resolve();
       }
     };
     let validatePass2 = async (rule, value) => {
-      if (value === '') {
-        return Promise.reject('Please input the password again');
+      if (value === "") {
+        return Promise.reject("Please input the password again");
       } else if (value !== formState.passWord) {
         return Promise.reject("Two inputs don't match!");
       } else {
@@ -99,18 +122,17 @@ export default defineComponent({
       userName: [
         {
           required: true,
-          message: 'name không để trống.',
-          trigger: 'change',
-        }
+          message: "name không để trống.",
+          trigger: "change",
+        },
       ],
       fullName: [
         {
           required: false,
-          message: ' không để trống.',
-          trigger: 'change',
-        }
+          message: " không để trống.",
+          trigger: "change",
+        },
       ],
-
     };
     const layout = {
       labelCol: {
@@ -125,10 +147,11 @@ export default defineComponent({
     };
     //
     const getOptionsLevelManage = () => {
-      ApiViewData.GetOptionsLevelManage().then((response) => {
-        users.optionsLevelManage = response.data;
-        formState.levelManage = response.data[0].value;
-      })
+      ApiViewData.GetOptionsLevelManage()
+        .then((response) => {
+          users.optionsLevelManage = response.data;
+          formState.levelManage = response.data[0].value;
+        })
         .catch((error) => {
           console.log(error);
         });
@@ -137,10 +160,11 @@ export default defineComponent({
       return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
     };
     const getOptionsRole = () => {
-      ApiViewData.GetOptionsRole().then((response) => {
-        users.optionsRole = response.data;
-        formState.roleID = response.data[0].value;
-      })
+      ApiViewData.GetOptionsRole()
+        .then((response) => {
+          users.optionsRole = response.data;
+          formState.roleID = response.data[0].value;
+        })
         .catch((error) => {
           console.log(error);
         });
@@ -149,10 +173,11 @@ export default defineComponent({
       return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
     };
     const getOptionsStatus = () => {
-      ApiViewData.GetOptionsStatus().then((response) => {
-        users.optionsStatus = response.data;
-        formState.status = response.data[0].value;
-      })
+      ApiViewData.GetOptionsStatus()
+        .then((response) => {
+          users.optionsStatus = response.data;
+          formState.status = response.data[0].value;
+        })
         .catch((error) => {
           console.log(error);
         });
@@ -163,48 +188,58 @@ export default defineComponent({
     //
     const handleFileUpload = (event) => {
       const file = event.target.files[0];
-      this.formState.avatarFile = file; // Store the file object in formState
-    }
+      formState.avatarFile = file; // Store the file object in formState
+    };
     const createUsers = () => {
       const formData = new FormData();
-      formData.append('name', formState.userName);
-      formData.append('avatar', formState.avatarFile); // avatarFile will hold the file object
-      console.log('formState');
-      console.log(formState, 'formState');
-      axios.post('https://charismatic-friendship-production.up.railway.app/api/v1/management/1/producttype/insert', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+      formData.append("name", formState.userName);
+      formData.append("avatar", formState.avatarFile); // avatarFile will hold the file object
+      console.log("formState");
+      console.log(formState, "formState");
+      axios
+        .post(
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/producttype/insert`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
         .then((response) => {
           message.success("Tạo mới thành công!");
-          router.push({ name: "admin-users" });
+          router.push({
+            name: "ProductByStore",
+            params: {
+              id: id,
+            },
+          });
         })
         .catch((error) => {
           console.log(error);
         });
-    }
+    };
     onMounted(() => {
       //
       resetForm();
       getOptionsLevelManage();
       getOptionsStatus();
       getOptionsRole();
-    })
+    });
     const handleChangeUpload = (e) => {
       var p = BaseCommon.GetBase64(e.target.files[0]);
-      console.log(e.target.files[0],'e.target.files[0]');
-      p.then(value => {
+      console.log(e.target.files[0], "e.target.files[0]");
+      p.then((value) => {
         formState.urlAvatar = value;
-        formState.rmavatar = 'no';
-      }).catch(err => {
+        formState.rmavatar = "no";
+      }).catch((err) => {
         console.log(err); // 👉️ "Something went wrong"
       });
-    }
+    };
     const handleRemoveAvatar = () => {
       formState.urlAvatar = null;
-      formState.rmavatar = 'yes';
-    }
+      formState.rmavatar = "yes";
+    };
     //
     return {
       ...toRefs(users),
@@ -228,7 +263,7 @@ export default defineComponent({
       createUsers,
       // preview
       handleChangeUpload,
-      handleRemoveAvatar
+      handleRemoveAvatar,
     };
   },
 });
