@@ -4,7 +4,9 @@
       <div class="col-12">
         <a-breadcrumb>
           <a-breadcrumb-item>
-            <router-link :to="{ name: 'admin-dashboards' }">Trang chủ</router-link>
+            <router-link :to="{ name: 'admin-dashboards' }"
+              >Trang chủ</router-link
+            >
           </a-breadcrumb-item>
           <a-breadcrumb-item>
             <router-link :to="{ name: 'admin-users' }">Product</router-link>
@@ -14,29 +16,73 @@
         <h1>Sửa sản phẩm</h1>
       </div>
       <div class="col-12 col-sm-12 mb-3">
-        <a-form class="p-3" name="custom-validation" ref="formRef" :model="formState" :rules="rules" v-bind="layout"
-          @finish="createUsers">
+        <a-form
+          class="p-3"
+          name="custom-validation"
+          ref="formRef"
+          :model="formState"
+          :rules="rules"
+          v-bind="layout"
+          @finish="createUsers"
+        >
           <div class="row">
             <div class="col-12">
-              <a-form-item ref="productName" label="Tên sản phẩm" required name="productName">
+              <a-form-item
+                ref="productName"
+                label="Tên sản phẩm"
+                required
+                name="productName"
+              >
                 <a-input v-model:value="formState.productName" />
-                <small v-if="errors && errors.productName" class="text-danger">{{ errors.productName[0] }}</small>
+                <small
+                  v-if="errors && errors.productName"
+                  class="text-danger"
+                  >{{ errors.productName[0] }}</small
+                >
               </a-form-item>
               <a-form-item ref="price" label="Giá" required name="price">
                 <a-input v-model:value="formState.price" />
-                <small v-if="errors && errors.price" class="text-danger">{{ errors.price[0] }}</small>
+                <small v-if="errors && errors.price" class="text-danger">{{
+                  errors.price[0]
+                }}</small>
               </a-form-item>
-              <a-form-item ref="description" label="Mô tả" required name="description">
+              <a-form-item
+                ref="description"
+                label="Mô tả"
+                required
+                name="description"
+              >
                 <a-textarea v-model:value="formState.description" />
-                <small v-if="errors && errors.description" class="text-danger">{{ errors.description[0] }}</small>
+                <small
+                  v-if="errors && errors.description"
+                  class="text-danger"
+                  >{{ errors.description[0] }}</small
+                >
               </a-form-item>
-              <a-form-item ref="productType" label="Loại sản phẩm" required name="productType">
+              <a-form-item
+                ref="productType"
+                label="Loại sản phẩm"
+                required
+                name="productType"
+              >
                 <a-input v-model:value="formState.productType" />
-                <small v-if="errors && errors.productType" class="text-danger">{{ errors.productType[0] }}</small>
+                <small
+                  v-if="errors && errors.productType"
+                  class="text-danger"
+                  >{{ errors.productType[0] }}</small
+                >
               </a-form-item>
-              <a-form-item ref="avatarProduct" label="Ảnh sản phẩm" name="avatarProduct">
+              <a-form-item
+                ref="avatarProduct"
+                label="Ảnh sản phẩm"
+                name="avatarProduct"
+              >
                 <input type="file" @change="handleFileUpload" />
-                <small v-if="errors && errors.avatarProduct" class="text-danger">{{ errors.avatarProduct[0] }}</small>
+                <small
+                  v-if="errors && errors.avatarProduct"
+                  class="text-danger"
+                  >{{ errors.avatarProduct[0] }}</small
+                >
               </a-form-item>
               <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
                 <a-button class="me-0 me-sm-2 mb-3 mb-sm-0">
@@ -44,8 +90,14 @@
                     <span>Quay lại</span>
                   </router-link>
                 </a-button>
-                <a-button class="me-0 me-sm-2 mb-3 mb-sm-0 bg-info text-light" @click="resetForm">Reset</a-button>
-                <a-button type="primary" html-type="submit" class="bg-success">Lưu</a-button>
+                <a-button
+                  class="me-0 me-sm-2 mb-3 mb-sm-0 bg-info text-light"
+                  @click="resetForm"
+                  >Reset</a-button
+                >
+                <a-button type="primary" html-type="submit" class="bg-success"
+                  >Lưu</a-button
+                >
               </a-form-item>
             </div>
           </div>
@@ -58,7 +110,7 @@
 <script>
 import { onMounted, defineComponent, ref, reactive, toRefs } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { message } from 'ant-design-vue';
+import { message } from "ant-design-vue";
 import { useMenu } from "../../stores/use-menu.js";
 import axios from "axios";
 
@@ -71,44 +123,44 @@ export default defineComponent({
     const formRef = ref();
     const errors = ref({});
     const product = ref();
-
+    const id = route.params.id;
     const formState = reactive({
-      productName: '',
-      price: '',
-      description: '',
-      productType: '',
-      avatarProduct: '',
-      avatarFile: null
+      productName: "",
+      price: "",
+      description: "",
+      productType: "",
+      avatarProduct: "",
+      avatarFile: null,
     });
 
     const rules = {
       productName: [
         {
           required: true,
-          message: 'Tên sản phẩm không để trống.',
-          trigger: 'change',
-        }
+          message: "Tên sản phẩm không để trống.",
+          trigger: "change",
+        },
       ],
       price: [
         {
           required: true,
-          message: 'Giá không để trống.',
-          trigger: 'change',
-        }
+          message: "Giá không để trống.",
+          trigger: "change",
+        },
       ],
       description: [
         {
           required: true,
-          message: 'Mô tả không để trống.',
-          trigger: 'change',
-        }
+          message: "Mô tả không để trống.",
+          trigger: "change",
+        },
       ],
       productType: [
         {
           required: true,
-          message: 'Loại sản phẩm không để trống.',
-          trigger: 'change',
-        }
+          message: "Loại sản phẩm không để trống.",
+          trigger: "change",
+        },
       ],
     };
 
@@ -132,15 +184,16 @@ export default defineComponent({
 
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`https://charismatic-friendship-production.up.railway.app/api/v1/product/info/${productId}`);
-        console.log(response.data.data,'response')
-          const data = response.data.data;
-          formState.productName = data.productName;
-          formState.price = data.price;
-          formState.description = data.description;
-          formState.productType = data.productType;
-          formState.avatarProduct = data.avatarProduct;
-       
+        const response = await axios.get(
+          `https://charismatic-friendship-production.up.railway.app/api/v1/product/info/${productId}`
+        );
+        console.log(response.data.data, "response");
+        const data = response.data.data;
+        formState.productName = data.productName;
+        formState.price = data.price;
+        formState.description = data.description;
+        formState.productType = data.productType;
+        formState.avatarProduct = data.avatarProduct;
       } catch (error) {
         console.error(error);
       }
@@ -148,23 +201,28 @@ export default defineComponent({
 
     const createUsers = () => {
       const formData = new FormData();
-      formData.append('productName', formState.productName);
-      formData.append('avatarProduct', formState.avatarFile);
-      formData.append('description', formState.description);
-      formData.append('productType', formState.productType);
-      formData.append('price', formState.price);
-      axios.post('https://charismatic-friendship-production.up.railway.app/api/v1/management/1/product/insert', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      .then((response) => {
-        message.success("Tạo mới thành công!");
-        router.push({ name: "admin-users" });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      formData.append("productName", formState.productName);
+      formData.append("avatarProduct", formState.avatarFile);
+      formData.append("description", formState.description);
+      formData.append("productType", formState.productType);
+      formData.append("price", formState.price);
+      axios
+        .put(
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/product/edit`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((response) => {
+          message.success("Tạo mới thành công!");
+          router.push({ name: "admin-users" });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
 
     onMounted(() => {
@@ -180,9 +238,9 @@ export default defineComponent({
       formState,
       resetForm,
       handleFileUpload,
-      createUsers
+      createUsers,
     };
-  }
+  },
 });
 </script>
 <style scoped>
