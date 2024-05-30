@@ -9,7 +9,7 @@
           <a-breadcrumb-item>
             <router-link :to="{ name: 'admin-users' }">Tài khoản</router-link>
           </a-breadcrumb-item>
-          <a-breadcrumb-item>Thêm mới</a-breadcrumb-item>
+          <a-breadcrumb-item>Thêm mới shipper</a-breadcrumb-item>
         </a-breadcrumb>
         <h1></h1>
       </div>

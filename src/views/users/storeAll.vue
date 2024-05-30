@@ -70,18 +70,6 @@
             </template>
 
             <template v-if="column.key === 'action' && authStoreClaim !== null">
-              <a-space warp>
-                <!-- <router-link :to="{ name: 'admin-users-edit', params: { id: record.id } }"> -->
-                <a-button
-                  type="dashed"
-                  class="me-2 text-primary"
-                  size="small"
-                  title="Sửa"
-                >
-                  <i class="fa-solid fa-pen-to-square"></i>
-                </a-button>
-                <!-- </router-link> -->
-              </a-space>
               <a-popconfirm
                 title="Bạn muốn Khóa bản ghi này?"
                 ok-text="Yes"
@@ -100,21 +88,10 @@
                     shape=""
                     class="me-2 text-warning"
                   >
-                    <i class="fa-solid fa-lock"></i>
+                    sản phẩm
                   </a-button>
                 </router-link>
               </a-popconfirm>
-              <a-popconfirm
-                title="Dữ liệu sẽ không thể phục hồi, bạn muốn xóa bản ghi này?"
-                ok-text="Yes"
-                cancel-text="No"
-                @confirm="confirmRemove(record.id)"
-              >
-                <a-button title="Xóa" type="dashed" size="small" shape="" danger
-                  ><i class="fa-solid fa-trash-can"></i
-                ></a-button>
-              </a-popconfirm>
-
               <a-popconfirm
                 title="Bạn muốn Khóa bản ghi này?"
                 ok-text="Yes"
@@ -133,7 +110,76 @@
                     shape=""
                     class="me-2 text-warning"
                   >
-                    staff
+                    Khách hàng
+                  </a-button>
+                </router-link>
+              </a-popconfirm>
+
+              <a-popconfirm
+                title="Bạn muốn Khóa bản ghi này?"
+                ok-text="Yes"
+                cancel-text="No"
+              >
+                <router-link
+                  :to="{
+                    name: 'danh-sach-order-store',
+                    params: { id: record.storeId },
+                  }"
+                >
+                  <a-button
+                    title="Khóa"
+                    type="dashed"
+                    size="small"
+                    shape=""
+                    class="me-2 text-warning"
+                  >
+                    đơn hàng
+                  </a-button>
+                </router-link>
+              </a-popconfirm>
+
+              <a-popconfirm
+                title="Bạn muốn Khóa bản ghi này?"
+                ok-text="Yes"
+                cancel-text="No"
+              >
+                <router-link
+                  :to="{
+                    name: 'doanh-thu-store',
+                    params: { id: record.storeId },
+                  }"
+                >
+                  <a-button
+                    title="Khóa"
+                    type="dashed"
+                    size="small"
+                    shape=""
+                    class="me-2 text-warning"
+                  >
+                    doanh thu
+                  </a-button>
+                </router-link>
+              </a-popconfirm>
+
+              <a-popconfirm
+                title="Bạn muốn Khóa bản ghi này?"
+                ok-text="Yes"
+                cancel-text="No"
+              >
+                <router-link
+                  :to="{
+                    name: 'importExport',
+                    params: { id: record.storeId },
+                  }"
+                >
+                  <a-button
+                    title="Khóa"
+                    type="dashed"
+                    size="small"
+                    shape=""
+                    class="me-2 text-warning"
+                  >
+                    Hóa đơn nhập hàng
                   </a-button>
                 </router-link>
               </a-popconfirm>

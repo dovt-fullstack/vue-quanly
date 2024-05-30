@@ -3,21 +3,11 @@
     <div class="row mb-3">
       <div class="col-6">
         <a-breadcrumb>
-          <a-breadcrumb-item>Danh sách khách hàng cửa hàng</a-breadcrumb-item>
+          <a-breadcrumb-item>Danh sách đơn hàng cửa hàng</a-breadcrumb-item>
         </a-breadcrumb>
       </div>
       <div class="col-6 d-flex justify-content-end">
-        <a-button class="me-2">
-          <i class="fa-solid fa-vials"></i>
-        </a-button>
-        <a-button class="me-2">
-          <i class="fa-solid fa-vial-virus"></i>
-        </a-button>
-        <a-button type="primary" title="Thêm mới">
-          <router-link :to="{ name: 'admin-store-create' }">
-            <i class="fa-solid fa-plus"></i>
-          </router-link>
-        </a-button>
+       
       </div>
     </div>
     <!-- <div class="row">
@@ -59,19 +49,24 @@
             <template v-if="column.key === 'index'">
               <span>{{ index + 1 }}</span>
             </template>
+            <!-- imageSp -->
+            <template v-if="column.key === 'imageSp'">
+              <img :style="{ width: '50px !important' }" :src="record.productImg" :alt="record.productImg">
+            </template>
             <template v-if="column.key === 'userName'">
-              <span>{{ record.customerName }}</span>
+              <span>{{ record.productName }}</span>
             </template>
             <template v-if="column.key === 'fullName'">
-              <span>{{ record.customerPhoneNumber }}</span>
+              <span>{{ record.quantity }}</span>
             </template>
             <template v-if="column.key === 'email'">
-              <span>{{ record.totalOrder }}</span>
+              <span>{{ record.priceTotal?.toLocaleString() }} VNĐ</span>
             </template>
-
+            <template v-if="column.key === 'status'">
+              <span>{{ record.orderStatusName }}</span>
+            </template>
             <template v-if="column.key === 'action' && authStoreClaim !== null">
               <!-- <a-space warp>
-               
                 <a-button
                   type="dashed"
                   class="me-2 text-primary"
@@ -103,17 +98,10 @@
                   </a-button>
                 </router-link>
               </a-popconfirm> -->
-              <router-link
-                  :to="{
-                    name: 'order-by-user',
-                    params: { id: record.storeId },
-                  }"
-                >
-                <a-button title="Xóa" type="dashed" size="small" shape="" danger
-                  >
-                  Xem đơn đã mua
-                </a-button>
-              </router-link>
+             
+                <a-button title="Xóa" type="dashed" size="small" shape="" blue
+                  ><i class="fa-solid fa-eye"></i></a-button>
+             
 
               <!-- <a-popconfirm
                 title="Bạn muốn Khóa bản ghi này?"
@@ -191,31 +179,40 @@ export default defineComponent({
         key: "index",
       },
       {
-        title: "Tên khách hàng",
+        title: "Ảnh sản phẩm",
+        dataIndex: "imageSp",
+        key: "imageSp",
+      },
+      {
+        title: "Tên sản phẩm",
         dataIndex: "userName",
         key: "userName",
       },
       {
-        title: "Sđt",
+        title: "số lượng",
         dataIndex: "fullName",
         key: "fullName",
       },
       {
-        title: "Số lượng order",
+        title: "tồng tiền",
         key: "email",
       },
-
+      {
+        title: "trạng thái",
+        key: "status",
+      },
+// 
       {
         title: "Tác vụ",
         key: "action",
         fixed: "right",
       },
     ];
-
+    // api/v1/management/1/order/view
     const getUsers = (args) => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/customer/view`
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/order/view`
         )
         .then((response) => {
           console.log(response.data.data, "response");

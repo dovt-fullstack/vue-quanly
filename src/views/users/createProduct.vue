@@ -58,7 +58,7 @@
 </template>
 <script>
 import { onMounted, defineComponent, ref, reactive, toRefs } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { message } from 'ant-design-vue';
 import { DeleteOutlined } from '@ant-design/icons-vue';
 import { useMenu } from "../../stores/use-menu.js";
@@ -83,6 +83,8 @@ export default defineComponent({
     });
     const errors = ref({});
     const formRef = ref();
+    const route = useRoute();
+    const id = route.params.id
     const formState = reactive({
       userName: '',
       fullName: '',
@@ -90,7 +92,7 @@ export default defineComponent({
       description: '',
       producttypename: '',
       avatar: '',
-      avatarFile:''
+      avatarFile: ''
     });
     const fileAvatar = ref(null)
     let validatePass = async (rule, value) => {
@@ -180,25 +182,24 @@ export default defineComponent({
     //
     const handleFileUpload = (event) => {
       const file = event.target.files[0];
-      this.formState.avatarFile = file; // Store the file object in formState
+      formState.avatarFile = file; 
     }
     const createUsers = () => {
       const formData = new FormData();
       formData.append('name', formState.userName);
-      formData.append('avatar', formState.avatarFile); 
-      formData.append('description', formState.description); 
-      formData.append('producttypename', formState.producttypename); 
-      formData.append('price', formState.price); 
-      console.log('formState');
-      console.log(formState, 'formState');
-      axios.post('https://charismatic-friendship-production.up.railway.app/api/v1/management/1/product/insert', formData, {
+      formData.append('avatar', formState.avatarFile);
+      formData.append('description', formState.description);
+      formData.append('producttypename', formState.producttypename);
+      formData.append('price', formState.price);
+
+      axios.post(`https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/product/insert`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
         .then((response) => {
           message.success("Tạo mới thành công!");
-          router.push({ name: "admin-users" });
+          router.push({ name: "dashboards" });
         })
         .catch((error) => {
           console.log(error);

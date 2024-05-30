@@ -3,24 +3,10 @@
         <div class="row mb-3">
             <div class="col-6">
                 <a-breadcrumb>
-                    <a-breadcrumb-item>Sản phẩm của Cửa hàng</a-breadcrumb-item>
+                    <a-breadcrumb-item>Sản phẩm khách đã mua</a-breadcrumb-item>
                 </a-breadcrumb>
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <a-button class="me-2">
-
-                    <i class="fa-solid fa-vials"></i>
-
-                </a-button>
-                <a-button class="me-2">
-                    <i class="fa-solid fa-vial-virus"></i>
-                </a-button>
-                <a-button type="primary" title="Thêm mới">
-                    <router-link :to="{ name: 'product/them-moi' , params:{id :storeId2 } }">
-                        <i class="fa-solid fa-plus"></i>
-                    </router-link>
-                </a-button>
-
             </div>
         </div>
         <div class="row">
@@ -44,22 +30,10 @@
                             <span>{{ record.price }}</span>
                         </template>
                         <template v-if="column.key === 'action' && authStoreClaim !== null">
-                            <a-space warp>
-                                <router-link :to="{ name: 'admin-product-edit', params: { id: record.id } }">
-                                    <a-button type="dashed" class="me-2 text-primary" size="small" title="Sửa">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a-button>
-                                </router-link>
-                            </a-space>
                             <router-link :to="{ name: 'admin-chi-tiet-san-pham', params: { id: record.productId } }">
                                 <a-button title="Khóa" type="dashed" size="small" shape="" class="me-2 text-warning">xem
                                 </a-button>
                             </router-link>
-                            <a-popconfirm title="Dữ liệu sẽ không thể phục hồi, bạn muốn xóa bản ghi này?" ok-text="Yes"
-                                cancel-text="No" @confirm="confirmRemove(record.id)">
-                                <a-button title="Xóa" type="dashed" size="small" shape="" danger><i
-                                        class="fa-solid fa-trash-can"></i></a-button>
-                            </a-popconfirm>
                         </template>
                     </template>
                 </a-table>
@@ -88,6 +62,7 @@ export default defineComponent({
     setup() {
         useMenu().onSelectedKeys(["admin-users"]);
         const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+
         const router = useRouter();
         const route = useRoute();
         const errors = ref([]);
@@ -144,6 +119,29 @@ export default defineComponent({
             }).catch((error) => {
                 console.error(error)
             })
+            // ApiUser.GetAllByLimit(args).then((response) => {
+            //     // // list ban ghi
+            //     // tham so
+            //     pageParam.current = response.data.pageNumber;
+            //     pageParam.pageNumber = response.data.pageNumber;
+            //     pageParam.pageSize = response.data.pageSize;
+            //     pageParam.totalRecord = response.data.totalRecords;
+            //     //
+            //     pageParam.userName = args.userName;
+            //     if (pageParam.statusFilter) {
+            //         if (response.data.totalPages < response.data.pageNumber && response.data.totalRecords > 0) {
+            //             pageParam.current = 1;
+            //             pageParam.pageNumber = 1;
+            //             getUsers(pageParam);
+            //             router.push({ name: "admin-users", query: { PageNumber: 1, PageSize: pageParam.pageSize, UserName: pageParam.userName } })
+            //         } else {
+            //             router.push({ name: "admin-users", query: { PageNumber: pageParam.pageNumber, PageSize: pageParam.pageSize, UserName: pageParam.userName } })
+            //         }
+            //     }
+            //     //
+            // }).catch((error) => {
+            //     message.error(`Lỗi! ${error.response.statusText}`);
+            // });
         };
         const confirmRemove = (id) => {
             ApiUser.DeleteById(id)
@@ -220,7 +218,6 @@ export default defineComponent({
             users,
             columns,
             pageParam,
-            storeId2,
             onChange,
             clickFrmFilter,
             confirmRemove,

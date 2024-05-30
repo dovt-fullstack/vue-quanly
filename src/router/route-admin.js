@@ -103,6 +103,44 @@ const adminRoutes = [
         component: () => import("../views/users/storeAll.vue"),
       },
       {
+        path: "importExport/:id",
+        name: "importExport",
+        meta: { title: "Dánh sách hóa đơn" },
+        component: () => import("../views/users/importExport.vue"),
+      },
+      {
+        path: "importExport/add-new/:id",
+        name: "importExport/add-new",
+        meta: { title: "Thêm hóa đơn" },
+        component: () => import("../views/users/createExport.vue"),
+      },
+      {
+        path: "profile-user",
+        name: "profile-user",
+        meta: { title: "Thông tin cá nhân" },
+        component: () => import("../views/users/profileUser.vue"),
+      },
+      // importExport
+      {
+        path: "danh-sach-order-store/:id",
+        name: "danh-sach-order-store",
+        meta: { title: "Dánh sách order" },
+        component: () => import("../views/users/detailsOrderbyStore.vue"),
+      },
+      {
+        path: "order-by-user/:id",
+        name: "order-by-user",
+        meta: { title: "Danh sách sản phẩm đã mua" },
+        component: () => import("../views/users/orderByUser.vue"),
+      },
+      {
+        path: "doanh-thu-store/:id",
+        name: "doanh-thu-store",
+        meta: { title: "Doanh thu" },
+        component: () => import("../views/users/revenueStore.vue"),
+      },
+      // detailsOrderbyStore
+      {
         path: "ProductByStore/:id",
         name: "ProductByStore",
         meta: { title: "ProductByStore" },
@@ -134,8 +172,8 @@ const adminRoutes = [
       },
 
       {
-        path: "product/them-moi",
-        name: "admin-product-create",
+        path: "product/them-moi/:id",
+        name: "product/them-moi",
         meta: { title: "Thêm mới - product" },
         component: () => import("../views/users/createProduct.vue"),
       },

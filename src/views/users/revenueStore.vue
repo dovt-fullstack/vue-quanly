@@ -1,78 +1,36 @@
 <template>
-    <a-card style="width: 100%">
-        <div class="row mb-3">
-            <div class="col-6">
-                <a-breadcrumb>
-                    <a-breadcrumb-item>Sản phẩm của Cửa hàng</a-breadcrumb-item>
-                </a-breadcrumb>
+    <div class="mui-card">
+      <div class="mui-card-content">
+        <div class="mui-stack vertical">
+          <div class="mui-stack horizontal">
+            <div class="mui-stack vertical">
+              <span class="mui-typography overline">Doanh thu cửa hàng </span>
+              <h4 class="mui-typography h4">
+                {{ users?.toLocaleString() }} VNĐ
+              </h4>
             </div>
-            <div class="col-6 d-flex justify-content-end">
-                <a-button class="me-2">
-
-                    <i class="fa-solid fa-vials"></i>
-
-                </a-button>
-                <a-button class="me-2">
-                    <i class="fa-solid fa-vial-virus"></i>
-                </a-button>
-                <a-button type="primary" title="Thêm mới">
-                    <router-link :to="{ name: 'product/them-moi' , params:{id :storeId2 } }">
-                        <i class="fa-solid fa-plus"></i>
-                    </router-link>
-                </a-button>
-
+            <div class="mui-avatar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                   viewBox="0 0 256 256" class="icon-lg">
+                <path d="M152,120H136V56h8a32,32,0,0,1,32,32,8,8,0,0,0,16,0,48.05,48.05,0,0,0-48-48h-8V24a8,8,0,0,0-16,0V40h-8a48,48,0,0,0,0,96h8v64H104a32,32,0,0,1-32-32,8,8,0,0,0-16,0,48.05,48.05,0,0,0,48,48h16v16a8,8,0,0,0,16,0V216h16a48,48,0,0,0,0-96Zm-40,0a32,32,0,0,1,0-64h8v64Zm40,80H136V136h16a32,32,0,0,1,0,64Z"></path>
+              </svg>
             </div>
+          </div>
+          <div class="mui-stack horizontal">
+            <div class="mui-stack vertical">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="var(--mui-palette-success-main)"
+                   viewBox="0 0 256 256" class="icon-md">
+                <path d="M205.66,117.66a8,8,0,0,1-11.32,0L136,59.31V216a8,8,0,0,1-16,0V59.31L61.66,117.66a8,8,0,0,1-11.32-11.32l72-72a8,8,0,0,1,11.32,0l72,72A8,8,0,0,1,205.66,117.66Z"></path>
+              </svg>
+              <p class="mui-typography body2">12%</p>
+            </div>
+            <span class="mui-typography caption">Since last month</span>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <a-table :dataSource="users" :columns="columns" :scroll="{ x: 576 }" :pagination=false>
-                    <template #bodyCell="{ column, index, record }">
-                        <template v-if="column.key === 'index'">
-                            <span>{{ index + 1 }}</span>
-                        </template>
-                        <template v-if="column.key === 'userName'">
-                            <span>{{ record.storeName }}</span>
-                        </template>
-                        <template v-if="column.key === 'imageSp'">
-                            <img :style="{ width: '50px !important' }" :src="record.avatarProduct"
-                                :alt="record.avatarProduct">
-                        </template>
-                        <template v-if="column.key === 'fullName'">
-                            <span>{{ record.productName }}</span>
-                        </template>
-                        <template v-if="column.key === 'email'">
-                            <span>{{ record.price }}</span>
-                        </template>
-                        <template v-if="column.key === 'action' && authStoreClaim !== null">
-                            <a-space warp>
-                                <router-link :to="{ name: 'admin-product-edit', params: { id: record.id } }">
-                                    <a-button type="dashed" class="me-2 text-primary" size="small" title="Sửa">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a-button>
-                                </router-link>
-                            </a-space>
-                            <router-link :to="{ name: 'admin-chi-tiet-san-pham', params: { id: record.productId } }">
-                                <a-button title="Khóa" type="dashed" size="small" shape="" class="me-2 text-warning">xem
-                                </a-button>
-                            </router-link>
-                            <a-popconfirm title="Dữ liệu sẽ không thể phục hồi, bạn muốn xóa bản ghi này?" ok-text="Yes"
-                                cancel-text="No" @confirm="confirmRemove(record.id)">
-                                <a-button title="Xóa" type="dashed" size="small" shape="" danger><i
-                                        class="fa-solid fa-trash-can"></i></a-button>
-                            </a-popconfirm>
-                        </template>
-                    </template>
-                </a-table>
-                <div class="col-12">
-                    <a-pagination @change="onChange" v-model:current="pageParam.current" :total=pageParam.totalRecord
-                        :pageSize="pageParam.pageSize"
-                        :show-total="(total, range) => `${range[0]}-${range[1]} of ${total} items`"
-                        class="mt-2 text-end" />
-                </div>
-            </div>
-        </div>
-    </a-card>
-</template>
+      </div>
+    </div>
+  </template>
+  
 <script>
 import { defineComponent, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
@@ -88,14 +46,14 @@ export default defineComponent({
     setup() {
         useMenu().onSelectedKeys(["admin-users"]);
         const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+
         const router = useRouter();
         const route = useRoute();
         const errors = ref([]);
-        const users = ref([]);
-        const storeId = route.params.id;
-        console.log(storeId, 'storeId')
+        const users = ref(null);
+        console.log(users, 'users')
         const storeId2 = ref(route.params.id);
-        console.log(storeId2._value, 'storeId2')
+
 
         const pageParam = reactive({
             current: (Object.keys(route.query).length > 0) ? route.query.PageNumber : 1,
@@ -116,11 +74,6 @@ export default defineComponent({
                 key: "userName",
             },
             {
-                title: "Ảnh sản phẩm",
-                dataIndex: "imageSp",
-                key: "imageSp",
-            },
-            {
                 title: "Tên sản phẩm",
                 dataIndex: "fullName",
                 key: "fullName",
@@ -138,7 +91,7 @@ export default defineComponent({
         ];
 
         const getUsers = (args) => {
-            axios.get(`https://charismatic-friendship-production.up.railway.app/api/v1/management/${storeId2._value}/product/view`).then((response) => {
+            axios.get(`https://charismatic-friendship-production.up.railway.app/api/v1/management/store/revenue?storeid=${storeId2._value}`).then((response) => {
                 console.log(response.data.data, 'response')
                 users.value = response.data.data;
             }).catch((error) => {
@@ -220,7 +173,6 @@ export default defineComponent({
             users,
             columns,
             pageParam,
-            storeId2,
             onChange,
             clickFrmFilter,
             confirmRemove,
@@ -230,3 +182,79 @@ export default defineComponent({
     }
 });
 </script>
+
+<style scoped>
+.mui-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+  padding: 16px;
+  margin: 16px;
+}
+
+.mui-card-content {
+  padding: 16px;
+}
+
+.mui-stack {
+  display: flex;
+}
+
+.mui-stack.vertical {
+  flex-direction: column;
+}
+
+.mui-stack.horizontal {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mui-typography {
+  margin: 0;
+}
+
+.mui-typography.overline {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.mui-typography.h4 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 4px 0 0 0;
+}
+
+.mui-typography.body2 {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mui-typography.caption {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.mui-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-lg {
+  font-size: 2rem;
+}
+
+.icon-md {
+  font-size: 1.5rem;
+}
+
+</style>

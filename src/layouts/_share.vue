@@ -3,53 +3,14 @@
   <div class="container-fluid mt-3">
     <div class="row">
       <div class="col-sm-3 d-none d-sm-flex">
-        <a-list bordered style="width: 100%">
-          <p
-            @click="navigateTo('admin-users-create')"
-            style="padding-left: 5px; padding-top: 10px"
-          >
-            Đăng kí shipper
-          </p>
-          <p
-            @click="navigateTo('admin-member-create')"
-            style="padding-left: 5px; padding-top: 10px"
-          >
-            Đăng kí user
-          </p>
-          <p
-            @click="navigateTo('admin-manager-create')"
-            style="padding-left: 5px; padding-top: 10px"
-          >
-            Đăng kí manager
-          </p>
-          <p
-            @click="navigateTo('admin-store')"
-            style="padding-left: 5px; padding-top: 10px"
-          >
-            Danh sách sửa hàng
-          </p>
-          <p
-            @click="navigateTo('admin-product-type-create')"
-            style="padding-left: 5px; padding-top: 10px"
-          >
-            Thêm product type
-          </p>
-          <p
-            @click="navigateTo('admin-product-create')"
-            style="padding-left: 5px; padding-top: 10px"
-          >
-            Thêm product
-          </p>
-          <p
-            @click="navigateTo('store/info-them-moi')"
-            style="padding-left: 5px; padding-top: 10px"
-          >
-            Thêm info store
-          </p>
-          <template #header>
-            <div>BẢNG ĐIỀU KHIỂN</div>
-          </template>
-        </a-list>
+        <div class="menu">
+          <p @click="navigateTo('admin-users-create')">Đăng kí shipper</p>
+          <p @click="navigateTo('admin-member-create')">Đăng kí user</p>
+          <p @click="navigateTo('admin-manager-create')">Đăng kí manager</p>
+          <p @click="navigateTo('admin-store')">Danh sách sửa hàng</p>
+          <p @click="navigateTo('admin-product-type-create')">Thêm product type</p>
+          <p @click="navigateTo('store/info-them-moi')">Thêm info store</p>
+        </div>
       </div>
       <div class="col-12 col-sm-9">
         <router-view></router-view>
@@ -72,3 +33,24 @@ export default {
   },
 };
 </script>
+
+<style>
+.menu {
+  width: 100%;
+  border: 1px solid #e8e8e8;
+  border-radius: 2px;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.menu p {
+  margin: 0;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menu p:hover {
+  background-color: #f0f0f0;
+}
+</style>

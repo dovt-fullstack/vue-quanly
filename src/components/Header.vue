@@ -24,6 +24,11 @@
               <a-menu-item>
                 <a @click="handleClickLogout">Đăng xuất</a>
               </a-menu-item>
+              <a-menu-item>
+                <router-link :to="{ name: 'profile-user' }">
+                <a>Profile</a>
+                </router-link>
+              </a-menu-item>
             </a-menu>
           </template>
         </a-dropdown>

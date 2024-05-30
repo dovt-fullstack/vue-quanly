@@ -3,24 +3,15 @@
         <div class="row mb-3">
             <div class="col-6">
                 <a-breadcrumb>
-                    <a-breadcrumb-item>Sản phẩm của Cửa hàng</a-breadcrumb-item>
+                    <a-breadcrumb-item> Danh sách các hóa đơn nhập hàng</a-breadcrumb-item>
                 </a-breadcrumb>
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <a-button class="me-2">
-
-                    <i class="fa-solid fa-vials"></i>
-
-                </a-button>
-                <a-button class="me-2">
-                    <i class="fa-solid fa-vial-virus"></i>
-                </a-button>
                 <a-button type="primary" title="Thêm mới">
-                    <router-link :to="{ name: 'product/them-moi' , params:{id :storeId2 } }">
+                    <router-link :to="{ name: 'importExport/add-new', params: { id: storeId2._value } }">
                         <i class="fa-solid fa-plus"></i>
                     </router-link>
                 </a-button>
-
             </div>
         </div>
         <div class="row">
@@ -34,8 +25,7 @@
                             <span>{{ record.storeName }}</span>
                         </template>
                         <template v-if="column.key === 'imageSp'">
-                            <img :style="{ width: '50px !important' }" :src="record.avatarProduct"
-                                :alt="record.avatarProduct">
+                            <span>{{ record.quantity }}</span>
                         </template>
                         <template v-if="column.key === 'fullName'">
                             <span>{{ record.productName }}</span>
@@ -43,23 +33,15 @@
                         <template v-if="column.key === 'email'">
                             <span>{{ record.price }}</span>
                         </template>
+
+                        <template v-if="column.key === 'alltotal'">
+                            <span>{{ record.priceTotal }}</span>
+                        </template>
                         <template v-if="column.key === 'action' && authStoreClaim !== null">
-                            <a-space warp>
-                                <router-link :to="{ name: 'admin-product-edit', params: { id: record.id } }">
-                                    <a-button type="dashed" class="me-2 text-primary" size="small" title="Sửa">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a-button>
-                                </router-link>
-                            </a-space>
                             <router-link :to="{ name: 'admin-chi-tiet-san-pham', params: { id: record.productId } }">
                                 <a-button title="Khóa" type="dashed" size="small" shape="" class="me-2 text-warning">xem
                                 </a-button>
                             </router-link>
-                            <a-popconfirm title="Dữ liệu sẽ không thể phục hồi, bạn muốn xóa bản ghi này?" ok-text="Yes"
-                                cancel-text="No" @confirm="confirmRemove(record.id)">
-                                <a-button title="Xóa" type="dashed" size="small" shape="" danger><i
-                                        class="fa-solid fa-trash-can"></i></a-button>
-                            </a-popconfirm>
                         </template>
                     </template>
                 </a-table>
@@ -88,6 +70,7 @@ export default defineComponent({
     setup() {
         useMenu().onSelectedKeys(["admin-users"]);
         const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+
         const router = useRouter();
         const route = useRoute();
         const errors = ref([]);
@@ -116,7 +99,7 @@ export default defineComponent({
                 key: "userName",
             },
             {
-                title: "Ảnh sản phẩm",
+                title: "Số lượng",
                 dataIndex: "imageSp",
                 key: "imageSp",
             },
@@ -129,6 +112,10 @@ export default defineComponent({
                 title: "Giá",
                 key: "email",
             },
+            {
+                title: "Tổng tiền",
+                key: "alltotal",
+            },
 
             {
                 title: "Tác vụ",
@@ -138,12 +125,13 @@ export default defineComponent({
         ];
 
         const getUsers = (args) => {
-            axios.get(`https://charismatic-friendship-production.up.railway.app/api/v1/management/${storeId2._value}/product/view`).then((response) => {
+            axios.get(`https://charismatic-friendship-production.up.railway.app/api/v1/management/${storeId2._value}/import/view`).then((response) => {
                 console.log(response.data.data, 'response')
                 users.value = response.data.data;
             }).catch((error) => {
                 console.error(error)
             })
+         
         };
         const confirmRemove = (id) => {
             ApiUser.DeleteById(id)
@@ -215,12 +203,12 @@ export default defineComponent({
         return {
             route,
             router,
+            storeId2,
             authStoreClaim,
             errors,
             users,
             columns,
             pageParam,
-            storeId2,
             onChange,
             clickFrmFilter,
             confirmRemove,
