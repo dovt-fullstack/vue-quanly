@@ -768,8 +768,8 @@
             </li>
           </ul>
           <div class="flexJus">
-            <div id="vcart">
-              (<b>0</b>)
+            <router-link to="/trang-chu/gio-hang">
+              <div id="vcart">
               <fieldset>
                 <u>x</u>
                 <figure>
@@ -777,6 +777,8 @@
                 </figure>
               </fieldset>
             </div>
+            </router-link>
+            
           </div>
         </div>
       </div>

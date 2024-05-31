@@ -220,7 +220,6 @@ export default defineComponent({
           console.log(error);
         });
     };
-
     onMounted(() => {
       fetchProduct();
     });

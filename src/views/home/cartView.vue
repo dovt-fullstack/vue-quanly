@@ -101,7 +101,7 @@
                     <div class="open">
                         <label class="hl"><span>Hotline 1: <b>097366.5115</b></span><span>Hotline 2:
                                 <b>097366.5115</b></span></label>
-                                <label style="cursor: pointer;" class="oh">
+                        <label style="cursor: pointer;" class="oh">
                             <router-link v-if="!userLocal" to="/login">
                                 <span> Đăng nhập </span>
                             </router-link>
@@ -456,12 +456,9 @@
                         <li>
                             <a class="c1" title="Quạt trần đèn" href="/quat-tran-den">
                                 <span>Quạt trần đèn</span>
-
                                 <meta itemprop="name" content="Quạt trần đèn">
                                 <meta itemprop="url" content="/quat-tran-den">
-
                             </a>
-
                         </li>
 
                         <li>
@@ -547,19 +544,16 @@
 
                     </ul>
                     <div class="flexJus">
-
-
-                        <div id="vcart">(<b>1</b>)<fieldset><u>x</u>
-                                <figure><label>Sản phẩm mới thêm vào giỏ hàng !</label>
-                                    <ul>
-                                        <li><img src="/Data/ResizeImage/files/TD_1508x100x100x4.jpg"
-                                                alt="Đèn led âm trần 15W TD-1508 GX LIGHTING">
-                                            <div>Đèn led âm trần 15W TD-1508 GX LIGHTING<span>156,000₫</span></div>
-                                        </li>
-                                    </ul><i onclick="viewcart();">XEM GIỎ HÀNG</i>
-                                </figure>
-                            </fieldset>
-                        </div>
+                        <router-link to="/trang-chu/gio-hang">
+                            <div id="vcart">
+                                <fieldset>
+                                    <u>x</u>
+                                    <figure>
+                                        <p>Chưa có sản phẩm nào trong giỏ hàng !</p>
+                                    </figure>
+                                </fieldset>
+                            </div>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -580,37 +574,27 @@
                 <div class="giohang orderhome">
                     <form method="post" name="giohang" id="cart">
                         <ul class="listcart">
-
-                            <li class="cartitem">
+                            <li v-for="product in product" :key="product.id" class="cartitem">
                                 <div class="oimg">
-                                    <a href="/den-led-am-tran/den-led-am-tran-tron-15w-td-1508-gx-lighting"
-                                        title="Đèn led âm trần 15W TD-1508 GX LIGHTING">
-                                        <img src="https://denled.com/Data/upload/files/T8-120-25W(1).jpg"
-                                            alt="Đèn led âm trần 15W TD-1508 GX LIGHTING"></a>
-                                    <a href="javascript:;" class="odel"
-                                        onclick="deleteP(736,'https://denled.com/den-led-am-tran/den-led-am-tran-tron-15w-td-1508-gx-lighting');"
-                                        rel="nofollow" title="Xóa sản phẩm khỏi đơn hàng">xóa</a>
+                                    <a :href="product.href" :title="product.title">
+                                        <img :src="product.productImg" :alt="product.title" />
+                                    </a>
+                                    <a @click="deleteProduct(product.cartItemId)" class="odel" rel="nofollow"
+                                        :title="`Xóa ${product.title} khỏi đơn hàng`">xóa</a>
                                 </div>
                                 <div class="oname">
-                                    <h3>Đèn led âm trần 15W TD-1508 GX LIGHTING </h3>
-                                    <label>156.000₫</label>
-
-
+                                    <h3>{{ product.productName }}</h3>
+                                    <label>{{ product.priceTotal?.toLocaleString() }}₫</label>
                                     <div class="ArrCount">
-                                        <span class="sub" data-rel="ac736">-</span><input type="text" id="ac736"
-                                            name="ArrCount" value="1"><span class="cre" data-rel="ac736">+</span>
+                                        <span @click="decrement(product)" class="sub">-</span>
+                                        <input type="text" :value="product.quantity" readonly />
+                                        <span @click="increment(product)" class="cre">+</span>
+                                        <!-- increment -->
                                     </div>
                                 </div>
                             </li>
-
                         </ul>
                         <div class="total flexJus">
-
-                            <div class="flexJus">
-                                <input type="text" style="" id="coupon" value="" placeholder="Mã giảm giá">
-                                <a href="javascript:;" style="margin:0 10px;" onclick="applyCoupon();">Áp dụng</a>
-
-                            </div>
                             <div>
                                 <span>Tổng tiền:&nbsp;&nbsp;</span>
                                 <b class="total_money">156.000₫</b>
@@ -671,21 +655,8 @@
                                     <input name="Agent" type="radio" value="4">245 Đường 30/4, Dương Đông, Phú Quốc
                                 </div>
                             </div>
-                            <div class="group">
-
-
-                                <input type="text" style="width:100px;" name="ValidCode" placeholder="Mã bảo mật">
-                                <img title="Click để thay hình khác" onclick="ChangeImage();" src="/Tools/Security.aspx"
-                                    name="imgValidCode" id="imgValidCode" alt="ValidCode" style="height: 28px;">
-
-
-                            </div>
                         </div>
-
-
-
                         <div class="fpanel">
-
                             <div class="da">
                                 <p class="state">Đơn hàng đang được gửi ...</p>
                                 <p class="od" id="gui" onclick="guidonhang();">ĐẶT HÀNG <span>(Xem hàng, không mua không
@@ -843,7 +814,7 @@ import {
     reactive,
     toRefs,
 } from "vue";
-import { cloneDeep } from "lodash-es";
+
 import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
 import { message } from "ant-design-vue";
@@ -862,12 +833,98 @@ export default defineComponent({
     setup() {
         const route = useRoute();
         const productId = route.params.id;
+        const product = ref({});
+
         const router = useRouter();
         const userLocal = JSON.parse(localStorage.getItem("auth"));
+        const token = JSON.parse(localStorage.getItem('token'));
+
+        // https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/view
+        const fetchProduct = async () => {
+            try {
+                const response = await axios.get(
+                    ` https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/view`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                }
+                );
+                console.log(response.data, 'data')
+                product.value = response.data.data;
+
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        
+        const  deleteProduct = async(id)=> {
+            const formData = new FormData();
+      formData.append("cartitemid", id);
+   try {
+       const response = await axios.post(
+           `https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/delete`,formData, {
+           headers: {
+               Authorization: `Bearer ${token}`
+           },
+       }
+       );
+       window.location.reload()
+   } catch (error) {
+       console.error(error);
+   }
+}
+
+    const decrement = async(pr)=>{
+      try {
+       const formData = new FormData();
+         const newQuantity = pr.quantity -1
+         formData.append("quantity", newQuantity);
+         formData.append("cartitemid", pr.cartItemId);
+         console.log(newQuantity);
+          const response = await axios.put(
+              `https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/update`,formData, {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              },
+          }
+          );
+          fetchProduct();
+      } catch (error) {
+          console.error(error);
+      }
+      
+    }
+    const increment = async(pr)=>{
+      try {
+       const formData = new FormData();
+         const newQuantity = pr.quantity +1
+         formData.append("quantity", newQuantity);
+         formData.append("cartitemid", pr.cartItemId);
+         console.log(newQuantity);
+          const response = await axios.put(
+              `https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/update`,formData, {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              },
+          }
+          );
+          fetchProduct();
+      } catch (error) {
+          console.error(error);
+      }
+      
+    }
+        onMounted(() => {
+            fetchProduct();
+        });
         return {
             router,
             route,
-            userLocal
+            product,
+            userLocal,
+            deleteProduct,
+            decrement,
+            increment
         };
     }
 });
