@@ -15,21 +15,13 @@
           itemtype="https://schema.org/Organization"
           itemid="https://denled.com/#organization"
         >
-          <a
-            href="/"
-            title="Siêu thị đèn LED"
-            itemprop="logo"
-            itemscope=""
-            itemtype="http://schema.org/ImageObject"
-          >
-            <meta itemprop="url" content="/Content/img/logo.png" />
-            <img
-              width="286"
-              height="60"
-              src="https://denled.com/Content/img/logo.png"
-              alt="Siêu thị đèn LED"
-            />
-          </a>
+        <router-link to="/trang-chu">
+                    <a  title="Siêu thị đèn LED" itemprop="logo" itemscope=""
+                        itemtype="http://schema.org/ImageObject">
+                        <meta itemprop="url" content="/Content/img/logo.png">
+                        <img width="286" height="60" src="https://denled.com/Content/img/logo.png" alt="Siêu thị đèn LED">
+                    </a>
+                   </router-link>
           <meta itemprop="url" content="https://denled.com" />
           <meta itemprop="name" content="Siêu thị đèn LED" />
           <meta
@@ -198,29 +190,18 @@
               content="https://www.facebook.com/ChuThanhPhong"
             />
           </span>
-          <div class="search-box">
-            <form action="/tim-kiem">
-              <input
-                type="text"
-                class="textbox"
-                id="key"
-                name="s"
-                value=""
-                placeholder="Nhập từ khóa cần tìm ..."
-              />
-              <button
-                class="fa iseach"
-                onclick="doSearch();"
-                aria-label="seach"
-              ></button>
-            </form>
-          </div>
+
           <div class="open">
             <label class="hl"
               ><span>Hotline 1: <b>097366.5115</b></span
               ><span>Hotline 2: <b>097366.5115</b></span></label
             >
-            <label class="oh"><span> GIỜ MỞ CỬA</span>8h00 - 21h00</label>
+            <label style="cursor: pointer;" class="oh">
+      <router-link v-if="!userLocal" to="/login">
+        <span> Đăng nhập </span>
+      </router-link>
+      <span v-else class="me-1">Xin chào {{ userLocal.lastname }}</span>
+    </label>
           </div>
         </div>
       </div>
@@ -831,7 +812,7 @@
                   <a href="" title="">
                     <img
                       src="https://denled.com/Data/upload/files/1(5).png"
-                      data-src="/Data/upload/files/Adv/Slide/banner2.jpg"
+                     
                       alt=""
                     />
                   </a>
@@ -842,7 +823,7 @@
                   <a href="" title="">
                     <img
                       src="https://denled.com/Data/upload/files/1(5).png"
-                      data-src="/Data/upload/files/Banner%20web/banner%201.png"
+                     
                       alt=""
                     />
                   </a>
@@ -863,8 +844,8 @@
                 <div class="item">
                   <a href="" title="">
                     <img
-                      src="/Data/upload/files/0123/3.png"
-                      data-src="/Data/upload/files/0123/3.png"
+                      src="https://denled.com/Data/upload/files/0123/3.png"
+                      data-src="https://denled.com/Data/upload/files/0123/3.png"
                       alt=""
                     />
                   </a>
@@ -874,8 +855,8 @@
                 <div class="item">
                   <a href="" title="">
                     <img
-                      src="/Data/upload/files/0123/2.png"
-                      data-src="/Data/upload/files/0123/2.png"
+                      src="https://denled.com/Data/upload/files/0123/2.png"
+                      data-src="https://denled.com/Data/upload/files/0123/2.png"
                       alt=""
                     />
                   </a>
@@ -900,140 +881,41 @@
             <div class="owl-wrapper-outer">
               <div
                 class="owl-wrapper"
-                style="width: 3936px; left: 0px; display: block"
+                style="
+                  width: 3936px;
+                  left: 0px;
+                  display: block;
+                  background-color: #bfbfbf !important;
+                "
               >
-                <div class="owl-item active" style="width: 246px">
-                  <a
-                    class="item pi"
-                    title="Bóng đèn LED 25w Tuýp T8 1m2 vỏ nhôm"
-                    href="/den-led-tuyp/den-led-tuyp-22w-t8-2835-120"
+                <div
+                  v-for="user in users"
+                  :key="user.id"
+                  class="owl-item active"
+                  style="width: 246px"
+                >
+                  <router-link
+                    :to="{
+                      name: 'trang-chu-chi-tiet-san-pham',
+                      params: { id: user.productId },
+                    }"
                   >
-                    <div>
-                      <img
-                        src="/Data/ResizeImage/files/T8_120_25W_1_x250x250x4.jpg"
-                        alt="Bóng đèn LED 25w Tuýp T8 1m2 vỏ nhôm"
-                      />
-                    </div>
-                    <h3>Bóng đèn LED 25w Tuýp T8 1m2 vỏ nhôm</h3>
-                    <strong>96.000₫<i>-20%</i><u>120.000₫</u></strong>
-                    <span class="s s5">(2 nhận xét)</span>
-                  </a>
-                </div>
-                <div class="owl-item active" style="width: 246px">
-                  <a
-                    class="item pi"
-                    title="Đèn led âm trần 15W TD-1508 GX LIGHTING"
-                    href="/den-led-am-tran/den-led-am-tran-tron-15w-td-1508-gx-lighting"
-                  >
-                    <div>
-                      <img
-                        src="/Data/ResizeImage/files/TD_1508x250x250x4.jpg"
-                        alt="Đèn led âm trần 15W TD-1508 GX LIGHTING"
-                      />
-                    </div>
-                    <h3>Đèn led âm trần 15W TD-1508 GX LIGHTING</h3>
-                    <strong>156.000₫<i>-52%</i><u>320.000₫</u></strong>
-                    <span class="s s4">(3 nhận xét)</span>
-                  </a>
-                </div>
-                <div class="owl-item active" style="width: 246px">
-                  <a
-                    class="item pi"
-                    title="Đèn Exit 2 mặt chỉ hướng 1 chiều ZT-2LE3W"
-                    href="/den-exit/den-exit-loi-thoat-2-mat"
-                  >
-                    <div>
-                      <img
-                        src="/Data/ResizeImage/files/ZT_2LE3Wx250x250x4.jpg"
-                        alt="Đèn Exit 2 mặt chỉ hướng 1 chiều ZT-2LE3W"
-                      />
-                    </div>
-                    <h3>Đèn Exit 2 mặt chỉ hướng 1 chiều ZT-2LE3W</h3>
-                    <strong>245.000₫<i>-45%</i><u>445.000₫</u></strong>
-                    <span class="s s3">(260 nhận xét)</span>
-                  </a>
-                </div>
-                <div class="owl-item active" style="width: 246px">
-                  <a
-                    class="item pi"
-                    title="Đèn led chống cháy nổ CN-02"
-                    href="/den-led-chong-chay-no/den-chong-chay-no-02"
-                  >
-                    <div>
-                      <img
-                        src="/Data/ResizeImage/files/CN_02x250x250x4.jpg"
-                        alt="Đèn led chống cháy nổ CN-02"
-                      />
-                    </div>
-                    <h3>Đèn led chống cháy nổ CN-02</h3>
-                    <strong>297.000₫<i>-16%</i><u>350.000₫</u></strong>
-                    <span class="s s5">(2 nhận xét)</span>
-                  </a>
-                </div>
-                <div class="owl-item active" style="width: 246px">
-                  <a
-                    class="item pi"
-                    title="Đèn led pha rọi xám 30W-Hộp nguồn sau"
-                    href="/den-led-pha/den-led-pha-roi-xam-30whop-nguon-sau"
-                  >
-                    <div>
-                      <img
-                        src="/Data/ResizeImage/files/__n_led_pha_r_i_x_m_30wx250x250x4.jpg"
-                        alt="Đèn led pha rọi xám 30W-Hộp nguồn sau"
-                      />
-                    </div>
-                    <h3>Đèn led pha rọi xám 30W-Hộp nguồn sau</h3>
-                    <strong>390.000₫<i>-24%</i><u>510.000₫</u></strong>
-                  </a>
-                </div>
-                <div class="owl-item" style="width: 246px">
-                  <a
-                    class="item pi"
-                    title="Đèn bàn khử trùng Philips UV-C "
-                    href="/den-uvc-diet-khuan/den-ban-khu-trung-uv-c-philips"
-                  >
-                    <div>
-                      <img
-                        src="/Data/ResizeImage/files/__n_b_n_UV_C_Philipsx250x250x4.jpg"
-                        alt="Đèn bàn khử trùng Philips UV-C "
-                      />
-                    </div>
-                    <h3>Đèn bàn khử trùng Philips UV-C</h3>
-                    <strong>2.600.000₫<i>-19%</i><u>3.200.000₫</u></strong>
-                    <span class="s s5">(3 nhận xét)</span>
-                  </a>
-                </div>
-                <div class="owl-item" style="width: 246px">
-                  <a
-                    class="item pi"
-                    title="Đèn led pha tròn 150W-Chóa Rộng "
-                    href="/den-led-pha/den-led-pha-tron-150wchoa-rong"
-                  >
-                    <div>
-                      <img
-                        src="/Data/ResizeImage/files/__n_pha_tr_n_ch_a_r_ng_150Wx250x250x4.jpg"
-                        alt="Đèn led pha tròn 150W-Chóa Rộng "
-                      />
-                    </div>
-                    <h3>Đèn led pha tròn 150W-Chóa Rộng</h3>
-                    <strong>2.620.000₫<i>-14%</i><u>3.013.000₫</u></strong>
-                  </a>
-                </div>
-                <div class="owl-item" style="width: 246px">
-                  <a
-                    class="item pi"
-                    title="Đèn led pha tròn 300W-Chóa Rộng "
-                    href="/den-led-pha/den-led-pha-tron-300wchoa-rong"
-                  >
-                    <div>
-                      <img
-                        src="/Data/ResizeImage/files/__n_pha_tr_n_ch_a_r_ng_300Wx250x250x4.jpg"
-                        alt="Đèn led pha tròn 300W-Chóa Rộng "
-                      />
-                    </div>
-                    <h3>Đèn led pha tròn 300W-Chóa Rộng</h3>
-                    <strong>4.430.000₫<i>-14%</i><u>5.094.500₫</u></strong>
-                  </a>
+                    <!-- /trang-chu/chi-tiet-san-pham -->
+                    <a class="item pi" :title="user.title" :href="user.href">
+                      <div>
+                        <img
+                          :src="user.avatarProduct"
+                          :alt="user.avatarProduct"
+                        />
+                      </div>
+                      <h3>{{ user.productName }}</h3>
+                      <strong
+                        >{{ user.discount }}₫<i>{{ user.price }}</i
+                        ><u>{{ user.price }}₫</u></strong
+                      >
+                      <span class="s s5">{{ user.view }}(Lượt xem)</span>
+                    </a>
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -1064,1171 +946,45 @@
             <h2><a href="den-led-day" title="Đèn LED Dây">Đèn LED Dây</a></h2>
           </div>
         </div>
-        <ul class="pb Product">
-          <li class="pi">
-            <a
-              title="Bóng đèn LED 25w Tuýp T8 1m2 vỏ nhôm"
-              href="/den-led-tuyp/den-led-tuyp-22w-t8-2835-120"
-            >
-              <div data-l="t8-120-25w">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/T8_120_25W_1_x250x250x4.jpg"
-                  alt="Bóng đèn LED 25w Tuýp T8 1m2 vỏ nhôm"
-                  data-num1="/Data/ResizeImage/files/T8_120_25W_1_x250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Bóng đèn LED 25w Tuýp T8 1m2 vỏ nhôm</h3>
-              <strong>96.000₫<i>-20%</i><u>120.000₫</u></strong>
-              <span class="s s5">(2 nhận xét)</span>
-            </a>
-          </li>
-          <li class="pi">
-            <a
-              title="Đèn led âm trần 15W TD-1508 GX LIGHTING"
-              href="/den-led-am-tran/den-led-am-tran-tron-15w-td-1508-gx-lighting"
-            >
-              <div data-l="td-1508">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/TD_1508x250x250x4.jpg"
-                  alt="Đèn led âm trần 15W TD-1508 GX LIGHTING"
-                  data-num1="/Data/ResizeImage/files/TD_1508x250x250x4.jpg"
-                  data-num2="/Data/ResizeImage/files/24-08/1_1_x250x250x4.png"
-                  data-num3="/Data/ResizeImage/files/đèn âm trần gx/3000_4000_6000kx250x250x4.jpg"
-                  data-max="3"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn led âm trần 15W TD-1508 GX LIGHTING</h3>
-              <strong>156.000₫<i>-52%</i><u>320.000₫</u></strong>
-              <span class="s s4">(3 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn led tuýp bán nguyệt 1,2m BN120-40W"
-              href="/den-led-tuyp/tuyp-ban-nguyet-12m-bn120"
-            >
-              <div data-l="bn120-40w">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/đèn chùm/76x250x250x4.png"
-                  alt="Đèn led tuýp bán nguyệt 1,2m BN120-40W"
-                  data-num1="/Data/ResizeImage/files/đèn chùm/76x250x250x4.png"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn led tuýp bán nguyệt 1,2m BN120-40W</h3>
-              <strong>198.000₫<i>-30%</i><u>280.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn Led dây SL-2835-168L-12V 16w/m"
-              href="/den-led-day/led-day-20w-m-12v"
-            >
-              <div data-l="2835-168p-12v">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/2835_168leds_c__logo_1x250x250x4.jpg"
-                  alt="Đèn Led dây SL-2835-168L-12V 16w/m"
-                  data-num1="/Data/ResizeImage/files/2835_168leds_c__logo_1x250x250x4.jpg"
-                  data-num2="/Data/ResizeImage/files/2835_168leds_c__logox250x250x4.jpg"
-                  data-num3="/Data/ResizeImage/files/2835_168leds_c__logo_2x250x250x4.jpg"
-                  data-max="3"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn Led dây SL-2835-168L-12V 16w/m</h3>
-              <strong>280.000₫<i>-20%</i><u>350.000₫</u></strong>
-              <span class="s s5">(2 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Bộ đèn LED Tuýp T8 1.2M máng đôi lắp nổi"
-              href="/den-led-tuyp/bo-den-led-tuyp-t8-1-2m-mang-doi-lap-noi"
-            >
-              <div data-l="mn-t8-2835-120-25wx2">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/MN_T8_2835_120_25Wx2x250x250x4.jpg"
-                  alt="Bộ đèn LED Tuýp T8 1.2M máng đôi lắp nổi"
-                  data-num1="/Data/ResizeImage/files/MN_T8_2835_120_25Wx2x250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Bộ đèn LED Tuýp T8 1.2M máng đôi lắp nổi</h3>
-              <strong>348.000₫<i>-21%</i><u>436.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-        </ul>
-
-        <div class="f boxtit flexJus">
-          <label>Đèn led ngoại thất</label>
-          <div class="bst">
-            <h2><a href="den-led-pha" title="Đèn LED Pha">Đèn LED Pha</a></h2>
-
-            <h2>
-              <a href="den-led-san-vuon" title="Đèn led sân vườn"
-                >Đèn led sân vườn</a
-              >
-            </h2>
-
-            <h2>
-              <a href="den-led-am-dat" title="Đèn led âm đất">Đèn led âm đất</a>
-            </h2>
-
-            <h2>
-              <a href="den-led-am-nuoc" title="Đèn led Âm Nước"
-                >Đèn led Âm Nước</a
-              >
-            </h2>
-
-            <h2>
-              <a href="den-duong-led" title="Đèn đường led">Đèn đường led</a>
-            </h2>
-          </div>
-        </div>
-
-        <ul class="pb Product">
-          <li class="pi">
-            <a
-              title="ĐÈN RỌI CỘT RC02-30W"
-              href="/den-led-san-vuon/den-roi-cot-rc-30w"
-            >
-              <div data-l="rc-30w">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/24-08/5x250x250x4.png"
-                  alt="ĐÈN RỌI CỘT RC02-30W"
-                  data-num1="/Data/ResizeImage/files/24-08/5x250x250x4.png"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">ĐÈN RỌI CỘT RC02-30W</h3>
-              <strong>640.000₫<i>-40%</i><u>1.050.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn Led Âm Nước Đế 36W GX Lighting DAN-36W"
-              href="/den-led-am-nuoc/den-led-am-nuoc-de-dan-36w"
-            >
-              <div data-l="dan-36w">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/Den_Led_Am_Nuoc_36W_DAN_36W__600x600x250x250x4.jpg"
-                  alt="Đèn Led Âm Nước Đế 36W GX Lighting DAN-36W"
-                  data-num1="/Data/ResizeImage/files/Den_Led_Am_Nuoc_36W_DAN_36W__600x600x250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">
-                Đèn Led Âm Nước Đế 36W GX Lighting DAN-36W
-              </h3>
-              <strong>1.480.000₫<i>-29%</i><u>2.059.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn led Wall Washer 18W"
-              href="/den-led-san-vuon/den-led-wall-washer-18w"
-            >
-              <div data-l="xqd3223">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/24-08/7_1_x250x250x4.png"
-                  alt="Đèn led Wall Washer 18W"
-                  data-num1="/Data/ResizeImage/files/24-08/7_1_x250x250x4.png"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn led Wall Washer 18W</h3>
-              <strong>532.400₫<i>-4%</i><u>550.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn led âm tường ram dốc BD-5W-L"
-              href="/den-led-am-tuong/den-led-am-tuong-ram-doc-bd5wl"
-            >
-              <div data-l="bd-5w-l">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/den_led_am_tuong_ram_docx250x250x4.jpg"
-                  alt="Đèn led âm tường ram dốc BD-5W-L"
-                  data-num1="/Data/ResizeImage/files/den_led_am_tuong_ram_docx250x250x4.jpg"
-                  data-num2="/Data/ResizeImage/files/BD_5W_Lx250x250x4.png"
-                  data-max="2"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn led âm tường ram dốc BD-5W-L</h3>
-              <strong>265.000₫<i>-52%</i><u>550.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn led pha tròn 300W-IP65"
-              href="/den-led-pha/den-led-pha-300w-ip65"
-            >
-              <div data-l="gx-dpt300">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/__n_led_pha_tr_n_300Wx250x250x4.jpg"
-                  alt="Đèn led pha tròn 300W-IP65"
-                  data-num1="/Data/ResizeImage/files/__n_led_pha_tr_n_300Wx250x250x4.jpg"
-                  data-num2="/Data/ResizeImage/files/__n_led_pha_tr_n_300W___2__x250x250x4.jpg"
-                  data-num3="/Data/ResizeImage/files/__n_led_pha_tr_n_300W___1__x250x250x4.jpg"
-                  data-num4="/Data/ResizeImage/files/__n_led_pha_tr_n_300W___3__x250x250x4.jpg"
-                  data-max="4"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn led pha tròn 300W-IP65</h3>
-              <strong>4.430.000₫<i>-14%</i><u>5.094.500₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-        </ul>
-
-        <div class="f boxtit flexJus">
-          <label>Đèn led công nghiệp</label>
-          <div class="bst">
-            <h2>
-              <a href="den-led-nha-xuong" title="Đèn led nhà xưởng"
-                >Đèn led nhà xưởng</a
-              >
-            </h2>
-
-            <h2><a href="den-exit" title="Đèn Exit">Đèn Exit</a></h2>
-
-            <h2>
-              <a href="den-led-chong-chay-no" title="Đèn led chống cháy nổ"
-                >Đèn led chống cháy nổ</a
-              >
-            </h2>
-
-            <h2><a href="den-su-co" title="Đèn sự cố">Đèn sự cố</a></h2>
-
-            <h2>
-              <a href="den-uvc-diet-khuan" title="Đèn UV-C diệt khuẩn"
-                >Đèn UV-C diệt khuẩn</a
-              >
-            </h2>
-          </div>
-        </div>
-
-        <ul class="pb Product">
-          <li class="pi">
-            <a
-              title="Đèn led chống cháy nổ CN-02"
-              href="/den-led-chong-chay-no/den-chong-chay-no-02"
-            >
-              <div data-l="cn-02">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/CN_02x250x250x4.jpg"
-                  alt="Đèn led chống cháy nổ CN-02"
-                  data-num1="/Data/ResizeImage/files/CN_02x250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn led chống cháy nổ CN-02</h3>
-              <strong>297.000₫<i>-16%</i><u>350.000₫</u></strong>
-              <span class="s s5">(2 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn Exit 2 mặt chỉ hướng 1 chiều ZT-2LE3W"
-              href="/den-exit/den-exit-loi-thoat-2-mat"
-            >
-              <div data-l="zt-2le3w">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/ZT_2LE3Wx250x250x4.jpg"
-                  alt="Đèn Exit 2 mặt chỉ hướng 1 chiều ZT-2LE3W"
-                  data-num1="/Data/ResizeImage/files/ZT_2LE3Wx250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn Exit 2 mặt chỉ hướng 1 chiều ZT-2LE3W</h3>
-              <strong>245.000₫<i>-45%</i><u>445.000₫</u></strong>
-              <span class="s s3">(260 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn chống cháy nổ giá rẻ CN-01"
-              href="/den-led-chong-chay-no/den-chong-chay-no-gia-re"
-            >
-              <div data-l="cn-01">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/CN_01x250x250x4.jpg"
-                  alt="Đèn chống cháy nổ giá rẻ CN-01"
-                  data-num1="/Data/ResizeImage/files/CN_01x250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn chống cháy nổ giá rẻ CN-01</h3>
-              <strong>176.000₫<i>-30%</i><u>250.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn sự cố chiếu sáng khẩn cấp ZT-ZFZD-E3WX"
-              href="/den-su-co/den-su-co-chieu-sang-khan-cap"
-            >
-              <div data-l="zt-zfzd-e3wx">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/__n_s__c__m_t__ch_GX_lightingx250x250x4.jpg"
-                  alt="Đèn sự cố chiếu sáng khẩn cấp ZT-ZFZD-E3WX"
-                  data-num1="/Data/ResizeImage/files/__n_s__c__m_t__ch_GX_lightingx250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">
-                Đèn sự cố chiếu sáng khẩn cấp ZT-ZFZD-E3WX
-              </h3>
-              <strong>350.000₫<i>-37%</i><u>550.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn Exit 2 mặt chỉ hướng 2 chiều ZT-2LRE3W"
-              href="/den-exit/den-exit-loi-thoat-2-mat-chi-huong"
-            >
-              <div data-l="zt-2lre3w">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/ZT_2LRE3Wjpgx250x250x4.jpg"
-                  alt="Đèn Exit 2 mặt chỉ hướng 2 chiều ZT-2LRE3W"
-                  data-num1="/Data/ResizeImage/files/ZT_2LRE3Wjpgx250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">
-                Đèn Exit 2 mặt chỉ hướng 2 chiều ZT-2LRE3W
-              </h3>
-              <strong>245.000₫<i>-45%</i><u>445.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-        </ul>
-
-        <div class="f boxtit flexJus">
-          <label>Đèn chùm</label>
-          <div class="bst">
-            <h2>
-              <a href="den-chum-gx-lighting" title="Đèn chùm GX Lighting"
-                >Đèn chùm GX Lighting</a
-              >
-            </h2>
-          </div>
-        </div>
-
-        <ul class="pb Product">
-          <li class="pi">
-            <a
-              title="Đèn chùm thả nến màu trắng hạt pha lê cao cấp K9 8 tay"
-              href="/den-chum/den-chum-39114-carpento"
-            >
-              <div data-l="39114">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/39114___CARPENTO_1_x250x250x4.png"
-                  alt="Đèn chùm thả nến màu trắng hạt pha lê cao cấp K9 8 tay"
-                  data-num1="/Data/ResizeImage/files/39114___CARPENTO_1_x250x250x4.png"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">
-                Đèn chùm thả nến màu trắng hạt pha lê cao cấp K9 8 tay
-              </h3>
-              <strong>9.350.000₫<i>-5%</i><u>9.750.000₫</u></strong>
-              <span class="s s3">(258 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn chùm thả đồng chao thủy tinh 6 tay phong cách Indochine Eglo "
-              href="/den-chum/den-chum-eglo-82749-savoy"
-            >
-              <div data-l="82749">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/Eglo_82749___SAVOYx250x250x4.png"
-                  alt="Đèn chùm thả đồng chao thủy tinh 6 tay phong cách Indochine Eglo "
-                  data-num1="/Data/ResizeImage/files/Eglo_82749___SAVOYx250x250x4.png"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">
-                Đèn chùm thả đồng chao thủy tinh 6 tay phong cách Indochine Eglo
-              </h3>
-              <strong>7.975.000₫<i>-1%</i><u>8.053.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn chùm thả pha lê mã thép DVD TPL.08T600"
-              href="/den-chum/den-chum-tha-tpl08t500"
-            >
-              <div data-l="tpl.08t600">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/TPL_08T600x250x250x4.png"
-                  alt="Đèn chùm thả pha lê mã thép DVD TPL.08T600"
-                  data-num1="/Data/ResizeImage/files/TPL_08T600x250x250x4.png"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">
-                Đèn chùm thả pha lê mã thép DVD TPL.08T600
-              </h3>
-              <strong>6.670.000₫<i>-11%</i><u>7.420.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a title="Đèn chùm OT.7021/8+4" href="/den-chum/den-chum-ot702184">
-              <div data-l="ot.7021/8+4">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/OT_7021_12x250x250x4.jpg"
-                  alt="Đèn chùm OT.7021/8+4"
-                  data-num1="/Data/ResizeImage/files/OT_7021_12x250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn chùm OT.7021/8+4</h3>
-              <strong>Liên hệ</strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn thả chùm đồng bán cổ điển chao thủy tinh phong cách Indochine Eglo "
-              href="/den-chum/den-chum-eglo-82743-imperial"
-            >
-              <div data-l="82743">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/82743___IMPERIAL_2_x250x250x4.png"
-                  alt="Đèn thả chùm đồng bán cổ điển chao thủy tinh phong cách Indochine Eglo "
-                  data-num1="/Data/ResizeImage/files/82743___IMPERIAL_2_x250x250x4.png"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">
-                Đèn thả chùm đồng bán cổ điển chao thủy tinh phong cách
-                Indochine Eglo
-              </h3>
-              <strong>7.500.000₫<i>-5%</i><u>7.832.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-        </ul>
-
-        <div class="f boxtit flexJus">
-          <label>Đèn tường</label>
-          <div class="bst">
-            <h2>
-              <a
-                href="den-tuong-trang-tri-gx-lighting"
-                title="Đèn tường GX Lighting"
-                >Đèn tường GX Lighting</a
-              >
-            </h2>
-
-            <h2>
-              <a href="den-tuong-trang-tri-cosmos" title="Đèn tường Cosmos"
-                >Đèn tường Cosmos</a
-              >
-            </h2>
-
-            <h2>
-              <a
-                href="den-tuong-co-dien-ngoai-troi"
-                title="Đèn tường cổ điển ngoài trời"
-                >Đèn tường cổ điển ngoài ...</a
-              >
-            </h2>
-          </div>
-        </div>
-
-        <ul class="pb Product">
-          <li class="pi">
-            <a
-              title="Đèn led gắn tường RA109-BK"
-              href="/den-tuong/den-led-gan-tuong-rc-1502"
-            >
-              <div data-l="ra109">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/RA_109x250x250x4.png"
-                  alt="Đèn led gắn tường RA109-BK"
-                  data-num1="/Data/ResizeImage/files/RA_109x250x250x4.png"
-                  data-num2="/Data/ResizeImage/files/RA_109___2__x250x250x4.jpg"
-                  data-num3="/Data/ResizeImage/files/RA_109___1__x250x250x4.jpg"
-                  data-num4="/Data/ResizeImage/files/RA_109___3__x250x250x4.jpg"
-                  data-max="4"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn led gắn tường RA109-BK</h3>
-              <strong>484.000₫<i>-45%</i><u>880.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn led gắn tường RA21-WH"
-              href="/den-tuong/den-led-gan-tuong-ra1796wh"
-            >
-              <div data-l="ra21wh">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/RA_21Tx250x250x4.jpg"
-                  alt="Đèn led gắn tường RA21-WH"
-                  data-num1="/Data/ResizeImage/files/RA_21Tx250x250x4.jpg"
-                  data-num2="/Data/ResizeImage/files/RA179_2_x250x250x4.jpg"
-                  data-num3="/Data/ResizeImage/files/RA179___2___2_x250x250x4.jpg"
-                  data-num4="/Data/ResizeImage/files/RA179___1___2_x250x250x4.jpg"
-                  data-max="4"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn led gắn tường RA21-WH</h3>
-              <strong>250.000₫<i>-49%</i><u>490.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn led gắn tường RA21-BK"
-              href="/den-tuong/den-led-gan-tuong-ra179bk"
-            >
-              <div data-l="ra21bk">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/RA_21_x250x250x4.jpg"
-                  alt="Đèn led gắn tường RA21-BK"
-                  data-num1="/Data/ResizeImage/files/RA_21_x250x250x4.jpg"
-                  data-num2="/Data/ResizeImage/files/RA179_3_x250x250x4.jpg"
-                  data-num3="/Data/ResizeImage/files/RA179___2___3_x250x250x4.jpg"
-                  data-num4="/Data/ResizeImage/files/RA179___1___3_x250x250x4.jpg"
-                  data-max="4"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn led gắn tường RA21-BK</h3>
-              <strong>250.000₫<i>-49%</i><u>490.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn led gắn tường RA 22"
-              href="/den-tuong/den-led-gan-tuong-RA22"
-            >
-              <div data-l="ra">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/đèn gắn tường/RA22x250x250x4.jpg"
-                  alt="Đèn led gắn tường RA 22"
-                  data-num1="/Data/ResizeImage/files/đèn gắn tường/RA22x250x250x4.jpg"
-                  data-num2="/Data/ResizeImage/files/đèn gắn tường/RA22___2__x250x250x4.jpg"
-                  data-num3="/Data/ResizeImage/files/đèn gắn tường/RA22___1__x250x250x4.jpg"
-                  data-num4="/Data/ResizeImage/files/RA179___1___3_x250x250x4.jpg"
-                  data-max="4"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn led gắn tường RA 22</h3>
-              <strong>200.000₫<i>-20%</i><u>250.000₫</u></strong>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Đèn led gắn tường RA76-BK"
-              href="/den-tuong/den-led-gan-tuong-ra76bk"
-            >
-              <div data-l="ra76bk">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/RA76_BKx250x250x4.jpg"
-                  alt="Đèn led gắn tường RA76-BK"
-                  data-num1="/Data/ResizeImage/files/RA76_BKx250x250x4.jpg"
-                  data-num2="/Data/ResizeImage/files/RA76_BK___1__x250x250x4.jpg"
-                  data-num3="/Data/ResizeImage/files/RA76_BK___2__x250x250x4.jpg"
-                  data-max="3"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Đèn led gắn tường RA76-BK</h3>
-              <strong>500.000₫<i>-42%</i><u>860.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-        </ul>
-
-        <div class="f boxtit flexJus">
-          <label>Quạt trần đèn</label>
-          <div class="bst">
-            <h2>
-              <a
-                href="quat-tran-trang-tri-kaiyokukan"
-                title="Quạt trần trang trí Kaiyokukan"
-                >Quạt trần trang trí ...</a
-              >
-            </h2>
-          </div>
-        </div>
-
-        <ul class="pb Product">
-          <li class="pi">
-            <a
-              title="Quạt trần Nhật Bản KaiyoKukan HIRO OAK"
-              href="/quat-tran-den/quat-tran-nhat-ban-kaiyo-hiro-oak"
-            >
-              <div data-l="kaiyo">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/24-08/6_1_x250x250x4.png"
-                  alt="Quạt trần Nhật Bản KaiyoKukan HIRO OAK"
-                  data-num1="/Data/ResizeImage/files/24-08/6_1_x250x250x4.png"
-                  data-num2="/Data/ResizeImage/files/quat_tran_kaiyokukan_hiro_219_oak_canhx600x600x4x250x250x4.png"
-                  data-num3="/Data/ResizeImage/files/i_quat_tran_kaiyo_hiro_oak_pcx600x600x4x250x250x4.jpg"
-                  data-max="3"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Quạt trần Nhật Bản KaiyoKukan HIRO OAK</h3>
-              <strong>8.523.000₫<i>-10%</i><u>9.470.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Quạt trần Nhật Bản KaiyoKukan YAMA 4054"
-              href="/quat-tran-den/quat-tran-nhat-ban-kaiyo-yama"
-            >
-              <div data-l="kaiyo">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/24-08/7x250x250x4.png"
-                  alt="Quạt trần Nhật Bản KaiyoKukan YAMA 4054"
-                  data-num1="/Data/ResizeImage/files/24-08/7x250x250x4.png"
-                  data-num2="/Data/ResizeImage/files/quat_tran_kaiyokukan_yama_4054_tay_canhx600x600x4x250x250x4.png"
-                  data-num3="/Data/ResizeImage/files/quat_tran_kaiyokukan_yama_4054_allx600x600x4x250x250x4.png"
-                  data-num4="/Data/ResizeImage/files/i_quat_tran_kaiyo_yama_pcx600x600x4x250x250x4.jpg"
-                  data-max="4"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Quạt trần Nhật Bản KaiyoKukan YAMA 4054</h3>
-              <strong>9.405.000₫<i>-10%</i><u>10.450.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Quạt trần Nhật Bản KAIYOKUKAN KYO 021"
-              href="/quat-tran-den/quat-tran-nhat-ban-kaiyo-kyo"
-            >
-              <div data-l="kaiyo">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/24-08/8x250x250x4.png"
-                  alt="Quạt trần Nhật Bản KAIYOKUKAN KYO 021"
-                  data-num1="/Data/ResizeImage/files/24-08/8x250x250x4.png"
-                  data-num2="/Data/ResizeImage/files/quat_tran_kaiyo_kyo_allx600x600x4x250x250x4.png"
-                  data-num3="/Data/ResizeImage/files/quat_tran_kaiyo_kyo_pcx600x600x4x250x250x4.png"
-                  data-num4="/Data/ResizeImage/images/2020/07/KAIYO_KYO_021_scaled_e1594440604240x250x250x4.jpg"
-                  data-max="4"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Quạt trần Nhật Bản KAIYOKUKAN KYO 021</h3>
-              <strong>6.372.000₫<i>-10%</i><u>7.080.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Quạt trần Nhật Bản Kaiyokukan OKA 181 AB"
-              href="/quat-tran-den/quat-tran-nhat-ban-kaiyo-oka-ab"
-            >
-              <div data-l="kaiyo">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/24-08/10x250x250x4.png"
-                  alt="Quạt trần Nhật Bản Kaiyokukan OKA 181 AB"
-                  data-num1="/Data/ResizeImage/files/24-08/10x250x250x4.png"
-                  data-num2="/Data/ResizeImage/files/quat_tran_kaiyokukan_oka_181_ab_allx600x600x4x250x250x4.png"
-                  data-num3="/Data/ResizeImage/files/i_quat_tran_kaiyo_oka_dong_pcx600x600x4x250x250x4.jpg"
-                  data-num4="/Data/ResizeImage/images/2020/06/quat_tran_kaiyo_oka_181_dong_2_scaled_e1591502975378x250x250x4.jpg"
-                  data-max="4"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Quạt trần Nhật Bản Kaiyokukan OKA 181 AB</h3>
-              <strong>7.434.000₫<i>-10%</i><u>8.260.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Quạt trần Nhật Bản KaiyoKukan OKA 181 BA"
-              href="/quat-tran-den/quat-tran-nhat-ban-kaiyo-oka-ba"
-            >
-              <div data-l="kaiyo">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/24-08/9x250x250x4.png"
-                  alt="Quạt trần Nhật Bản KaiyoKukan OKA 181 BA"
-                  data-num1="/Data/ResizeImage/files/24-08/9x250x250x4.png"
-                  data-num2="/Data/ResizeImage/files/quat_tran_kaiyokukan_oka_181_ba_2x600x600x4x250x250x4.png"
-                  data-num3="/Data/ResizeImage/files/i_quat_tran_kaiyo_oka_ba_pcx600x600x4__1_x250x250x4.jpg"
-                  data-num4="/Data/ResizeImage/images/2020/05/Kaiyo_OKA_BA_scaled_e1588842606478x250x250x4.jpg"
-                  data-max="4"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Quạt trần Nhật Bản KaiyoKukan OKA 181 BA</h3>
-              <strong>7.434.000₫<i>-10%</i><u>8.260.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-        </ul>
-
-        <div class="f boxtit flexJus">
-          <label>Thiết bị điện thông minh</label>
-          <div class="bst">
-            <h2>
-              <a href="khoa-cua-thong-minh" title="Khóa cửa thông minh"
-                >Khóa cửa thông minh</a
-              >
-            </h2>
-
-            <h2>
-              <a href="den-led-thong-minh" title="Đèn led thông minh"
-                >Đèn led thông minh</a
-              >
-            </h2>
-
-            <h2>
-              <a href="gian-phoi-thong-minh" title="Giàn phơi thông minh"
-                >Giàn phơi thông minh</a
-              >
-            </h2>
-
-            <h2>
-              <a href="ket-sat-thong-minh" title="Két sắt thông minh"
-                >Két sắt thông minh</a
-              >
-            </h2>
-
-            <h2>
-              <a
-                href="thiet-bi-chieu-sang-thong-minh"
-                title="Thiết bị chiếu sáng thông minh Philips Wizpro"
-                >Thiết bị chiếu sáng thông ...</a
-              >
-            </h2>
-          </div>
-        </div>
-
-        <ul class="pb Product">
-          <li class="pi">
-            <a
-              title="Khóa cửa thông minh Kaadas K20-F"
-              href="/khoa-cua-thong-minh/khoa-cua-thong-minh-kaadas-k20f"
-            >
-              <div data-l="kaadas">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/k20x250x250x4.jpg"
-                  alt="Khóa cửa thông minh Kaadas K20-F"
-                  data-num1="/Data/ResizeImage/files/k20x250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Khóa cửa thông minh Kaadas K20-F</h3>
-              <strong>17.300.000₫<i>-24%</i><u>22.700.000₫</u></strong>
-              <span class="s s5">(3 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Khóa cửa thông minh Philips 7300"
-              href="/khoa-cua-thong-minh/khoa-cua-thong-minh-philips-7300"
-            >
-              <div data-l="philips">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/mo_khoa_1_cham_768x768x250x250x4.jpg"
-                  alt="Khóa cửa thông minh Philips 7300"
-                  data-num1="/Data/ResizeImage/files/mo_khoa_1_cham_768x768x250x250x4.jpg"
-                  data-num2="/Data/ResizeImage/files/khóa cửa thông minh/7300__9_x250x250x4.jpg"
-                  data-num3="/Data/ResizeImage/files/khóa cửa thông minh/7300__8_x250x250x4.jpg"
-                  data-num4="/Data/ResizeImage/files/khóa cửa thông minh/7300__7_x250x250x4.jpg"
-                  data-max="4"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Khóa cửa thông minh Philips 7300</h3>
-              <strong>8.600.000₫<i>-24%</i><u>11.300.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Bộ 2 Bóng Đèn Philips Hue White Ambiance Starter Kit E27 8.5W A60 set VN"
-              href="/den-led-thong-minh/philips-huewa-85w-a60-e27-set-vn"
-            >
-              <div data-l="kitwa">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/B__2_B_ng___n_Philips_Hue_White_Ambiance_Starter_Kit_E27_8_5W_A60_set_VNx250x250x4.jpg"
-                  alt="Bộ 2 Bóng Đèn Philips Hue White Ambiance Starter Kit E27 8.5W A60 set VN"
-                  data-num1="/Data/ResizeImage/files/B__2_B_ng___n_Philips_Hue_White_Ambiance_Starter_Kit_E27_8_5W_A60_set_VNx250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">
-                Bộ 2 Bóng Đèn Philips Hue White Ambiance Starter Kit E27 8.5W
-                A60 set VN
-              </h3>
-              <strong>3.400.000₫<i>-12%</i><u>3.829.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Giàn phơi thông minh Philips SDR601-FA0"
-              href="/gian-phoi-thong-minh/gian-phoi-thong-minh-philips-sdr601"
-            >
-              <div data-l="sdr601-fa0">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/SDR601_AB0x250x250x4.jpg"
-                  alt="Giàn phơi thông minh Philips SDR601-FA0"
-                  data-num1="/Data/ResizeImage/files/SDR601_AB0x250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Giàn phơi thông minh Philips SDR601-FA0</h3>
-              <strong>10.600.000₫<i>-25%</i><u>14.100.000₫</u></strong>
-              <span class="s s5">(2 nhận xét)</span>
-            </a>
-          </li>
-
-          <li class="pi">
-            <a
-              title="Giàn phơi thông minh Philips SDR801-XCW"
-              href="/gian-phoi-thong-minh/gian-phoi-thong-minh-philips-sdr801xcw"
-            >
-              <div data-l="sdr801-xcw">
-                <img
-                  itemprop="image"
-                  src="/Data/ResizeImage/files/Catalogue_gi_n_ph_i_th_ng_minh_philips_1x250x250x4.jpg"
-                  alt="Giàn phơi thông minh Philips SDR801-XCW"
-                  data-num1="/Data/ResizeImage/files/Catalogue_gi_n_ph_i_th_ng_minh_philips_1x250x250x4.jpg"
-                  data-max="1"
-                  data-current="1"
-                />
-              </div>
-              <h3 itemprop="name">Giàn phơi thông minh Philips SDR801-XCW</h3>
-              <strong>24.700.000₫<i>-22%</i><u>31.400.000₫</u></strong>
-              <span class="s s5">(1 nhận xét)</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!--bai viet-->
-
-      <div class="f n2">
-        <div class="wrap">
-          <div class="f boxtit flexJus">
-            <label>Bài viết mới nhất</label>
-            <a class="more" href="/blog" target="_blank" title="Tin tức"
-              >Xem tất cả</a
-            >
-          </div>
-          <ul class="f">
-            <li>
-              <a href="/tu-van-den-chum/chiec-den-chum-dat-nhat-the-gioi">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/denchum/lichsu/The_Hall_of_Mirrors_Chandelierx300x200x5.jpg"
-                    data-src="/Data/ResizeImage/images/denchum/lichsu/The_Hall_of_Mirrors_Chandelierx300x200x5.jpg"
-                    alt="Chiếc đèn chùm đắt nhất thế giới"
-                  />
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 10px;
+            background-color: #eee !important;
+          "
+        >
+          <ul
+            v-for="user in users.slice(0, 8)"
+            :key="user.id"
+            class="pb Product"
+          >
+            <li style="width: 100% !important" class="pi">
+              <router-link
+                    :to="{
+                      name: 'trang-chu-chi-tiet-san-pham',
+                      params: { id: user.productId },
+                    }"
+                  >
+                  <a :title="user.title" >
+                <div data-l="kaadas">
+                  <img :src="user.avatarProduct" :alt="user.avatarProduct" />
                 </div>
-                <span class="na">Chiếc đèn chùm đắt nhất thế giới</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/tu-van-den-chum/george-ravenscroft-la-ai">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/denchum/george_ravenscroft/George_Ravenscroftx300x200x5.jpg"
-                    data-src="/Data/ResizeImage/images/denchum/george_ravenscroft/George_Ravenscroftx300x200x5.jpg"
-                    alt="George Ravenscroft - cha đẻ nghệ thuật đèn chùm pha lê"
-                  />
-                </div>
-                <span class="na"
-                  >George Ravenscroft - cha đẻ nghệ thuật đèn chùm pha lê</span
+                <h3>{{ user.productName }}</h3>
+                <strong
+                  >{{ user.discount }}₫<i>{{ user.price }}</i
+                  ><u>{{ user.price }}₫</u></strong
                 >
+                <span class="s s5">{{ user.view }}(Lượt xem)</span>
               </a>
-            </li>
-
-            <li>
-              <a href="/tu-van-den-tuyp/bong-den-led-1m2-gia-bao-nhieu">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/2018/07/bong_den_led_1m2_gia_bao_nhieux300x200x5.jpg"
-                    data-src="/Data/ResizeImage/images/2018/07/bong_den_led_1m2_gia_bao_nhieux300x200x5.jpg"
-                    alt="Bóng đèn Led 1m2 giá bao nhiêu?"
-                  />
-                </div>
-                <span class="na">Bóng đèn Led 1m2 giá bao nhiêu?</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/Tu-van-den-tuong/cao-do-treo-den-tuong">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/news/dentuongtreem/den_gan_tuong_cho_be_2x300x200x5.jpg"
-                    data-src="/Data/ResizeImage/images/news/dentuongtreem/den_gan_tuong_cho_be_2x300x200x5.jpg"
-                    alt="Cao độ treo đèn tường chuẩn xác nhất"
-                  />
-                </div>
-                <span class="na">Cao độ treo đèn tường chuẩn xác nhất</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/den-led-dowlight-am-tran-la-gi">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/2018/08/bong_den_led_am_tranx300x200x5.jpg"
-                    data-src="/Data/ResizeImage/images/2018/08/bong_den_led_am_tranx300x200x5.jpg"
-                    alt="Đèn led downlight âm trần là gì ?"
-                  />
-                </div>
-                <span class="na">Đèn led downlight âm trần là gì ?</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/huong-dan-lap-dat-den-led-am-tran-downlight">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/2018/12/z1221796293699_a75b5520fa3fc568a4e22a2ee77ff3ccx300x200x5.png"
-                    data-src="/Data/ResizeImage/images/2018/12/z1221796293699_a75b5520fa3fc568a4e22a2ee77ff3ccx300x200x5.png"
-                    alt="Hướng dẫn cách lắp đặt đèn led âm trần downlight"
-                  />
-                </div>
-                <span class="na"
-                  >Hướng dẫn cách lắp đặt đèn led âm trần downlight</span
-                >
-              </a>
-            </li>
-
-            <li>
-              <a href="/cach-chon-den-led-downlight-am-tran">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/AT06_V2_chieu_sang_phong_khach_1_1x300x200x5.png"
-                    data-src="/Data/ResizeImage/images/AT06_V2_chieu_sang_phong_khach_1_1x300x200x5.png"
-                    alt="Cách chọn đèn led downlight âm trần A-Z"
-                  />
-                </div>
-                <span class="na">Cách chọn đèn led downlight âm trần A-Z</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/den-led-am-tran-loai-nao-tot">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/2018/08/den_led_am_tran_loai_nao_totx300x200x5.jpg"
-                    data-src="/Data/ResizeImage/images/2018/08/den_led_am_tran_loai_nao_totx300x200x5.jpg"
-                    alt="Đèn led âm trần có những loại nào ?"
-                  />
-                </div>
-                <span class="na">Đèn led âm trần có những loại nào ?</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/mua-den-led-am-tran-o-dau">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/12x300x200x5.jpg"
-                    data-src="/Data/ResizeImage/images/12x300x200x5.jpg"
-                    alt="Mua đèn led âm trần ở đâu ?"
-                  />
-                </div>
-                <span class="na">Mua đèn led âm trần ở đâu ?</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/cac-loi-thuong-gap-cua-den-led-downlight-am-tran">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/2018/10/den_led_van_phongx300x200x5.jpg"
-                    data-src="/Data/ResizeImage/images/2018/10/den_led_van_phongx300x200x5.jpg"
-                    alt="Các lỗi thường gặp của đèn led âm trần"
-                  />
-                </div>
-                <span class="na">Các lỗi thường gặp của đèn led âm trần</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/den-nha-xuong-loai-nao-tot">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/2018/09/den_led_chieu_sang_cong_nghiepx300x200x5.jpg"
-                    data-src="/Data/ResizeImage/images/2018/09/den_led_chieu_sang_cong_nghiepx300x200x5.jpg"
-                    alt="Đèn nhà xưởng loại nào tốt ?"
-                  />
-                </div>
-                <span class="na">Đèn nhà xưởng loại nào tốt ?</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/bien-phap-thi-cong-va-lap-dat-den-nha-xuong">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/2018/08/gia_den_led_nha_xuong_1x300x200x5.jpg"
-                    data-src="/Data/ResizeImage/images/2018/08/gia_den_led_nha_xuong_1x300x200x5.jpg"
-                    alt="Biện pháp thi công và lắp đặt đèn nhà xưởng"
-                  />
-                </div>
-                <span class="na"
-                  >Biện pháp thi công và lắp đặt đèn nhà xưởng</span
-                >
-              </a>
-            </li>
-
-            <li>
-              <a href="/bao-gia-den-led-nha-xuong">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/2018/08/bao_gia_den_led_nha_xuong_2x300x200x5.jpg"
-                    data-src="/Data/ResizeImage/images/2018/08/bao_gia_den_led_nha_xuong_2x300x200x5.jpg"
-                    alt="Báo giá đèn led nhà xưởng"
-                  />
-                </div>
-                <span class="na">Báo giá đèn led nhà xưởng</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/den-tuong-la-gi">
-                <span class="na">Đèn tường là gì ? có những loại nào ?</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/kich-thuoc-den-tuyp-led">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/2_6_x300x200x5.jpg"
-                    data-src="/Data/ResizeImage/images/2_6_x300x200x5.jpg"
-                    alt="Kích thước đèn tuýp led ?"
-                  />
-                </div>
-                <span class="na">Kích thước đèn tuýp led ?</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="/lich-su-phat-trien-den-chum">
-                <div class="wi">
-                  <img
-                    src="/Data/ResizeImage/images/denchum/lichsu/Winchester_Cathedral_Chandelierx300x200x5.webp"
-                    data-src="/Data/ResizeImage/images/denchum/lichsu/Winchester_Cathedral_Chandelierx300x200x5.webp"
-                    alt="Lịch sử phát triển của đèn chùm"
-                  />
-                </div>
-                <span class="na">Lịch sử phát triển của đèn chùm</span>
-              </a>
+                  </router-link>
+            
             </li>
           </ul>
         </div>
       </div>
 
+      <!--bai viet-->
       <!--dichvu-->
       <div class="f dichvu">
         <ul class="wrap">
@@ -2575,7 +1331,44 @@ import ApiViewData from "../../api/ApiViewData.js";
 import ApiUser from "../../api/ApiUser.js";
 import { useAuthStore } from "../../stores/auth.store.js";
 import axios from "axios";
-export default defineComponent({});
+export default defineComponent({
+  setup() {
+    useMenu().onSelectedKeys(["admin-users"]);
+    const userLocal = JSON.parse(localStorage.getItem("auth"));
+
+    const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+    const router = useRouter();
+    const route = useRoute();
+    const errors = ref([]);
+    const users = ref([]);
+    const storeId = route.params.id;
+    const storeId2 = ref(route.params.id);
+    const getUsers = () => {
+      axios
+        .get(
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/1/product/view`
+        )
+        .then((response) => {
+          console.log(response.data.data, "response");
+          users.value = response.data.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+    onMounted(() => {
+      getUsers();
+    });
+    return {
+      route,
+      router,
+      users,
+      storeId2,
+      userLocal
+    };
+    //
+  },
+});
 </script>
 
 <style scoped>
@@ -4249,7 +3042,7 @@ body {
 }
 
 .brands {
-  background: url(/Data/upload/files/Home/BG-hang.jpg) no-repeat 0 0;
+  background: url("https://denled.com/Data/upload/files/Home/BG-hang.jpg") no-repeat 0 0;
   padding: 40px 0;
   color: #fff;
   margin-top: 50px;

@@ -201,10 +201,7 @@ export default defineComponent({
 
     const createUsers = () => {
       const formData = new FormData();
-      formData.append("productName", formState.productName);
-      formData.append("avatarProduct", formState.avatarFile);
-      formData.append("description", formState.description);
-      formData.append("productType", formState.productType);
+      formData.append("productId", id);
       formData.append("price", formState.price);
       axios
         .put(
@@ -217,8 +214,7 @@ export default defineComponent({
           }
         )
         .then((response) => {
-          message.success("Tạo mới thành công!");
-          router.push({ name: "admin-users" });
+          message.success("sửa thành công!");
         })
         .catch((error) => {
           console.log(error);

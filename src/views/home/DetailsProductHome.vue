@@ -6,11 +6,14 @@
                 <meta itemprop="name" content="Siêu thị đèn LED">
                 <div class="wrap flexJus" itemscope="" itemtype="https://schema.org/Organization"
                     itemid="https://denled.com/#organization">
-                    <a href="/" title="Siêu thị đèn LED" itemprop="logo" itemscope=""
-                        itemtype="http://schema.org/ImageObject">
-                        <meta itemprop="url" content="/Content/img/logo.png">
-                        <img width="286" height="60" src="https://denled.com/Content/img/logo.png" alt="Siêu thị đèn LED">
-                    </a>
+                    <router-link to="/trang-chu">
+                        <a title="Siêu thị đèn LED" itemprop="logo" itemscope=""
+                            itemtype="http://schema.org/ImageObject">
+                            <meta itemprop="url" content="/Content/img/logo.png">
+                            <img width="286" height="60" src="https://denled.com/Content/img/logo.png"
+                                alt="Siêu thị đèn LED">
+                        </a>
+                    </router-link>
                     <meta itemprop="url" content="https://denled.com">
                     <meta itemprop="name" content="Siêu thị đèn LED">
                     <meta itemprop="description" content="Siêu thị đèn LED chiếu sáng số 1 Việt Nam">
@@ -89,18 +92,16 @@
                         <meta itemprop="gender" content="https://schema.org/Male">
                         <meta itemprop="sameAs" content="https://www.facebook.com/ChuThanhPhong">
                     </span>
-                    <div class="search-box">
 
-                        <form action="/tim-kiem">
-                            <input type="text" class="textbox" id="key" name="s" value=""
-                                placeholder="Nhập từ khóa cần tìm ...">
-                            <button class="fa iseach" onclick="doSearch();" aria-label="seach"></button>
-                        </form>
-                    </div>
                     <div class="open">
                         <label class="hl"><span>Hotline 1: <b>097366.5115</b></span><span>Hotline 2:
                                 <b>097366.5115</b></span></label>
-                        <label class="oh"><span> GIỜ MỞ CỬA</span>8h00 - 21h00</label>
+                        <label style="cursor: pointer;" class="oh">
+                            <router-link v-if="!userLocal" to="/login">
+                                <span> Đăng nhập </span>
+                            </router-link>
+                            <span v-else class="me-1">Xin chào {{ userLocal.lastname }}</span>
+                        </label>
 
                     </div>
                 </div>
@@ -112,7 +113,6 @@
                         <li>
                             <a class="c1" title="Đèn led nội thất" href="javascript:;">
                                 <span>Đèn led nội thất</span>
-
                             </a>
 
                             <figure>
@@ -585,7 +585,7 @@
 
                             <div class="f box-zoom flexCen">
                                 <div id="anhdd" class="f larimg">
-                                    <img itemprop="image" src="https://denled.com/Data/upload/files/T8-120-25W(1).jpg"
+                                    <img :src="product.avatarProduct" itemprop="image"
                                         alt="Đèn led âm trần 15W TD-1508 GX LIGHTING">
                                 </div>
                                 <span data-list="listImg" data-index="0" class="zoom hide bgghi bo p10 ab">+ Phóng
@@ -600,29 +600,19 @@
 
                         </div>
                         <div class="w50 fr flexC" style="padding:0 5%;">
-                            <h1 itemprop="name" class="pname">Đèn led âm trần 15W TD-1508 GX LIGHTING</h1>
-                            <div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
-
-                                <span style="display:inline-block;" class="s s4"></span>
-                                <div class="hide">
-                                    <i itemprop="ratingValue">4</i>
-                                    <i itemprop="reviewCount">3</i>
-                                    <i itemprop="bestRating">5</i>
-                                </div>
-                                <label onclick="moveto('formvote',0);">
-                                    Xem <b itemprop="ratingCount">3</b> đánh giá</label>
-                            </div>
-                            <span class="priced"><u>320.000₫</u><b>156.000₫</b><i>-52%</i></span>
+                            <h1 itemprop="name" class="pname">{{ product.productName }}</h1>
+                            <span class="priced"><u>{{ product.discount }}₫</u><b>{{ product.price?.toLocaleString()
+                                    }}₫</b></span>
 
                             <!--tieu ban-->
 
 
                             <div class="f gtb">
-                                <label>Ánh sáng</label>
+                                <label>{{ product.view }} Lượt xem</label>
                                 <ul class="tieuban">
 
                                     <li data-id="728" data-imgid="tb728" data-pricett="0₫" data-price="156.000₫"
-                                        data-off="0">TD-1508 Vàng</li>
+                                        data-off="0">{{ product.productType }}</li>
 
                                 </ul>
                             </div>
@@ -632,9 +622,9 @@
                             <div class="dvdq flexC">
                                 <label>Mua ngay và thưởng thức dịch vụ độc quyền</label>
                                 <ul>
-                                    <li class="ron">Bảo hành: 2 năm</li>
+                                    <li class="ron">Tên cửa hàng : {{ product.storeName }}</li>
 
-                                    <li class="ron">Miễn phí giao hàng toàn quốc</li>
+                                    <li class="ron">Số lượng : {{ product.quantity }}</li>
 
                                     <li class="ron">Giao hàng nhanh trong 30 phút tại Hà Nội và Hồ Chí Minh</li>
 
@@ -677,573 +667,9 @@
                     <li data-rel="thongso">Thông số kỹ thuật</li>
                     <li data-rel="binhluan">Bình luận - đánh giá</li>
                 </ul>
-                <div id="pFull" class="f bgwhite p15">
-                    <div class="wrap flexCol">
+                <div style="padding: 20px;">
 
-
-                        <!--hien thi thong so ky thuat,hien thi anh noi bat neu co, ko có thi hien thi tong quan-->
-
-                        <div id="thongso" itemprop="description" class="contenttab">
-                            <div class="w40 p10">
-                                <label class="f td cen">Thông số kỹ thuật</label>
-                                <div class="lts">
-                                    <ul>
-                                        <li>Model : TD-1508</li>
-                                        <li>Hãng sản xuất : <a href="/den-led-am-tran-gx-lighting"
-                                                title="Đèn led âm trần GX Lighting">Đèn led âm trần GX Lighting</a></li>
-
-
-                                        <li>Phân loại: <a href="/den-led-am-tran-tron" title="Đèn Led âm trần Tròn">Đèn
-                                                Led âm trần tròn</a></li>
-
-                                        <li>Kiểu ánh sáng: <a href="/den-led-am-tran-toa-deu"
-                                                title="Đèn Led âm trần Tỏa đều">Đèn Led âm trần tỏa đều</a></li>
-
-                                        <li>Diện tích: <a href="/den-led-am-tran-phong-25-m2"
-                                                title="Đèn Led âm trần Phòng > 25m2">Đèn Led âm trần phòng &gt; 25m2</a>
-                                        </li>
-
-                                        <li>Công suất: <a href="/den-led-downlight-am-tran-15w"
-                                                title="Đèn Led âm trần 15W">Đèn Led âm trần 15w</a></li>
-
-                                    </ul>
-                                    <table border="0" cellpadding="0" cellspacing="1" width="380">
-                                        <tbody>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Model&nbsp;No.</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">TD-1508</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">LED quantity</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">15pcs</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">LED&nbsp;Power</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">15W</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span
-                                                        style="font-size: 16px;">Minimum&nbsp;luminous&nbsp;flux(lm)</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">400 lm</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Voltage</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">85~265V</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Environmental&nbsp;Temperature</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">﹣20℃~60℃</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Environmental&nbsp;Humidity</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">0%-95%</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Safety&nbsp;Class</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">I</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Safety&nbsp;Type</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">IP20</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Material</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Aluminium</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Driver</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Included</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Color</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">White/Warm white</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Dimension</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Φ180*H45</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">Pcs/Carton</span>
-                                                </td>
-                                                <td style="text-align: justify;">
-                                                    <span style="font-size: 16px;">155 pcs</span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <p>
-                                        &nbsp;</p>
-
-                                </div>
-
-
-                                <div class="f flexC tuvan">
-                                    <label>Cẩm nang</label>
-
-                                    <a href="/den-led-dowlight-am-tran-la-gi"
-                                        title="Đèn led downlight âm trần là gì ?"><img
-                                            src="/Data/ResizeImage/images/2018/08/bong_den_led_am_tranx100x100x4.jpg"
-                                            alt="Đèn led downlight âm trần là gì ?"><span>Đèn led downlight âm trần là
-                                            gì ?</span></a>
-
-                                    <a href="/huong-dan-lap-dat-den-led-am-tran-downlight"
-                                        title="Hướng dẫn cách lắp đặt đèn led âm trần downlight"><img
-                                            src="/Data/ResizeImage/data/upload/images/2018/12/z1221796293699_a75b5520fa3fc568a4e22a2ee77ff3ccx100x100x4.png"
-                                            alt="Hướng dẫn cách lắp đặt đèn led âm trần downlight"><span>Hướng dẫn cách
-                                            lắp đặt đèn led âm trần downlight</span></a>
-
-                                    <a href="/cach-chon-den-led-downlight-am-tran"
-                                        title="Cách chọn đèn led downlight âm trần A-Z"><img
-                                            src="/Data/ResizeImage/images/AT06_V2_chieu_sang_phong_khach_1_1x100x100x4.png"
-                                            alt="Cách chọn đèn led downlight âm trần A-Z"><span>Cách chọn đèn led
-                                            downlight âm trần A-Z</span></a>
-
-                                    <a href="/den-led-am-tran-loai-nao-tot"
-                                        title="Đèn led âm trần có những loại nào ?"><img
-                                            src="/Data/ResizeImage/images/2018/08/den_led_am_tran_loai_nao_totx100x100x4.jpg"
-                                            alt="Đèn led âm trần có những loại nào ?"><span>Đèn led âm trần có những
-                                            loại nào ?</span></a>
-
-                                    <a href="/mua-den-led-am-tran-o-dau" title="Mua đèn led âm trần ở đâu ?"><img
-                                            src="/Data/ResizeImage/images/12x100x100x4.jpg"
-                                            alt="Mua đèn led âm trần ở đâu ?"><span>Mua đèn led âm trần ở đâu
-                                            ?</span></a>
-
-                                    <a href="/cac-loi-thuong-gap-cua-den-led-downlight-am-tran"
-                                        title="Các lỗi thường gặp của đèn led âm trần"><img
-                                            src="/Data/ResizeImage/images/2018/10/den_led_van_phongx100x100x4.jpg"
-                                            alt="Các lỗi thường gặp của đèn led âm trần"><span>Các lỗi thường gặp của
-                                            đèn led âm trần</span></a>
-
-                                </div>
-                            </div>
-                            <div class="f w60" style="padding:60px 0 0 60px;">
-                                <div class="f imore" id="ctongquan" data-h="800" style="height: 800px;">
-                                    <div class="p10">
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;"><a href="https://denled.com/den-led-am-tran"
-                                                    target="_blank">Đèn LED&nbsp;âm trần tròn 15w&nbsp;TD 1508</a>
-                                                thương hiệu&nbsp;GX Lighting Việt Nam. Uy tín, chất lượng, bảo hành 3
-                                                năm cho khách hàng khi mua tại các đại lý phân phối của công ty.</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;"><img alt="Đèn led âm trần tròn 15w"
-                                                    height="525"
-                                                    src="/Data/upload/images/2017/11/f2104b9d5a38b6df66ef29.jpg"
-                                                    data-src="/Data/upload/images/2017/11/f2104b9d5a38b6df66ef29.jpg"
-                                                    width="700"> </span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">Đèn led âm trần tròn 15w</span>
-                                        </p>
-                                        <h2 style="text-align: justify;">
-                                            <span style="font-size:16px;">Khám phá sản phẩm <a
-                                                    href="https://denled.com/den-led-am-tran" target="_blank">đèn led âm
-                                                    trần tròn 15W TD 1508 GX LIGHTING</a></span>
-                                        </h2>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">Đèn LED âm trần tròn 15W TD-1508&nbsp;GX
-                                                Lighting&nbsp;thay thế trực tiếp của ánh sáng từ đèn Compact. Sử dụng
-                                                rộng rãi trong chiếu sáng trong nhà thương mại hoặc&nbsp;như siêu thị,
-                                                phòng hội nghị, triển lãm, khách sạn, văn phòng, trường học, gia đình,
-                                                showroom,…Lắp đặt âm trần thạch cao, trần gỗ.</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;"><a href="https://denled.com/den-led-am-tran"
-                                                    target="_blank">Đèn led âm trần tròn 15w mã hiệu TD1508</a> có thiết
-                                                kế viền kim loại ấn tượng. Mặt mika chống lóa khi nhìn trực tiếp. Logo
-                                                được in chìm khẳng định thương hiệu chất lượng của GX lighting.</span>
-                                        </p>
-                                        <h2 style="text-align: justify;">
-                                            <span style="font-size: 16px;">HƯỚNG DẪN LẮP ĐẶT ĐÚNG QUY CÁCH</span><span
-                                                style="font-size: 16px;">* Xem thêm sản phẩm cùng loại:</span>
-                                        </h2>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">1. Việc đầu tiên nên làm là tắt tất cả các
-                                                nguồn&nbsp;điện liên quan.</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">2. Cẩn thận, chú ý khoan lỗ sao cho phù hợp
-                                                với kích thước của đèn.</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">3. Tháo nắp bảo vệ bên trên đèn LED âm trần
-                                                downlight GX Lighting 15W TD-1508</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">4. Nguồn điện từ 100V – 200V thì phải nối dây
-                                                điện cấp cho đèn vào vị trí cầu có sẵn đèn, và đảm bảo hai dây điện được
-                                                nối vào hai chốt sẵn có cố định.</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">5. Đút đèn cẩn thận vào lỗ bạn đã khoan rồi
-                                                đấu điện lại.</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">Xem đầy đủ đèn led âm trần downlight:
-                                                http://denled.com/den-led-am-tran/</span>
-                                        </p>
-                                        <h2 style="text-align: justify;">
-                                            <span style="font-size:16px;">Tại sao bạn nên chọn mua đèn Led tại
-                                                Denled.com của chúng tôi?</span>
-                                        </h2>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">Hiện nay trên thị trường có rất nhiều chủng
-                                                loại và thương hiệu đèn Led. Giá cả của các loại cũng khác nhau. Và
-                                                đương nhiên chất lượng cũng khác nhau. Người tiêu dùng rất khó để lựa
-                                                chọn đèn led phù hợp với nhu cầu. Rất nhiều cửa hàng bán hàng không bảo
-                                                hành, giá rẻ. Sản phẩm dùng được 1 năm là hỏng 100%. Khi ra bảo hành rất
-                                                khó khăn hoặc chủng loại đó không còn hàng. Các bạn nên chọn đơn vị bán
-                                                hàng có uy tín như denled.com.</span>
-                                        </p>
-                                        <h2 style="text-align: justify;">
-                                            <span style="font-size:16px;">6 lý do bạn nên chọn mua đèn âm trần tại
-                                                Denled.com:</span>
-                                        </h2>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">1. Denled.com luôn bán hàng chính hãng, có
-                                                nguồn gốc xuất xứ rõ ràng, CO, CQ, chứng nhận xuất xưởng của các hãng có
-                                                uy tín.</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">2. Sản phẩm chúng tôi bán đều đã được khẳng
-                                                định chất lượng thực tế trên thị trường nhiều năm.</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">3. Trên sản phẩm của chúng tôi đều có tem nhãn
-                                                của nhà sản xuất. Tem bảo hành của Denled.com. Trong thời gian bảo hành,
-                                                các bạn yên tâm là chúng tôi sẽ đổi mới sản phẩm nếu lỗi. Trường hợp sau
-                                                thời gian bảo hành, chúng tôi sẽ sửa chữa cho bạn để giảm chi phí thấp
-                                                nhất.</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">4. Chúng tôi có dịch vụ lắp đặt nếu các bạn
-                                                yêu cầu.</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">5. Chúng tôi thường xuyên có các chương trình
-                                                khuyến mãi ưu đãi cho khách hàng.</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size:16px;">6. Sản phẩm của chúng tôi bảo hành 3 năm (khác
-                                                với sản phẩm bảo hành 2 năm trên thị trường)</span>
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            &nbsp;</p>
-                                        <h2 style="text-align: justify;">
-                                            &nbsp;</h2>
-                                        <p>
-                                            <img alt="" src="/Data/upload/images/sieuthidenled.jpg"
-                                                data-src="/Data/upload/images/sieuthidenled.jpg"
-                                                style="width: 200px; height: 50px;">
-                                        </p>
-                                        <p>
-                                            <span style="font-size: 16px;"><span
-                                                    style="color: rgb(0, 0, 205);"><strong>Sieuthidenled.com là một đơn
-                                                        vị phân phối đèn led chuyên nghiệp có mặt trên thị trường hơn 10
-                                                        năm. Chúng tôi là nhà phân phối thiết bị điện cho nhiều hãng lớn
-                                                        như Philips, Vimar, GX lighting, Rạng Đông, KaiyoKukan
-                                                        v.v…</strong></span><br>
-                                                <strong style="color: rgb(0, 0, 205);">Chúng tôi tin tưởng sẽ đem tới
-                                                    cho quý khách sản phẩm chính hãng và dịch vụ tốt nhất, mang lại giá
-                                                    trị cao nhất cho khách hàng. Chúc quý khách luôn có sức khỏe và
-                                                    thành công!</strong></span>
-                                        </p>
-                                        <blockquote id="Den-led-am-tran" cite="/den-led-am-tran#Den-led-am-tran"
-                                            class="inli">Click để xem thêm chiết khấu, quà tặng và khuyến mãi của <a
-                                                href="/den-led-am-tran" title="Đèn led âm trần" target="_blank">đèn led
-                                                âm trần</a>.<p></p>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                                <div class="f cen p15" style="display: inline-block;">
-                                    <span class="bmore" data-more="ctongquan" data-title="mô tả sản phẩm">Xem thêm mô tả
-                                        sản phẩm<i></i></span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="f" style="margin:20px 0;">
-                    <div class="wrap flexC">
-                        <label class="td">Đèn Led âm trần khác cùng mức giá</label>
-
-                        <div id="contentt3" class="ss" style="height:323px;">
-                            <span class="psback"></span>
-                            <div class="pspanel">
-                                <div class="pswrap">
-
-                                    <div class="psitem" style="width: 222.6px;">
-                                        <a title="Đèn led âm trần Philips Dimmable RS051B LED8 D75"
-                                            href="/den-led-am-tran/den-led-am-tran-philips-dimmable-rs051b-led8-d75-dim">
-                                            <div>
-                                                <img src="/Data/ResizeImage/files/24-08/at7x250x250x4.png"
-                                                    alt="Đèn led âm trần Philips Dimmable RS051B LED8 D75">
-                                            </div>
-                                            <h3>Đèn led âm trần Philips Dimmable RS051B LED8 D75</h3>
-                                            <strong>1.060.000₫<i>-21%</i><u>1.326.000₫</u></strong>
-                                        </a>
-                                    </div>
-
-                                    <div class="psitem" style="width: 222.6px;">
-                                        <a title="Đèn led âm trần Philips Dimmable RS051B LED6 D75"
-                                            href="/den-led-am-tran/den-led-am-tran-philips-dimmable-rs051b-led6-d75-dim">
-                                            <div>
-                                                <img src="/Data/ResizeImage/files/24-08/at7x250x250x4.png"
-                                                    alt="Đèn led âm trần Philips Dimmable RS051B LED6 D75">
-                                            </div>
-                                            <h3>Đèn led âm trần Philips Dimmable RS051B LED6 D75</h3>
-                                            <strong>1.032.000₫<i>-20%</i><u>1.290.000₫</u></strong>
-                                        </a>
-                                    </div>
-
-                                    <div class="psitem" style="width: 222.6px;">
-                                        <a title="Đèn led âm trần Philips Dimmable RS051B LED4 D55"
-                                            href="/den-led-am-tran/den-led-am-tran-philips-dimmable-rs051b-led4-d55-dim">
-                                            <div>
-                                                <img src="/Data/ResizeImage/files/24-08/at7x250x250x4.png"
-                                                    alt="Đèn led âm trần Philips Dimmable RS051B LED4 D55">
-                                            </div>
-                                            <h3>Đèn led âm trần Philips Dimmable RS051B LED4 D55</h3>
-                                            <strong>1.008.000₫<i>-20%</i><u>1.260.000₫</u></strong>
-                                        </a>
-                                    </div>
-
-                                    <div class="psitem" style="width: 222.6px;">
-                                        <a title="Đèn led âm trần Philips Dimmable DN029B G2 LED20 D200"
-                                            href="/den-led-am-tran/den-led-am-tran-philips-dn029b-g2-led20-d200">
-                                            <div>
-                                                <img src="/Data/ResizeImage/files/DN029B_G2_LED20_D200x250x250x4.jpg"
-                                                    alt="Đèn led âm trần Philips Dimmable DN029B G2 LED20 D200">
-                                            </div>
-                                            <h3>Đèn led âm trần Philips Dimmable DN029B G2 LED20 D200</h3>
-                                            <strong>846.000₫<i>-21%</i><u>1.058.000₫</u></strong>
-                                        </a>
-                                    </div>
-
-                                    <div class="psitem" style="width: 222.6px;">
-                                        <a title="Đèn led âm trần Philips GD100B LED8x2 D90 WH"
-                                            href="/den-led-am-tran/den-led-am-tran-philips-gd100b-led8x2-d90-wh">
-                                            <div>
-                                                <img src="/Data/ResizeImage/files/GD100B_Led8x2_1_x250x250x4.jpg"
-                                                    alt="Đèn led âm trần Philips GD100B LED8x2 D90 WH">
-                                            </div>
-                                            <h3>Đèn led âm trần Philips GD100B LED8x2 D90 WH</h3>
-                                            <strong>800.000₫<i>-19%</i><u>980.000₫</u></strong>
-                                        </a>
-                                    </div>
-
-                                    <div class="psitem" style="width: 222.6px;">
-                                        <a title="ĐÈN LED ÂM TRẦN DN04 15W D110"
-                                            href="/den-led-am-tran/den-led-am-tran-dn04-15w-d110">
-                                            <div>
-                                                <img src="/Data/ResizeImage/files/Untitled_14x250x250x4.jpg"
-                                                    alt="ĐÈN LED ÂM TRẦN DN04 15W D110">
-                                            </div>
-                                            <h3>ĐÈN LED ÂM TRẦN DN04 15W D110</h3>
-                                            <strong>770.000₫<i>-4%</i><u>800.000₫</u></strong>
-                                        </a>
-                                    </div>
-
-                                    <div class="psitem" style="width: 222.6px;">
-                                        <a title="Đèn led âm trần Philips DN350B LED32 D175"
-                                            href="/den-led-am-tran/den-led-am-tran-philips-dn350-led-32">
-                                            <div>
-                                                <img src="/Data/ResizeImage/files/DN350_Led32x250x250x4.jpg"
-                                                    alt="Đèn led âm trần Philips DN350B LED32 D175">
-                                            </div>
-                                            <h3>Đèn led âm trần Philips DN350B LED32 D175</h3>
-                                            <strong>768.000₫<i>-31%</i><u>1.109.000₫</u></strong>
-                                        </a>
-                                    </div>
-
-                                    <div class="psitem" style="width: 222.6px;">
-                                        <a title="ĐÈN ÂM TRẦN ĐÔI CAO CẤP LÕM SƠN TRẮNG LTT2-12"
-                                            href="/den-led-am-tran/den-am-tran-cao-cap-son-trang-ltt2-12">
-                                            <div>
-                                                <img src="/Data/ResizeImage/files/LTT2_12x250x250x4.jpg"
-                                                    alt="ĐÈN ÂM TRẦN ĐÔI CAO CẤP LÕM SƠN TRẮNG LTT2-12">
-                                            </div>
-                                            <h3>ĐÈN ÂM TRẦN ĐÔI CAO CẤP LÕM SƠN TRẮNG LTT2-12</h3>
-                                            <strong>740.000₫<i>-22%</i><u>940.000₫</u></strong>
-                                        </a>
-                                    </div>
-
-                                    <div class="psitem" style="width: 222.6px;">
-                                        <a title="ĐÈN ÂM TRẦN ĐÔI CAO CẤP LÕM SƠN ĐEN LĐĐ2-12"
-                                            href="/den-led-am-tran/den-am-tran-cao-cap-son-trang-Ldd2-12">
-                                            <div>
-                                                <img src="/Data/ResizeImage/files/L__2_12x250x250x4.jpg"
-                                                    alt="ĐÈN ÂM TRẦN ĐÔI CAO CẤP LÕM SƠN ĐEN LĐĐ2-12">
-                                            </div>
-                                            <h3>ĐÈN ÂM TRẦN ĐÔI CAO CẤP LÕM SƠN ĐEN LĐĐ2-12</h3>
-                                            <strong>740.000₫<i>-22%</i><u>940.000₫</u></strong>
-                                        </a>
-                                    </div>
-
-                                    <div class="psitem" style="width: 222.6px;">
-                                        <a title="Đèn led âm trần dimmable Philips DN029B G2 LED12 D150"
-                                            href="/den-led-am-tran/den-led-am-tran-philips-dn029b-g2-d150">
-                                            <div>
-                                                <img src="/Data/ResizeImage/files/DN029B_G2_LED12_D150x250x250x4.jpg"
-                                                    alt="Đèn led âm trần dimmable Philips DN029B G2 LED12 D150">
-                                            </div>
-                                            <h3>Đèn led âm trần dimmable Philips DN029B G2 LED12 D150</h3>
-                                            <strong>617.000₫<i>-21%</i><u>772.000₫</u></strong>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <span class="psnext"></span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="f contenttab">
-                    <div class="wrap">
-                        <span class="td">Đánh giá</span>
-                        <div class="f" id="formvote">
-
-                            <form method="post" action="/den-led-am-tran/den-led-am-tran-tron-15w-td-1508-gx-lighting"
-                                style="display:flex;">
-                                <textarea placeholder="Mời bạn đánh giá sản phẩm này" name="Message"></textarea>
-                                <div>
-                                    <input placeholder="Họ tên bạn" type="text" value="" name="Name">
-                                    <p>
-                                        <span style="margin-right: 5px;">Bình thường</span>
-                                        <input name="Vote" type="radio" value="1">
-                                        <input name="Vote" type="radio" value="2">
-                                        <input name="Vote" type="radio" value="3">
-                                        <input name="Vote" type="radio" value="4">
-                                        <input name="Vote" type="radio" value="5">
-                                        <span style="margin-left: 5px;">Tốt</span>
-                                    </p>
-                                    <input type="hidden" value="736" name="ProductID">
-                                    <input type="submit" name="_w_action[AddPOST]" value="Đánh giá">
-                                </div>
-                            </form>
-                        </div>
-
-                        <ul class="f">
-
-                            <li class="review">
-                                <div class="rava">
-                                    VH
-                                </div>
-                                <div class="rcom">
-                                    <strong>Việt Hoàng<i> (1 năm, 9 tháng, 23 ngày trước)</i></strong>
-                                    <p>Đèn làm bằng nhôm đúc nguyên khối rất đẹp và chắc chắn, giá quá hợp lý</p>
-                                    <span class="s s5"></span>
-                                </div>
-                            </li>
-
-                            <li class="review">
-                                <div class="rava">
-                                    HT
-                                </div>
-                                <div class="rcom">
-                                    <strong>Hoàng Thằng<i> (1 năm, 7 tháng, 12 ngày trước)</i></strong>
-                                    <p>Uy tín</p>
-                                    <span class="s s5"></span>
-                                </div>
-                            </li>
-
-                            <li class="review">
-                                <div class="rava">
-                                    AA
-                                </div>
-                                <div class="rcom">
-                                    <strong>Anastasia Agnew<i> (22 ngày, 12 giờ, 26 phút trước)</i></strong>
-                                    <p>Dear denled.com,
-
-                                        We found your website and would like to give you the change to claim your free
-                                        5000USDT.
-                                        There are only 5 spots left, go to; https://www.bybit.nl/invite?ref=BYKM5P
-
-                                        And claim your free 5000 USDT.</p>
-                                    <span class="s s1"></span>
-                                </div>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </div>
-                <div id="contentt5" class="f contenttab">
-
-
-                    <div class="f combox" id="binhluan">
-
-                        <div class="f comment">
-                            <textarea id="comment_M0" rows="2"
-                                placeholder="Bạn có thắc mắc? Chúng tôi luôn vui lòng tư vấn, hãy để lại câu hỏi !"></textarea>
-                            <button onclick="coment(0);">Gửi</button>
-                        </div>
-                        <div class="f listcomment">
-
-                        </div>
-                    </div>
-                    <input type="hidden" id="CMenuID" value="277">
-                    <input type="hidden" id="ItemID" value="736">
-                    <input type="hidden" id="TypeComment" value="prod">
-
+                    Mô tả sản phẩm : {{ product.description}}
                 </div>
                 <div class="f">
                     <div class="wrap cm">
@@ -1353,7 +779,7 @@
         </div>
         <div id="footer">
 
-       
+
             <div class="f" style="padding:40px 0;">
                 <div class="wrap flexJus">
 
@@ -1376,8 +802,8 @@
                                 <a style="background:#000;margin-top:5px;"
                                     href="//www.dmca.com/Protection/Status.aspx?ID=fb224c55-eb25-4914-8540-4f94b9c3013d"
                                     rel="noreferrer nofollow" title="DMCA.com Protection Status" class="dmca-badge">
-                                    <img src="https://denled.com/Content/img/dmca.png" alt="DMCA.com Protection Status" width="75"
-                                        height="24"></a>
+                                    <img src="https://denled.com/Content/img/dmca.png" alt="DMCA.com Protection Status"
+                                        width="75" height="24"></a>
                                 <a style="background:#000;margin-top:5px;"
                                     href="http://online.gov.vn/Home/WebDetails/85212" target="_blank"
                                     title="Đã thông báo bộ công thương" rel="nofollow"><img
@@ -1462,15 +888,16 @@
                 © 2019 bản quyền thuộc về <a href="https://denled.com" title="Siêu thị đèn LED">denled.com</a>
             </div>
 
-         
+
             <ul id="panel">
 
-<li><img src="https://denled.com/Content/img/totop.svg" alt="To top" width="45" height="45">
-</li>
-<li style="padding-top:10px;padding-bottom:10px"><img alt="Messenger" src="https://denled.com/Content/img/messenger.svg" width="45" height="45"></li>
+                <li><img src="https://denled.com/Content/img/totop.svg" alt="To top" width="45" height="45">
+                </li>
+                <li style="padding-top:10px;padding-bottom:10px"><img alt="Messenger"
+                        src="https://denled.com/Content/img/messenger.svg" width="45" height="45"></li>
 
-<li><img alt="Phone" src="https://denled.com/Content/img/phone.svg" width="45" height="45"></li>
-</ul>
+                <li><img alt="Phone" src="https://denled.com/Content/img/phone.svg" width="45" height="45"></li>
+            </ul>
             <div class="zalo-chat-widget" data-oaid="2839194858446814357"
                 data-welcome-message="Rất vui khi được hỗ trợ bạn!. Nếu bạn không thể chờ thì hãy gọi hoặc nhắn tin đến số điện thoại này 0973.66.5115."
                 data-autopopup="1800" data-width="500" data-height="500" style="right:12px;"></div>
@@ -1504,11 +931,35 @@ import BaseCommon from "../../api/BaseCommon.js";
 import ApiMeasuringTool from "../../api/ApiMeasuringTool.js";
 import { useAuthStore } from "../../stores/auth.store.js";
 export default defineComponent({
-    setup(){
-        const router = useRouter();
+    setup() {
+        const product = ref({});
         const route = useRoute();
-        const products = ref([]);
-        
+        const productId = route.params.id;
+        const router = useRouter();
+        const userLocal = JSON.parse(localStorage.getItem("auth"));
+
+        const fetchProduct = async () => {
+            try {
+                const response = await axios.get(` https://charismatic-friendship-production.up.railway.app/api/v1/product/info/${productId}`);
+                if (response.data.status === 'OK') {
+                    product.value = response.data.data;
+                } else {
+                    console.error(response.data.message);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        onMounted(() => {
+            fetchProduct();
+        });
+        return {
+            product,
+            router,
+            route,
+            userLocal
+        };
+
     }
 });
 </script>
@@ -4115,818 +3566,817 @@ table tbody>tr:nth-child(2n+1)>td {
 }
 
 
-                .pswp {
-                    display: none;
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    left: 0;
-                    top: 0;
-                    overflow: hidden;
-                    -ms-touch-action: none;
-                    touch-action: none;
-                    z-index: 1500;
-                    -webkit-text-size-adjust: 100%;
-                    -webkit-backface-visibility: hidden;
-                    outline: none;
-                }
-
-                .pswp * {
-                    box-sizing: border-box;
-                }
-
-                .pswp img {
-                    max-width: none;
-                }
-
-                .pswp--animate_opacity {
-                    opacity: 0.001;
-                    will-change: opacity;
-                    transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);
-                }
-
-                .pswp--open {
-                    display: block;
-                }
-
-                .pswp--zoom-allowed .pswp__img {
-                    cursor: -webkit-zoom-in;
-                    cursor: -moz-zoom-in;
-                    cursor: zoom-in;
-                }
-
-                .pswp--zoomed-in .pswp__img {
-                    cursor: grab;
-                }
-
-                .pswp--dragging .pswp__img {
-                    cursor: grabbing;
-                }
-
-                .pswp__bg {
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: #000;
-                    opacity: 0;
-                    transform: translateZ(0);
-                    -webkit-backface-visibility: hidden;
-                    will-change: opacity;
-                }
-
-                .pswp__scroll-wrap {
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    overflow: hidden;
-                }
-
-                .pswp__container,
-                .pswp__zoom-wrap {
-                    -ms-touch-action: none;
-                    touch-action: none;
-                    position: absolute;
-                    left: 0;
-                    right: 0;
-                    top: 0;
-                    bottom: 0;
-                }
-
-                .pswp__container,
-                .pswp__img {
-                    user-select: none;
-                    -webkit-tap-highlight-color: transparent;
-                    -webkit-touch-callout: none;
-                }
-
-                .pswp__zoom-wrap {
-                    position: absolute;
-                    width: 100%;
-                    transform-origin: left top;
-                    transition: transform 333ms cubic-bezier(0.4, 0, 0.22, 1);
-                }
-
-                .pswp__bg {
-                    will-change: opacity;
-                    transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);
-                }
-
-                .pswp--animated-in .pswp__bg,
-                .pswp--animated-in .pswp__zoom-wrap {
-                    transition: none;
-                }
-
-                .pswp__container,
-                .pswp__zoom-wrap {
-                    -webkit-backface-visibility: hidden;
-                }
-
-                .pswp__item {
-                    position: absolute;
-                    left: 0;
-                    right: 0;
-                    top: 0;
-                    bottom: 0;
-                    overflow: hidden;
-                }
-
-                .pswp__img {
-                    position: absolute;
-                    width: auto;
-                    height: auto;
-                    top: 0;
-                    left: 0;
-                }
-
-                .pswp__img--placeholder {
-                    -webkit-backface-visibility: hidden;
-                }
-
-                .pswp__img--placeholder--blank {
-                    background: #222;
-                }
-
-                .pswp--ie .pswp__img {
-                    width: 100% !important;
-                    height: auto !important;
-                    left: 0;
-                    top: 0;
-                }
-
-                .pswp__error-msg {
-                    position: absolute;
-                    left: 0;
-                    top: 50%;
-                    width: 100%;
-                    text-align: center;
-                    font-size: 14px;
-                    line-height: 16px;
-                    margin-top: -8px;
-                    color: #CCC;
-                }
-
-                .pswp__error-msg a {
-                    color: #CCC;
-                    text-decoration: underline;
-                }
-
-                .pswp__button {
-                    width: 44px;
-                    height: 44px;
-                    position: relative;
-                    background: none;
-                    cursor: pointer;
-                    overflow: visible;
-                    -webkit-appearance: none;
-                    display: block;
-                    border: 0;
-                    padding: 0;
-                    margin: 0;
-                    float: right;
-                    opacity: 0.75;
-                    transition: opacity 0.2s;
-                    box-shadow: none;
-                }
-
-                .pswp__button:focus,
-                .pswp__button:hover {
-                    opacity: 1;
-                }
-
-                .pswp__button:active {
-                    outline: none;
-                    opacity: 0.9;
-                }
-
-                .pswp__button::-moz-focus-inner {
-                    padding: 0;
-                    border: 0;
-                }
-
-                .pswp__ui--over-close .pswp__button--close {
-                    opacity: 1;
-                }
-
-                .pswp__button,
-                .pswp__button--arrow--left:before,
-                .pswp__button--arrow--right:before {
-                    background: url(/Content/photoswipe/default-skin.png) 0 0 no-repeat;
-                    background-size: 264px 88px;
-                    width: 44px;
-                    height: 44px;
-                }
-
-                @media (-webkit-min-device-pixel-ratio: 1.1),
-                (-webkit-min-device-pixel-ratio: 1.09375),
-                (min-resolution: 105dpi),
-                (min-resolution: 1.1dppx) {
-
-                    .pswp--svg .pswp__button,
-                    .pswp--svg .pswp__button--arrow--left:before,
-                    .pswp--svg .pswp__button--arrow--right:before {
-                        background-image: url(/Content/photoswipe/default-skin.svg);
-                    }
-
-                    .pswp--svg .pswp__button--arrow--left,
-                    .pswp--svg .pswp__button--arrow--right {
-                        background: none;
-                    }
-                }
-
-                .pswp__button--close {
-                    background-position: 0 -44px;
-                }
-
-                .pswp__button--share {
-                    background-position: -44px -44px;
-                }
-
-                .pswp__button--fs {
-                    display: none;
-                }
-
-                .pswp--supports-fs .pswp__button--fs {
-                    display: block;
-                }
-
-                .pswp--fs .pswp__button--fs {
-                    background-position: -44px 0;
-                }
-
-                .pswp__button--zoom {
-                    display: none;
-                    background-position: -88px 0;
-                }
-
-                .pswp--zoom-allowed .pswp__button--zoom {
-                    display: block;
-                }
-
-                .pswp--zoomed-in .pswp__button--zoom {
-                    background-position: -132px 0;
-                }
-
-                .pswp--touch .pswp__button--arrow--left,
-                .pswp--touch .pswp__button--arrow--right {
-                    visibility: hidden;
-                }
-
-                .pswp__button--arrow--left,
-                .pswp__button--arrow--right {
-                    background: none;
-                    top: 50%;
-                    margin-top: -50px;
-                    width: 70px;
-                    height: 100px;
-                    position: absolute;
-                }
-
-                .pswp__button--arrow--left {
-                    left: 0;
-                }
-
-                .pswp__button--arrow--right {
-                    right: 0;
-                }
-
-                .pswp__button--arrow--left:before,
-                .pswp__button--arrow--right:before {
-                    content: '';
-                    top: 35px;
-                    background-color: rgba(0, 0, 0, 0.3);
-                    height: 30px;
-                    width: 32px;
-                    position: absolute;
-                }
-
-                .pswp__button--arrow--left:before {
-                    left: 6px;
-                    background-position: -138px -44px;
-                }
-
-                .pswp__button--arrow--right:before {
-                    right: 6px;
-                    background-position: -94px -44px;
-                }
-
-                .pswp__counter,
-                .pswp__share-modal {
-                    user-select: none;
-                }
-
-                .pswp__share-modal {
-                    display: block;
-                    background: rgba(0, 0, 0, 0.5);
-                    width: 100%;
-                    height: 100%;
-                    top: 0;
-                    left: 0;
-                    padding: 10px;
-                    position: absolute;
-                    z-index: 1600;
-                    opacity: 0;
-                    transition: opacity 0.25s ease-out;
-                    -webkit-backface-visibility: hidden;
-                    will-change: opacity;
-                }
-
-                .pswp__share-modal--hidden {
-                    display: none;
-                }
-
-                .pswp__share-tooltip {
-                    z-index: 1620;
-                    position: absolute;
-                    background: #FFF;
-                    top: 56px;
-                    border-radius: 2px;
-                    display: block;
-                    width: auto;
-                    right: 44px;
-                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-                    transform: translateY(6px);
-                    transition: transform 0.25s;
-                    -webkit-backface-visibility: hidden;
-                    will-change: transform;
-                }
-
-                .pswp__share-tooltip a {
-                    display: block;
-                    padding: 8px 12px;
-                    color: #000;
-                    text-decoration: none;
-                    font-size: 14px;
-                    line-height: 18px;
-                }
-
-                .pswp__share-tooltip a:hover {
-                    text-decoration: none;
-                    color: #000;
-                }
-
-                .pswp__share-tooltip a:first-child {
-                    border-radius: 2px 2px 0 0;
-                }
-
-                .pswp__share-tooltip a:last-child {
-                    border-radius: 0 0 2px 2px;
-                }
-
-                .pswp__share-modal--fade-in {
-                    opacity: 1;
-                }
-
-                .pswp__share-modal--fade-in .pswp__share-tooltip {
-                    transform: translateY(0);
-                }
-
-                .pswp--touch .pswp__share-tooltip a {
-                    padding: 16px 12px;
-                }
-
-                a.pswp__share--facebook:before {
-                    content: '';
-                    display: block;
-                    width: 0;
-                    height: 0;
-                    position: absolute;
-                    top: -12px;
-                    right: 15px;
-                    border: 6px solid transparent;
-                    border-bottom-color: #FFF;
-                    pointer-events: none;
-                }
-
-                a.pswp__share--facebook:hover {
-                    background: #3E5C9A;
-                    color: #FFF;
-                }
-
-                a.pswp__share--facebook:hover:before {
-                    border-bottom-color: #3E5C9A;
-                }
-
-                a.pswp__share--twitter:hover {
-                    background: #55ACEE;
-                    color: #FFF;
-                }
-
-                a.pswp__share--pinterest:hover {
-                    background: #CCC;
-                    color: #CE272D;
-                }
-
-                a.pswp__share--download:hover {
-                    background: #DDD;
-                }
-
-                .pswp__counter {
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    height: 44px;
-                    font-size: 13px;
-                    line-height: 44px;
-                    color: #FFF;
-                    opacity: 0.75;
-                    padding: 0 10px;
-                }
-
-                .pswp__caption {
-                    position: absolute;
-                    left: 0;
-                    bottom: 0;
-                    width: 100%;
-                    min-height: 44px;
-                }
-
-                .pswp__caption small {
-                    font-size: 11px;
-                    color: #BBB;
-                }
-
-                .pswp__caption__center {
-                    text-align: center;
-                    max-width: 420px;
-                    margin: 0 auto;
-                    font-size: 13px;
-                    padding: 10px;
-                    line-height: 20px;
-                    color: #CCC;
-                }
-
-                .pswp__caption__center a {
-                    font: bold 12px/30px arial;
-                    padding: 0 10px;
-                    background: #fb7710;
-                    color: #fff;
-                    border-radius: 4px;
-                    display: inline-block;
-                }
-
-                .pswp__caption--empty {
-                    display: none;
-                }
-
-                .pswp__caption--fake {
-                    visibility: hidden;
-                }
-
-                .pswp__preloader {
-                    width: 44px;
-                    height: 44px;
-                    position: absolute;
-                    top: 0;
-                    left: 50%;
-                    margin-left: -22px;
-                    opacity: 0;
-                    transition: opacity 0.25s ease-out;
-                    will-change: opacity;
-                    direction: ltr;
-                }
-
-                .pswp__preloader__icn {
-                    width: 20px;
-                    height: 20px;
-                    margin: 12px;
-                }
-
-                .pswp__preloader--active {
-                    opacity: 1;
-                }
-
-                .pswp__preloader--active .pswp__preloader__icn {
-                    background: url(preloader.gif) 0 0 no-repeat;
-                }
-
-                .pswp--css_animation .pswp__preloader--active {
-                    opacity: 1;
-                }
-
-                .pswp--css_animation .pswp__preloader--active .pswp__preloader__icn {
-                    animation: clockwise 500ms linear infinite;
-                }
-
-                .pswp--css_animation .pswp__preloader--active .pswp__preloader__donut {
-                    animation: donut-rotate 1000ms cubic-bezier(0.4, 0, 0.22, 1) infinite;
-                }
-
-                .pswp--css_animation .pswp__preloader__icn {
-                    background: none;
-                    opacity: 0.75;
-                    width: 14px;
-                    height: 14px;
-                    position: absolute;
-                    left: 15px;
-                    top: 15px;
-                    margin: 0;
-                }
-
-                .pswp--css_animation .pswp__preloader__cut {
-                    position: relative;
-                    width: 7px;
-                    height: 14px;
-                    overflow: hidden;
-                }
-
-                .pswp--css_animation .pswp__preloader__donut {
-                    box-sizing: border-box;
-                    width: 14px;
-                    height: 14px;
-                    border: 2px solid #FFF;
-                    border-radius: 50%;
-                    border-left-color: transparent;
-                    border-bottom-color: transparent;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    background: none;
-                    margin: 0;
-                }
-
-                @media screen and (max-width: 1024px) {
-                    .pswp__preloader {
-                        position: relative;
-                        left: auto;
-                        top: auto;
-                        margin: 0;
-                        float: right;
-                    }
-                }
-
-                @media screen and (max-width: 768px) {
-                    .pswp__caption__center a {
-                        font: bold 12px/38px arial;
-                        padding: 0 15px;
-                    }
-                }
-
-                @-webkit-keyframes clockwise {
-                    0% {
-                        transform: rotate(0deg);
-                    }
-
-                    100% {
-                        transform: rotate(360deg);
-                    }
-                }
-
-                @keyframes clockwise {
-                    0% {
-                        transform: rotate(0deg);
-                    }
-
-                    100% {
-                        transform: rotate(360deg);
-                    }
-                }
-
-                @-webkit-keyframes donut-rotate {
-                    0% {
-                        transform: rotate(0);
-                    }
-
-                    50% {
-                        transform: rotate(-140deg);
-                    }
-
-                    100% {
-                        transform: rotate(0);
-                    }
-                }
-
-                @keyframes donut-rotate {
-                    0% {
-                        transform: rotate(0);
-                    }
-
-                    50% {
-                        transform: rotate(-140deg);
-                    }
-
-                    100% {
-                        transform: rotate(0);
-                    }
-                }
-
-                .pswp__ui {
-                    -webkit-font-smoothing: auto;
-                    visibility: visible;
-                    opacity: 1;
-                    z-index: 1550;
-                }
-
-                .pswp__top-bar {
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    height: 44px;
-                    width: 100%;
-                }
-
-                .pswp__caption,
-                .pswp__top-bar,
-                .pswp--has_mouse .pswp__button--arrow--left,
-                .pswp--has_mouse .pswp__button--arrow--right {
-                    -webkit-backface-visibility: hidden;
-                    will-change: opacity;
-                    transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);
-                }
-
-                .pswp--has_mouse .pswp__button--arrow--left,
-                .pswp--has_mouse .pswp__button--arrow--right {
-                    visibility: visible;
-                }
-
-                .pswp__top-bar,
-                .pswp__caption {
-                    background-color: rgba(0, 0, 0, 0.5);
-                }
-
-                .pswp__ui--fit .pswp__top-bar,
-                .pswp__ui--fit .pswp__caption {
-                    background-color: rgba(0, 0, 0, 0.3);
-                }
-
-                .pswp__ui--idle .pswp__top-bar {
-                    opacity: 0;
-                }
-
-                .pswp__ui--idle .pswp__button--arrow--left,
-                .pswp__ui--idle .pswp__button--arrow--right {
-                    opacity: 0;
-                }
-
-                .pswp__ui--hidden .pswp__top-bar,
-                .pswp__ui--hidden .pswp__caption,
-                .pswp__ui--hidden .pswp__button--arrow--left,
-                .pswp__ui--hidden .pswp__button--arrow--right {
-                    opacity: 0.001;
-                }
-
-                .pswp__ui--one-slide .pswp__button--arrow--left,
-                .pswp__ui--one-slide .pswp__button--arrow--right,
-                .pswp__ui--one-slide .pswp__counter {
-                    display: none;
-                }
-
-                .pswp__element--disabled {
-                    display: none !important;
-                }
-
-                .pswp--minimal--dark .pswp__top-bar {
-                    background: none;
-                }
-
-                .fotb {
-                    float: left;
-                    width: 30%;
-                    color: #fff;
-                }
-
-                .fotb a {
-                    color: #fff;
-                }
-
-                .fotb:nth-last-child(1) {
-                    margin-right: 0;
-                }
-
-                .fotb label {
-                    display: block;
-                    margin-bottom: 10px;
-                    font: bold 13px/25px arial;
-                    text-transform: uppercase;
-                }
-
-                .fotb label:before {
-                    font: 14px/18px FontAwesome;
-                    margin-right: 5px;
-                }
-
-                .fotb:nth-last-child(1) label:before {
-                    content: "\f095";
-                }
-
-                .fotb:nth-last-child(2) label:before {
-                    content: "\f129";
-                }
-
-                .fotb:nth-last-child(3) label:before {
-                    content: "\f0f6";
-                }
-
-                .social {
-                    margin-bottom: 20px;
-                }
-
-                .social a {
-                    margin-right: 10px;
-                    background: #8ab6e3;
-                    padding: 5px 10px;
-                    border-radius: 50%;
-                    color: #fff;
-                }
-
-                .social a:hover {
-                    background: #498ed4;
-                }
-
-                .social a i:before {
-                    padding-right: 0;
-                }
-
-                .muahang p a {
-                    color: #ffb229;
-                    min-width: 105px !important;
-                    display: inline-block;
-                    padding-left: 5px
-                }
-
-                .muahang p span {
-                    width: 70px;
-                    display: inline-block;
-                }
-
-                .showrooms {
-                    float: left;
-                    width: 100%;
-                }
-
-                .showrooms ul {
-                    float: left;
-                    width: 100%;
-                    margin-bottom: 10px;
-                }
-
-                .showrooms li {
-                    float: left;
-                    width: 100%;
-                }
-
-                .showrooms li:nth-child(1) {
-                    font-weight: bold;
-                    text-transform: uppercase;
-                }
-
-                .showrooms li:nth-child(1):before {
-                    font: 14px/18px FontAwesome;
-                    margin-right: 5px;
-                    content: "\f041";
-                }
-
-                .showrooms span {
-                    display: inline-block;
-                    width: 80px;
-                    color: #aaa;
-                }
-
-                .showrooms li i {
-                    font: 12px arial;
-                    color: red;
-                }
-
-                .showrooms li a {
-                    color: orange !important;
-                }
-
-                .coson {
-                    color: yellow;
-                }
-
-                .copyright {
-                    border-top: 1px solid #111;
-                }
-
-                .copyright a {
-                    color: #fff;
-                }
-
-                #panel {
-                    position: fixed;
-                    z-index: 999;
-                    right: 20px;
-                    bottom: 10px;
-                    height: 250px;
-                    width: 45px;
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                #panel img {
-                    width: 80px;
-                }
-
-                #panel img:hover {
-                    opacity: 0.9;
-                }
-
-                .zalo-chat-widget {
-                    right: 12px !important;
-                }
-
+.pswp {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    -ms-touch-action: none;
+    touch-action: none;
+    z-index: 1500;
+    -webkit-text-size-adjust: 100%;
+    -webkit-backface-visibility: hidden;
+    outline: none;
+}
+
+.pswp * {
+    box-sizing: border-box;
+}
+
+.pswp img {
+    max-width: none;
+}
+
+.pswp--animate_opacity {
+    opacity: 0.001;
+    will-change: opacity;
+    transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);
+}
+
+.pswp--open {
+    display: block;
+}
+
+.pswp--zoom-allowed .pswp__img {
+    cursor: -webkit-zoom-in;
+    cursor: -moz-zoom-in;
+    cursor: zoom-in;
+}
+
+.pswp--zoomed-in .pswp__img {
+    cursor: grab;
+}
+
+.pswp--dragging .pswp__img {
+    cursor: grabbing;
+}
+
+.pswp__bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    will-change: opacity;
+}
+
+.pswp__scroll-wrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.pswp__container,
+.pswp__zoom-wrap {
+    -ms-touch-action: none;
+    touch-action: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.pswp__container,
+.pswp__img {
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+.pswp__zoom-wrap {
+    position: absolute;
+    width: 100%;
+    transform-origin: left top;
+    transition: transform 333ms cubic-bezier(0.4, 0, 0.22, 1);
+}
+
+.pswp__bg {
+    will-change: opacity;
+    transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);
+}
+
+.pswp--animated-in .pswp__bg,
+.pswp--animated-in .pswp__zoom-wrap {
+    transition: none;
+}
+
+.pswp__container,
+.pswp__zoom-wrap {
+    -webkit-backface-visibility: hidden;
+}
+
+.pswp__item {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.pswp__img {
+    position: absolute;
+    width: auto;
+    height: auto;
+    top: 0;
+    left: 0;
+}
+
+.pswp__img--placeholder {
+    -webkit-backface-visibility: hidden;
+}
+
+.pswp__img--placeholder--blank {
+    background: #222;
+}
+
+.pswp--ie .pswp__img {
+    width: 100% !important;
+    height: auto !important;
+    left: 0;
+    top: 0;
+}
+
+.pswp__error-msg {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    line-height: 16px;
+    margin-top: -8px;
+    color: #CCC;
+}
+
+.pswp__error-msg a {
+    color: #CCC;
+    text-decoration: underline;
+}
+
+.pswp__button {
+    width: 44px;
+    height: 44px;
+    position: relative;
+    background: none;
+    cursor: pointer;
+    overflow: visible;
+    -webkit-appearance: none;
+    display: block;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    float: right;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+    box-shadow: none;
+}
+
+.pswp__button:focus,
+.pswp__button:hover {
+    opacity: 1;
+}
+
+.pswp__button:active {
+    outline: none;
+    opacity: 0.9;
+}
+
+.pswp__button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+.pswp__ui--over-close .pswp__button--close {
+    opacity: 1;
+}
+
+.pswp__button,
+.pswp__button--arrow--left:before,
+.pswp__button--arrow--right:before {
+    background: url(/Content/photoswipe/default-skin.png) 0 0 no-repeat;
+    background-size: 264px 88px;
+    width: 44px;
+    height: 44px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.1),
+(-webkit-min-device-pixel-ratio: 1.09375),
+(min-resolution: 105dpi),
+(min-resolution: 1.1dppx) {
+
+    .pswp--svg .pswp__button,
+    .pswp--svg .pswp__button--arrow--left:before,
+    .pswp--svg .pswp__button--arrow--right:before {
+        background-image: url(/Content/photoswipe/default-skin.svg);
+    }
+
+    .pswp--svg .pswp__button--arrow--left,
+    .pswp--svg .pswp__button--arrow--right {
+        background: none;
+    }
+}
+
+.pswp__button--close {
+    background-position: 0 -44px;
+}
+
+.pswp__button--share {
+    background-position: -44px -44px;
+}
+
+.pswp__button--fs {
+    display: none;
+}
+
+.pswp--supports-fs .pswp__button--fs {
+    display: block;
+}
+
+.pswp--fs .pswp__button--fs {
+    background-position: -44px 0;
+}
+
+.pswp__button--zoom {
+    display: none;
+    background-position: -88px 0;
+}
+
+.pswp--zoom-allowed .pswp__button--zoom {
+    display: block;
+}
+
+.pswp--zoomed-in .pswp__button--zoom {
+    background-position: -132px 0;
+}
+
+.pswp--touch .pswp__button--arrow--left,
+.pswp--touch .pswp__button--arrow--right {
+    visibility: hidden;
+}
+
+.pswp__button--arrow--left,
+.pswp__button--arrow--right {
+    background: none;
+    top: 50%;
+    margin-top: -50px;
+    width: 70px;
+    height: 100px;
+    position: absolute;
+}
+
+.pswp__button--arrow--left {
+    left: 0;
+}
+
+.pswp__button--arrow--right {
+    right: 0;
+}
+
+.pswp__button--arrow--left:before,
+.pswp__button--arrow--right:before {
+    content: '';
+    top: 35px;
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 30px;
+    width: 32px;
+    position: absolute;
+}
+
+.pswp__button--arrow--left:before {
+    left: 6px;
+    background-position: -138px -44px;
+}
+
+.pswp__button--arrow--right:before {
+    right: 6px;
+    background-position: -94px -44px;
+}
+
+.pswp__counter,
+.pswp__share-modal {
+    user-select: none;
+}
+
+.pswp__share-modal {
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    z-index: 1600;
+    opacity: 0;
+    transition: opacity 0.25s ease-out;
+    -webkit-backface-visibility: hidden;
+    will-change: opacity;
+}
+
+.pswp__share-modal--hidden {
+    display: none;
+}
+
+.pswp__share-tooltip {
+    z-index: 1620;
+    position: absolute;
+    background: #FFF;
+    top: 56px;
+    border-radius: 2px;
+    display: block;
+    width: auto;
+    right: 44px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    transform: translateY(6px);
+    transition: transform 0.25s;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+}
+
+.pswp__share-tooltip a {
+    display: block;
+    padding: 8px 12px;
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.pswp__share-tooltip a:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+.pswp__share-tooltip a:first-child {
+    border-radius: 2px 2px 0 0;
+}
+
+.pswp__share-tooltip a:last-child {
+    border-radius: 0 0 2px 2px;
+}
+
+.pswp__share-modal--fade-in {
+    opacity: 1;
+}
+
+.pswp__share-modal--fade-in .pswp__share-tooltip {
+    transform: translateY(0);
+}
+
+.pswp--touch .pswp__share-tooltip a {
+    padding: 16px 12px;
+}
+
+a.pswp__share--facebook:before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -12px;
+    right: 15px;
+    border: 6px solid transparent;
+    border-bottom-color: #FFF;
+    pointer-events: none;
+}
+
+a.pswp__share--facebook:hover {
+    background: #3E5C9A;
+    color: #FFF;
+}
+
+a.pswp__share--facebook:hover:before {
+    border-bottom-color: #3E5C9A;
+}
+
+a.pswp__share--twitter:hover {
+    background: #55ACEE;
+    color: #FFF;
+}
+
+a.pswp__share--pinterest:hover {
+    background: #CCC;
+    color: #CE272D;
+}
+
+a.pswp__share--download:hover {
+    background: #DDD;
+}
+
+.pswp__counter {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 44px;
+    font-size: 13px;
+    line-height: 44px;
+    color: #FFF;
+    opacity: 0.75;
+    padding: 0 10px;
+}
+
+.pswp__caption {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    min-height: 44px;
+}
+
+.pswp__caption small {
+    font-size: 11px;
+    color: #BBB;
+}
+
+.pswp__caption__center {
+    text-align: center;
+    max-width: 420px;
+    margin: 0 auto;
+    font-size: 13px;
+    padding: 10px;
+    line-height: 20px;
+    color: #CCC;
+}
+
+.pswp__caption__center a {
+    font: bold 12px/30px arial;
+    padding: 0 10px;
+    background: #fb7710;
+    color: #fff;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.pswp__caption--empty {
+    display: none;
+}
+
+.pswp__caption--fake {
+    visibility: hidden;
+}
+
+.pswp__preloader {
+    width: 44px;
+    height: 44px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -22px;
+    opacity: 0;
+    transition: opacity 0.25s ease-out;
+    will-change: opacity;
+    direction: ltr;
+}
+
+.pswp__preloader__icn {
+    width: 20px;
+    height: 20px;
+    margin: 12px;
+}
+
+.pswp__preloader--active {
+    opacity: 1;
+}
+
+.pswp__preloader--active .pswp__preloader__icn {
+    background: url(preloader.gif) 0 0 no-repeat;
+}
+
+.pswp--css_animation .pswp__preloader--active {
+    opacity: 1;
+}
+
+.pswp--css_animation .pswp__preloader--active .pswp__preloader__icn {
+    animation: clockwise 500ms linear infinite;
+}
+
+.pswp--css_animation .pswp__preloader--active .pswp__preloader__donut {
+    animation: donut-rotate 1000ms cubic-bezier(0.4, 0, 0.22, 1) infinite;
+}
+
+.pswp--css_animation .pswp__preloader__icn {
+    background: none;
+    opacity: 0.75;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    margin: 0;
+}
+
+.pswp--css_animation .pswp__preloader__cut {
+    position: relative;
+    width: 7px;
+    height: 14px;
+    overflow: hidden;
+}
+
+.pswp--css_animation .pswp__preloader__donut {
+    box-sizing: border-box;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #FFF;
+    border-radius: 50%;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: none;
+    margin: 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .pswp__preloader {
+        position: relative;
+        left: auto;
+        top: auto;
+        margin: 0;
+        float: right;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .pswp__caption__center a {
+        font: bold 12px/38px arial;
+        padding: 0 15px;
+    }
+}
+
+@-webkit-keyframes clockwise {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes clockwise {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes donut-rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(-140deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+@keyframes donut-rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(-140deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.pswp__ui {
+    -webkit-font-smoothing: auto;
+    visibility: visible;
+    opacity: 1;
+    z-index: 1550;
+}
+
+.pswp__top-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 44px;
+    width: 100%;
+}
+
+.pswp__caption,
+.pswp__top-bar,
+.pswp--has_mouse .pswp__button--arrow--left,
+.pswp--has_mouse .pswp__button--arrow--right {
+    -webkit-backface-visibility: hidden;
+    will-change: opacity;
+    transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);
+}
+
+.pswp--has_mouse .pswp__button--arrow--left,
+.pswp--has_mouse .pswp__button--arrow--right {
+    visibility: visible;
+}
+
+.pswp__top-bar,
+.pswp__caption {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.pswp__ui--fit .pswp__top-bar,
+.pswp__ui--fit .pswp__caption {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.pswp__ui--idle .pswp__top-bar {
+    opacity: 0;
+}
+
+.pswp__ui--idle .pswp__button--arrow--left,
+.pswp__ui--idle .pswp__button--arrow--right {
+    opacity: 0;
+}
+
+.pswp__ui--hidden .pswp__top-bar,
+.pswp__ui--hidden .pswp__caption,
+.pswp__ui--hidden .pswp__button--arrow--left,
+.pswp__ui--hidden .pswp__button--arrow--right {
+    opacity: 0.001;
+}
+
+.pswp__ui--one-slide .pswp__button--arrow--left,
+.pswp__ui--one-slide .pswp__button--arrow--right,
+.pswp__ui--one-slide .pswp__counter {
+    display: none;
+}
+
+.pswp__element--disabled {
+    display: none !important;
+}
+
+.pswp--minimal--dark .pswp__top-bar {
+    background: none;
+}
+
+.fotb {
+    float: left;
+    width: 30%;
+    color: #fff;
+}
+
+.fotb a {
+    color: #fff;
+}
+
+.fotb:nth-last-child(1) {
+    margin-right: 0;
+}
+
+.fotb label {
+    display: block;
+    margin-bottom: 10px;
+    font: bold 13px/25px arial;
+    text-transform: uppercase;
+}
+
+.fotb label:before {
+    font: 14px/18px FontAwesome;
+    margin-right: 5px;
+}
+
+.fotb:nth-last-child(1) label:before {
+    content: "\f095";
+}
+
+.fotb:nth-last-child(2) label:before {
+    content: "\f129";
+}
+
+.fotb:nth-last-child(3) label:before {
+    content: "\f0f6";
+}
+
+.social {
+    margin-bottom: 20px;
+}
+
+.social a {
+    margin-right: 10px;
+    background: #8ab6e3;
+    padding: 5px 10px;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.social a:hover {
+    background: #498ed4;
+}
+
+.social a i:before {
+    padding-right: 0;
+}
+
+.muahang p a {
+    color: #ffb229;
+    min-width: 105px !important;
+    display: inline-block;
+    padding-left: 5px
+}
+
+.muahang p span {
+    width: 70px;
+    display: inline-block;
+}
+
+.showrooms {
+    float: left;
+    width: 100%;
+}
+
+.showrooms ul {
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.showrooms li {
+    float: left;
+    width: 100%;
+}
+
+.showrooms li:nth-child(1) {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.showrooms li:nth-child(1):before {
+    font: 14px/18px FontAwesome;
+    margin-right: 5px;
+    content: "\f041";
+}
+
+.showrooms span {
+    display: inline-block;
+    width: 80px;
+    color: #aaa;
+}
+
+.showrooms li i {
+    font: 12px arial;
+    color: red;
+}
+
+.showrooms li a {
+    color: orange !important;
+}
+
+.coson {
+    color: yellow;
+}
+
+.copyright {
+    border-top: 1px solid #111;
+}
+
+.copyright a {
+    color: #fff;
+}
+
+#panel {
+    position: fixed;
+    z-index: 999;
+    right: 20px;
+    bottom: 10px;
+    height: 250px;
+    width: 45px;
+    display: flex;
+    flex-direction: column;
+}
+
+#panel img {
+    width: 80px;
+}
+
+#panel img:hover {
+    opacity: 0.9;
+}
+
+.zalo-chat-widget {
+    right: 12px !important;
+}
 </style>

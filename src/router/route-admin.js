@@ -266,7 +266,7 @@ const adminRoutes = [
     component: () => import("../views/home/homeLayout.vue"),
   },
   {
-    path: "/trang-chu/chi-tiet-san-pham/:id",
+    path: "/trang-chu-chi-tiet-san-pham/:id",
     name: "trang-chu-chi-tiet-san-pham",
     meta: { title: "Trang chủ" },
     component: () => import("../views/home/DetailsProductHome.vue"),

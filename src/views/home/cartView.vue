@@ -1,10 +1,6 @@
 <template>
     <div id="wrapper">
         <div id="header">
-
-
-
-
             <div class="f head1" itemscope="" itemtype="http://schema.org/WebSite" itemid="https://denled.com/#website">
                 <meta itemprop="url" content="https://denled.com">
                 <meta itemprop="name" content="Siêu thị đèn LED">
@@ -13,7 +9,8 @@
                     <a href="/" title="Siêu thị đèn LED" itemprop="logo" itemscope=""
                         itemtype="http://schema.org/ImageObject">
                         <meta itemprop="url" content="https://denled.com/Content/img/logo.png">
-                        <img width="286" height="60" src="https://denled.com/Content/img/logo.png" alt="Siêu thị đèn LED">
+                        <img width="286" height="60" src="https://denled.com/Content/img/logo.png"
+                            alt="Siêu thị đèn LED">
                     </a>
                     <meta itemprop="url" content="https://denled.com">
                     <meta itemprop="name" content="Siêu thị đèn LED">
@@ -104,7 +101,12 @@
                     <div class="open">
                         <label class="hl"><span>Hotline 1: <b>097366.5115</b></span><span>Hotline 2:
                                 <b>097366.5115</b></span></label>
-                        <label class="oh"><span> GIỜ MỞ CỬA</span>8h00 - 21h00</label>
+                                <label style="cursor: pointer;" class="oh">
+                            <router-link v-if="!userLocal" to="/login">
+                                <span> Đăng nhập </span>
+                            </router-link>
+                            <span v-else class="me-1">Xin chào {{ userLocal.lastname }}</span>
+                        </label>
 
                     </div>
                 </div>
@@ -726,8 +728,8 @@
                                 <a style="background:#000;margin-top:5px;"
                                     href="//www.dmca.com/Protection/Status.aspx?ID=fb224c55-eb25-4914-8540-4f94b9c3013d"
                                     rel="noreferrer nofollow" title="DMCA.com Protection Status" class="dmca-badge">
-                                    <img src="https://denled.com/Content/img/dmca.png" alt="DMCA.com Protection Status" width="75"
-                                        height="24"></a>
+                                    <img src="https://denled.com/Content/img/dmca.png" alt="DMCA.com Protection Status"
+                                        width="75" height="24"></a>
                                 <a style="background:#000;margin-top:5px;"
                                     href="http://online.gov.vn/Home/WebDetails/85212" target="_blank"
                                     title="Đã thông báo bộ công thương" rel="nofollow"><img
@@ -815,12 +817,13 @@
 
             <ul id="panel">
 
-<li><img src="https://denled.com/Content/img/totop.svg" alt="To top" width="45" height="45">
-</li>
-<li style="padding-top:10px;padding-bottom:10px"><img alt="Messenger" src="https://denled.com/Content/img/messenger.svg" width="45" height="45"></li>
+                <li><img src="https://denled.com/Content/img/totop.svg" alt="To top" width="45" height="45">
+                </li>
+                <li style="padding-top:10px;padding-bottom:10px"><img alt="Messenger"
+                        src="https://denled.com/Content/img/messenger.svg" width="45" height="45"></li>
 
-<li><img alt="Phone" src="https://denled.com/Content/img/phone.svg" width="45" height="45"></li>
-</ul>
+                <li><img alt="Phone" src="https://denled.com/Content/img/phone.svg" width="45" height="45"></li>
+            </ul>
             <div class="zalo-chat-widget" data-oaid="2839194858446814357"
                 data-welcome-message="Rất vui khi được hỗ trợ bạn!. Nếu bạn không thể chờ thì hãy gọi hoặc nhắn tin đến số điện thoại này 0973.66.5115."
                 data-autopopup="1800" data-width="500" data-height="500" style="right:12px;"></div>
@@ -856,7 +859,17 @@ import BaseCommon from "../../api/BaseCommon.js";
 import ApiMeasuringTool from "../../api/ApiMeasuringTool.js";
 import { useAuthStore } from "../../stores/auth.store.js";
 export default defineComponent({
-
+    setup() {
+        const route = useRoute();
+        const productId = route.params.id;
+        const router = useRouter();
+        const userLocal = JSON.parse(localStorage.getItem("auth"));
+        return {
+            router,
+            route,
+            userLocal
+        };
+    }
 });
 </script>
 
