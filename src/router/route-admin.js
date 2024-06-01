@@ -228,6 +228,12 @@ const adminRoutes = [
         component: () => import("../views/roles/edit.vue"),
       },
       {
+        path: "hoa-don/sua/:id",
+        name: "hoa-don/sua",
+        meta: { title: "Sửa - hoá đơn" },
+        component: () => import("../views/users/editImport.vue"),
+      },
+      {
         path: "cai-dat",
         name: "admin-themeoptions",
         meta: { title: "Cài đặt" },

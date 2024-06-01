@@ -15,13 +15,22 @@
           itemtype="https://schema.org/Organization"
           itemid="https://denled.com/#organization"
         >
-        <router-link to="/trang-chu">
-                    <a  title="Siêu thị đèn LED" itemprop="logo" itemscope=""
-                        itemtype="http://schema.org/ImageObject">
-                        <meta itemprop="url" content="/Content/img/logo.png">
-                        <img width="286" height="60" src="https://denled.com/Content/img/logo.png" alt="Siêu thị đèn LED">
-                    </a>
-                   </router-link>
+          <router-link to="/trang-chu">
+            <a
+              title="Siêu thị đèn LED"
+              itemprop="logo"
+              itemscope=""
+              itemtype="http://schema.org/ImageObject"
+            >
+              <meta itemprop="url" content="/Content/img/logo.png" />
+              <img
+                width="286"
+                height="60"
+                src="https://denled.com/Content/img/logo.png"
+                alt="Siêu thị đèn LED"
+              />
+            </a>
+          </router-link>
           <meta itemprop="url" content="https://denled.com" />
           <meta itemprop="name" content="Siêu thị đèn LED" />
           <meta
@@ -196,12 +205,12 @@
               ><span>Hotline 1: <b>097366.5115</b></span
               ><span>Hotline 2: <b>097366.5115</b></span></label
             >
-            <label style="cursor: pointer;" class="oh">
-      <router-link v-if="!userLocal" to="/login">
-        <span> Đăng nhập </span>
-      </router-link>
-      <span v-else class="me-1">Xin chào {{ userLocal.lastname }}</span>
-    </label>
+            <label style="cursor: pointer" class="oh">
+              <router-link v-if="!userLocal" to="/login">
+                <span> Đăng nhập </span>
+              </router-link>
+              <span v-else class="me-1">Xin chào {{ userLocal.lastname }}</span>
+            </label>
           </div>
         </div>
       </div>
@@ -770,15 +779,14 @@
           <div class="flexJus">
             <router-link to="/trang-chu/gio-hang">
               <div id="vcart">
-              <fieldset>
-                <u>x</u>
-                <figure>
-                  <p>Chưa có sản phẩm nào trong giỏ hàng !</p>
-                </figure>
-              </fieldset>
-            </div>
+                <fieldset>
+                  <u>x</u>
+                  <figure>
+                    <p>Chưa có sản phẩm nào trong giỏ hàng !</p>
+                  </figure>
+                </fieldset>
+              </div>
             </router-link>
-            
           </div>
         </div>
       </div>
@@ -814,7 +822,6 @@
                   <a href="" title="">
                     <img
                       src="https://denled.com/Data/upload/files/1(5).png"
-                     
                       alt=""
                     />
                   </a>
@@ -825,7 +832,6 @@
                   <a href="" title="">
                     <img
                       src="https://denled.com/Data/upload/files/1(5).png"
-                     
                       alt=""
                     />
                   </a>
@@ -963,24 +969,23 @@
           >
             <li style="width: 100% !important" class="pi">
               <router-link
-                    :to="{
-                      name: 'trang-chu-chi-tiet-san-pham',
-                      params: { id: user.productId },
-                    }"
+                :to="{
+                  name: 'trang-chu-chi-tiet-san-pham',
+                  params: { id: user.productId },
+                }"
+              >
+                <a :title="user.title">
+                  <div data-l="kaadas">
+                    <img :src="user.avatarProduct" :alt="user.avatarProduct" />
+                  </div>
+                  <h3>{{ user.productName }}</h3>
+                  <strong
+                    >{{ user.discount }}₫<i>{{ user.price }}</i
+                    ><u>{{ user.price }}₫</u></strong
                   >
-                  <a :title="user.title" >
-                <div data-l="kaadas">
-                  <img :src="user.avatarProduct" :alt="user.avatarProduct" />
-                </div>
-                <h3>{{ user.productName }}</h3>
-                <strong
-                  >{{ user.discount }}₫<i>{{ user.price }}</i
-                  ><u>{{ user.price }}₫</u></strong
-                >
-                <span class="s s5">{{ user.view }}(Lượt xem)</span>
-              </a>
-                  </router-link>
-            
+                  <span class="s s5">{{ user.view }}(Lượt xem)</span>
+                </a>
+              </router-link>
             </li>
           </ul>
         </div>
@@ -1366,7 +1371,7 @@ export default defineComponent({
       router,
       users,
       storeId2,
-      userLocal
+      userLocal,
     };
     //
   },
@@ -3044,7 +3049,8 @@ body {
 }
 
 .brands {
-  background: url("https://denled.com/Data/upload/files/Home/BG-hang.jpg") no-repeat 0 0;
+  background: url("https://denled.com/Data/upload/files/Home/BG-hang.jpg")
+    no-repeat 0 0;
   padding: 40px 0;
   color: #fff;
   margin-top: 50px;

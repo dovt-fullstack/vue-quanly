@@ -779,13 +779,13 @@
           <div class="flexJus">
             <router-link to="/trang-chu/gio-hang">
               <div id="vcart">
-              <fieldset>
-                <u>x</u>
-                <figure>
-                  <p>Chưa có sản phẩm nào trong giỏ hàng !</p>
-                </figure>
-              </fieldset>
-            </div>
+                <fieldset>
+                  <u>x</u>
+                  <figure>
+                    <p>Chưa có sản phẩm nào trong giỏ hàng !</p>
+                  </figure>
+                </fieldset>
+              </div>
             </router-link>
           </div>
         </div>
@@ -1073,7 +1073,7 @@
           <div class="f flex">
             <div class="fotb" style="width: 30%; padding-right: 30px">
               <img
-                src="/Content/img/logo-foot.png"
+                src="https://denled.com/Content/img/logo-foot.png"
                 alt="Denled.com"
                 width="286"
                 height="60"
@@ -1392,15 +1392,15 @@ export default defineComponent({
         console.error(error);
       }
     };
-    const token = JSON.parse(localStorage.getItem('token'));  // Lấy token từ localStorage
+    const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
     const handelAddCart = () => {
       const data = window.prompt("Vui lòng nhập số lượng");
       console.log(data);
-      const newData =Number(data);
-      if(newData <0){
-        alert("số lượng tối thiểu là 1")
-      }else{
-        addToCart(newData)
+      const newData = Number(data);
+      if (newData < 0) {
+        alert("số lượng tối thiểu là 1");
+      } else {
+        addToCart(newData);
       }
     };
     const addToCart = async (q) => {
@@ -1413,7 +1413,7 @@ export default defineComponent({
           formData,
           {
             headers: {
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${token}`,
             },
           }
         )
@@ -1425,7 +1425,6 @@ export default defineComponent({
         });
     };
 
-
     onMounted(() => {
       fetchProduct();
     });
@@ -1435,7 +1434,6 @@ export default defineComponent({
       route,
       userLocal,
       handelAddCart,
-      
     };
   },
 });
