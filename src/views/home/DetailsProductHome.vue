@@ -871,6 +871,15 @@
                   >
                     {{ product.productType }}
                   </li>
+                  <!-- <li
+                    data-id="728"
+                    data-imgid="tb728"
+                    data-pricett="0₫"
+                    data-price="156.000₫"
+                    data-off="0"
+                  >
+                    Thêm yêu thích
+                  </li> -->
                 </ul>
               </div>
 
@@ -894,12 +903,17 @@
               </div>
 
               <div @click="handelAddCart()" class="action">
-                <span class="btn2 bcam btnorder" onclick="addItoCart(736);"
-                  ><b>MUA HÀNG</b>
+                <span class="btn2 bcam btnorder"
+                  ><b>THÊM VÀO GIỎ HÀNG</b>
                   <i>Mua càng nhiều giá càng rẻ</i>
                 </span>
               </div>
-
+              <div @click="handelByNow()" class="action">
+                <span class="btn2 bcam btnorder"
+                  ><b>MUA NGAY</b>
+                  <i>Mua càng nhiều giá càng rẻ</i>
+                </span>
+              </div>
               <ul class="bphone">
                 <li>Hotline 1(24/7)<b>097366.5115</b></li>
               </ul>
@@ -1403,6 +1417,35 @@ export default defineComponent({
         addToCart(newData);
       }
     };
+    const handelByNow = async () => {
+      const data = window.prompt("Vui lòng nhập số lượng");
+      console.log(data);
+      const newData = Number(data);
+      if (newData < 0) {
+        alert("số lượng tối thiểu là 1");
+      } else {
+        const formData = new FormData();
+        formData.append("productid", productId);
+        formData.append("quantity", data);
+        axios
+          .post(
+            `https://charismatic-friendship-production.up.railway.app/api/v1/customer/order/insert`,
+            formData,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+          .then((response) => {
+            message.success("Thêm vào giỏ hàng thành công");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    };
+
     const addToCart = async (q) => {
       const formData = new FormData();
       formData.append("productid", productId);
@@ -1434,6 +1477,7 @@ export default defineComponent({
       route,
       userLocal,
       handelAddCart,
+      handelByNow,
     };
   },
 });

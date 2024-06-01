@@ -897,10 +897,10 @@
                 "
               >
                 <div
-                  v-for="user in users"
+                  v-for="user in users.slice(0, 5)"
                   :key="user.id"
                   class="owl-item active"
-                  style="width: 246px"
+                  style="width: 256px; margin-left: 2px"
                 >
                   <router-link
                     :to="{

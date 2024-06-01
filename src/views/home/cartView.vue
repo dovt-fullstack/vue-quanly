@@ -815,11 +815,7 @@
 
       <div class="orderbox">
         <div class="dieuhuong">
-          <a
-            href="https://denled.com/den-led-am-tran/den-led-am-tran-tron-15w-td-1508-gx-lighting"
-            title="Tiếp tục mua hàng"
-            >Tiếp tục mua hàng</a
-          >
+          <a>Giỏ hàng của bạn</a>
         </div>
 
         <div class="giohang orderhome">
@@ -841,6 +837,17 @@
                 <div class="oname">
                   <h3>{{ product.productName }}</h3>
                   <label>{{ product.priceTotal?.toLocaleString() }}₫</label>
+                  <span
+                    @click="byProductCart(product.cartItemId)"
+                    style="
+                      float: right;
+                      text-decoration: underline;
+                      padding-top: 10px;
+                      cursor: 'pointer';
+                    "
+                    >Mua ngay</span
+                  >
+
                   <div class="ArrCount">
                     <span @click="decrement(product)" class="sub">-</span>
                     <input type="text" :value="product.quantity" readonly />
@@ -866,7 +873,7 @@
           </form>
 
           <!--.box_27-->
-          <form method="post" name="order" id="fod">
+          <!-- <form method="post" name="order" id="fod">
             <div class="fpanel">
               <div class="option">
                 <input name="Sex" type="radio" value="1" />Anh
@@ -952,7 +959,22 @@
               />
               <input type="hidden" name="_w_action" value="OrderPOST" />
             </div>
-          </form>
+          </form> -->
+          <div class="fpanel">
+            <div class="da">
+              <p class="state">Đơn hàng đang được gửi ...</p>
+              <p @click="showDrawer" class="od" id="gui">
+                Xem các đơn đã đặt
+                <!-- <span>(Xem hàng, không mua không sao)</span> -->
+              </p>
+            </div>
+            <input
+              type="submit"
+              name="_w_action[OrderPOST]"
+              style="display: none"
+            />
+            <input type="hidden" name="_w_action" value="OrderPOST" />
+          </div>
         </div>
         <p class="los">
           Bằng cách đặt hàng, bạn đồng ý với
@@ -1235,6 +1257,79 @@
         style="right: 12px"
       ></div>
     </div>
+    <div>
+      <a-drawer
+        title="Danh sách đơn hàng đã đặt"
+        :visible="isDrawerVisible"
+        :width="850"
+        @close="handleClose"
+        :destroyOnClose="true"
+      >
+        <div class="giohang orderhome">
+          <form method="post" name="giohang" id="cart">
+            <ul class="listcart">
+              <li v-for="product in myOrder" :key="product.id" class="cartitem">
+                <div class="oimg">
+                  <a :href="product.href" :title="product.title">
+                    <img :src="product.productImg" :alt="product.title" />
+                  </a>
+                  <!-- <a
+                    @click="deleteProduct(product.cartItemId)"
+                    class="odel"
+                    rel="nofollow"
+                    :title="`Xóa ${product.title} khỏi đơn hàng`"
+                    >xóa</a
+                  > -->
+                </div>
+                <div class="oname">
+                  <h3>{{ product.productName }}</h3>
+                  <label>{{ product.orderStatusName }}</label>
+
+                  <label style="float: left"
+                    >{{ product.priceTotal?.toLocaleString() }}₫</label
+                  >
+
+                  <!-- <div class="ArrCount">
+                    <span @click="decrement(product)" class="sub">-</span>
+                    <input type="text" :value="product.quantity" readonly />
+                    <span @click="increment(product)" class="cre">+</span>
+
+                  </div> -->
+                </div>
+              </li>
+            </ul>
+            <!-- <div class="total flexJus">
+              <div>
+                <span>Tổng tiền:&nbsp;&nbsp;</span>
+                <b class="total_money">{{ allTotal.toLocaleString() }}₫</b>
+              </div>
+            </div> -->
+
+            <input
+              type="submit"
+              name="_w_action[UpdatePOST]"
+              style="display: none"
+            />
+            <input type="hidden" name="_w_action" value="UpdatePOST" />
+          </form>
+
+          <!-- <div class="fpanel">
+            <div class="da">
+              <p class="state">Đơn hàng đang được gửi ...</p>
+              <p @click="showDrawer" class="od" id="gui">
+                Xem các đơn đã đặt
+              </p>
+            </div>
+            <input
+              type="submit"
+              name="_w_action[OrderPOST]"
+              style="display: none"
+            />
+            <input type="hidden" name="_w_action" value="OrderPOST" />
+          </div> -->
+        </div>
+      </a-drawer>
+    </div>
   </div>
 </template>
 
@@ -1250,7 +1345,7 @@ import {
 
 import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
-import { message } from "ant-design-vue";
+import { Form, Drawer, Button, InputNumber, message } from "ant-design-vue";
 import {
   DeleteOutlined,
   CheckOutlined,
@@ -1263,17 +1358,35 @@ import BaseCommon from "../../api/BaseCommon.js";
 import ApiMeasuringTool from "../../api/ApiMeasuringTool.js";
 import { useAuthStore } from "../../stores/auth.store.js";
 export default defineComponent({
+  components: {
+    "a-form": Form,
+    "a-form-item": Form.Item,
+    "a-drawer": Drawer,
+    "a-button": Button,
+    "a-input-number": InputNumber,
+  },
   setup() {
     const route = useRoute();
     const productId = route.params.id;
     const product = ref([]);
+    const isDrawerVisible = ref(false);
     const allTotal = ref(0);
-
+    const form = ref(null);
     const router = useRouter();
     const userLocal = JSON.parse(localStorage.getItem("auth"));
     const token = JSON.parse(localStorage.getItem("token"));
-
+    const myOrder = ref([]);
     // https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/view
+
+    const showDrawer = () => {
+      isDrawerVisible.value = true;
+      fetchMyOrder();
+    };
+
+    const handleClose = () => {
+      isDrawerVisible.value = false;
+    };
+
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
@@ -1298,7 +1411,40 @@ export default defineComponent({
         console.error(error);
       }
     };
+    const fetchMyOrder = async () => {
+      try {
+        const response = await axios.get(
+          `https://charismatic-friendship-production.up.railway.app/api/v1/customer/orderdetail/view`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response.data, "data");
+        myOrder.value = response.data.data;
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    // https://charismatic-friendship-production.up.railway.app/api/v1/customer/orderdetail/view
+    const byProductCart = async (idCart) => {
+      const formData = new FormData();
+      // cartitemid
+      formData.append("cartitemid", idCart);
 
+      await axios.post(
+        `https://charismatic-friendship-production.up.railway.app/api/v1/customer/order/insert/cartitem`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert("Mua thành công");
+      fetchProduct();
+    };
     console.log(allTotal, "1");
     const deleteProduct = async (id) => {
       const formData = new FormData();
@@ -1376,6 +1522,16 @@ export default defineComponent({
         console.error(error);
       }
     };
+    const handleSubmit = () => {
+      form.value.validateFields((err) => {
+        if (!err) {
+          message.success("Quantity submitted successfully!");
+          handleClose();
+        } else {
+          message.error("Please input the correct quantity!");
+        }
+      });
+    };
     onMounted(() => {
       fetchProduct();
     });
@@ -1388,6 +1544,12 @@ export default defineComponent({
       decrement,
       increment,
       allTotal,
+      byProductCart,
+      isDrawerVisible,
+      showDrawer,
+      handleClose,
+      handleSubmit,
+      myOrder,
     };
   },
 });
