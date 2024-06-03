@@ -212,7 +212,7 @@ export default defineComponent({
     const getUsers = (args) => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/order/view`
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/order/view?keyword=a`
         )
         .then((response) => {
           console.log(response.data.data, "response");
