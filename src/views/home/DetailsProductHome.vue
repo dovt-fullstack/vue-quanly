@@ -15,7 +15,7 @@
           itemtype="https://schema.org/Organization"
           itemid="https://denled.com/#organization"
         >
-          <router-link to="/trang-chu">
+          <router-link to="/trang-chu-stores">
             <a
               title="Siêu thị đèn LED"
               itemprop="logo"

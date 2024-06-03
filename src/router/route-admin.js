@@ -1,7 +1,7 @@
 const adminRoutes = [
   {
     path: "/",
-    redirect: { path: "/dashboards" }, // redirect property
+    redirect: { path: "/trang-chu-stores" }, // redirect property
     component: () => import("../layouts/_share.vue"),
     children: [
       {
@@ -266,10 +266,16 @@ const adminRoutes = [
     component: () => import("../views/auths/register.vue"),
   },
   {
-    path: "/trang-chu",
+    path: "/trang-chu/:id",
     name: "trang-chu",
     meta: { title: "Trang chủ" },
     component: () => import("../views/home/homeLayout.vue"),
+  },
+  {
+    path: "/trang-chu-stores",
+    name: "trang-chu-stores",
+    meta: { title: "Trang chủ cửa hàng" },
+    component: () => import("../views/home/storeAllDs.vue"),
   },
   {
     path: "/trang-chu-chi-tiet-san-pham/:id",

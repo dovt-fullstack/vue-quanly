@@ -15,7 +15,7 @@
           itemtype="https://schema.org/Organization"
           itemid="https://denled.com/#organization"
         >
-          <router-link to="/trang-chu">
+          <router-link to="/trang-chu-stores">
             <a
               title="Siêu thị đèn LED"
               itemprop="logo"
@@ -875,7 +875,24 @@
         </div>
       </div>
       <!--san pham khuyen mai-->
-
+      <div class="f box-tit" id="headpro">
+        <div class="flexJus wrap" style="height: 40px">
+          <label @click="addMyFarvors()" class="btn" style="font: 15px arial"
+            >yêu thích</label
+          >
+          <div class="flexJus">
+            <ul
+              v-for="user in typeStore.productTypeName"
+              :key="user.id"
+              class="othpro flexL"
+            >
+              <li style="padding-right: 10px">
+                <label>{{ user }}</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="f dealhot">
         <div class="wrap flexCol">
           <div class="f dhtit">
@@ -1348,30 +1365,68 @@ export default defineComponent({
     const route = useRoute();
     const errors = ref([]);
     const users = ref([]);
+    const typeStore = ref([]);
+    const token = JSON.parse(localStorage.getItem("token"));
     const storeId = route.params.id;
     const storeId2 = ref(route.params.id);
     const getUsers = () => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/1/product/view`
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${storeId}/product/view`
         )
         .then((response) => {
-          console.log(response.data.data, "response");
           users.value = response.data.data;
         })
         .catch((error) => {
           console.error(error);
         });
     };
+    const addMyFarvors = async () => {
+      const formData = new FormData();
+      formData.append("storeid", storeId);
+      try {
+        await axios.post(
+          "https://charismatic-friendship-production.up.railway.app/api/v1/customer/favor/add",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        message.success("đã thêm yêu thích");
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    const getTypeStore = () => {
+      axios
+        .get(
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${storeId}/info/view`
+        )
+        .then((response) => {
+          console.log(response.data.data);
+          typeStore.value = response.data.data;
+          console.log(typeStore.value.productTypeName);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+    console.log(typeStore.value.productTypeName, "cs");
     onMounted(() => {
       getUsers();
+      getTypeStore();
     });
+
     return {
       route,
       router,
       users,
       storeId2,
       userLocal,
+      typeStore,
+      addMyFarvors,
     };
     //
   },
@@ -1401,6 +1456,7 @@ export default defineComponent({
 .zalo-chat-widget {
   right: 12px !important;
 }
+
 .fotb {
   float: left;
   width: 30%;
@@ -2118,6 +2174,207 @@ a:focus {
   text-decoration: underline;
 }
 
+.sapobanner {
+  position: relative;
+}
+
+.sapobanner figure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.sapobanner .sapold {
+  padding: 20px 50px;
+  margin: 0 auto;
+  max-width: 800px;
+  border-radius: 15px;
+  font-size: 18px;
+}
+
+.sapobanner h1 {
+  font: bold 42px/35px arial;
+  margin-bottom: 15px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.sapobanner {
+  font-size: 14px;
+  text-align: justify;
+}
+
+.sapobanner a {
+  color: #eee;
+}
+
+.sapobanner h3 {
+  text-align: center;
+  display: block;
+  font: bold 15px arial;
+  margin: 10px 0;
+}
+
+.sapobanner img {
+  display: block;
+  margin: 0 auto;
+  width: auto;
+  height: auto;
+}
+
+.sapobanner .beadcrum a {
+  color: orange;
+}
+
+.sapobanner .beadcrum span {
+  font-size: 13px;
+}
+
+/*thuoc tinh*/
+.property {
+  background: #f8f8f8;
+  padding: 0 0 20px;
+}
+
+.prol {
+  width: 60%;
+}
+
+.pror {
+  width: 40%;
+}
+
+.prol img {
+}
+
+.propertyhead label {
+  font: bold 18px/60px arial;
+  display: inline-block;
+}
+
+.propertyhead label:nth-child(1) {
+  width: 60%;
+}
+
+.propertyhead label:nth-child(2) {
+  width: 40%;
+}
+
+.pl {
+  height: 280px;
+}
+
+.prol figure a {
+  margin-right: 2%;
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+.prol figure a span {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 214px;
+  padding: 5px;
+}
+
+.plnoslide figure a span {
+  width: 130px;
+}
+
+.prol figure a h2 {
+  font: 14px arial;
+  margin-top: 10px;
+}
+
+.hang {
+  width: 100%;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.hang h2 {
+  float: left;
+  margin: 5px;
+  font: 14px/35px arial;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: #000;
+  color: orange;
+}
+
+.cur {
+  border-color: orange !important;
+}
+
+.othpro {
+  margin-left: 20px;
+}
+
+.othpro label {
+  font: 13px/33px arial;
+  color: #000;
+}
+
+.othpro div {
+  display: none;
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  min-width: 310px;
+  z-index: 1;
+}
+
+.othpro li {
+  position: relative;
+  background: #ffd52f;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.othpro li:hover > div {
+  display: block;
+}
+
+.othpro div a {
+  width: 100%;
+  float: left;
+  font: 13px/30px arial;
+  color: #555;
+  cursor: pointer;
+}
+
+.othpro div a h2 {
+  font: 13px/30px arial;
+  color: #555;
+  margin: 0;
+  display: inline-block;
+}
+
+.othpro div a:before,
+.prol h2:before {
+  font: 14px/1px FontAwesome;
+  margin-right: 5px;
+  color: #999;
+}
+
+.on:before,
+.plon h2:before {
+  content: "\f192" !important;
+}
+
+.othpro div a:before,
+.ploff h2:before {
+  content: "\f10c";
+}
+
 /*box-tit*/
 .box-tit {
   height: 40px;
@@ -2453,6 +2710,7 @@ textarea {
 .bi {
   background: url("https://denled.com/Content/img/i/icon-logo.png") no-repeat;
 }
+
 .head1 {
   padding: 15px 0;
   background: #000;
@@ -3094,6 +3352,7 @@ body {
   display: inline-block;
   margin-top: 30px;
 }
+
 .owl-carousel .owl-wrapper:after {
   content: ".";
   display: block;
@@ -3409,6 +3668,7 @@ body {
   min-height: 150px;
   background: url(AjaxLoader.gif) no-repeat center center;
 }
+
 .Product {
   width: 100%;
   float: left;
@@ -3700,6 +3960,7 @@ body {
 .dealhot .bq u {
   font: 13px/14px arial;
 }
+
 .boxtit ul {
   display: flex;
   justify-content: flex-end;
@@ -3725,6 +3986,7 @@ body {
 .bst h2 a {
   color: #333;
 }
+
 .n2 {
   padding: 0 0 30px;
 }
