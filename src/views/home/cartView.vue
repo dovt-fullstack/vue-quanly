@@ -1,102 +1,228 @@
 <template>
   <div id="wrapper">
     <div id="header">
-      <div class="f head1" itemscope="" itemtype="http://schema.org/WebSite" itemid="https://denled.com/#website">
+      <div
+        class="f head1"
+        itemscope=""
+        itemtype="http://schema.org/WebSite"
+        itemid="https://denled.com/#website"
+      >
         <meta itemprop="url" content="https://denled.com" />
         <meta itemprop="name" content="Siêu thị đèn LED" />
-        <div class="wrap flexJus" itemscope="" itemtype="https://schema.org/Organization"
-          itemid="https://denled.com/#organization">
-          <a href="/" title="Siêu thị đèn LED" itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject">
-            <meta itemprop="url" content="https://denled.com/Content/img/logo.png" />
-            <img width="286" height="60" src="https://denled.com/Content/img/logo.png" alt="Siêu thị đèn LED" />
+        <div
+          class="wrap flexJus"
+          itemscope=""
+          itemtype="https://schema.org/Organization"
+          itemid="https://denled.com/#organization"
+        >
+          <a
+            href="/"
+            title="Siêu thị đèn LED"
+            itemprop="logo"
+            itemscope=""
+            itemtype="http://schema.org/ImageObject"
+          >
+            <meta
+              itemprop="url"
+              content="https://denled.com/Content/img/logo.png"
+            />
+            <img
+              width="286"
+              height="60"
+              src="https://denled.com/Content/img/logo.png"
+              alt="Siêu thị đèn LED"
+            />
           </a>
           <meta itemprop="url" content="https://denled.com" />
           <meta itemprop="name" content="Siêu thị đèn LED" />
-          <meta itemprop="description" content="Siêu thị đèn LED chiếu sáng số 1 Việt Nam" />
-          <meta itemprop="disambiguatingDescription"
-            content="Chuyên phân phối các loại đèn LED chiếu sáng, trang trí chất lượng, chính hãng tại Hà Nội, Hồ Chí Minh. Đèn led âm trần, đèn ốp trần, đèn chùm, đèn tường" />
-          <meta itemprop="sameAs" content="https://www.facebook.com/thegioidenledhanoii" />
-          <meta itemprop="sameAs" content="https://g.page/Thegioidenledtranduyhung" />
-          <meta itemprop="sameAs" content="https://goo.gl/maps/cmk6SUJRmpn1UXKS6" />
-          <meta itemprop="sameAs" content="http://online.gov.vn/Home/WebDetails/85212" />
-          <link itemprop="additionalType" href="https://en.wikipedia.org/wiki/LED_lamp" />
-          <link itemprop="additionalType" href="https://vi.wikipedia.org/wiki/%C4%90%C3%A8n_LED" />
-          <link itemprop="additionalType" href="https://en.wikipedia.org/wiki/Lighting" />
-          <link itemprop="additionalType" href="https://en.wiktionary.org/wiki/store" />
+          <meta
+            itemprop="description"
+            content="Siêu thị đèn LED chiếu sáng số 1 Việt Nam"
+          />
+          <meta
+            itemprop="disambiguatingDescription"
+            content="Chuyên phân phối các loại đèn LED chiếu sáng, trang trí chất lượng, chính hãng tại Hà Nội, Hồ Chí Minh. Đèn led âm trần, đèn ốp trần, đèn chùm, đèn tường"
+          />
+          <meta
+            itemprop="sameAs"
+            content="https://www.facebook.com/thegioidenledhanoii"
+          />
+          <meta
+            itemprop="sameAs"
+            content="https://g.page/Thegioidenledtranduyhung"
+          />
+          <meta
+            itemprop="sameAs"
+            content="https://goo.gl/maps/cmk6SUJRmpn1UXKS6"
+          />
+          <meta
+            itemprop="sameAs"
+            content="http://online.gov.vn/Home/WebDetails/85212"
+          />
+          <link
+            itemprop="additionalType"
+            href="https://en.wikipedia.org/wiki/LED_lamp"
+          />
+          <link
+            itemprop="additionalType"
+            href="https://vi.wikipedia.org/wiki/%C4%90%C3%A8n_LED"
+          />
+          <link
+            itemprop="additionalType"
+            href="https://en.wikipedia.org/wiki/Lighting"
+          />
+          <link
+            itemprop="additionalType"
+            href="https://en.wiktionary.org/wiki/store"
+          />
           <meta itemprop="vatID" content="0105770373" />
           <meta itemprop="email" content="denledminhhai@gmail.com" />
 
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
+          <span
+            itemprop="location"
+            itemscope=""
+            itemtype="https://schema.org/PostalAddress"
+          >
             <meta itemprop="name" content="trụ sở chính" />
-            <meta itemprop="streetAddress" content="21C Trần Duy Hưng, Cầu Giấy, HN" />
+            <meta
+              itemprop="streetAddress"
+              content="21C Trần Duy Hưng, Cầu Giấy, HN"
+            />
             <meta itemprop="addressLocality" content="Cầu Giấy" />
             <meta itemprop="addressRegion" content="Hà Nội" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
+            <span
+              itemprop="addressCountry"
+              itemscope=""
+              itemtype="https://schema.org/Country"
+            >
               <meta itemprop="name" content="Việt Nam" />
             </span>
           </span>
 
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
+          <span
+            itemprop="location"
+            itemscope=""
+            itemtype="https://schema.org/PostalAddress"
+          >
             <meta itemprop="name" content="SIÊU THỊ ĐÈN LED CẦU GIẤY" />
             <meta itemprop="streetAddress" content="21C Trần Duy Hưng" />
             <meta itemprop="addressLocality" content="Cầu Giấy" />
             <meta itemprop="addressRegion" content="Hà Nội" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
+            <span
+              itemprop="addressCountry"
+              itemscope=""
+              itemtype="https://schema.org/Country"
+            >
               <meta itemprop="name" content="Việt Nam" />
             </span>
           </span>
 
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
+          <span
+            itemprop="location"
+            itemscope=""
+            itemtype="https://schema.org/PostalAddress"
+          >
             <meta itemprop="name" content="SIÊU THỊ ĐÈN LED ECOPARK" />
             <meta itemprop="streetAddress" content="107 Thảo Nguyên" />
             <meta itemprop="addressLocality" content="Ecopark" />
             <meta itemprop="addressRegion" content="Hà Nội" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
+            <span
+              itemprop="addressCountry"
+              itemscope=""
+              itemtype="https://schema.org/Country"
+            >
               <meta itemprop="name" content="Việt Nam" />
             </span>
           </span>
 
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
+          <span
+            itemprop="location"
+            itemscope=""
+            itemtype="https://schema.org/PostalAddress"
+          >
             <meta itemprop="name" content="SIÊU THỊ ĐÈN LED QUẬN 2" />
-            <meta itemprop="streetAddress" content="148 Nguyễn Hoàng, P. AN Phú, Quận 2" />
+            <meta
+              itemprop="streetAddress"
+              content="148 Nguyễn Hoàng, P. AN Phú, Quận 2"
+            />
             <meta itemprop="addressLocality" content="Quận 2" />
             <meta itemprop="addressRegion" content="Hà Nội" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
+            <span
+              itemprop="addressCountry"
+              itemscope=""
+              itemtype="https://schema.org/Country"
+            >
               <meta itemprop="name" content="Việt Nam" />
             </span>
           </span>
 
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
+          <span
+            itemprop="location"
+            itemscope=""
+            itemtype="https://schema.org/PostalAddress"
+          >
             <meta itemprop="name" content="SIÊU THỊ ĐÈN LED PHÚ QUỐC" />
-            <meta itemprop="streetAddress" content="245 Đường 30/4, Dương Đông, Phú Quốc" />
+            <meta
+              itemprop="streetAddress"
+              content="245 Đường 30/4, Dương Đông, Phú Quốc"
+            />
             <meta itemprop="addressLocality" content="Phú Quốc" />
             <meta itemprop="addressRegion" content="Kiên Giang" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
+            <span
+              itemprop="addressCountry"
+              itemscope=""
+              itemtype="https://schema.org/Country"
+            >
               <meta itemprop="name" content="Việt Nam" />
             </span>
           </span>
 
-          <span itemprop="contactPoint" itemscope="" itemtype="https://schema.org/ContactPoint">
+          <span
+            itemprop="contactPoint"
+            itemscope=""
+            itemtype="https://schema.org/ContactPoint"
+          >
             <meta itemprop="email" content="denledminhhai@gmail.com" />
             <meta itemprop="telephone" content="+84973665115" />
             <meta itemprop="areaServed" content="VN" />
           </span>
-          <span itemprop="founder" itemscope="" itemtype="https://schema.org/Person" itemid="/#founder">
+          <span
+            itemprop="founder"
+            itemscope=""
+            itemtype="https://schema.org/Person"
+            itemid="/#founder"
+          >
             <meta itemprop="name" content="Chu Thanh Phong" />
             <meta itemprop="jobTitle" content="Co-Founder &amp; CEO" />
             <meta itemprop="alternateName" content="Chu Thanh Phong" />
             <meta itemprop="gender" content="https://schema.org/Male" />
-            <meta itemprop="sameAs" content="https://www.facebook.com/ChuThanhPhong" />
+            <meta
+              itemprop="sameAs"
+              content="https://www.facebook.com/ChuThanhPhong"
+            />
           </span>
           <div class="search-box">
             <form action="/tim-kiem">
-              <input type="text" class="textbox" id="key" name="s" value="" placeholder="Nhập từ khóa cần tìm ..." />
-              <button class="fa iseach" onclick="doSearch();" aria-label="seach"></button>
+              <input
+                type="text"
+                class="textbox"
+                id="key"
+                name="s"
+                value=""
+                placeholder="Nhập từ khóa cần tìm ..."
+              />
+              <button
+                class="fa iseach"
+                onclick="doSearch();"
+                aria-label="seach"
+              ></button>
             </form>
           </div>
           <div class="open">
-            <label class="hl"><span>Hotline 1: <b>097366.5115</b></span><span>Hotline 2:
-                <b>097366.5115</b></span></label>
+            <label class="hl"
+              ><span>Hotline 1: <b>097366.5115</b></span
+              ><span>Hotline 2: <b>097366.5115</b></span></label
+            >
             <label style="cursor: pointer" class="oh">
               <router-link v-if="!userLocal" to="/login">
                 <span> Đăng nhập </span>
@@ -117,142 +243,219 @@
               <figure>
                 <div class="wrap">
                   <a title="Đèn Led âm trần" href="/den-led-am-tran">
-                    <img width="160" height="160"
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/den_led_nhaxuongx160x160x4x160x160x4.jpg"
-                      alt="Đèn Led âm trần" />
+                      alt="Đèn Led âm trần"
+                    />
                     <b>Đèn Led âm trần</b>
                     <meta itemprop="name" content="Đèn Led âm trần" />
                     <meta itemprop="url" content="/den-led-am-tran" />
                   </a>
 
                   <a title="Đèn bàn" href="/den-ban">
-                    <img width="160" height="160" data-src="/Data/ResizeImage/files/add/noithat/den_banx160x160x4.jpg"
-                      alt="Đèn bàn" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/add/noithat/den_banx160x160x4.jpg"
+                      alt="Đèn bàn"
+                    />
                     <b>Đèn bàn</b>
                     <meta itemprop="name" content="Đèn bàn" />
                     <meta itemprop="url" content="/den-ban" />
                   </a>
 
                   <a title="Đèn led thanh" href="/den-led-thanh">
-                    <img width="160" height="160"
-                      data-src="/Data/ResizeImage/files/add/noithat/den_led_thanhx160x160x4.jpg" alt="Đèn led thanh" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/add/noithat/den_led_thanhx160x160x4.jpg"
+                      alt="Đèn led thanh"
+                    />
                     <b>Đèn led thanh</b>
                     <meta itemprop="name" content="Đèn led thanh" />
                     <meta itemprop="url" content="/den-led-thanh" />
                   </a>
 
                   <a title="Đèn Tuýp Led" href="/den-led-tuyp">
-                    <img width="160" height="160"
-                      data-src="/Data/ResizeImage/files/add/noithat/den_led_tuypx160x160x4.jpg" alt="Đèn Tuýp Led" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/add/noithat/den_led_tuypx160x160x4.jpg"
+                      alt="Đèn Tuýp Led"
+                    />
                     <b>Đèn Tuýp Led</b>
                     <meta itemprop="name" content="Đèn Tuýp Led" />
                     <meta itemprop="url" content="/den-led-tuyp" />
                   </a>
 
                   <a title="Đèn LED Dây" href="/den-led-day">
-                    <img width="160" height="160"
-                      data-src="/Data/ResizeImage/files/add/noithat/den_led_dayx160x160x4.jpg" alt="Đèn LED Dây" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/add/noithat/den_led_dayx160x160x4.jpg"
+                      alt="Đèn LED Dây"
+                    />
                     <b>Đèn LED Dây</b>
                     <meta itemprop="name" content="Đèn LED Dây" />
                     <meta itemprop="url" content="/den-led-day" />
                   </a>
 
                   <a title="Đèn led ốp trần" href="/den-led-op-tran">
-                    <img width="160" height="160"
-                      data-src="/Data/ResizeImage/files/add/noithat/den_op_tranx160x160x4.jpg" alt="Đèn led ốp trần" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/add/noithat/den_op_tranx160x160x4.jpg"
+                      alt="Đèn led ốp trần"
+                    />
                     <b>Đèn led ốp trần</b>
                     <meta itemprop="name" content="Đèn led ốp trần" />
                     <meta itemprop="url" content="/den-led-op-tran" />
                   </a>
 
                   <a title="Đèn led rọi ray" href="/den-led-roi-ray">
-                    <img width="160" height="160"
-                      data-src="/Data/ResizeImage/files/add/noithat/den_led_roix160x160x4.jpg" alt="Đèn led rọi ray" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/add/noithat/den_led_roix160x160x4.jpg"
+                      alt="Đèn led rọi ray"
+                    />
                     <b>Đèn led rọi ray</b>
                     <meta itemprop="name" content="Đèn led rọi ray" />
                     <meta itemprop="url" content="/den-led-roi-ray" />
                   </a>
 
                   <a title="Đèn LED Panel" href="/den-led-panel">
-                    <img width="160" height="160"
-                      data-src="/Data/ResizeImage/files/add/noithat/den_led_Panelx160x160x4.jpg" alt="Đèn LED Panel" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/add/noithat/den_led_Panelx160x160x4.jpg"
+                      alt="Đèn LED Panel"
+                    />
                     <b>Đèn LED Panel</b>
                     <meta itemprop="name" content="Đèn LED Panel" />
                     <meta itemprop="url" content="/den-led-panel" />
                   </a>
 
-                  <a title="Đèn led rọi tranh, gương" href="/den-led-roi-tranh-guong">
-                    <img width="160" height="160"
+                  <a
+                    title="Đèn led rọi tranh, gương"
+                    href="/den-led-roi-tranh-guong"
+                  >
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/add/noithat/den_led_tranhx160x160x4.jpg"
-                      alt="Đèn led rọi tranh, gương" />
+                      alt="Đèn led rọi tranh, gương"
+                    />
                     <b>Đèn led rọi tranh, gương</b>
                     <meta itemprop="name" content="Đèn led rọi tranh, gương" />
                     <meta itemprop="url" content="/den-led-roi-tranh-guong" />
                   </a>
 
                   <a title="Đèn Led Bulb" href="/den-led-bulb">
-                    <img width="160" height="160"
-                      data-src="/Data/ResizeImage/files/add/noithat/den_led_Bulbx160x160x4.jpg" alt="Đèn Led Bulb" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/add/noithat/den_led_Bulbx160x160x4.jpg"
+                      alt="Đèn Led Bulb"
+                    />
                     <b>Đèn Led Bulb</b>
                     <meta itemprop="name" content="Đèn Led Bulb" />
                     <meta itemprop="url" content="/den-led-bulb" />
                   </a>
 
-                  <a title="Đèn led thả hộp văn phòng" href="/den-led-tha-hop-van-phong">
-                    <img width="160" height="160"
+                  <a
+                    title="Đèn led thả hộp văn phòng"
+                    href="/den-led-tha-hop-van-phong"
+                  >
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/add/noithat/den_led_thahopx160x160x4.jpg"
-                      alt="Đèn led thả hộp văn phòng" />
+                      alt="Đèn led thả hộp văn phòng"
+                    />
                     <b>Đèn led thả hộp văn phòng</b>
                     <meta itemprop="name" content="Đèn led thả hộp văn phòng" />
                     <meta itemprop="url" content="/den-led-tha-hop-van-phong" />
                   </a>
 
                   <a title="Đèn led cảm biến" href="/den-led-cam-bien">
-                    <img width="160" height="160"
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/add/noithat/den_led_cambienx160x160x4.jpg"
-                      alt="Đèn led cảm biến" />
+                      alt="Đèn led cảm biến"
+                    />
                     <b>Đèn led cảm biến</b>
                     <meta itemprop="name" content="Đèn led cảm biến" />
                     <meta itemprop="url" content="/den-led-cam-bien" />
                   </a>
 
                   <a title="Đèn chao thả" href="/den-chao-tha">
-                    <img width="160" height="160" data-src="/Data/ResizeImage/files/49463___HEMINGTON_2x160x160x4.jpg"
-                      alt="Đèn chao thả" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/49463___HEMINGTON_2x160x160x4.jpg"
+                      alt="Đèn chao thả"
+                    />
                     <b>Đèn chao thả</b>
                     <meta itemprop="name" content="Đèn chao thả" />
                     <meta itemprop="url" content="/den-chao-tha" />
                   </a>
 
                   <a title="Đèn cây" href="/den-cay">
-                    <img width="160" height="160"
-                      data-src="/Data/ResizeImage/files/__n_c_y_ph_ng_kh_ch_u_ng_cong_2x160x160x4.jpg" alt="Đèn cây" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/__n_c_y_ph_ng_kh_ch_u_ng_cong_2x160x160x4.jpg"
+                      alt="Đèn cây"
+                    />
                     <b>Đèn cây</b>
                     <meta itemprop="name" content="Đèn cây" />
                     <meta itemprop="url" content="/den-cay" />
                   </a>
 
                   <a title="Đèn led ray nam châm" href="/den-led-ray-nam-cham">
-                    <img width="160" height="160"
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/__n_led_ray_nam_ch_m_7____nh___i_di_n_1_x160x160x4.jpg"
-                      alt="Đèn led ray nam châm" />
+                      alt="Đèn led ray nam châm"
+                    />
                     <b>Đèn led ray nam châm</b>
                     <meta itemprop="name" content="Đèn led ray nam châm" />
                     <meta itemprop="url" content="/den-led-ray-nam-cham" />
                   </a>
 
-                  <a title="Đèn Ốp Trần , Chao Thả Gỗ Cao Cấp" href="/den-op-tran-chao-tha-go-cao-cap">
-                    <img width="160" height="160"
+                  <a
+                    title="Đèn Ốp Trần , Chao Thả Gỗ Cao Cấp"
+                    href="/den-op-tran-chao-tha-go-cao-cap"
+                  >
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/ốp trần , chao thả gỗ/Thi_t_k__ch_a_c__t_nx160x160x4.png"
-                      alt="Đèn Ốp Trần , Chao Thả Gỗ Cao Cấp" />
+                      alt="Đèn Ốp Trần , Chao Thả Gỗ Cao Cấp"
+                    />
                     <b>Đèn Ốp Trần , Chao Thả Gỗ Cao Cấp</b>
-                    <meta itemprop="name" content="Đèn Ốp Trần , Chao Thả Gỗ Cao Cấp" />
-                    <meta itemprop="url" content="/den-op-tran-chao-tha-go-cao-cap" />
+                    <meta
+                      itemprop="name"
+                      content="Đèn Ốp Trần , Chao Thả Gỗ Cao Cấp"
+                    />
+                    <meta
+                      itemprop="url"
+                      content="/den-op-tran-chao-tha-go-cao-cap"
+                    />
                   </a>
 
                   <a title="Nguồn đèn led" href="/nguon-den-led">
-                    <img width="160" height="160"
-                      data-src="/Data/ResizeImage/files/add/linhkien/nguon_denx160x160x4.jpg" alt="Nguồn đèn led" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/add/linhkien/nguon_denx160x160x4.jpg"
+                      alt="Nguồn đèn led"
+                    />
                     <b>Nguồn đèn led</b>
                     <meta itemprop="name" content="Nguồn đèn led" />
                     <meta itemprop="url" content="/nguon-den-led" />
@@ -271,63 +474,96 @@
               <figure>
                 <div class="wrap">
                   <a title="Đèn LED Pha" href="/den-led-pha">
-                    <img width="160" height="160" data-src="/Data/ResizeImage/files/add/ngoaithat/den_phax160x160x4.jpg"
-                      alt="Đèn LED Pha" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/add/ngoaithat/den_phax160x160x4.jpg"
+                      alt="Đèn LED Pha"
+                    />
                     <b>Đèn LED Pha</b>
                     <meta itemprop="name" content="Đèn LED Pha" />
                     <meta itemprop="url" content="/den-led-pha" />
                   </a>
 
                   <a title="Đèn led sân vườn" href="/den-led-san-vuon">
-                    <img width="160" height="160"
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/add/ngoaithat/den_led_chieuroix160x160x4.jpg"
-                      alt="Đèn led sân vườn" />
+                      alt="Đèn led sân vườn"
+                    />
                     <b>Đèn led sân vườn</b>
                     <meta itemprop="name" content="Đèn led sân vườn" />
                     <meta itemprop="url" content="/den-led-san-vuon" />
                   </a>
 
                   <a title="Đèn led âm đất" href="/den-led-am-dat">
-                    <img width="160" height="160"
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/add/ngoaithat/den_led_amdatx160x160x4.jpg"
-                      alt="Đèn led âm đất" />
+                      alt="Đèn led âm đất"
+                    />
                     <b>Đèn led âm đất</b>
                     <meta itemprop="name" content="Đèn led âm đất" />
                     <meta itemprop="url" content="/den-led-am-dat" />
                   </a>
 
                   <a title="Đèn led Âm Nước" href="/den-led-am-nuoc">
-                    <img width="160" height="160"
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/add/ngoaithat/den_led_amnuocx160x160x4.jpg"
-                      alt="Đèn led Âm Nước" />
+                      alt="Đèn led Âm Nước"
+                    />
                     <b>Đèn led Âm Nước</b>
                     <meta itemprop="name" content="Đèn led Âm Nước" />
                     <meta itemprop="url" content="/den-led-am-nuoc" />
                   </a>
 
                   <a title="Đèn đường led" href="/den-duong-led">
-                    <img width="160" height="160"
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/add/ngoaithat/den_led_duongx160x160x4.jpg"
-                      alt="Đèn đường led" />
+                      alt="Đèn đường led"
+                    />
                     <b>Đèn đường led</b>
                     <meta itemprop="name" content="Đèn đường led" />
                     <meta itemprop="url" content="/den-duong-led" />
                   </a>
 
                   <a title="Đèn led âm tường" href="/den-led-am-tuong">
-                    <img width="160" height="160" data-src="/Data/ResizeImage/files/Icon___n_led__m_t__ngx160x160x4.jpg"
-                      alt="Đèn led âm tường" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/Icon___n_led__m_t__ngx160x160x4.jpg"
+                      alt="Đèn led âm tường"
+                    />
                     <b>Đèn led âm tường</b>
                     <meta itemprop="name" content="Đèn led âm tường" />
                     <meta itemprop="url" content="/den-led-am-tuong" />
                   </a>
 
-                  <a title="Đèn led năng lượng mặt trời" href="/den-led-nang-luong-mat-troi">
-                    <img width="160" height="160" data-src="/Data/ResizeImage/files/Untitled_3_1_x160x160x4.jpg"
-                      alt="Đèn led năng lượng mặt trời" />
+                  <a
+                    title="Đèn led năng lượng mặt trời"
+                    href="/den-led-nang-luong-mat-troi"
+                  >
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/Untitled_3_1_x160x160x4.jpg"
+                      alt="Đèn led năng lượng mặt trời"
+                    />
                     <b>Đèn led năng lượng mặt trời</b>
-                    <meta itemprop="name" content="Đèn led năng lượng mặt trời" />
-                    <meta itemprop="url" content="/den-led-nang-luong-mat-troi" />
+                    <meta
+                      itemprop="name"
+                      content="Đèn led năng lượng mặt trời"
+                    />
+                    <meta
+                      itemprop="url"
+                      content="/den-led-nang-luong-mat-troi"
+                    />
                   </a>
 
                   <span class="close"><label>Đóng</label></span>
@@ -343,53 +579,80 @@
               <figure>
                 <div class="wrap">
                   <a title="Đèn led nhà xưởng" href="/den-led-nha-xuong">
-                    <img width="160" height="160"
-                      data-src="/Data/ResizeImage/files/den_led_nhaxuongx1logox160x160x4.jpg" alt="Đèn led nhà xưởng" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/den_led_nhaxuongx1logox160x160x4.jpg"
+                      alt="Đèn led nhà xưởng"
+                    />
                     <b>Đèn led nhà xưởng</b>
                     <meta itemprop="name" content="Đèn led nhà xưởng" />
                     <meta itemprop="url" content="/den-led-nha-xuong" />
                   </a>
 
                   <a title="Đèn Exit" href="/den-exit">
-                    <img width="160" height="160"
-                      data-src="/Data/ResizeImage/files/add/congnghiep/den_led_exitx160x160x4.jpg" alt="Đèn Exit" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/add/congnghiep/den_led_exitx160x160x4.jpg"
+                      alt="Đèn Exit"
+                    />
                     <b>Đèn Exit</b>
                     <meta itemprop="name" content="Đèn Exit" />
                     <meta itemprop="url" content="/den-exit" />
                   </a>
 
-                  <a title="Đèn led chống cháy nổ" href="/den-led-chong-chay-no">
-                    <img width="160" height="160"
+                  <a
+                    title="Đèn led chống cháy nổ"
+                    href="/den-led-chong-chay-no"
+                  >
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/add/congnghiep/den_led_chongchayx160x160x4.jpg"
-                      alt="Đèn led chống cháy nổ" />
+                      alt="Đèn led chống cháy nổ"
+                    />
                     <b>Đèn led chống cháy nổ</b>
                     <meta itemprop="name" content="Đèn led chống cháy nổ" />
                     <meta itemprop="url" content="/den-led-chong-chay-no" />
                   </a>
 
                   <a title="Đèn sự cố" href="/den-su-co">
-                    <img width="160" height="160"
-                      data-src="/Data/ResizeImage/files/add/congnghiep/den_led_sucox160x160x4.jpg" alt="Đèn sự cố" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/add/congnghiep/den_led_sucox160x160x4.jpg"
+                      alt="Đèn sự cố"
+                    />
                     <b>Đèn sự cố</b>
                     <meta itemprop="name" content="Đèn sự cố" />
                     <meta itemprop="url" content="/den-su-co" />
                   </a>
 
                   <a title="Đèn UV-C diệt khuẩn" href="/den-uvc-diet-khuan">
-                    <img width="160" height="160"
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/add/noithat/den_led_uvx160x160x4.jpg"
-                      alt="Đèn UV-C diệt khuẩn" />
+                      alt="Đèn UV-C diệt khuẩn"
+                    />
                     <b>Đèn UV-C diệt khuẩn</b>
                     <meta itemprop="name" content="Đèn UV-C diệt khuẩn" />
                     <meta itemprop="url" content="/den-uvc-diet-khuan" />
                   </a>
 
                   <a title="Bộ lưu điện sự cố cho đèn Led" href="/bo-luu-dien">
-                    <img width="160" height="160"
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/_nh___i_di_n_b__l_u__i_nx160x160x4.jpg"
-                      alt="Bộ lưu điện sự cố cho đèn Led" />
+                      alt="Bộ lưu điện sự cố cho đèn Led"
+                    />
                     <b>Bộ lưu điện sự cố cho đèn Led</b>
-                    <meta itemprop="name" content="Bộ lưu điện sự cố cho đèn Led" />
+                    <meta
+                      itemprop="name"
+                      content="Bộ lưu điện sự cố cho đèn Led"
+                    />
                     <meta itemprop="url" content="/bo-luu-dien" />
                   </a>
 
@@ -425,59 +688,92 @@
             </li>
 
             <li>
-              <a class="c1" title="Thiết bị điện thông minh" href="javascript:;">
+              <a
+                class="c1"
+                title="Thiết bị điện thông minh"
+                href="javascript:;"
+              >
                 <span>Thiết bị điện thông minh</span>
               </a>
 
               <figure>
                 <div class="wrap">
                   <a title="Khóa cửa thông minh" href="/khoa-cua-thong-minh">
-                    <img width="160" height="160"
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/add/thongminh/khoacua_thongminhx160x160x4.jpg"
-                      alt="Khóa cửa thông minh" />
+                      alt="Khóa cửa thông minh"
+                    />
                     <b>Khóa cửa thông minh</b>
                     <meta itemprop="name" content="Khóa cửa thông minh" />
                     <meta itemprop="url" content="/khoa-cua-thong-minh" />
                   </a>
 
                   <a title="Đèn led thông minh" href="/den-led-thong-minh">
-                    <img width="160" height="160" data-src="/Data/ResizeImage/files/__n_led_thong_minh_1_x160x160x4.jpg"
-                      alt="Đèn led thông minh" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/__n_led_thong_minh_1_x160x160x4.jpg"
+                      alt="Đèn led thông minh"
+                    />
                     <b>Đèn led thông minh</b>
                     <meta itemprop="name" content="Đèn led thông minh" />
                     <meta itemprop="url" content="/den-led-thong-minh" />
                   </a>
 
                   <a title="Giàn phơi thông minh" href="/gian-phoi-thong-minh">
-                    <img width="160" height="160"
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/Gi_n_ph_i_th_ng_minh_Philipsx160x160x4.jpg"
-                      alt="Giàn phơi thông minh" />
+                      alt="Giàn phơi thông minh"
+                    />
                     <b>Giàn phơi thông minh</b>
                     <meta itemprop="name" content="Giàn phơi thông minh" />
                     <meta itemprop="url" content="/gian-phoi-thong-minh" />
                   </a>
 
                   <a title="Két sắt thông minh" href="/ket-sat-thong-minh">
-                    <img width="160" height="160"
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/K_t_s_t_th_ng_minh_philipsx160x160x4.jpg"
-                      alt="Két sắt thông minh" />
+                      alt="Két sắt thông minh"
+                    />
                     <b>Két sắt thông minh</b>
                     <meta itemprop="name" content="Két sắt thông minh" />
                     <meta itemprop="url" content="/ket-sat-thong-minh" />
                   </a>
 
-                  <a title="Thiết bị chiếu sáng thông minh Philips Wizpro" href="/thiet-bi-chieu-sang-thong-minh">
-                    <img width="160" height="160"
+                  <a
+                    title="Thiết bị chiếu sáng thông minh Philips Wizpro"
+                    href="/thiet-bi-chieu-sang-thong-minh"
+                  >
+                    <img
+                      width="160"
+                      height="160"
                       data-src="/Data/ResizeImage/files/thi_t_b__nh__th_ng_minh_wizx160x160x4.jpg"
-                      alt="Thiết bị chiếu sáng thông minh Philips Wizpro" />
+                      alt="Thiết bị chiếu sáng thông minh Philips Wizpro"
+                    />
                     <b>Thiết bị chiếu sáng thông minh Philips Wizpro</b>
-                    <meta itemprop="name" content="Thiết bị chiếu sáng thông minh Philips Wizpro" />
-                    <meta itemprop="url" content="/thiet-bi-chieu-sang-thong-minh" />
+                    <meta
+                      itemprop="name"
+                      content="Thiết bị chiếu sáng thông minh Philips Wizpro"
+                    />
+                    <meta
+                      itemprop="url"
+                      content="/thiet-bi-chieu-sang-thong-minh"
+                    />
                   </a>
 
                   <a title="Nhà thông minh Wizpro" href="/nha-thong-minh-9">
-                    <img width="160" height="160" data-src="/Data/ResizeImage/files/anh1x160x160x4.png"
-                      alt="Nhà thông minh Wizpro" />
+                    <img
+                      width="160"
+                      height="160"
+                      data-src="/Data/ResizeImage/files/anh1x160x160x4.png"
+                      alt="Nhà thông minh Wizpro"
+                    />
                     <b>Nhà thông minh Wizpro</b>
                     <meta itemprop="name" content="Nhà thông minh Wizpro" />
                     <meta itemprop="url" content="/nha-thong-minh-9" />
@@ -530,18 +826,27 @@
                   <a :href="product.href" :title="product.title">
                     <img :src="product.productImg" :alt="product.title" />
                   </a>
-                  <a @click="deleteProduct(product.cartItemId)" class="odel" rel="nofollow"
-                    :title="`Xóa ${product.title} khỏi đơn hàng`">xóa</a>
+                  <a
+                    @click="deleteProduct(product.cartItemId)"
+                    class="odel"
+                    rel="nofollow"
+                    :title="`Xóa ${product.title} khỏi đơn hàng`"
+                    >xóa</a
+                  >
                 </div>
                 <div class="oname">
                   <h3>{{ product.productName }}</h3>
                   <label>{{ product.priceTotal?.toLocaleString() }}₫</label>
-                  <span @click="byProductCart(product.cartItemId)" style="
+                  <span
+                    @click="byProductCart(product.cartItemId)"
+                    style="
                       float: right;
                       text-decoration: underline;
                       padding-top: 10px;
                       cursor: 'pointer';
-                    ">Mua ngay</span>
+                    "
+                    >Mua ngay</span
+                  >
 
                   <div class="ArrCount">
                     <span @click="decrement(product)" class="sub">-</span>
@@ -559,7 +864,11 @@
               </div>
             </div>
 
-            <input type="submit" name="_w_action[UpdatePOST]" style="display: none" />
+            <input
+              type="submit"
+              name="_w_action[UpdatePOST]"
+              style="display: none"
+            />
             <input type="hidden" name="_w_action" value="UpdatePOST" />
           </form>
 
@@ -653,14 +962,16 @@
           </form> -->
           <div class="fpanel">
             <div class="da">
-              <p @click="showDrawer" class="od" id="gui">
-                Xem các đơn đã đặt
-              </p>
+              <p @click="showDrawer" class="od" id="gui">Xem các đơn đã đặt</p>
             </div>
             <p @click="showDrawer2" class="od" id="gui">
               Xem cừa hàng yêu thích
             </p>
-            <input type="submit" name="_w_action[OrderPOST]" style="display: none" />
+            <input
+              type="submit"
+              name="_w_action[OrderPOST]"
+              style="display: none"
+            />
             <input type="hidden" name="_w_action" value="OrderPOST" />
           </div>
         </div>
@@ -676,7 +987,12 @@
         <div class="wrap flexJus">
           <div class="f flex">
             <div class="fotb" style="width: 30%; padding-right: 30px">
-              <img src="https://denled.com/Content/img/logo-foot.png" alt="Denled.com" width="286" height="60" />
+              <img
+                src="https://denled.com/Content/img/logo-foot.png"
+                alt="Denled.com"
+                width="286"
+                height="60"
+              />
               <p>
                 Công ty cổ phần Chu Minh Hải sở hữu chuỗi sieuthidenled.com là
                 nơi tập hợp các thương hiệu
@@ -686,19 +1002,46 @@
               </p>
 
               <div class="f social flexL m10">
-                <a href="https://www.facebook.com/thegioidenledhanoii" alt="Fanpage" aria-label="Fanpage"
-                  rel="nofollow"><i class="fa face"></i></a><a href="" alt="Google Page" aria-label="Google Page"
-                  rel="nofollow"><i class="fa gg"></i></a><a href="" alt="Youtube" aria-label="Youtube"
-                  rel="nofollow"><i class="fa ytb"></i></a>
-                <a style="background: #000; margin-top: 5px"
+                <a
+                  href="https://www.facebook.com/thegioidenledhanoii"
+                  alt="Fanpage"
+                  aria-label="Fanpage"
+                  rel="nofollow"
+                  ><i class="fa face"></i></a
+                ><a
+                  href=""
+                  alt="Google Page"
+                  aria-label="Google Page"
+                  rel="nofollow"
+                  ><i class="fa gg"></i></a
+                ><a href="" alt="Youtube" aria-label="Youtube" rel="nofollow"
+                  ><i class="fa ytb"></i
+                ></a>
+                <a
+                  style="background: #000; margin-top: 5px"
                   href="//www.dmca.com/Protection/Status.aspx?ID=fb224c55-eb25-4914-8540-4f94b9c3013d"
-                  rel="noreferrer nofollow" title="DMCA.com Protection Status" class="dmca-badge">
-                  <img src="https://denled.com/Content/img/dmca.png" alt="DMCA.com Protection Status" width="75"
-                    height="24" /></a>
-                <a style="background: #000; margin-top: 5px" href="http://online.gov.vn/Home/WebDetails/85212"
-                  target="_blank" title="Đã thông báo bộ công thương" rel="nofollow"><img
-                    src="https://denled.com/Content/img/dathongbao.png" width="69" height="35"
-                    alt="Đã thông báo bộ công thương" /></a>
+                  rel="noreferrer nofollow"
+                  title="DMCA.com Protection Status"
+                  class="dmca-badge"
+                >
+                  <img
+                    src="https://denled.com/Content/img/dmca.png"
+                    alt="DMCA.com Protection Status"
+                    width="75"
+                    height="24"
+                /></a>
+                <a
+                  style="background: #000; margin-top: 5px"
+                  href="http://online.gov.vn/Home/WebDetails/85212"
+                  target="_blank"
+                  title="Đã thông báo bộ công thương"
+                  rel="nofollow"
+                  ><img
+                    src="https://denled.com/Content/img/dathongbao.png"
+                    width="69"
+                    height="35"
+                    alt="Đã thông báo bộ công thương"
+                /></a>
               </div>
             </div>
             <div class="fotb" style="width: 50%; padding: 0 40px 0 60px">
@@ -711,23 +1054,28 @@
                       <span>Địa chỉ 1 : </span>21C Trần Duy Hưng, Cầu Giấy, HN
                     </li>
                     <li>
-                      <span>Hotline 1 : </span><a href="tel:0933665115">0933.66.5115</a> - Hotline 2:
+                      <span>Hotline 1 : </span
+                      ><a href="tel:0933665115">0933.66.5115</a> - Hotline 2:
                       <a href="tel:0911913366">0911.91.3366</a>
                     </li>
                     <li>
-                      <span>Hotline 3: </span><a href="tel:0814666688">0814.6666.88</a>
+                      <span>Hotline 3: </span
+                      ><a href="tel:0814666688">0814.6666.88</a>
                     </li>
                     <li>
                       <span>Địa chỉ 2 : </span>107 Thảo Nguyên, Ecopark, HN
                     </li>
                     <li>
-                      <span>Hotline 4 : </span><a href="tel:0903665115">0903.66.5115</a>
+                      <span>Hotline 4 : </span
+                      ><a href="tel:0903665115">0903.66.5115</a>
                     </li>
                     <li>
-                      <span>Hotline 5: </span><a href="tel:0833665115">08.3366.5115</a>
+                      <span>Hotline 5: </span
+                      ><a href="tel:0833665115">08.3366.5115</a>
                     </li>
                     <li>
-                      <span>Hotline 6: </span><a href="tel:0923665115">0923.66.5115</a>
+                      <span>Hotline 6: </span
+                      ><a href="tel:0923665115">0923.66.5115</a>
                     </li>
                   </ul>
                   <ul>
@@ -737,13 +1085,16 @@
                       2, HCM
                     </li>
                     <li>
-                      <span>Hotline 7 : </span><a href="tel:0923193366">0923.19.3366</a>
+                      <span>Hotline 7 : </span
+                      ><a href="tel:0923193366">0923.19.3366</a>
                     </li>
                     <li>
-                      <span>Hotline 8: </span><a href="tel:0911193366">0911.19.3366</a>
+                      <span>Hotline 8: </span
+                      ><a href="tel:0911193366">0911.19.3366</a>
                     </li>
                     <li>
-                      <span>Hotline 9 : </span><a href="tel:0943193366">0943.19.3366</a>
+                      <span>Hotline 9 : </span
+                      ><a href="tel:0943193366">0943.19.3366</a>
                     </li>
                   </ul>
                   <ul>
@@ -753,7 +1104,8 @@
                       Quốc
                     </li>
                     <li>
-                      <span>Hotline 10 : </span><a href="tel:0943665115">0943.66.5115</a>
+                      <span>Hotline 10 : </span
+                      ><a href="tel:0943665115">0943.66.5115</a>
                     </li>
                   </ul>
                 </div>
@@ -763,53 +1115,99 @@
               <label>THÔNG TIN - HƯỚNG DẪN</label>
               <ul>
                 <li>
-                  <a title="Giới Thiệu Siêu Thị Đèn Led" rel="nofollow" href="/gioi-thieu-the-gioi-den-led">Giới Thiệu
-                    Siêu Thị Đèn Led</a>
+                  <a
+                    title="Giới Thiệu Siêu Thị Đèn Led"
+                    rel="nofollow"
+                    href="/gioi-thieu-the-gioi-den-led"
+                    >Giới Thiệu Siêu Thị Đèn Led</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Giao hàng &amp; Thanh toán" rel="nofollow" href="/giao-hang-thanh-toan">Giao hàng &amp;
-                    Thanh toán</a>
+                  <a
+                    title="Giao hàng &amp; Thanh toán"
+                    rel="nofollow"
+                    href="/giao-hang-thanh-toan"
+                    >Giao hàng &amp; Thanh toán</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Hướng dẫn mua hàng Online" rel="nofollow" href="/huong-dan-mua-hang-online">Hướng dẫn mua
-                    hàng Online</a>
+                  <a
+                    title="Hướng dẫn mua hàng Online"
+                    rel="nofollow"
+                    href="/huong-dan-mua-hang-online"
+                    >Hướng dẫn mua hàng Online</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Quy chế hoạt động" rel="nofollow" href="/quy-che-hoat-dong">Quy chế hoạt động</a>
+                  <a
+                    title="Quy chế hoạt động"
+                    rel="nofollow"
+                    href="/quy-che-hoat-dong"
+                    >Quy chế hoạt động</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Nội quy cửa hàng" rel="nofollow" href="/noi-quy-cua-hang">Nội quy cửa hàng</a>
+                  <a
+                    title="Nội quy cửa hàng"
+                    rel="nofollow"
+                    href="/noi-quy-cua-hang"
+                    >Nội quy cửa hàng</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Tuyển Dụng" rel="nofollow" href="/tuyen-dung">Tuyển Dụng</a>
+                  <a title="Tuyển Dụng" rel="nofollow" href="/tuyen-dung"
+                    >Tuyển Dụng</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Chính sách bảo hành" rel="nofollow" href="/chinh-sach-bao-hanh">Chính sách bảo hành</a>
+                  <a
+                    title="Chính sách bảo hành"
+                    rel="nofollow"
+                    href="/chinh-sach-bao-hanh"
+                    >Chính sách bảo hành</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Chính sách quy trình xử lý khiếu nại" rel="nofollow"
-                    href="/chinh-sach-quy-trinh-xu-ly-khieu-nai">Chính sách quy trình xử lý khiếu nại</a>
+                  <a
+                    title="Chính sách quy trình xử lý khiếu nại"
+                    rel="nofollow"
+                    href="/chinh-sach-quy-trinh-xu-ly-khieu-nai"
+                    >Chính sách quy trình xử lý khiếu nại</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Chính sách đổi trả" rel="nofollow" href="/chinh-sach-doi-tra">Chính sách đổi trả</a>
+                  <a
+                    title="Chính sách đổi trả"
+                    rel="nofollow"
+                    href="/chinh-sach-doi-tra"
+                    >Chính sách đổi trả</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Chính sách bảo mật thông tin" rel="nofollow" href="/chinh-sach-bao-mat-thong-tin">Chính sách
-                    bảo mật thông tin</a>
+                  <a
+                    title="Chính sách bảo mật thông tin"
+                    rel="nofollow"
+                    href="/chinh-sach-bao-mat-thong-tin"
+                    >Chính sách bảo mật thông tin</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Chính sách xử lý khiếu nại" rel="nofollow" href="/chinh-sach-xu-ly-khieu-nai">Chính sách xử
-                    lý khiếu nại</a>
+                  <a
+                    title="Chính sách xử lý khiếu nại"
+                    rel="nofollow"
+                    href="/chinh-sach-xu-ly-khieu-nai"
+                    >Chính sách xử lý khiếu nại</a
+                  >
                 </li>
               </ul>
             </div>
@@ -823,27 +1221,57 @@
 
       <ul id="panel">
         <li>
-          <img src="https://denled.com/Content/img/totop.svg" alt="To top" width="45" height="45" />
+          <img
+            src="https://denled.com/Content/img/totop.svg"
+            alt="To top"
+            width="45"
+            height="45"
+          />
         </li>
         <li style="padding-top: 10px; padding-bottom: 10px">
-          <img alt="Messenger" src="https://denled.com/Content/img/messenger.svg" width="45" height="45" />
+          <img
+            alt="Messenger"
+            src="https://denled.com/Content/img/messenger.svg"
+            width="45"
+            height="45"
+          />
         </li>
 
         <li>
-          <img alt="Phone" src="https://denled.com/Content/img/phone.svg" width="45" height="45" />
+          <img
+            alt="Phone"
+            src="https://denled.com/Content/img/phone.svg"
+            width="45"
+            height="45"
+          />
         </li>
       </ul>
-      <div class="zalo-chat-widget" data-oaid="2839194858446814357"
+      <div
+        class="zalo-chat-widget"
+        data-oaid="2839194858446814357"
         data-welcome-message="Rất vui khi được hỗ trợ bạn!. Nếu bạn không thể chờ thì hãy gọi hoặc nhắn tin đến số điện thoại này 0973.66.5115."
-        data-autopopup="1800" data-width="500" data-height="500" style="right: 12px"></div>
+        data-autopopup="1800"
+        data-width="500"
+        data-height="500"
+        style="right: 12px"
+      ></div>
     </div>
     <div>
-      <a-drawer title="Danh sách đơn hàng đã đặt" :visible="isDrawerVisible" :width="850" @close="handleClose"
-        :destroyOnClose="true">
+      <a-drawer
+        title="Danh sách đơn hàng đã đặt"
+        :visible="isDrawerVisible"
+        :width="850"
+        @close="handleClose"
+        :destroyOnClose="true"
+      >
         <div class="giohang orderhome">
           <form name="giohang" id="cart">
             <ul class="listcart">
-              <li v-for="product in myOrder" :key="product.orderDetailId" class="cartitem">
+              <li
+                v-for="product in myOrder"
+                :key="product.orderDetailId"
+                class="cartitem"
+              >
                 <div class="oimg">
                   <a>
                     <img :src="product.productImg" :alt="product.title" />
@@ -860,9 +1288,20 @@
                   <h3>{{ product.productName }}</h3>
                   <label>{{ product.orderStatusName }}</label>
 
-                  <label style="float: left">{{ product.priceTotal?.toLocaleString() }}₫</label>
-                  <div v-if="product.orderStatusName !== 'Đơn đã hủy'" style="float: right;">
-                    <button type="button" @click="cancelOder(product.orderDetailId)" class="btn">Hủy đơn </button>
+                  <label style="float: left"
+                    >{{ product.priceTotal?.toLocaleString() }}₫</label
+                  >
+                  <div
+                    v-if="product.orderStatusName !== 'Đơn đã hủy'"
+                    style="float: right"
+                  >
+                    <button
+                      type="button"
+                      @click="cancelOder(product.orderDetailId)"
+                      class="btn"
+                    >
+                      Hủy đơn
+                    </button>
                   </div>
                 </div>
               </li>
@@ -874,7 +1313,11 @@
               </div>
             </div> -->
 
-            <input type="submit" name="_w_action[UpdatePOST]" style="display: none" />
+            <input
+              type="submit"
+              name="_w_action[UpdatePOST]"
+              style="display: none"
+            />
             <input type="hidden" name="_w_action" value="UpdatePOST" />
           </form>
 
@@ -894,12 +1337,21 @@
           </div> -->
         </div>
       </a-drawer>
-      <a-drawer title="Danh sách cửa hàng bạn thích" :visible="isDrawerVisible2" :width="850" @close="handleClose2"
-        :destroyOnClose="true">
+      <a-drawer
+        title="Danh sách cửa hàng bạn thích"
+        :visible="isDrawerVisible2"
+        :width="850"
+        @close="handleClose2"
+        :destroyOnClose="true"
+      >
         <div class="giohang orderhome">
           <form name="giohang" id="cart">
             <ul class="listcart">
-              <li v-for="product in myFarve" :key="product.orderDetailId" class="cartitem">
+              <li
+                v-for="product in myFarve"
+                :key="product.orderDetailId"
+                class="cartitem"
+              >
                 <div class="oimg">
                   <a>
                     <img :src="product.avatar" :alt="product.title" />
@@ -910,13 +1362,23 @@
                   <label>{{ product.orderStatusName }}</label>
                   <p>{{ product.storeAddress }}</p>
 
-                  <div style="float: right;">
-                    <button type="button" @click="cancelOderMyFarvor(product.storeId)" class="btn">Hủy thích </button>
+                  <div style="float: right">
+                    <button
+                      type="button"
+                      @click="cancelOderMyFarvor(product.storeId)"
+                      class="btn"
+                    >
+                      Hủy thích
+                    </button>
                   </div>
                 </div>
               </li>
             </ul>
-            <input type="submit" name="_w_action[UpdatePOST]" style="display: none" />
+            <input
+              type="submit"
+              name="_w_action[UpdatePOST]"
+              style="display: none"
+            />
             <input type="hidden" name="_w_action" value="UpdatePOST" />
           </form>
         </div>
@@ -992,7 +1454,7 @@ export default defineComponent({
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          ` https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/view`,
+          `https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -1014,49 +1476,56 @@ export default defineComponent({
       }
     };
     const getMyfavorite = async () => {
-      const response = await axios.get('https://charismatic-friendship-production.up.railway.app/api/v1/customer/favor/view', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      myFarve.value = response.data.data
-    }
-    const cancelOder = async (id) => {
-      try {
-        await axios.get('https://charismatic-friendship-production.up.railway.app/api/v1/customer/order/delete/' + id, {
+      const response = await axios.get(
+        "https://charismatic-friendship-production.up.railway.app/api/v1/customer/favor/view",
+        {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        })
-        message.success("Hủy thành công")
+        }
+      );
+      myFarve.value = response.data.data;
+    };
+    const cancelOder = async (id) => {
+      try {
+        await axios.get(
+          "https://charismatic-friendship-production.up.railway.app/api/v1/customer/order/delete/" +
+            id,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        message.success("Hủy thành công");
         setTimeout(() => {
-          window.location.reload()
+          window.location.reload();
         }, 350);
       } catch (error) {
         console.error(error);
       }
-    }
+    };
     const cancelOderMyFarvor = async (id) => {
-      const formData = new FormData()
-      formData.append('storeid', id)
+      const formData = new FormData();
+      formData.append("storeid", id);
       try {
         await axios({
-          method: 'delete',
-          url: 'https://charismatic-friendship-production.up.railway.app/api/v1/customer/favor/remove',
+          method: "delete",
+          url: "https://charismatic-friendship-production.up.railway.app/api/v1/customer/favor/remove",
           data: formData,
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-          }
+            "Content-Type": "multipart/form-data",
+          },
         });
-        message.success("Hủy thành công")
+        message.success("Hủy thành công");
         setTimeout(() => {
-          window.location.reload()
+          window.location.reload();
         }, 350);
       } catch (error) {
         console.error(error);
       }
-    }
+    };
     const fetchMyOrder = async () => {
       try {
         const response = await axios.get(
@@ -1180,7 +1649,7 @@ export default defineComponent({
     };
     onMounted(() => {
       fetchProduct();
-      getMyfavorite()
+      getMyfavorite();
     });
     return {
       router,
@@ -1202,7 +1671,7 @@ export default defineComponent({
       cancelOderMyFarvor,
       myOrder,
       myFarve,
-      cancelOder
+      cancelOder,
     };
   },
 });
@@ -1221,11 +1690,13 @@ export default defineComponent({
 @font-face {
   font-family: "FontAwesome";
   src: url("/Content/awesome/fontawesome-webfont.eot?v=4.4.0");
-  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0") format("embedded-opentype"),
+  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0")
+      format("embedded-opentype"),
     url("/Content/awesome/fontawesome-webfont.woff2?v=4.4.0") format("woff2"),
     url("/Content/awesome/fontawesome-webfont.woff?v=4.4.0") format("woff"),
     url("/Content/awesome/fontawesome-webfont.ttf?v=4.4.0") format("truetype"),
-    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular") format("svg");
+    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular")
+      format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -1988,7 +2459,6 @@ a:focus {
 }
 
 @media screen and (max-width: 415px) {
-
   .tiplist h2,
   .tiplist h3,
   .tiplist h4 {
@@ -2448,7 +2918,8 @@ textarea {
 }
 
 /*beadcrum*/
-.beadcrum {}
+.beadcrum {
+}
 
 .beadcrum li {
   display: inline-block;

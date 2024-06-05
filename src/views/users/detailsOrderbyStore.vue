@@ -6,9 +6,7 @@
           <a-breadcrumb-item>Danh sách đơn hàng cửa hàng</a-breadcrumb-item>
         </a-breadcrumb>
       </div>
-      <div class="col-6 d-flex justify-content-end">
-       
-      </div>
+      <div class="col-6 d-flex justify-content-end"></div>
     </div>
     <!-- <div class="row">
             <div class="col-12">
@@ -51,7 +49,11 @@
             </template>
             <!-- imageSp -->
             <template v-if="column.key === 'imageSp'">
-              <img :style="{ width: '50px !important' }" :src="record.productImg" :alt="record.productImg">
+              <img
+                :style="{ width: '50px !important' }"
+                :src="record.productImg"
+                :alt="record.productImg"
+              />
             </template>
             <template v-if="column.key === 'userName'">
               <span>{{ record.productName }}</span>
@@ -66,42 +68,40 @@
               <span>{{ record.orderStatusName }}</span>
             </template>
             <template v-if="column.key === 'action' && authStoreClaim !== null">
-              <!-- <a-space warp>
+              <!-- giveOrder,
+      doneOrder -->
+              <a-space warp>
                 <a-button
+                  @click="giveOrder(record.orderDetailId)"
                   type="dashed"
                   class="me-2 text-primary"
                   size="small"
                   title="Sửa"
                 >
-                  <i class="fa-solid fa-pen-to-square"></i>
+                  Nhân đơn
                 </a-button>
               </a-space>
-              <a-popconfirm
-                title="Bạn muốn Khóa bản ghi này?"
-                ok-text="Yes"
-                cancel-text="No"
+
+              <a-button
+                title="Khóa"
+                @click="doneOrder(record.orderDetailId)"
+                type="dashed"
+                size="small"
+                shape=""
+                class="me-2 text-warning"
               >
-                <router-link
-                  :to="{
-                    name: 'ProductByStore',
-                    params: { id: record.storeId },
-                  }"
-                >
-                  <a-button
-                    title="Khóa"
-                    type="dashed"
-                    size="small"
-                    shape=""
-                    class="me-2 text-warning"
-                  >
-                    <i class="fa-solid fa-lock"></i>
-                  </a-button>
-                </router-link>
-              </a-popconfirm> -->
-             
-                <a-button title="Xóa" type="dashed" size="small" shape="" blue
-                  ><i class="fa-solid fa-eye"></i></a-button>
-             
+                Hoàn thành đơn
+              </a-button>
+
+              <a-button
+                @click="showDrawer(record.orderDetailId)"
+                title="Xóa"
+                type="dashed"
+                size="small"
+                shape=""
+                blue
+                ><i class="fa-solid fa-eye"></i
+              ></a-button>
 
               <!-- <a-popconfirm
                 title="Bạn muốn Khóa bản ghi này?"
@@ -143,27 +143,78 @@
       </div>
     </div>
   </a-card>
+  <div>
+    <a-drawer
+      title="Chi tiết đơn hàng "
+      :visible="isDrawerVisible"
+      :width="850"
+      @close="handleClose"
+      :destroyOnClose="true"
+    >
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Tên sản phẩm :</p>
+        <p style="color: black">{{ dataIdOrder.productName }}</p>
+      </div>
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Tên cửa hàng :</p>
+        <p style="color: black">{{ dataIdOrder.storeName }}</p>
+      </div>
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Tên khách hàng :</p>
+        <p style="color: black">{{ dataIdOrder.customerName }}</p>
+      </div>
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Số lượng order :</p>
+        <p style="color: black">{{ dataIdOrder.quantity }}</p>
+      </div>
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Tổng tiền :</p>
+        <p style="color: black">
+          {{ dataIdOrder.priceTotal?.toLocaleString() }} VND
+        </p>
+      </div>
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Số điện thoại khách hàng :</p>
+        <p style="color: black">
+          {{ dataIdOrder.customerPhone }}
+        </p>
+      </div>
+    </a-drawer>
+  </div>
 </template>
 <script>
 import { defineComponent, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
-import { message } from "ant-design-vue";
 import { useMenu } from "../../stores/use-menu.js";
 import { onUpdated, onMounted } from "vue";
 import ApiViewData from "../../api/ApiViewData.js";
 import ApiUser from "../../api/ApiUser.js";
 import { useAuthStore } from "../../stores/auth.store.js";
 import axios from "axios";
+import { Form, Drawer, Button, InputNumber, message } from "ant-design-vue";
+
 export default defineComponent({
+  components: {
+    "a-form": Form,
+    "a-form-item": Form.Item,
+    "a-drawer": Drawer,
+    "a-button": Button,
+    "a-input-number": InputNumber,
+  },
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
     const router = useRouter();
     const route = useRoute();
+    const isDrawerVisible = ref(false);
+    const dataIdOrder = ref({});
+
     const id = route.params.id;
     const errors = ref([]);
     const users = ref([]);
+    const token = JSON.parse(localStorage.getItem("token"));
+
     const pageParam = reactive({
       current: Object.keys(route.query).length > 0 ? route.query.PageNumber : 1,
       pageNumber:
@@ -201,7 +252,7 @@ export default defineComponent({
         title: "trạng thái",
         key: "status",
       },
-// 
+      //
       {
         title: "Tác vụ",
         key: "action",
@@ -246,6 +297,18 @@ export default defineComponent({
       //     message.error(`Lỗi! ${error.response.statusText}`);
       // });
     };
+    const fetchIdOrder = async (idOrder) => {
+      const { data } = await axios.get(
+        `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/orderdetail/view/${idOrder}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(data, "ccd");
+      dataIdOrder.value = data.data;
+    };
     const confirmRemove = (id) => {
       ApiUser.DeleteById(id)
         .then((response) => {
@@ -264,6 +327,38 @@ export default defineComponent({
             errors.value = error.response.data;
           }
         });
+    };
+    const giveOrder = async (orderId) => {
+      try {
+        const data = await axios.get(
+          "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/changestatus1/" +
+            orderId,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        message.success("success");
+      } catch (e) {
+        message.error(e.response.data.message);
+      }
+    };
+    const doneOrder = async (orderId) => {
+      try {
+        const data = await axios.get(
+          "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/changestatus2/" +
+            orderId,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        message.success("success");
+      } catch (e) {
+        message.error(e.response.data.message);
+      }
     };
     const confirmBanned = (id) => {
       ApiUser.BannedById(id)
@@ -318,6 +413,13 @@ export default defineComponent({
       getUsers(pageParam);
     };
     //
+    const showDrawer = (id) => {
+      isDrawerVisible.value = true;
+      fetchIdOrder(id);
+    };
+    const handleClose = () => {
+      isDrawerVisible.value = false;
+    };
     return {
       route,
       router,
@@ -330,6 +432,12 @@ export default defineComponent({
       clickFrmFilter,
       confirmRemove,
       confirmBanned,
+      showDrawer,
+      handleClose,
+      isDrawerVisible,
+      dataIdOrder,
+      giveOrder,
+      doneOrder,
     };
     //
   },
