@@ -1,53 +1,8 @@
 <template>
-    <!-- <div class="container">
-        <div class="row justify-content-center mt-5">
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="card shadow">
-                    <div class="card-title text-center border-bottom">
-                        <h2 class="p-3">Đăng nhập</h2>
-                    </div>
-                    <div class="card-body px-3 py-3">
-                        <h1></h1>
-                        <a-form :model="formState" autocomplete="off" name="normal_login" class="login-form"
-                            @finish="onFinish" @finishFailed="onFinishFailed">
-                            <a-form-item label="Username" name="username"
-                                :rules="[{ required: true, message: 'Please input your username!' }]">
-                                <a-input v-model:value="formState.username">
-                                    <template #prefix>
-                                        <UserOutlined class="site-form-item-icon" />
-                                    </template>
-</a-input>
-</a-form-item>
-
-<a-form-item label="Password" name="password" autocomplete="off"
-    :rules="[{ required: true, message: 'Please input your password!' }]">
-    <a-input-password v-model:value="formState.password" autocomplete="off">
-        <template #prefix>
-                                        <LockOutlined class="site-form-item-icon" />
-                                    </template>
-    </a-input-password>
-</a-form-item>
-<a-form-item>
-    <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
-        Log in
-    </a-button>
-    Or
-    <router-link :to="{ name: 'register' }">
-        <a>register now!</a>
-    </router-link>
-</a-form-item>
-</a-form>
-</div>
-</div>
-</div>
-</div>
-</div> -->
     <div class="login-style sapo-sso">
         <div class="container form form-login">
             <div class="recently-login-view hidden">
                 <div class="header">
-
-
                     <img class="fade show sapo-logo" alt="Sapo"
                         src="https://sapo.dktcdn.net/sso-service/images/Sapo-logo.svg" />
                     <div class="title mt-3">

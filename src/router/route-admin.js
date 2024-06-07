@@ -36,6 +36,12 @@ const adminRoutes = [
         component: () => import("../views/measurementresultdatas/index.vue"),
       },
       {
+        path: "danh-sach-don",
+        name: "danh-sach-don",
+        meta: { title: "Dánh sách đơn" },
+        component: () => import("../views/users/dsDorder.vue"),
+      },
+      {
         path: "ket-qua-do/them-moi/:id",
         name: "admin-measurementresultdatas-create",
         meta: { title: "Thêm mới - Kết quả đo" },

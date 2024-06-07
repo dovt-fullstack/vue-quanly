@@ -36,13 +36,13 @@
                 style="overflow-y: auto"
               >
                 <nav class="MuiList-root menuList MuiList-padding">
-                  <a
+                  <!-- <a
                     aria-current="page"
                     class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem active MuiListItem-gutters MuiListItem-button active"
                     tabindex="0"
                     role="button"
                     aria-disabled="false"
-                    href="/dashboard"
+                    href="/trang-chu-stores"
                   >
                     <div class="MuiListItemIcon-root">
                       <svg
@@ -64,9 +64,9 @@
                         >Tổng quan
                       </span>
                     </div>
-                  </a>
+                  </a> -->
 
-                  <div
+                  <!-- <div
                     class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
                     tabindex="0"
                     role="button"
@@ -105,7 +105,7 @@
                         >Đăng kí shipper</span
                       >
                     </div>
-                  </div>
+                  </div> -->
                   <div
                     v-if="role == 'SHIPPER'"
                     class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
@@ -141,7 +141,7 @@
                     </div>
                     <div class="MuiListItemText-root menuItemTitle">
                       <span
-                        @click="navigateTo('admin-users-create')"
+                        @click="navigateTo('danh-sach-don')"
                         class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                         >Danh sách đơn</span
                       >
@@ -198,7 +198,7 @@
                       </div>
                     </div>
                   </div>
-                  <div
+                  <!-- <div
                     class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
                     tabindex="0"
                     role="button"
@@ -231,7 +231,7 @@
                         >Đăng kí user</span
                       >
                     </div>
-                  </div>
+                  </div> -->
                   <div
                     class="MuiCollapse-container MuiCollapse-hidden"
                     style="min-height: 0px"
@@ -246,7 +246,7 @@
                             tabindex="0"
                             role="button"
                             aria-disabled="false"
-                            to="/ashboards"
+                            to="/trang-chu-stores"
                           >
                             <div class="MuiListItemText-root menuItemTitle">
                               <span
@@ -311,7 +311,7 @@
                       </div>
                     </div>
                   </div>
-
+<!-- 
                   <div
                     class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
                     tabindex="0"
@@ -339,7 +339,7 @@
                         >Đăng kí manager</span
                       >
                     </div>
-                  </div>
+                  </div> -->
                   <div
                     class="MuiCollapse-container MuiCollapse-hidden"
                     style="min-height: 0px"
@@ -526,7 +526,7 @@
                       </div>
                     </div>
                   </div>
-                  <div
+                  <!-- <div
                     class="MuiTypography-root MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button MuiTypography-body1"
                     tabindex="0"
                     role="button"
@@ -569,7 +569,7 @@
                         Thêm info store
                       </span>
                     </div>
-                  </div>
+                  </div> -->
                 </nav>
               </div>
             </div>
