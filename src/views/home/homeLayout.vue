@@ -1372,7 +1372,12 @@ export default defineComponent({
     const getUsers = () => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${storeId}/product/view`
+          `https://charismatic-friendship-production.up.railway.app/api/v1/customer/store/view/${storeId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         )
         .then((response) => {
           users.value = response.data.data;
@@ -1402,7 +1407,12 @@ export default defineComponent({
     const getTypeStore = () => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${storeId}/info/view`
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${storeId}/info/view`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         )
         .then((response) => {
           console.log(response.data.data);
