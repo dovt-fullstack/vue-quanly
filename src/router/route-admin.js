@@ -42,6 +42,18 @@ const adminRoutes = [
         component: () => import("../views/users/dsDorder.vue"),
       },
       {
+        path: "danh-sach-don-accept",
+        name: "danh-sach-don-accept",
+        meta: { title: "Dánh sách đơn đã nhận" },
+        component: () => import("../views/users/dsAccept.vue"),
+      },
+      {
+        path: "danh-sach-don-accept-o",
+        name: "danh-sach-don-accept-o",
+        meta: { title: "Dánh sách đơn đã giao" },
+        component: () => import("../views/users/dsOrdero.vue"),
+      },
+      {
         path: "ket-qua-do/them-moi/:id",
         name: "admin-measurementresultdatas-create",
         meta: { title: "Thêm mới - Kết quả đo" },

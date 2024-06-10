@@ -156,7 +156,7 @@ export default defineComponent({
       localStorage.removeItem("auth");
       localStorage.removeItem("access_token");
       localStorage.removeItem("token");
-      route.push({ name: "login" });
+      window.location.href="http://localhost:5173/login"
       // if (authStore.user) {
 
       //   return authStore.logout(authStore.user.userName).catch(error => {

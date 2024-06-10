@@ -45,6 +45,9 @@
             </template>
             <template v-if="column.key === 'action' && authStoreClaim !== null">
            
+              <a-button @click="getIdDh(record.orderDetailId)" type="dashed" size="small" title="Sửa">
+                                Chi tiết
+                            </a-button>
                 <a-button
                   @click="giveOrder(record.orderDetailId)"
                   type="dashed"
@@ -54,7 +57,7 @@
                 >
                   Nhân đơn
                 </a-button>
-              <a-button
+              <!-- <a-button
                 title="Khóa"
                 @click="doneOrder(record.orderDetailId)"
                 type="dashed"
@@ -63,7 +66,7 @@
                
               >
                 Hoàn thành
-              </a-button>
+              </a-button> -->
             </template>
           </template>
         </a-table>
@@ -82,12 +85,22 @@
       </div>
     </div>
   </a-card>
+  <a-drawer title="Chi tiết" :visible="isDrawerVisible" :width="850" @close="handleClose" :destroyOnClose="true">
+        <div class="giohang orderhome">
+            <p style="color: black;">Tên khách hàng : {{ dataId.customerName }}</p>
+            <p>Số điện thoại : {{ dataId.customerPhone }}</p>
+            <p>Tổng tiền :{{ dataId.priceTotal }}</p>
+            <p>Tên sản phẩm :{{ dataId.productName }}</p>
+            <p>Số lượng :{{ dataId.quantity }}</p>
+
+        </div>
+    </a-drawer>
 </template>
 <script>
 import { defineComponent, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
-import { message } from "ant-design-vue";
+import { Form, Drawer, Button, InputNumber, message } from "ant-design-vue";
 import { useMenu } from "../../stores/use-menu.js";
 import { onUpdated, onMounted } from "vue";
 import ApiViewData from "../../api/ApiViewData.js";
@@ -95,6 +108,13 @@ import ApiUser from "../../api/ApiUser.js";
 import { useAuthStore } from "../../stores/auth.store.js";
 import axios from "axios";
 export default defineComponent({
+  components: {
+        "a-form": Form,
+        "a-form-item": Form.Item,
+        "a-drawer": Drawer,
+        "a-button": Button,
+        "a-input-number": InputNumber,
+    },
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
@@ -102,6 +122,10 @@ export default defineComponent({
     const route = useRoute();
     const errors = ref([]);
     const users = ref([]);
+    const dataId = ref({});
+    const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
+
+const isDrawerVisible = ref(false);
     const pageParam = reactive({
       current: Object.keys(route.query).length > 0 ? route.query.PageNumber : 1,
       pageNumber:
@@ -111,6 +135,28 @@ export default defineComponent({
       userName: Object.keys(route.query).length > 0 ? route.query.UserName : "",
       statusFilter: false,
     });
+
+    const showDrawer = () => {
+            isDrawerVisible.value = true;
+        };
+        const handleClose = () => {
+            isDrawerVisible.value = false;
+        };
+        const getIdDh = async (idI) => {
+            showDrawer()
+            const { data } = await axios.get(`https://charismatic-friendship-production.up.railway.app/api/v1/shipper/orderdetail?orderid=${idI}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            if (data.status === "OK") {
+                dataId.value = data.data
+                console.log(dataId.data, 'dataId.data')
+            } else {
+                console.error(data.message);
+            }
+
+        }
     const columns = [
       {
         title: "#",
@@ -148,7 +194,6 @@ export default defineComponent({
         fixed: "right",
       },
     ];
-    const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
 
     const getUsers = (args) => {
       axios
@@ -310,6 +355,11 @@ export default defineComponent({
       confirmBanned,
       giveOrder,
       doneOrder,
+      isDrawerVisible,
+            showDrawer,
+            handleClose,
+            dataId,
+            getIdDh
     };
     //
   },

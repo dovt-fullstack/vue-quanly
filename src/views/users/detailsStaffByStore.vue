@@ -211,11 +211,16 @@ export default defineComponent({
         fixed: "right",
       },
     ];
+    const token = JSON.parse(localStorage.getItem("token"));
 
     const getUsers = (args) => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/customer/view`
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/customer/view`,{
+            headers: {
+              Authorization: `Bearer ${token}`, // Thêm token vào headers
+            },
+          }
         )
         .then((response) => {
           console.log(response.data.data, "response");

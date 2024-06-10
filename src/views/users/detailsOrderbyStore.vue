@@ -70,7 +70,7 @@
             <template v-if="column.key === 'action' && authStoreClaim !== null">
               <!-- giveOrder,
       doneOrder -->
-              <a-space warp>
+              <!-- <a-space warp>
                 <a-button
                   @click="giveOrder(record.orderDetailId)"
                   type="dashed"
@@ -91,7 +91,7 @@
                 class="me-2 text-warning"
               >
                 Hoàn thành đơn
-              </a-button>
+              </a-button> -->
 
               <a-button
                 @click="showDrawer(record.orderDetailId)"
@@ -260,10 +260,15 @@ export default defineComponent({
       },
     ];
     // api/v1/management/1/order/view
+
     const getUsers = (args) => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/order/view?keyword=a`
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/order/view?keyword=a`,{
+            headers: {
+              Authorization: `Bearer ${token}`, // Thêm token vào headers
+            },
+          }
         )
         .then((response) => {
           console.log(response.data.data, "response");
