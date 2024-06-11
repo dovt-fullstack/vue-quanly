@@ -146,7 +146,7 @@
                         >Danh sách đơn</span
                       >
                     </div>
-                    
+
                   </div>
                   <div
                     v-if="role == 'SHIPPER'"
@@ -188,7 +188,7 @@
                         >Đơn đã nhận</span
                       >
                     </div>
-                    
+
                   </div>
                   <div
                     v-if="role == 'SHIPPER'"
@@ -230,7 +230,7 @@
                         >Đơn đã giao</span
                       >
                     </div>
-                    
+
                   </div>
                   <div
                     class="MuiCollapse-container MuiCollapse-hidden"
@@ -396,7 +396,7 @@
                       </div>
                     </div>
                   </div>
-<!-- 
+<!--
                   <div
                     class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
                     tabindex="0"
@@ -545,7 +545,7 @@
                     </div>
                   </div>
                   <div
-                    v-if="role == 'ADMIN'"
+                    v-if="role == 'ADMIN' || 'MANAGER'"
                     class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
                     tabindex="0"
                     role="button"

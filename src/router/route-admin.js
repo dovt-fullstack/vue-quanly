@@ -269,6 +269,12 @@ const adminRoutes = [
         meta: { title: "Chi tiết - Logs" },
         component: () => import("../views/show-logs/detail.vue"),
       },
+      {
+        path: "product-type/info",
+        name: "product-type/info",
+        meta: { title: "Thêm mới - product-type" },
+        component: () => import("../views/users/createProductTypeCo.vue"),
+      },
     ],
   },
   {
