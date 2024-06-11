@@ -308,6 +308,12 @@ const adminRoutes = [
     component: () => import("../views/home/cartView.vue"),
   },
   {
+    path: "/profile-client",
+    name: "profile-client",
+    meta: { title: "Thông tin cá nhân" },
+    component: () => import("../views/users/profileUser.vue"),
+  },
+  {
     path: "/404",
     name: "404",
     meta: { title: "404" },

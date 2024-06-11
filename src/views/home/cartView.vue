@@ -227,7 +227,7 @@
               <router-link v-if="!userLocal" to="/login">
                 <span> Đăng nhập </span>
               </router-link>
-              <span v-else class="me-1">Xin chào {{ userLocal.lastname }}</span>
+              <router-link to="/profile-client" v-else class="me-1"> <span>Xin chào {{ userLocal.lastname }}</span> </router-link>
             </label>
           </div>
         </div>
