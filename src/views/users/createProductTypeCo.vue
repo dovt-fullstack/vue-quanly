@@ -204,6 +204,7 @@ export default defineComponent({
       const formData = new FormData();
       formData.append("address", formState.userName);
       formData.append("phonenumber", formState.fullName);
+      3;
       formData.append("name", formState.email);
       formData.append("image", "a.png");
       formData.append("storetypeid", 1);
