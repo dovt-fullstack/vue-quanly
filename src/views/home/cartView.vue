@@ -227,7 +227,9 @@
               <router-link v-if="!userLocal" to="/login">
                 <span> Đăng nhập </span>
               </router-link>
-              <router-link to="/profile-client" v-else class="me-1"> <span>Xin chào {{ userLocal.lastname }}</span> </router-link>
+              <router-link to="/profile-client" v-else class="me-1">
+                <span>Xin chào {{ userLocal.lastname }}</span>
+              </router-link>
             </label>
           </div>
         </div>
@@ -238,6 +240,7 @@
             <span style="font: bold 15px arial;">Hãy cùng mua sắm nào!</span>
           </div>
 
+          <ul class="nav"></ul>
           <div class="flexJus">
             <router-link to="/trang-chu/gio-hang">
               <div id="vcart">

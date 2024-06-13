@@ -205,7 +205,9 @@
               <router-link v-if="!userLocal" to="/login">
                 <span> Đăng nhập </span>
               </router-link>
-              <router-link to="/profile-client" v-else class="me-1"> <span>Xin chào {{ userLocal.lastname }}</span> </router-link>
+              <router-link to="/profile-client" v-else class="me-1">
+                <span>Xin chào {{ userLocal.lastname }}</span>
+              </router-link>
             </label>
           </div>
         </div>
@@ -213,7 +215,7 @@
       <div class="f head2">
         <div class="wrap flexJus">
           <div>
-            <span style="font: bold 15px arial;">Hãy cùng mua sắm nào!</span>
+            <span style="font: bold 15px arial">Hãy cùng mua sắm nào!</span>
           </div>
           <div class="flexJus">
             <router-link to="/trang-chu/gio-hang">
@@ -246,10 +248,7 @@
             style="opacity: 1; display: block"
           >
             <div class="owl-wrapper-outer">
-              <div
-                class="owl-wrapper"
-
-              >
+              <div class="owl-wrapper">
                 <div
                   v-for="store in stores.slice(0, 5)"
                   :key="store.storeId"
@@ -473,8 +472,8 @@ export default defineComponent({
     useMenu().onSelectedKeys(["admin-users"]);
     const userLocal = JSON.parse(localStorage.getItem("auth"));
     const token = JSON.parse(localStorage.getItem("token"));
+    console.log(token);
 
-    const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
     const router = useRouter();
     const route = useRoute();
     const errors = ref([]);
@@ -499,6 +498,13 @@ export default defineComponent({
     };
     onMounted(() => {
       getUsers();
+      if (!token) {
+        // Xóa localStorage
+        localStorage.removeItem("token");
+        localStorage.removeItem("auth");
+        // Redirect đến trang login
+        router.push("/login");
+      }
     });
     return {
       route,
@@ -2916,8 +2922,8 @@ body {
   float: left;
   width: 100%;
 }
-.owl-wrapper{
-  background-color: #bfbfbf ;
-  padding:15px 10px;
+.owl-wrapper {
+  background-color: #bfbfbf;
+  padding: 15px 10px;
 }
 </style>
