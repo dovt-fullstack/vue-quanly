@@ -37,7 +37,7 @@
   </div> -->
 
   <div class="MuiBox-root jss272 jss261" id="header">
-    <h3 style="color: white" class="MuiTypography-root MuiTypography-h3">
+    <h3  style="color: white" class="MuiTypography-root MuiTypography-h3">
       Tổng quan
     </h3>
     <div class="MuiBox-root jss273 jss262">
@@ -90,9 +90,9 @@
           class="MuiTypography-root jss266 MuiTypography-body1 MuiTypography-colorTextPrimary"
         >
           <a-dropdown>
-            <a class="ant-dropdown-link text-light" @click.prevent>
+            <a class="ant-dropdown-link " @click.prevent>
               <span class="me-1">Xin chào {{ userLocal?.lastname }}</span>
-              <i class="fa-solid fa-caret-down"></i>
+              <i class="fa-solid "></i>
             </a>
             <template #overlay>
               <a-menu>
@@ -2569,9 +2569,9 @@ body::backdrop {
   height: 100%;
   overflow: hidden;
 
-  background: url(https://sapo.dktcdn.net/sapo-frontend-v3/master/static/media/6f2d8a7e4d0034640555.png)
+  background: url(https://res.cloudinary.com/dqvr7kat6/image/upload/v1718268402/zu43thyvdywlzfuhxfm6.webp)
       top left no-repeat,
-    url(https://sapo.dktcdn.net/sapo-frontend-v3/master/static/media/f6083db7e88697072ad0.png)
+    url(https://res.cloudinary.com/dqvr7kat6/image/upload/v1718268402/zu43thyvdywlzfuhxfm6.webp)
       bottom right no-repeat !important;
 }
 .jss275 {

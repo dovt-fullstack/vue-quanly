@@ -26,7 +26,7 @@
               <img
                 width="286"
                 height="60"
-                src="https://denled.com/Content/img/logo.png"
+                src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718287579/ftld80xpfribbbfhp1qu.png"
                 alt="Siêu thị đèn LED"
               />
             </a>
@@ -201,10 +201,7 @@
           </span>
 
           <div class="open">
-            <label class="hl"
-              ><span>Hotline 1: <b>097366.5115</b></span
-              ><span>Hotline 2: <b>097366.5115</b></span></label
-            >
+
             <label style="cursor: pointer" class="oh">
               <router-link v-if="!userLocal" to="/login">
                 <span> Đăng nhập </span>
@@ -768,14 +765,7 @@
               </figure>
             </li>
 
-            <li>
-              <a class="c1" title="Tin tức" href="/blog">
-                <span>Tin tức</span>
 
-                <meta itemprop="name" content="Tin tức" />
-                <meta itemprop="url" content="/blog" />
-              </a>
-            </li>
           </ul>
           <div class="flexJus">
             <router-link to="/trang-chu/gio-hang">
@@ -822,48 +812,6 @@
                 <div class="item">
                   <a href="" title="">
                     <img
-                      src="https://denled.com/Data/upload/files/1(5).png"
-                      alt=""
-                    />
-                  </a>
-                </div>
-              </div>
-              <div class="owl-item" style="width: 1263px">
-                <div class="item">
-                  <a href="" title="">
-                    <img
-                      src="https://denled.com/Data/upload/files/1(5).png"
-                      alt=""
-                    />
-                  </a>
-                </div>
-              </div>
-              <div class="owl-item" style="width: 1263px">
-                <div class="item">
-                  <a href="" title="">
-                    <img
-                      src="https://denled.com/Data/upload/files/1(5).png"
-                      data-src="https://denled.com/Data/upload/files/1(5).png"
-                      alt=""
-                    />
-                  </a>
-                </div>
-              </div>
-              <div class="owl-item" style="width: 1263px">
-                <div class="item">
-                  <a href="" title="">
-                    <img
-                      src="https://denled.com/Data/upload/files/0123/3.png"
-                      data-src="https://denled.com/Data/upload/files/0123/3.png"
-                      alt=""
-                    />
-                  </a>
-                </div>
-              </div>
-              <div class="owl-item" style="width: 1263px">
-                <div class="item">
-                  <a href="" title="">
-                    <img
                       src="https://denled.com/Data/upload/files/0123/2.png"
                       data-src="https://denled.com/Data/upload/files/0123/2.png"
                       alt=""
@@ -897,7 +845,7 @@
       <div class="f dealhot">
         <div class="wrap flexCol">
           <div class="f dhtit">
-            <h2>TOP sản phẩm khuyến mãi HOT</h2>
+            <h2>TOP sản phẩm trong cửa hàng</h2>
           </div>
           <div
             class="dhpro owl-carousel owl-theme"

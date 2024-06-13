@@ -26,7 +26,7 @@
               <img
                 width="286"
                 height="60"
-                src="https://denled.com/Content/img/logo.png"
+                src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718287579/ftld80xpfribbbfhp1qu.png"
                 alt="Siêu thị đèn LED"
               />
             </a>
@@ -864,14 +864,10 @@
                 <label>{{ product.view }} Lượt xem</label>
                 <ul class="tieuban">
                   <li
-                    data-id="728"
-                    data-imgid="tb728"
-                    data-pricett="0₫"
-                    data-price="156.000₫"
-                    data-off="0"
                   >
                     {{ product.productType }}
                   </li>
+                  
                   <!-- <li
                     data-id="728"
                     data-imgid="tb728"
@@ -883,7 +879,13 @@
                   </li> -->
                 </ul>
               </div>
-
+              <div class='edit-number'>
+                    <button class='decrease'>
+                      -
+                    </button>
+                    <input type='number' class='input'/>
+                    <button class='increase'>+</button>
+                  </div>
               <!--het tieu ban-->
 
               <div class="dvdq flexC">
@@ -4902,5 +4904,33 @@ a.pswp__share--download:hover {
 
 .zalo-chat-widget {
   right: 12px !important;
+}
+.increase{
+  padding: 5px 8px;
+  border-radius: 5px;
+  cursor:pointer;
+  background-color:lightgray;
+  width:35px;
+
+}
+.decrease{
+  padding: 5px 8px;
+  border-radius: 5px;
+  cursor:pointer;
+  background-color:lightgray;
+  width:35px;
+
+}
+.input{
+  min-height:100%;
+  border:1px solid black;
+  margin:0 10px;
+  border-radius : 5px;
+  text-align:center;
+  width:60px;
+}
+.edit-number{
+  display:flex;
+  
 }
 </style>

@@ -195,8 +195,14 @@ export default defineComponent({
             </div>
             <div class="login-form-view">
                 <div class="header">
-                    <img class="fade show sapo-logo" alt="Sapo"
-                        src="https://sapo.dktcdn.net/sso-service/images/Sapo-logo.svg" />
+                    <div class='header-image'>
+                        <img
+                            style="margin:0px;"
+                            class="fade show sapo-logo"
+                            alt="Sapo"
+                            src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718268402/zu43thyvdywlzfuhxfm6.webp"
+                        />
+          </div>
                     <div class="title mt-3">
                         <h1 class="title-center h4">Đăng kí loại tài khoản</h1>
                     </div>
@@ -220,7 +226,7 @@ export default defineComponent({
                     <img class="fade show sapo-logo" alt="Sapo"
                         src="https://sapo.dktcdn.net/sso-service/images/Sapo-logo.svg" />
                     <div class="title mt-3">
-                        <h1 class="title-center h4">Đăng nhập vào cửa hàng của bạn</h1>
+                        <h1 class="title-center h4">Đăng nhập tài khoản</h1>
                     </div>
                 </div>
             </div>
@@ -247,7 +253,7 @@ export default defineComponent({
                         <input id="country-code" style="display: none" name="countryCode" value="66" />
                         <input id="service-type" type="hidden" name="Product" value="pos" />
 
-                        <div class="form-group domain-input-wrapper d-none" id="domain-input-wrapper">
+                        <div class="form-group domain-input-wrapper d-none " id="domain-input-wrapper">
                             <input class="form-input" id="domain" name="domain"
                                 placeholder="Nhập tên domain cửa hàng của bạn" value="" />
                             <div class="suffix-domain-select-wrapper hidden">
@@ -335,7 +341,7 @@ export default defineComponent({
                         <div class="form-group" id="password-input-wrapper">
                             <a-form-item name="password" autocomplete="off"
                                 :rules="[{ required: true, message: 'Please input your password!' }]">
-                                <a-input-password class="form-input" id="password" name="password"
+                                <a-input-password class="password-register" id="password" name="password"
                                     placeholder="Mật khẩu đăng nhập cửa hàng" type="password"
                                     autocomplete="current-password" v-model:value="formState.password">
                                 </a-input-password>
@@ -378,14 +384,14 @@ export default defineComponent({
                             <iframe style="display: none"></iframe>
                         </div>
                     </div>
-                    <div class="text-center mb-3" style="clear: both">
+                    <div class="btn-register text-center mb-3" style="">
                         <button @click="resigterUser" class="btn-login" type="button">
                             Đăng Kí User
                         </button>
                         <button @click="resigterShipper" class="btn-login" type="button">
                             Đăng Kí Shipper
                         </button>
-                        <button @click="resigterManager" style="margin-top: 10px;" class="btn-login" type="button">
+                        <button @click="resigterManager"  class="btn-login" type="button">
                             Đăng Kí Manager
                         </button>
 
@@ -14151,5 +14157,34 @@ screen and (-ms-high-contrast:active) {
 .setup-sso-account-style .note {
     margin: 0;
     padding-inline-start: 20px
+}
+.password-register{
+  border-radius: 40px;
+  padding:0 20px;
+  height:48px;
+  border: thin solid #d3d5d7;
+}
+#username-input-wrapper{
+    margin:0;
+}
+.header-image{
+  width:50%;
+  height:250px;
+  display:flex;
+  margin:auto;
+  margin-bottom:40px;
+}
+.header-image img{
+  margin:0px;
+  width:100%;
+  display:block;
+  height:100%;
+}
+.btn-register{
+    display:flex;
+    gap:6px;
+}
+.header-image{
+    margin-bottom:0;
 }
 </style>
