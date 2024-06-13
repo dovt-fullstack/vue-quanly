@@ -307,7 +307,7 @@ export default defineComponent({
               /> -->
                             <a-form-item name="firstName"
                                 :rules="[{ required: true, message: 'Please input your firstName!' }]">
-                                <a-input placeholder="firstName của bạn" class="form-input country-phone-input valid"
+                                <a-input placeholder="Nhập họ của bạn" class="form-input country-phone-input valid"
                                     v-model:value="formState.firstName">
                                     <template #prefix>
 
@@ -316,7 +316,7 @@ export default defineComponent({
                             </a-form-item>
                             <a-form-item name="lastName"
                                 :rules="[{ required: true, message: 'Please input your lastName!' }]">
-                                <a-input placeholder="lastName thoại của bạn"
+                                <a-input placeholder="Nhập tên của bạn"
                                     class="form-input country-phone-input valid" v-model:value="formState.lastName">
                                     <template #prefix>
 
@@ -325,7 +325,7 @@ export default defineComponent({
                             </a-form-item>
                             <a-form-item name="username"
                                 :rules="[{ required: true, message: 'Please input your username!' }]">
-                                <a-input placeholder="Email/Số điện thoại của bạn"
+                                <a-input placeholder="Email của bạn"
                                     class="form-input country-phone-input valid" v-model:value="formState.username">
                                     <template #prefix>
 
@@ -342,7 +342,7 @@ export default defineComponent({
                             <a-form-item name="password" autocomplete="off"
                                 :rules="[{ required: true, message: 'Please input your password!' }]">
                                 <a-input-password class="password-register" id="password" name="password"
-                                    placeholder="Mật khẩu đăng nhập cửa hàng" type="password"
+                                    placeholder="Mật khẩu đăng nhập" type="password"
                                     autocomplete="current-password" v-model:value="formState.password">
                                 </a-input-password>
                             </a-form-item>

@@ -92,6 +92,8 @@
             <p>Tổng tiền :{{ dataId.priceTotal }}</p>
             <p>Tên sản phẩm :{{ dataId.productName }}</p>
             <p>Số lượng :{{ dataId.quantity }}</p>
+            <p>Địa chỉ :{{ dataId.address }}</p>
+
 
         </div>
     </a-drawer>

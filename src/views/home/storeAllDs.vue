@@ -233,86 +233,7 @@
     </div>
 
     <div id="main">
-      <div style="position: absolute; left: -9999px">
-        <h1>Đèn led</h1>
-        <h2>Đèn led chiếu sáng</h2>
-      </div>
 
-      <!--Slide-->
-      <div class="f">
-        <div
-          id="sync1"
-          class="uudai owl-carousel owl-theme"
-          style="opacity: 1; display: block"
-        >
-          <div class="owl-wrapper-outer">
-            <div
-              class="owl-wrapper"
-              style="
-                width: 12630px;
-                left: 0px;
-                display: block;
-                transition: all 800ms ease 0s;
-                transform: translate3d(-1263px, 0px, 0px);
-              "
-            >
-              <div class="owl-item" style="width: 1263px">
-                <div class="item">
-                  <a href="" title="">
-                    <img
-                      src="https://denled.com/Data/upload/files/1(5).png"
-                      alt=""
-                    />
-                  </a>
-                </div>
-              </div>
-              <div class="owl-item" style="width: 1263px">
-                <div class="item">
-                  <a href="" title="">
-                    <img
-                      src="https://denled.com/Data/upload/files/1(5).png"
-                      alt=""
-                    />
-                  </a>
-                </div>
-              </div>
-              <div class="owl-item" style="width: 1263px">
-                <div class="item">
-                  <a href="" title="">
-                    <img
-                      src="https://denled.com/Data/upload/files/1(5).png"
-                      data-src="https://denled.com/Data/upload/files/1(5).png"
-                      alt=""
-                    />
-                  </a>
-                </div>
-              </div>
-              <div class="owl-item" style="width: 1263px">
-                <div class="item">
-                  <a href="" title="">
-                    <img
-                      src="https://denled.com/Data/upload/files/0123/3.png"
-                      data-src="https://denled.com/Data/upload/files/0123/3.png"
-                      alt=""
-                    />
-                  </a>
-                </div>
-              </div>
-              <div class="owl-item" style="width: 1263px">
-                <div class="item">
-                  <a href="" title="">
-                    <img
-                      src="https://denled.com/Data/upload/files/0123/2.png"
-                      data-src="https://denled.com/Data/upload/files/0123/2.png"
-                      alt=""
-                    />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <!--san pham khuyen mai-->
       <div class="f dealhot">
         <div class="wrap flexCol">
@@ -344,7 +265,7 @@
                     <!-- /trang-chu/chi-tiet-san-pham -->
                     <a style="height: 344px !important" class="item pi">
                       <div>
-                        <img :src="store.avatar" :alt="store.avatar" />
+                        <img :src="store.image" :alt="store.image" />
                       </div>
                       <h3>{{ store.storeName }}</h3>
                       <strong style="padding-right: 5px">{{
@@ -375,9 +296,7 @@
             /></i>
             <span>Hỏi chúng tôi</span>
             <p>
-              Nếu bạn không chắc chắn về những thiết bị nào phù hợp với bạn và
-              nhà của bạn, chỉ cần liên hệ với chúng tôi và để được nhóm hỗ trợ
-              khách hàng trực tuyến của chúng tôi đưa ra đề xuất cho bạn.
+              Nếu bạn không chắc chắn về hệ thống và cách đặt hàng, hãy liên hệ với chúng tôi.
             </p>
           </li>
           <li>
@@ -388,8 +307,7 @@
             /></i>
             <span>Tìm sản phẩm</span>
             <p>
-              Với nhiều sản phẩm để lựa chọn, đây là một nơi tuyệt vời để bắt
-              đầu dự án của bạn.
+              Với các hệ thống siêu thị, tạp hóa, bạn có thể dễ dàng tìm kiếm các món đồ bạn mong đợi.
             </p>
           </li>
           <li>
@@ -400,8 +318,7 @@
             /></i>
             <span>Ghé thăm cửa hàng</span>
             <p>
-              Chào mừng bạn đến với các cửa hàng đèn led hàng đầu Việt Nam -
-              trưng bày đầy đủ các thiết bị đèn, quạt, điện thông minh.
+              Bạn có thể xem địa chỉ của các cửa hàng để có thể đến trực tiếp và lựa chọn sản phẩm.
             </p>
           </li>
           <li>
@@ -433,120 +350,21 @@
                 width="286"
                 height="60"
               />
-              <p>
-                Công ty cổ phần Chu Minh Hải sở hữu chuỗi sieuthidenled.com là
-                nơi tập hợp các thương hiệu
-                <a href="/" title="đèn led">đèn led</a> hàng đầu Việt Nam và Thế
-                giới. Hệ thống phân phối nhiều tỉnh thành. <br /><br /><br />
-                GPĐKKD số: 01057.70373 do Sở KHĐT Hà Nội cấp ngày 12/01/2012
-              </p>
+              
 
-              <div class="f social flexL m10">
-                <a
-                  href="https://www.facebook.com/thegioidenledhanoii"
-                  alt="Fanpage"
-                  aria-label="Fanpage"
-                  rel="nofollow"
-                  ><i class="fa face"></i></a
-                ><a
-                  href=""
-                  alt="Google Page"
-                  aria-label="Google Page"
-                  rel="nofollow"
-                  ><i class="fa gg"></i></a
-                ><a href="" alt="Youtube" aria-label="Youtube" rel="nofollow"
-                  ><i class="fa ytb"></i
-                ></a>
-                <a
-                  style="background: #000; margin-top: 5px"
-                  href="//www.dmca.com/Protection/Status.aspx?ID=fb224c55-eb25-4914-8540-4f94b9c3013d"
-                  rel="noreferrer nofollow"
-                  title="DMCA.com Protection Status"
-                  class="dmca-badge"
-                >
-                  <img
-                    src="https://denled.com/Content/img/dmca.png"
-                    alt="DMCA.com Protection Status"
-                    width="75"
-                    height="24"
-                /></a>
-
-                <a
-                  style="background: #000; margin-top: 5px"
-                  href="http://online.gov.vn/Home/WebDetails/85212"
-                  target="_blank"
-                  title="Đã thông báo bộ công thương"
-                  rel="nofollow"
-                  ><img
-                    src="https://denled.com/Content/img/dathongbao.png"
-                    width="69"
-                    height="35"
-                    alt="Đã thông báo bộ công thương"
-                /></a>
-              </div>
             </div>
             <div class="fotb" style="width: 50%; padding: 0 40px 0 60px">
               <label>SHOWROOM</label>
               <div class="muahang f flexC">
                 <div class="showrooms">
                   <ul>
-                    <li>Siêu thị đèn Led Hà Nội</li>
+                    <li>Hệ thống hỗ trợ quản lí và bán hàng tạp hóa</li>
                     <li>
                       <span>Địa chỉ 1 : </span>21C Trần Duy Hưng, Cầu Giấy, HN
                     </li>
                     <li>
-                      <span>Hotline 1 : </span
-                      ><a href="tel:0933665115">0933.66.5115</a> - Hotline 2:
-                      <a href="tel:0911913366">0911.91.3366</a>
-                    </li>
-                    <li>
-                      <span>Hotline 3: </span
-                      ><a href="tel:0814666688">0814.6666.88</a>
-                    </li>
-                    <li>
-                      <span>Địa chỉ 2 : </span>107 Thảo Nguyên, Ecopark, HN
-                    </li>
-                    <li>
-                      <span>Hotline 4 : </span
-                      ><a href="tel:0903665115">0903.66.5115</a>
-                    </li>
-                    <li>
-                      <span>Hotline 5: </span
-                      ><a href="tel:0833665115">08.3366.5115</a>
-                    </li>
-                    <li>
-                      <span>Hotline 6: </span
-                      ><a href="tel:0923665115">0923.66.5115</a>
-                    </li>
-                  </ul>
-                  <ul>
-                    <li>Siêu thị đèn Led Hồ Chí Minh</li>
-                    <li>
-                      <span>Địa chỉ 1 : </span>148 Nguyễn Hoàng, P. AN Phú, Quận
-                      2, HCM
-                    </li>
-                    <li>
-                      <span>Hotline 7 : </span
-                      ><a href="tel:0923193366">0923.19.3366</a>
-                    </li>
-                    <li>
-                      <span>Hotline 8: </span
-                      ><a href="tel:0911193366">0911.19.3366</a>
-                    </li>
-                    <li>
-                      <span>Hotline 9 : </span
-                      ><a href="tel:0943193366">0943.19.3366</a>
-                    </li>
-                  </ul>
-                  <ul>
-                    <li>Siêu thị đèn Led Phú Quốc</li>
-                    <li>
-                      <span>Địa chỉ 1 : </span>245 Đường 30/4, Dương Đông, Phú
-                      Quốc
-                    </li>
-                    <li>
-                      <span>Hotline 10 : </span
-                      ><a href="tel:0943665115">0943.66.5115</a>
+                      <span>Hotline : </span
+                      ><a href="tel:0933665115">0933.66.5115</a> 
                     </li>
                   </ul>
                 </div>
@@ -557,10 +375,10 @@
               <ul>
                 <li>
                   <a
-                    title="Giới Thiệu Siêu Thị Đèn Led"
+                    title="Giới Thiệu Hệ Thống"
                     rel="nofollow"
-                    href="/gioi-thieu-the-gioi-den-led"
-                    >Giới Thiệu Siêu Thị Đèn Led</a
+                    href="/"
+                    >Giới Thiệu Hệ Thống</a
                   >
                 </li>
 
@@ -568,7 +386,7 @@
                   <a
                     title="Giao hàng &amp; Thanh toán"
                     rel="nofollow"
-                    href="/giao-hang-thanh-toan"
+                    href="/"
                     >Giao hàng &amp; Thanh toán</a
                   >
                 </li>
@@ -577,7 +395,7 @@
                   <a
                     title="Hướng dẫn mua hàng Online"
                     rel="nofollow"
-                    href="/huong-dan-mua-hang-online"
+                    href="/"
                     >Hướng dẫn mua hàng Online</a
                   >
                 </li>
@@ -586,68 +404,8 @@
                   <a
                     title="Quy chế hoạt động"
                     rel="nofollow"
-                    href="/quy-che-hoat-dong"
+                    href="/"
                     >Quy chế hoạt động</a
-                  >
-                </li>
-
-                <li>
-                  <a
-                    title="Nội quy cửa hàng"
-                    rel="nofollow"
-                    href="/noi-quy-cua-hang"
-                    >Nội quy cửa hàng</a
-                  >
-                </li>
-
-                <li>
-                  <a title="Tuyển Dụng" rel="nofollow" href="/tuyen-dung"
-                    >Tuyển Dụng</a
-                  >
-                </li>
-
-                <li>
-                  <a
-                    title="Chính sách bảo hành"
-                    rel="nofollow"
-                    href="/chinh-sach-bao-hanh"
-                    >Chính sách bảo hành</a
-                  >
-                </li>
-
-                <li>
-                  <a
-                    title="Chính sách quy trình xử lý khiếu nại"
-                    rel="nofollow"
-                    href="/chinh-sach-quy-trinh-xu-ly-khieu-nai"
-                    >Chính sách quy trình xử lý khiếu nại</a
-                  >
-                </li>
-
-                <li>
-                  <a
-                    title="Chính sách đổi trả"
-                    rel="nofollow"
-                    href="/chinh-sach-doi-tra"
-                    >Chính sách đổi trả</a
-                  >
-                </li>
-
-                <li>
-                  <a
-                    title="Chính sách bảo mật thông tin"
-                    rel="nofollow"
-                    href="/chinh-sach-bao-mat-thong-tin"
-                    >Chính sách bảo mật thông tin</a
-                  >
-                </li>
-
-                <li>
-                  <a
-                    title="Chính sách xử lý khiếu nại"
-                    rel="nofollow"
-                    href="/chinh-sach-xu-ly-khieu-nai"
-                    >Chính sách xử lý khiếu nại</a
                   >
                 </li>
               </ul>
@@ -656,7 +414,7 @@
         </div>
       </div>
       <div class="f p10 cen trang copyright">
-        © 2019 bản quyền thuộc về
+        © 2024 bản quyền thuộc về HungNL@gmail.com
         <a href="https://denled.com" title="Siêu thị đèn LED">denled.com</a>
       </div>
 

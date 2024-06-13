@@ -485,7 +485,7 @@
                       <span
                         @click="navigateTo('admin-store')"
                         class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                        >Danh sách sửa hàng</span
+                        >Danh sách cửa hàng</span
                       >
                     </div>
                   </div>

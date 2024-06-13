@@ -211,7 +211,7 @@
                 ]"
               >
                 <a-input
-                  placeholder="Email/Số điện thoại của bạn"
+                  placeholder="Email của bạn"
                   class="form-input country-phone-input valid"
                   v-model:value="formState.username"
                 >

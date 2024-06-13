@@ -7,11 +7,11 @@
         <div class="card-body">
           <h2 class="user-name">{{ userData.firstname }} {{ userData.lastname }}</h2>
           <div class="user-info">
-            <p><strong>User ID:</strong> {{ userData.userId }}</p>
-            <p><strong>First Name:</strong> {{ userData.firstname || 'N/A' }}</p>
-            <p><strong>Last Name:</strong> {{ userData.lastname || 'N/A' }}</p>
-            <p><strong>Phone Number:</strong> {{ userData.phoneNumber || 'N/A' }}</p>
-            <p><strong>Social Contact:</strong> {{ userData.socialContact || 'N/A' }}</p>
+            <p><strong>Họ:</strong> {{ userData.firstname || 'N/A' }}</p>
+            <p><strong>Tên:</strong> {{ userData.lastname || 'N/A' }}</p>
+            <p><strong>Số điện thoại:</strong> {{ userData.phoneNumber || 'N/A' }}</p>
+            <p><strong>Địa chỉ:</strong> {{ userData.phoneNumber || 'N/A' }}</p>
+            <p><strong>Mạng xã hội:</strong> {{ userData.socialContact || 'N/A' }}</p>
           </div>
         </div>
         <div class="card-footer">
@@ -22,18 +22,19 @@
   
       <a-modal v-model:visible="isModalVisible" title="Chỉnh sửa thông tin" @ok="handleOk" @cancel="handleCancel">
         <a-form :form="form" layout="vertical">
-            <a-form-item label="First Name">
+            <a-form-item label="Họ">
   <a-input v-model:value="formData.firstname" @input="handleInputChange('firstname', $event)" />
 </a-form-item>
-<a-form-item label="Last Name">
+<a-form-item label="Tên">
   <a-input v-model:value="formData.lastname" @input="handleInputChange('lastname', $event)" />
 </a-form-item>
-<a-form-item label="Phone Number">
+<a-form-item label="Số điện thoại">
   <a-input v-model:value="formData.phoneNumber" @input="handleInputChange('phoneNumber', $event)" />
 </a-form-item>
-<a-form-item label="Social Contact">
+<a-form-item label="Địa chỉ">
   <a-input v-model:value="formData.address" @input="handleInputChange('address', $event)" />
 </a-form-item>
+
         </a-form>
       </a-modal>
     </div>
