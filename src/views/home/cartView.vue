@@ -24,12 +24,12 @@
           >
             <meta
               itemprop="url"
-              content="https://denled.com/Content/img/logo.png"
+              content="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718287579/ftld80xpfribbbfhp1qu.png"
             />
             <img
               width="286"
               height="60"
-              src="https://denled.com/Content/img/logo.png"
+              src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718287579/ftld80xpfribbbfhp1qu.png"
               alt="Siêu thị đèn LED"
             />
           </a>
@@ -259,7 +259,7 @@
 
       <div class="orderbox">
         <div class="dieuhuong">
-          <a>Giỏ hàng của bạn</a>
+          <a >Giỏ hàng của bạn</a>
         </div>
 
         <div class="giohang orderhome">
@@ -281,11 +281,10 @@
                 <div class="oname">
                   <h3>{{ product.productName }}</h3>
                   <label>{{ product.priceTotal?.toLocaleString() }}₫</label>
-                  <span
+                  <span class="bynow"
                     @click="byProductCart(product.cartItemId)"
                     style="
                       float: right;
-                      text-decoration: underline;
                       padding-top: 10px;
                       cursor: 'pointer';
                     "
@@ -2438,6 +2437,21 @@ textarea {
   border-radius: 5px;
   color: #fff;
   text-align: center;
+}
+
+.bynow {
+  background: -webkit-linear-gradient(top, #ffa103, #fb7d0f);
+  padding: 8px 2px;
+  font: bold 16px/27px Arial;
+  border-radius: 5px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer; /* Thêm con trỏ dạng bàn tay */
+  transition: background 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt */
+}
+
+.bynow:hover {
+  background: -webkit-linear-gradient(top, #fb7d0f, #ffa103); /* Thay đổi màu khi trỏ chuột vào */
 }
 
 .od span {

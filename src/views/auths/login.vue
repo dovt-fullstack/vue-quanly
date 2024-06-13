@@ -6,7 +6,7 @@
           <img
             class="fade show sapo-logo"
             alt="Sapo"
-            src="https://sapo.dktcdn.net/sso-service/images/Sapo-logo.svg"
+            src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718268402/zu43thyvdywlzfuhxfm6.webp"
           />
           <div class="title mt-3">
             <h1 class="title-center h4">Cửa hàng truy cập gần đây</h1>
@@ -15,13 +15,15 @@
       </div>
       <div class="login-form-view">
         <div class="header">
-          <img
+          <div class='header-image'>
+            <img
             class="fade show sapo-logo"
             alt="Sapo"
-            src="https://sapo.dktcdn.net/sso-service/images/Sapo-logo.svg"
+            src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718268402/zu43thyvdywlzfuhxfm6.webp"
           />
+          </div>
           <div class="title mt-3">
-            <h1 class="title-center h4">Đăng nhập vào cửa hàng của bạn</h1>
+            <h1 class="title-center h4">Đăng nhập tài khoản</h1>
           </div>
         </div>
       </div>
@@ -250,8 +252,10 @@
                   { required: true, message: 'Please input your password!' },
                 ]"
               >
+
                 <a-input-password
-                  class="form-input"
+
+                  class='password-login'
                   id="password"
                   name="password"
                   placeholder="Mật khẩu đăng nhập cửa hàng"
@@ -12203,10 +12207,11 @@ input.form-input {
   line-height: 1;
   color: #363636;
   font-size: 0.895rem;
-  padding: 0 20px;
   width: 100%;
   outline: none;
   font-weight: 500;
+  padding: 0 20px;
+
 }
 
 input.form-input::placeholder {
@@ -14193,5 +14198,24 @@ input[type="number"] {
 .setup-sso-account-style .note {
   margin: 0;
   padding-inline-start: 20px;
+}
+.header-image{
+  width:50%;
+  height:250px;
+  display:flex;
+  margin:auto;
+  margin-bottom:40px;
+}
+.header-image img{
+  margin:0px;
+  width:100%;
+  display:block;
+  height:100%;
+}
+.password-login{
+  border-radius: 40px;
+  padding:0 20px;
+  height:48px;
+  border: thin solid #d3d5d7;
 }
 </style>

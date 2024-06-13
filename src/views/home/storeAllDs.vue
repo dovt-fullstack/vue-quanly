@@ -17,16 +17,16 @@
         >
           <router-link to="/trang-chu-stores">
             <a
-              title="Siêu thị đèn LED"
+              title="Siêu thị Agogo"
               itemprop="logo"
               itemscope=""
               itemtype="http://schema.org/ImageObject"
             >
               <meta itemprop="url" content="/Content/img/logo.png" />
               <img
-                width="286"
+                width="60"
                 height="60"
-                src="https://denled.com/Content/img/logo.png"
+                src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718287579/ftld80xpfribbbfhp1qu.png"
                 alt="Siêu thị đèn LED"
               />
             </a>
@@ -201,10 +201,6 @@
           </span>
 
           <div class="open">
-            <label class="hl"
-              ><span>Hotline 1: <b>097366.5115</b></span
-              ><span>Hotline 2: <b>097366.5115</b></span></label
-            >
             <label style="cursor: pointer" class="oh">
               <router-link v-if="!userLocal" to="/login">
                 <span> Đăng nhập </span>
@@ -218,7 +214,9 @@
       </div>
       <div class="f head2">
         <div class="wrap flexJus">
-          <ul class="nav"></ul>
+          <div>
+            <span style="font: bold 15px arial">Hãy cùng mua sắm nào!</span>
+          </div>
           <div class="flexJus">
             <router-link to="/trang-chu/gio-hang">
               <div id="vcart">
@@ -321,7 +319,7 @@
       <div class="f dealhot">
         <div class="wrap flexCol">
           <div class="f dhtit">
-            <h2>TOP cửa hàng UY TÍN</h2>
+            <h2>Danh sách cửa hàng yêu thích của bạn</h2>
           </div>
           <div
             class="dhpro owl-carousel owl-theme"
@@ -329,41 +327,33 @@
             style="opacity: 1; display: block"
           >
             <div class="owl-wrapper-outer">
-              <div
-                class="owl-wrapper"
-                style="
-                  width: 3936px;
-                  left: 0px;
-                  display: block;
-                  background-color: #bfbfbf !important;
-                "
-              >
+              <div class="owl-wrapper">
                 <div
-                  v-for="user in users.slice(0, 5)"
-                  :key="user.storeId"
+                  v-for="store in stores.slice(0, 5)"
+                  :key="store.storeId"
                   class="owl-item active"
-                  style="width: 256px; margin-left: 2px"
+                  style=""
                 >
                   <router-link
                     :to="{
                       name: 'trang-chu',
-                      params: { id: user.storeId },
+                      params: { id: store.storeId },
                     }"
                   >
                     <!-- /trang-chu/chi-tiet-san-pham -->
                     <a style="height: 344px !important" class="item pi">
                       <div>
-                        <img :src="user.image" :alt="user.image" />
+                        <img :src="store.avatar" :alt="store.avatar" />
                       </div>
-                      <h3>{{ user.storeName }}</h3>
+                      <h3>{{ store.storeName }}</h3>
                       <strong style="padding-right: 5px">{{
-                        user.rate
+                        store.rate
                       }}</strong>
                       <i
                         class="fa-solid fa-star"
                         style="color: #ffd43b; padding-right: 5px"
                       ></i>
-                      <p>{{ user.storeType }}</p>
+                      <p>{{ store.storeType }}</p>
                     </a>
                   </router-link>
                 </div>
@@ -729,11 +719,11 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
     const errors = ref([]);
-    const users = ref([]);
+    const stores = ref([]);
     const getUsers = () => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/admin/store/view`,
+          `https://charismatic-friendship-production.up.railway.app/api/v1/customer/favor/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Thêm token vào headers
@@ -742,7 +732,7 @@ export default defineComponent({
         )
         .then((response) => {
           console.log(response.data.data, "response");
-          users.value = response.data.data;
+          stores.value = response.data.data;
         })
         .catch((error) => {
           console.error(error);
@@ -761,7 +751,7 @@ export default defineComponent({
     return {
       route,
       router,
-      users,
+      stores,
       userLocal,
     };
     //
@@ -3173,5 +3163,9 @@ body {
   overflow: hidden;
   float: left;
   width: 100%;
+}
+.owl-wrapper {
+  background-color: #bfbfbf;
+  padding: 15px 10px;
 }
 </style>
