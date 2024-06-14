@@ -38,7 +38,6 @@
 
   <div class="MuiBox-root jss272 jss261" id="header">
     <h3  style="color: white" class="MuiTypography-root MuiTypography-h3">
-      Tổng quan
     </h3>
     <div class="MuiBox-root jss273 jss262">
       <div class="MuiBox-root jss305 jss263 jss267">
