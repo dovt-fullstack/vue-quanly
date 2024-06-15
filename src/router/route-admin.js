@@ -317,7 +317,7 @@ const adminRoutes = [
     path: "/profile-client",
     name: "profile-client",
     meta: { title: "Thông tin cá nhân" },
-    component: () => import("../views/users/profileUser.vue"),
+    component: () => import("../views/users/profileUserNew.vue"),
   },
   {
     path: "/404",
