@@ -1,95 +1,11 @@
 <template>
   <div id="wrapper">
     <div id="header">
-      <div class="f head1" itemscope="" itemtype="http://schema.org/WebSite" itemid="https://denled.com/#website">
-        <meta itemprop="url" content="https://denled.com" />
-        <meta itemprop="name" content="Siêu thị đèn LED" />
-        <div class="wrap flexJus" itemscope="" itemtype="https://schema.org/Organization"
-          itemid="https://denled.com/#organization">
+      <div class="f head1"  >
+        <div class="wrap flexJus" itemscope="" >
           <router-link to="/trang-chu-stores">
-            <a title="Siêu thị đèn LED" itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject">
-              <meta itemprop="url" content="/Content/img/logo.png" />
-              <img width="286" height="60" src="https://denled.com/Content/img/logo.png" alt="Siêu thị đèn LED" />
-            </a>
+              <img width="60" height="60" src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718287579/ftld80xpfribbbfhp1qu.png" alt="Siêu thị đèn LED" />
           </router-link>
-          <meta itemprop="url" content="https://denled.com" />
-          <meta itemprop="name" content="Siêu thị đèn LED" />
-          <meta itemprop="description" content="Siêu thị đèn LED chiếu sáng số 1 Việt Nam" />
-          <meta itemprop="disambiguatingDescription"
-            content="Chuyên phân phối các loại đèn LED chiếu sáng, trang trí chất lượng, chính hãng tại Hà Nội, Hồ Chí Minh. Đèn led âm trần, đèn ốp trần, đèn chùm, đèn tường" />
-          <meta itemprop="sameAs" content="https://www.facebook.com/thegioidenledhanoii" />
-          <meta itemprop="sameAs" content="https://g.page/Thegioidenledtranduyhung" />
-          <meta itemprop="sameAs" content="https://goo.gl/maps/cmk6SUJRmpn1UXKS6" />
-          <meta itemprop="sameAs" content="http://online.gov.vn/Home/WebDetails/85212" />
-          <link itemprop="additionalType" href="https://en.wikipedia.org/wiki/LED_lamp" />
-          <link itemprop="additionalType" href="https://vi.wikipedia.org/wiki/%C4%90%C3%A8n_LED" />
-          <link itemprop="additionalType" href="https://en.wikipedia.org/wiki/Lighting" />
-          <link itemprop="additionalType" href="https://en.wiktionary.org/wiki/store" />
-          <meta itemprop="vatID" content="0105770373" />
-          <meta itemprop="email" content="denledminhhai@gmail.com" />
-
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
-            <meta itemprop="name" content="trụ sở chính" />
-            <meta itemprop="streetAddress" content="21C Trần Duy Hưng, Cầu Giấy, HN" />
-            <meta itemprop="addressLocality" content="Cầu Giấy" />
-            <meta itemprop="addressRegion" content="Hà Nội" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
-              <meta itemprop="name" content="Việt Nam" />
-            </span>
-          </span>
-
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
-            <meta itemprop="name" content="SIÊU THỊ ĐÈN LED CẦU GIẤY" />
-            <meta itemprop="streetAddress" content="21C Trần Duy Hưng" />
-            <meta itemprop="addressLocality" content="Cầu Giấy" />
-            <meta itemprop="addressRegion" content="Hà Nội" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
-              <meta itemprop="name" content="Việt Nam" />
-            </span>
-          </span>
-
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
-            <meta itemprop="name" content="SIÊU THỊ ĐÈN LED ECOPARK" />
-            <meta itemprop="streetAddress" content="107 Thảo Nguyên" />
-            <meta itemprop="addressLocality" content="Ecopark" />
-            <meta itemprop="addressRegion" content="Hà Nội" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
-              <meta itemprop="name" content="Việt Nam" />
-            </span>
-          </span>
-
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
-            <meta itemprop="name" content="SIÊU THỊ ĐÈN LED QUẬN 2" />
-            <meta itemprop="streetAddress" content="148 Nguyễn Hoàng, P. AN Phú, Quận 2" />
-            <meta itemprop="addressLocality" content="Quận 2" />
-            <meta itemprop="addressRegion" content="Hà Nội" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
-              <meta itemprop="name" content="Việt Nam" />
-            </span>
-          </span>
-
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
-            <meta itemprop="name" content="SIÊU THỊ ĐÈN LED PHÚ QUỐC" />
-            <meta itemprop="streetAddress" content="245 Đường 30/4, Dương Đông, Phú Quốc" />
-            <meta itemprop="addressLocality" content="Phú Quốc" />
-            <meta itemprop="addressRegion" content="Kiên Giang" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
-              <meta itemprop="name" content="Việt Nam" />
-            </span>
-          </span>
-
-          <span itemprop="contactPoint" itemscope="" itemtype="https://schema.org/ContactPoint">
-            <meta itemprop="email" content="denledminhhai@gmail.com" />
-            <meta itemprop="telephone" content="+84973665115" />
-            <meta itemprop="areaServed" content="VN" />
-          </span>
-          <span itemprop="founder" itemscope="" itemtype="https://schema.org/Person" itemid="/#founder">
-            <meta itemprop="name" content="Chu Thanh Phong" />
-            <meta itemprop="jobTitle" content="Co-Founder &amp; CEO" />
-            <meta itemprop="alternateName" content="Chu Thanh Phong" />
-            <meta itemprop="gender" content="https://schema.org/Male" />
-            <meta itemprop="sameAs" content="https://www.facebook.com/ChuThanhPhong" />
-          </span>
 
           <div class="open">
             <label class="hl"><span>Hotline 1: <b>097366.5115</b></span><span>Hotline 2:
@@ -113,19 +29,27 @@
       
           <div class="flexJus">
             <router-link to="/trang-chu/gio-hang">
-              <div id="vcart">
-                <fieldset>
-                  <u>x</u>
-                  <figure>
-                    <p>Chưa có sản phẩm nào trong giỏ hàng !</p>
-                  </figure>
-                </fieldset>
+              <div class="vcart2">
+                <i class="fa-solid fa-store"></i>
               </div>
             </router-link>
+
+            <router-link to="/trang-chu/gio-hang">
+              <div class="vcart2">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+            </router-link>
+
+            <router-link to="/trang-chu/gio-hang">
+              <div class="vcart2">
+                <i class="fa-regular fa-rectangle-list"></i>
+              </div>
+            </router-link>
+
+
           </div>
         </div>
       </div>
-      <input type="hidden" id="LocaCode" value="hn" />
     </div>
 
     <div id="main">
@@ -133,13 +57,13 @@
         <div id="seo" class="f flexJus">
           <ul class="beadcrum" itemscope="" itemtype="https://schema.org/BreadcrumbList">
             <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-              <a itemprop="item" title="Siêu thị đèn LED" href="/"><span itemprop="name">{{ product.storeName ?
+              <a itemprop="item"  href="/"><span itemprop="name">{{ product.storeName ?
                 product.storeName.toUpperCase() : '' }}</span></a>
               <meta itemprop="position" content="1" />
             </li>
 
             <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-              <a itemprop="item" title="Đèn Led âm trần" href="/"><span itemprop="name">{{ product.productType
+              <a itemprop="item"  href="/"><span itemprop="name">{{ product.productType ? product.productType.toUpperCase() : '' 
                   }}</span></a>
               <meta itemprop="position" content="2" />
             </li>
@@ -153,12 +77,8 @@
             <div id="pLeft" class="rl">
               <div class="f box-zoom flexCen">
                 <div id="anhdd" class="f larimg">
-                  <img :src="product.avatarProduct" itemprop="image" alt="Đèn led âm trần 15W TD-1508 GX LIGHTING" />
+                  <img :src="product.avatarProduct" itemprop="image" />
                 </div>
-              </div>
-              <div class="f tht flexCen" id="listImg" style="margin-top: 30px">
-                <span class="ttback"></span>
-                <span class="ttnext"></span>
               </div>
             </div>
             <div class="w50 fr flexC" style="padding: 0 5%">
@@ -174,18 +94,6 @@
 
               <div class="f gtb">
                 <label>{{ product.view }} Lượt xem</label>
-                <ul class="tieuban">
-
-                  <!-- <li
-                    data-id="728"
-                    data-imgid="tb728"
-                    data-pricett="0₫"
-                    data-price="156.000₫"
-                    data-off="0"
-                  >
-                    Thêm yêu thích
-                  </li> -->
-                </ul>
               </div>
               <div class='edit-number'>
                 <p>Số lượng: </p>
@@ -217,60 +125,16 @@
               </div>
               <div @click="handelByNow()" class="action">
                 <span class="btn2 bcam btnorder"><b>MUA NGAY</b>
-                  <i>Mua càng nhiều giá càng rẻ</i>
+                  <i>Mua ngay để hưởng nhiều ưu đãi</i>
                 </span>
               </div>
               <ul class="bphone">
                 <li>Hotline 1(24/7)<b>097366.5115</b></li>
               </ul>
-
-              <div class="schema">
-                <div itemprop="offers" itemscope="" itemtype="http://schema.org/AggregateOffer">
-                  <i itemprop="highPrice">320000</i>
-                  <i itemprop="lowPrice">156000</i>
-                  <i itemprop="priceCurrency">156000</i>
-                  <i itemprop="availability">Còn hàng</i>
-                </div>
-              </div>
             </div>
           </div>
         </div>
     
-      </div>
-
-      <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="pswp__bg"></div>
-        <div class="pswp__scroll-wrap">
-          <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-          </div>
-          <div class="pswp__ui pswp__ui--hidden">
-            <div class="pswp__top-bar">
-              <div class="pswp__counter"></div>
-              <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-              <button class="pswp__button pswp__button--share" title="Share"></button>
-              <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-              <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-              <div class="pswp__preloader">
-                <div class="pswp__preloader__icn">
-                  <div class="pswp__preloader__cut">
-                    <div class="pswp__preloader__donut"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-              <div class="pswp__share-tooltip"></div>
-            </div>
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-            <div class="pswp__caption">
-              <div class="pswp__caption__center"></div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     
@@ -1588,13 +1452,12 @@ textarea {
   color: #888;
 }
 
-#vcart:before {
+.vcart2:before {
   font: 21px/1 FontAwesome;
-  content: "\f07a";
   padding-right: 2px;
 }
 
-#vcart {
+.vcart2 {
   color: #000;
   padding-left: 14px;
   cursor: pointer;
@@ -1602,121 +1465,11 @@ textarea {
   font-size: 18px;
 }
 
-#vcart b {
-  font: 18px/30px arial;
-}
 
-#vcart p {
-  padding: 20px 0;
-  display: block;
-  text-align: center;
-}
 
-#vcart {
-  position: relative;
-}
 
-#vcart fieldset {
-  position: absolute;
-  display: none;
-  width: 400px;
-  right: 0;
-  top: 41px;
-  border: 1px solid #ddd;
-  background: #fff;
-  padding: 10px;
-  color: #666;
-  font: 13px arial;
-  border-radius: 4px;
-  z-index: 2;
-}
 
-#vcart fieldset:after,
-#vcart p:before {
-  width: 0;
-  height: 0;
-  content: "";
-  position: absolute;
-  bottom: 100%;
-}
 
-#vcart fieldset:after {
-  border: 10px solid transparent;
-  border-bottom-color: #fff;
-  left: 361px;
-}
-
-#vcart fieldset:before {
-  border: 11px solid transparent;
-  border-bottom-color: #ddd;
-  left: 360px;
-}
-
-#vcart fieldset u {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 20px;
-  height: 20px;
-  background: #eee;
-  font: 11px/20px arial;
-  text-align: center;
-  border-radius: 4px;
-  display: block;
-}
-
-#vcart label {
-  display: block;
-  float: left;
-  width: 100%;
-  font: 15px/15px arial;
-  color: green;
-}
-
-#vcart ul {
-  float: left;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 15px 0;
-}
-
-#vcart li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2px 0;
-  cursor: pointer;
-}
-
-#vcart li img {
-  width: 50px;
-  margin-right: 10px;
-  padding: 2px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-}
-
-#vcart li div {
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-}
-
-#vcart li span {
-  margin-left: 40px;
-}
-
-#vcart i {
-  display: block;
-  font: bold 12px/35px arial;
-  color: #fff;
-  background: #be2020;
-  float: left;
-  width: 100%;
-  text-align: center;
-  border-radius: 4px;
-}
 
 /*end header*/
 #seo {

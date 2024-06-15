@@ -264,7 +264,7 @@ export default defineComponent({
     const getUsers = (args) => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/order/view?keyword=a`,{
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/order/view?size=50`,{
             headers: {
               Authorization: `Bearer ${token}`, // Thêm token vào headers
             },

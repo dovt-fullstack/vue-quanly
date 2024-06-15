@@ -84,6 +84,8 @@ export default defineComponent({
     const errors = ref({});
     const formRef = ref();
     const route = useRoute();
+    const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
+
     const id = route.params.id
     const formState = reactive({
       userName: '',
@@ -194,7 +196,9 @@ export default defineComponent({
 
       axios.post(`https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/product/insert`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+
         }
       })
         .then((response) => {

@@ -7,7 +7,7 @@
             Trang chủ
           </a-breadcrumb-item>
           <a-breadcrumb-item>
-            Hóa dơn
+            Hóa đơn
           </a-breadcrumb-item>
           <a-breadcrumb-item>Thêm mới</a-breadcrumb-item>
         </a-breadcrumb>
@@ -113,6 +113,12 @@ export default defineComponent({
       },
     };
     const resetForm = () => {
+      axios.post(`https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/producttype/view`, formData).then((response) => {
+        message.success("Tạo mới thành công!");
+        router.push({ name: "importExport", params: { id: id } });
+      }).catch((error) => {
+        console.log(error)
+      })
       formRef.value.resetFields();
     };
     //
@@ -134,6 +140,10 @@ export default defineComponent({
       formData.append("producttypename", formState.producttypename);
       // https://charismatic-friendship-production.up.railway.app/api/v1/management/1/import/insert
       // https://charismatic-friendship-production.up.railway.app/api/v1/management/1/import/insert
+      // https://charismatic-friendship-production.up.railway.app/api/v1/management/{storeid}/producttype/view
+
+
+
       axios.post(`https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/import/insert`, formData).then((response) => {
         message.success("Tạo mới thành công!");
         router.push({ name: "importExport", params: { id: id } });

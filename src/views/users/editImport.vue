@@ -164,7 +164,7 @@ export default defineComponent({
       formData.append("price", formState.value.price);
       axios
         .put(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/1/import/edit/${id}`,
+          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${s_id}/import/edit/${id}`,
           formData,
           {
             headers: {

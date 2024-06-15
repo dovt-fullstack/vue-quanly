@@ -640,7 +640,7 @@
               >
                 <div class="oimg">
                   <a>
-                    <img :src="product.avatar" :alt="product.title" />
+                    <img :src="product.image" :alt="product.title" />
                   </a>
                 </div>
                 <div class="oname">

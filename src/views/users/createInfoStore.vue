@@ -98,6 +98,8 @@ export default defineComponent({
     useMenu().onSelectedKeys(["admin-users"]);
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
     const router = useRouter();
+    const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
+
     const users = reactive({
       optionsLevelManage: [],
       optionsRole: [],
@@ -214,6 +216,8 @@ export default defineComponent({
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+
             },
           }
         )
