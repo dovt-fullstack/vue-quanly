@@ -583,7 +583,7 @@
                   >
                     <button
                       type="button"
-                      @click="cancelOder(product.orderDetailId)"
+                      @click="cancelOder(order.orderDetailId)"
                       class="btn"
                     >
                       Hủy đơn
@@ -707,6 +707,7 @@ export default defineComponent({
   },
   setup() {
     const route = useRoute();
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const productId = route.params.id;
     const product = ref([]);
     const myFarve = ref([]);
@@ -740,7 +741,7 @@ export default defineComponent({
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/view`,
+           `${apiPrefix}/api/v1/customer/cartitem/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -763,7 +764,7 @@ export default defineComponent({
     };
     const getMyfavorite = async () => {
       const response = await axios.get(
-        "https://charismatic-friendship-production.up.railway.app/api/v1/customer/favor/view",
+        `${apiPrefix}/api/v1/customer/favor/view`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -775,8 +776,7 @@ export default defineComponent({
     const cancelOder = async (id) => {
       try {
         await axios.get(
-          "https://charismatic-friendship-production.up.railway.app/api/v1/customer/order/delete/" +
-            id,
+          `${apiPrefix}/api/v1/customer/order/delete/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -797,7 +797,7 @@ export default defineComponent({
       try {
         await axios({
           method: "delete",
-          url: "https://charismatic-friendship-production.up.railway.app/api/v1/customer/favor/remove",
+          url: `${apiPrefix}/api/v1/customer/favor/remove`,
           data: formData,
           headers: {
             Authorization: `Bearer ${token}`,
@@ -815,7 +815,7 @@ export default defineComponent({
     const fetchMyOrder = async () => {
       try {
         const response = await axios.get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/customer/orderdetail/view`,
+           `${apiPrefix}/api/v1/customer/orderdetail/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -835,7 +835,7 @@ export default defineComponent({
       formData.append("cartitemid", idCart);
 
       await axios.post(
-        `https://charismatic-friendship-production.up.railway.app/api/v1/customer/order/insert/cartitem`,
+         `${apiPrefix}/api/v1/customer/order/insert/cartitem`,
         formData,
         {
           headers: {
@@ -851,7 +851,7 @@ export default defineComponent({
       const formData = new FormData();
       try {
         const response = await axios.get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/delete?cartitemid=${id}`,
+           `${apiPrefix}/api/v1/customer/cartitem/delete?cartitemid=${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -870,7 +870,7 @@ export default defineComponent({
           const formData = new FormData();
           formData.append("cartitemid", pr.cartItemId);
           const response = await axios.get(
-            `https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/delete?cartitemid=${pr.cartItemId}`,
+             `${apiPrefix}/api/v1/customer/cartitem/delete?cartitemid=${pr.cartItemId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -884,7 +884,7 @@ export default defineComponent({
           formData.append("cartitemid", pr.cartItemId);
           console.log(newQuantity);
           const response = await axios.put(
-            `https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/update`,
+             `${apiPrefix}/api/v1/customer/cartitem/update`,
             formData,
             {
               headers: {
@@ -907,7 +907,7 @@ export default defineComponent({
         formData.append("cartitemid", pr.cartItemId);
         console.log(newQuantity);
         const response = await axios.put(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/update`,
+           `${apiPrefix}/api/v1/customer/cartitem/update`,
           formData,
           {
             headers: {

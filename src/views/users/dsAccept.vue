@@ -88,6 +88,7 @@ export default defineComponent({
     setup() {
         useMenu().onSelectedKeys(["admin-users"]);
         const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+        const apiPrefix = import.meta.env.VITE_API_PREFIX;
         const router = useRouter();
         const route = useRoute();
         const errors = ref([]);
@@ -114,7 +115,7 @@ export default defineComponent({
         };
         const getIdDh = async (idI) => {
             showDrawer()
-            const { data } = await axios.get(`https://charismatic-friendship-production.up.railway.app/api/v1/shipper/orderdetail?orderid=${idI}`, {
+            const { data } = await axios.get( `${apiPrefix}/api/v1/shipper/orderdetail?orderid=${idI}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -170,7 +171,7 @@ export default defineComponent({
         const getUsers = (args) => {
             axios
                 .get(
-                    "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/orderlist/taken",
+                    `${apiPrefix}/api/v1/shipper/orderlist/taken`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -250,8 +251,7 @@ export default defineComponent({
         const giveOrder = async (orderId) => {
             try {
                 const data = await axios.get(
-                    "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/changestatus1/" +
-                    orderId,
+                    `${apiPrefix}/api/v1/shipper/changestatus1/${orderId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -266,8 +266,7 @@ export default defineComponent({
         const doneOrder = async (orderId) => {
             try {
                 const data = await axios.get(
-                    "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/changestatus2/" +
-                    orderId,
+                    `${apiPrefix}/api/v1/shipper/changestatus2/${orderId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

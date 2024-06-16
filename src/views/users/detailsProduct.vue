@@ -33,12 +33,13 @@
     name: 'ProductDetail',
     setup() {
       const product = ref({});
+      const apiPrefix = import.meta.env.VITE_API_PREFIX;
       const route = useRoute();
       const productId = route.params.id;
   
       const fetchProduct = async () => {
         try {
-          const response = await axios.get(` https://charismatic-friendship-production.up.railway.app/api/v1/product/info/${productId}`);
+          const response = await axios.get(`${apiPrefix}/api/v1/product/info/${productId}`);
           if (response.data.status === 'OK') {
             product.value = response.data.data;
           } else {

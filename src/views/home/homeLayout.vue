@@ -391,7 +391,7 @@ export default defineComponent({
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
     const userLocal = JSON.parse(localStorage.getItem("auth"));
-
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
     const router = useRouter();
     const route = useRoute();
@@ -404,7 +404,7 @@ export default defineComponent({
     const getUsers = () => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/customer/store/view/${storeId}`,
+           `${apiPrefix}/api/v1/customer/store/view/${storeId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -423,7 +423,7 @@ export default defineComponent({
       formData.append("storeid", storeId);
       try {
         await axios.post(
-          "https://charismatic-friendship-production.up.railway.app/api/v1/customer/favor/add",
+          `${apiPrefix}/api/v1/customer/favor/add`,
           formData,
           {
             headers: {
@@ -439,7 +439,7 @@ export default defineComponent({
     const getTypeStore = () => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${storeId}/info/view`,
+           `${apiPrefix}/api/v1/management/${storeId}/info/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -295,12 +295,13 @@ import axios from "axios";
 
 export default defineComponent({
   setup() {
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
+    console.log(apiPrefix)
     const authStore = useAuthStore();
     const formState = reactive({
       username: "",
       password: "",
     });
-
     const onFinish = (values) => {
       const { username, password } = values;
       const newValue = {
@@ -309,7 +310,7 @@ export default defineComponent({
       };
       axios
         .post(
-          "https://charismatic-friendship-production.up.railway.app/api/v1/auth/authenticate",
+          `${apiPrefix}/api/v1/auth/authenticate`,
           newValue
         )
         .then((res) => {

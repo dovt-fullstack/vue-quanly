@@ -75,6 +75,7 @@ export default defineComponent({
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const router = useRouter();
     const users = reactive({
       optionsLevelManage: [],
@@ -194,7 +195,7 @@ export default defineComponent({
       formData.append('producttypename', formState.producttypename);
       formData.append('price', formState.price);
 
-      axios.post(`https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/product/insert`, formData, {
+      axios.post( `${apiPrefix}/api/v1/management/${id}/product/insert`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,

@@ -205,6 +205,7 @@ export default defineComponent({
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const router = useRouter();
     const route = useRoute();
     const isDrawerVisible = ref(false);
@@ -264,7 +265,7 @@ export default defineComponent({
     const getUsers = (args) => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/order/view?size=50`,{
+           `${apiPrefix}/api/v1/management/${id}/order/view?size=50`,{
             headers: {
               Authorization: `Bearer ${token}`, // Thêm token vào headers
             },
@@ -304,7 +305,7 @@ export default defineComponent({
     };
     const fetchIdOrder = async (idOrder) => {
       const { data } = await axios.get(
-        `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/orderdetail/view/${idOrder}`,
+         `${apiPrefix}/api/v1/management/${id}/orderdetail/view/${idOrder}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -336,8 +337,8 @@ export default defineComponent({
     const giveOrder = async (orderId) => {
       try {
         const data = await axios.get(
-          "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/changestatus1/" +
-            orderId,
+          `${apiPrefix}/api/v1/shipper/changestatus1/${orderId}`,
+
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -352,8 +353,7 @@ export default defineComponent({
     const doneOrder = async (orderId) => {
       try {
         const data = await axios.get(
-          "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/changestatus2/" +
-            orderId,
+          `${apiPrefix}/api/v1/shipper/changestatus2/${orderId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

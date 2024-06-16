@@ -56,6 +56,7 @@ export default defineComponent({
     setup() {
         useMenu().onSelectedKeys(["admin-logs"]);
         const route = useRoute();
+        const apiPrefix = import.meta.env.VITE_API_PREFIX;
         const viewData = reactive({
             optionsLogType: [],
         });

@@ -14,7 +14,8 @@
   import { defineComponent, ref } from "vue";
   import axios from "axios";
   const token = JSON.parse(localStorage.getItem("token"));
-  
+  const apiPrefix = import.meta.env.VITE_API_PREFIX;
+
   export default defineComponent({
 
     data() {
@@ -25,7 +26,7 @@
     async created() {
       try {
         const response = await axios.get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/1/info/view`,
+           `${apiPrefix}/api/v1/management/1/info/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

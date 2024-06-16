@@ -262,6 +262,7 @@ export default defineComponent({
     useMenu().onSelectedKeys(["admin-users"]);
     const userLocal = JSON.parse(localStorage.getItem("auth"));
     const token = JSON.parse(localStorage.getItem("token"));
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     console.log(token);
 
     const router = useRouter();
@@ -274,7 +275,7 @@ export default defineComponent({
     const getAllStores = () => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/admin/store/view`,
+           `${apiPrefix}/api/v1/admin/store/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Thêm token vào headers
@@ -293,7 +294,7 @@ export default defineComponent({
     const getUsers = () => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/customer/favor/view`,
+           `${apiPrefix}/api/v1/customer/favor/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Thêm token vào headers
