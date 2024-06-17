@@ -1,15 +1,22 @@
 <template>
   <div id="wrapper">
     <div id="header">
-      <div class="f head1"  >
-        <div class="wrap flexJus" itemscope="" >
+      <div class="f head1">
+        <div class="wrap flexJus" itemscope="">
           <router-link to="/trang-chu-stores">
-              <img width="60" height="60" src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718287579/ftld80xpfribbbfhp1qu.png" alt="Siêu thị đèn LED" />
+            <img
+              width="60"
+              height="60"
+              src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718287579/ftld80xpfribbbfhp1qu.png"
+              alt="Siêu thị đèn LED"
+            />
           </router-link>
 
           <div class="open">
-            <label class="hl"><span>Hotline 1: <b>097366.5115</b></span><span>Hotline 2:
-                <b>097366.5115</b></span></label>
+            <label class="hl"
+              ><span>Hotline 1: <b>097366.5115</b></span
+              ><span>Hotline 2: <b>097366.5115</b></span></label
+            >
             <label style="cursor: pointer" class="oh">
               <router-link v-if="!userLocal" to="/login">
                 <span> Đăng nhập </span>
@@ -24,11 +31,11 @@
       <div class="f head2">
         <div class="wrap flexJus">
           <div>
-            <span style="font: bold 15px arial;">Hãy cùng mua sắm nào!</span>
+            <span style="font: bold 15px arial">Hãy cùng mua sắm nào!</span>
           </div>
-      
+
           <div class="flexJus">
-            <router-link to="/trang-chu/gio-hang">
+            <router-link to="/frivStore">
               <div class="vcart2">
                 <i class="fa-solid fa-store"></i>
               </div>
@@ -40,13 +47,11 @@
               </div>
             </router-link>
 
-            <router-link to="/trang-chu/gio-hang">
+            <router-link to="/ordered">
               <div class="vcart2">
                 <i class="fa-regular fa-rectangle-list"></i>
               </div>
             </router-link>
-
-
           </div>
         </div>
       </div>
@@ -55,16 +60,34 @@
     <div id="main">
       <div class="wrap">
         <div id="seo" class="f flexJus">
-          <ul class="beadcrum" itemscope="" itemtype="https://schema.org/BreadcrumbList">
-            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-              <a itemprop="item"  href="/"><span itemprop="name">{{ product.storeName ?
-                product.storeName.toUpperCase() : '' }}</span></a>
+          <ul
+            class="beadcrum"
+            itemscope=""
+            itemtype="https://schema.org/BreadcrumbList"
+          >
+            <li
+              itemprop="itemListElement"
+              itemscope=""
+              itemtype="https://schema.org/ListItem"
+            >
+              <a itemprop="item" href="/"
+                ><span itemprop="name">{{
+                  product.storeName ? product.storeName.toUpperCase() : ""
+                }}</span></a
+              >
               <meta itemprop="position" content="1" />
             </li>
 
-            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-              <a itemprop="item"  href="/"><span itemprop="name">{{ product.productType ? product.productType.toUpperCase() : '' 
-                  }}</span></a>
+            <li
+              itemprop="itemListElement"
+              itemscope=""
+              itemtype="https://schema.org/ListItem"
+            >
+              <a itemprop="item" href="/"
+                ><span itemprop="name">{{
+                  product.productType ? product.productType.toUpperCase() : ""
+                }}</span></a
+              >
               <meta itemprop="position" content="2" />
             </li>
           </ul>
@@ -86,7 +109,12 @@
               <span class="priced">
                 <u>{{ product.price?.toLocaleString() }}₫</u>
                 <b v-if="product.discount && product.discount !== 0">
-                  {{ (product.price * (100 - product.discount) / 100)?.toLocaleString() }}₫
+                  {{
+                    (
+                      (product.price * (100 - product.discount)) /
+                      100
+                    )?.toLocaleString()
+                  }}₫
                 </b>
               </span>
 
@@ -95,11 +123,16 @@
               <div class="f gtb">
                 <label>{{ product.view }} Lượt xem</label>
               </div>
-              <div class='edit-number'>
-                <p>Số lượng: </p>
-                <input id="numberItem" type="number" class="input" v-model="numberItem" :min="1" style="  padding: 5px 8px;
-  border-radius: 5px;
-  width: 70x;" />
+              <div class="edit-number">
+                <p>Số lượng:</p>
+                <input
+                  id="numberItem"
+                  type="number"
+                  class="input"
+                  v-model="numberItem"
+                  :min="1"
+                  style="padding: 5px 8px; border-radius: 5px; width: 70x"
+                />
               </div>
               <!--het tieu ban-->
 
@@ -110,7 +143,9 @@
 
                   <li class="ron">Số lượng : {{ product.quantity }}</li>
 
-                  <li class="ron">Mô tả sản phẩm : {{ product.description }}</li>
+                  <li class="ron">
+                    Mô tả sản phẩm : {{ product.description }}
+                  </li>
 
                   <li class="ron">Đổi sản phẩm lỗi trong vòng 30 ngày</li>
 
@@ -119,12 +154,14 @@
               </div>
 
               <div @click="handelAddCart()" class="action">
-                <span class="btn2 bcam btnorder"><b>THÊM VÀO GIỎ HÀNG</b>
+                <span class="btn2 bcam btnorder"
+                  ><b>THÊM VÀO GIỎ HÀNG</b>
                   <i> </i>
                 </span>
               </div>
               <div @click="handelByNow()" class="action">
-                <span class="btn2 bcam btnorder"><b>MUA NGAY</b>
+                <span class="btn2 bcam btnorder"
+                  ><b>MUA NGAY</b>
                   <i>Mua ngay để hưởng nhiều ưu đãi</i>
                 </span>
               </div>
@@ -134,10 +171,9 @@
             </div>
           </div>
         </div>
-    
       </div>
     </div>
-    
+
     <div id="footer">
       <div class="f" style="padding: 40px 0">
         <div class="wrap flexJus">
@@ -149,8 +185,6 @@
                 width="286"
                 height="60"
               />
-              
-
             </div>
             <div class="fotb" style="width: 50%; padding: 0 40px 0 60px">
               <label>SHOWROOM</label>
@@ -163,7 +197,7 @@
                     </li>
                     <li>
                       <span>Hotline : </span
-                      ><a href="tel:0933665115">0933.66.5115</a> 
+                      ><a href="tel:0933665115">0933.66.5115</a>
                     </li>
                   </ul>
                 </div>
@@ -173,37 +207,25 @@
               <label>THÔNG TIN - HƯỚNG DẪN</label>
               <ul>
                 <li>
-                  <a
-                    title="Giới Thiệu Hệ Thống"
-                    rel="nofollow"
-                    href="/"
+                  <a title="Giới Thiệu Hệ Thống" rel="nofollow" href="/"
                     >Giới Thiệu Hệ Thống</a
                   >
                 </li>
 
                 <li>
-                  <a
-                    title="Giao hàng &amp; Thanh toán"
-                    rel="nofollow"
-                    href="/"
+                  <a title="Giao hàng &amp; Thanh toán" rel="nofollow" href="/"
                     >Giao hàng &amp; Thanh toán</a
                   >
                 </li>
 
                 <li>
-                  <a
-                    title="Hướng dẫn mua hàng Online"
-                    rel="nofollow"
-                    href="/"
+                  <a title="Hướng dẫn mua hàng Online" rel="nofollow" href="/"
                     >Hướng dẫn mua hàng Online</a
                   >
                 </li>
 
                 <li>
-                  <a
-                    title="Quy chế hoạt động"
-                    rel="nofollow"
-                    href="/"
+                  <a title="Quy chế hoạt động" rel="nofollow" href="/"
                     >Quy chế hoạt động</a
                   >
                 </li>
@@ -219,19 +241,40 @@
 
       <ul id="panel">
         <li>
-          <img src="https://denled.com/Content/img/totop.svg" alt="To top" width="45" height="45" />
+          <img
+            src="https://denled.com/Content/img/totop.svg"
+            alt="To top"
+            width="45"
+            height="45"
+          />
         </li>
         <li style="padding-top: 10px; padding-bottom: 10px">
-          <img alt="Messenger" src="https://denled.com/Content/img/messenger.svg" width="45" height="45" />
+          <img
+            alt="Messenger"
+            src="https://denled.com/Content/img/messenger.svg"
+            width="45"
+            height="45"
+          />
         </li>
 
         <li>
-          <img alt="Phone" src="https://denled.com/Content/img/phone.svg" width="45" height="45" />
+          <img
+            alt="Phone"
+            src="https://denled.com/Content/img/phone.svg"
+            width="45"
+            height="45"
+          />
         </li>
       </ul>
-      <div class="zalo-chat-widget" data-oaid="2839194858446814357"
+      <div
+        class="zalo-chat-widget"
+        data-oaid="2839194858446814357"
         data-welcome-message="Rất vui khi được hỗ trợ bạn!. Nếu bạn không thể chờ thì hãy gọi hoặc nhắn tin đến số điện thoại này 0973.66.5115."
-        data-autopopup="1800" data-width="500" data-height="500" style="right: 12px"></div>
+        data-autopopup="1800"
+        data-width="500"
+        data-height="500"
+        style="right: 12px"
+      ></div>
     </div>
   </div>
 </template>
@@ -286,7 +329,6 @@ export default defineComponent({
     };
     const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
     const handelAddCart = () => {
-
       const newData = Number(numberItem.value);
       if (newData < 1) {
         alert("Số lượng tối thiểu là 1");
@@ -297,7 +339,6 @@ export default defineComponent({
       }
     };
     const handelByNow = async () => {
-
       const newData = Number(numberItem.value);
       if (newData < 1) {
         alert("Số lượng tối thiểu là 1");
@@ -308,17 +349,15 @@ export default defineComponent({
         formData.append("productid", productId);
         formData.append("quantity", newData);
         axios
-          .post(
-             `${apiPrefix}/api/v1/customer/order/insert`,
-            formData,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          )
+          .post(`${apiPrefix}/api/v1/customer/order/insert`, formData, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
           .then((response) => {
-            message.success("Đặt hàng thành công, hãy xem trạng thái đơn hàng của bạn");
+            message.success(
+              "Đặt hàng thành công, hãy xem trạng thái đơn hàng của bạn"
+            );
           })
           .catch((error) => {
             console.log(error);
@@ -331,15 +370,11 @@ export default defineComponent({
       formData.append("productid", productId);
       formData.append("quantity", q);
       axios
-        .post(
-           `${apiPrefix}/api/v1/customer/cartitem/insert`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .post(`${apiPrefix}/api/v1/customer/cartitem/insert`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           message.success("Thêm vào giỏ hàng thành công");
         })
@@ -377,11 +412,13 @@ export default defineComponent({
 @font-face {
   font-family: "FontAwesome";
   src: url("/Content/awesome/fontawesome-webfont.eot?v=4.4.0");
-  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0") format("embedded-opentype"),
+  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0")
+      format("embedded-opentype"),
     url("/Content/awesome/fontawesome-webfont.woff2?v=4.4.0") format("woff2"),
     url("/Content/awesome/fontawesome-webfont.woff?v=4.4.0") format("woff"),
     url("/Content/awesome/fontawesome-webfont.ttf?v=4.4.0") format("truetype"),
-    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular") format("svg");
+    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular")
+      format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -1145,7 +1182,6 @@ a:focus {
 }
 
 @media screen and (max-width: 415px) {
-
   .tiplist h2,
   .tiplist h3,
   .tiplist h4 {
@@ -1465,12 +1501,6 @@ textarea {
   font-size: 18px;
 }
 
-
-
-
-
-
-
 /*end header*/
 #seo {
   margin: 10px 0;
@@ -1494,7 +1524,8 @@ textarea {
 }
 
 /*beadcrum*/
-.beadcrum {}
+.beadcrum {
+}
 
 .beadcrum li {
   display: inline-block;
@@ -1597,7 +1628,8 @@ textarea {
   width: 40%;
 }
 
-.prol img {}
+.prol img {
+}
 
 .propertyhead label {
   font: bold 18px/60px arial;
@@ -1695,7 +1727,7 @@ textarea {
   border-radius: 5px;
 }
 
-.othpro li:hover>div {
+.othpro li:hover > div {
   display: block;
 }
 
@@ -1812,7 +1844,7 @@ textarea {
   margin: 2px;
 }
 
-.box-zoom:hover>.zoom {
+.box-zoom:hover > .zoom {
   display: block;
 }
 
@@ -1986,7 +2018,8 @@ textarea {
   margin-top: 10px;
 }
 
-.gift li {}
+.gift li {
+}
 
 .gift li:before {
   content: "\f111";
@@ -2180,7 +2213,7 @@ table tr td:nth-child(2n) {
   font-weight: bold;
 }
 
-table tbody>tr:nth-child(2n + 1)>td {
+table tbody > tr:nth-child(2n + 1) > td {
   background: #f9f9f9;
 }
 
@@ -2530,7 +2563,8 @@ table tbody>tr:nth-child(2n + 1)>td {
   padding-bottom: 5px;
 }
 
-.tieuban {}
+.tieuban {
+}
 
 .tieuban li {
   border: 1px solid #ddd;
@@ -3062,10 +3096,9 @@ table tbody>tr:nth-child(2n + 1)>td {
 }
 
 @media (-webkit-min-device-pixel-ratio: 1.1),
-(-webkit-min-device-pixel-ratio: 1.09375),
-(min-resolution: 105dpi),
-(min-resolution: 1.1dppx) {
-
+  (-webkit-min-device-pixel-ratio: 1.09375),
+  (min-resolution: 105dpi),
+  (min-resolution: 1.1dppx) {
   .pswp--svg .pswp__button,
   .pswp--svg .pswp__button--arrow--left:before,
   .pswp--svg .pswp__button--arrow--right:before {
@@ -3676,7 +3709,6 @@ a.pswp__share--download:hover {
   cursor: pointer;
   background-color: lightgray;
   width: 35px;
-
 }
 
 .decrease {
@@ -3685,7 +3717,6 @@ a.pswp__share--download:hover {
   cursor: pointer;
   background-color: lightgray;
   width: 35px;
-
 }
 
 .input {
@@ -3699,6 +3730,5 @@ a.pswp__share--download:hover {
 
 .edit-number {
   display: flex;
-
 }
 </style>

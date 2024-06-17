@@ -308,6 +308,18 @@ const adminRoutes = [
     component: () => import("../views/home/DetailsProductHome.vue"),
   },
   {
+    path: "/frivStore",
+    name: "frivStore",
+    meta: { title: "frivStore" },
+    component: () => import("../views/home/frivStore.vue"),
+  },
+  {
+    path: "/ordered",
+    name: "ordered",
+    meta: { title: "ordered" },
+    component: () => import("../views/home/Ordered.vue"),
+  },
+  {
     path: "/trang-chu/gio-hang",
     name: "trang-chu-gio-hang",
     meta: { title: "Giỏ hàng" },

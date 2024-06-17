@@ -220,8 +220,7 @@
           </div>
           <div class="open">
             <label class="hl"
-              ><span>Hotline: <b>097366.5115</b></span
-              ></label
+              ><span>Hotline: <b>097366.5115</b></span></label
             >
             <label style="cursor: pointer" class="oh">
               <router-link v-if="!userLocal" to="/login">
@@ -237,19 +236,26 @@
       <div class="f head2">
         <div class="wrap flexJus">
           <div>
-            <span style="font: bold 15px arial;">Hãy cùng mua sắm nào!</span>
+            <span style="font: bold 15px arial">Hãy cùng mua sắm nào!</span>
           </div>
 
           <ul class="nav"></ul>
           <div class="flexJus">
+            <router-link to="/frivStore">
+              <div class="vcart2">
+                <i class="fa-solid fa-store"></i>
+              </div>
+            </router-link>
+
             <router-link to="/trang-chu/gio-hang">
-              <div id="vcart">
-                <fieldset>
-                  <u>x</u>
-                  <figure>
-                    <p>Chưa có sản phẩm nào trong giỏ hàng !</p>
-                  </figure>
-                </fieldset>
+              <div class="vcart2">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+            </router-link>
+
+            <router-link to="/ordered">
+              <div class="vcart2">
+                <i class="fa-regular fa-rectangle-list"></i>
               </div>
             </router-link>
           </div>
@@ -263,7 +269,7 @@
 
       <div class="orderbox">
         <div class="dieuhuong">
-          <a >Giỏ hàng của bạn</a>
+          <a>Giỏ hàng của bạn</a>
         </div>
 
         <div class="giohang orderhome">
@@ -284,16 +290,13 @@
                 </div>
                 <div class="oname">
                   <h3>{{ product.productName }}</h3>
-                  
+
                   <label>{{ product.priceTotal?.toLocaleString() }}₫</label>
                   <h6>Cửa hàng: {{ product.storeName }}</h6>
-                  <span class="bynow"
+                  <span
+                    class="bynow"
                     @click="byProductCart(product.cartItemId)"
-                    style="
-                      float: right;
-                      padding-top: 10px;
-                      cursor: 'pointer';
-                    "
+                    style="float: right; padding-top: 10px; cursor: 'pointer'"
                     >Mua ngay</span
                   >
 
@@ -409,7 +412,7 @@
               <input type="hidden" name="_w_action" value="OrderPOST" />
             </div>
           </form> -->
-          <div class="fpanel">
+          <!-- <div class="fpanel">
             <div class="da">
               <p @click="showDrawer" class="od" id="gui">Xem các đơn đã đặt</p>
             </div>
@@ -422,7 +425,7 @@
               style="display: none"
             />
             <input type="hidden" name="_w_action" value="OrderPOST" />
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -437,8 +440,6 @@
                 width="286"
                 height="60"
               />
-              
-
             </div>
             <div class="fotb" style="width: 50%; padding: 0 40px 0 60px">
               <label>SHOWROOM</label>
@@ -451,7 +452,7 @@
                     </li>
                     <li>
                       <span>Hotline : </span
-                      ><a href="tel:0933665115">0933.66.5115</a> 
+                      ><a href="tel:0933665115">0933.66.5115</a>
                     </li>
                   </ul>
                 </div>
@@ -461,37 +462,25 @@
               <label>THÔNG TIN - HƯỚNG DẪN</label>
               <ul>
                 <li>
-                  <a
-                    title="Giới Thiệu Hệ Thống"
-                    rel="nofollow"
-                    href="/"
+                  <a title="Giới Thiệu Hệ Thống" rel="nofollow" href="/"
                     >Giới Thiệu Hệ Thống</a
                   >
                 </li>
 
                 <li>
-                  <a
-                    title="Giao hàng &amp; Thanh toán"
-                    rel="nofollow"
-                    href="/"
+                  <a title="Giao hàng &amp; Thanh toán" rel="nofollow" href="/"
                     >Giao hàng &amp; Thanh toán</a
                   >
                 </li>
 
                 <li>
-                  <a
-                    title="Hướng dẫn mua hàng Online"
-                    rel="nofollow"
-                    href="/"
+                  <a title="Hướng dẫn mua hàng Online" rel="nofollow" href="/"
                     >Hướng dẫn mua hàng Online</a
                   >
                 </li>
 
                 <li>
-                  <a
-                    title="Quy chế hoạt động"
-                    rel="nofollow"
-                    href="/"
+                  <a title="Quy chế hoạt động" rel="nofollow" href="/"
                     >Quy chế hoạt động</a
                   >
                 </li>
@@ -741,7 +730,7 @@ export default defineComponent({
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-           `${apiPrefix}/api/v1/customer/cartitem/view`,
+          `${apiPrefix}/api/v1/customer/cartitem/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -775,14 +764,11 @@ export default defineComponent({
     };
     const cancelOder = async (id) => {
       try {
-        await axios.get(
-          `${apiPrefix}/api/v1/customer/order/delete/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        await axios.get(`${apiPrefix}/api/v1/customer/order/delete/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         message.success("Hủy thành công");
         setTimeout(() => {
           window.location.reload();
@@ -815,7 +801,7 @@ export default defineComponent({
     const fetchMyOrder = async () => {
       try {
         const response = await axios.get(
-           `${apiPrefix}/api/v1/customer/orderdetail/view`,
+          `${apiPrefix}/api/v1/customer/orderdetail/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -835,7 +821,7 @@ export default defineComponent({
       formData.append("cartitemid", idCart);
 
       await axios.post(
-         `${apiPrefix}/api/v1/customer/order/insert/cartitem`,
+        `${apiPrefix}/api/v1/customer/order/insert/cartitem`,
         formData,
         {
           headers: {
@@ -851,7 +837,7 @@ export default defineComponent({
       const formData = new FormData();
       try {
         const response = await axios.get(
-           `${apiPrefix}/api/v1/customer/cartitem/delete?cartitemid=${id}`,
+          `${apiPrefix}/api/v1/customer/cartitem/delete?cartitemid=${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -870,7 +856,7 @@ export default defineComponent({
           const formData = new FormData();
           formData.append("cartitemid", pr.cartItemId);
           const response = await axios.get(
-             `${apiPrefix}/api/v1/customer/cartitem/delete?cartitemid=${pr.cartItemId}`,
+            `${apiPrefix}/api/v1/customer/cartitem/delete?cartitemid=${pr.cartItemId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -884,7 +870,7 @@ export default defineComponent({
           formData.append("cartitemid", pr.cartItemId);
           console.log(newQuantity);
           const response = await axios.put(
-             `${apiPrefix}/api/v1/customer/cartitem/update`,
+            `${apiPrefix}/api/v1/customer/cartitem/update`,
             formData,
             {
               headers: {
@@ -907,7 +893,7 @@ export default defineComponent({
         formData.append("cartitemid", pr.cartItemId);
         console.log(newQuantity);
         const response = await axios.put(
-           `${apiPrefix}/api/v1/customer/cartitem/update`,
+          `${apiPrefix}/api/v1/customer/cartitem/update`,
           formData,
           {
             headers: {
@@ -1683,7 +1669,18 @@ a:focus {
   flex: 0 0 100px;
   display: inline-block;
 }
+.vcart2:before {
+  font: 21px/1 FontAwesome;
+  padding-right: 2px;
+}
 
+.vcart2 {
+  color: #000;
+  padding-left: 14px;
+  cursor: pointer;
+  position: relative;
+  font-size: 18px;
+}
 /*list*/
 .tiplist {
   display: table;
@@ -2291,7 +2288,11 @@ textarea {
 }
 
 .bynow:hover {
-  background: -webkit-linear-gradient(top, #fb7d0f, #ffa103); /* Thay đổi màu khi trỏ chuột vào */
+  background: -webkit-linear-gradient(
+    top,
+    #fb7d0f,
+    #ffa103
+  ); /* Thay đổi màu khi trỏ chuột vào */
 }
 
 .od span {

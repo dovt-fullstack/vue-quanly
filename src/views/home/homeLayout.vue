@@ -1,96 +1,203 @@
 <template>
   <div id="wrapper">
     <div id="header">
-      <div class="f head1" itemscope="" itemtype="http://schema.org/WebSite" itemid="https://denled.com/#website">
+      <div
+        class="f head1"
+        itemscope=""
+        itemtype="http://schema.org/WebSite"
+        itemid="https://denled.com/#website"
+      >
         <meta itemprop="url" content="https://denled.com" />
         <meta itemprop="name" content="Siêu thị đèn LED" />
-        <div class="wrap flexJus" itemscope="" itemtype="https://schema.org/Organization"
-          itemid="https://denled.com/#organization">
+        <div
+          class="wrap flexJus"
+          itemscope=""
+          itemtype="https://schema.org/Organization"
+          itemid="https://denled.com/#organization"
+        >
           <router-link to="/trang-chu-stores">
-            <a title="Siêu thị đèn LED" itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject">
+            <a
+              title="Siêu thị đèn LED"
+              itemprop="logo"
+              itemscope=""
+              itemtype="http://schema.org/ImageObject"
+            >
               <meta itemprop="url" content="/Content/img/logo.png" />
-              <img width="60" height="60"
+              <img
+                width="60"
+                height="60"
                 src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718287579/ftld80xpfribbbfhp1qu.png"
-                alt="Siêu thị đèn LED" />
+                alt="Siêu thị đèn LED"
+              />
             </a>
           </router-link>
           <meta itemprop="url" content="https://denled.com" />
           <meta itemprop="name" content="Siêu thị đèn LED" />
-          <meta itemprop="description" content="Siêu thị đèn LED chiếu sáng số 1 Việt Nam" />
-          <meta itemprop="disambiguatingDescription"
-            content="Chuyên phân phối các loại đèn LED chiếu sáng, trang trí chất lượng, chính hãng tại Hà Nội, Hồ Chí Minh. Đèn led âm trần, đèn ốp trần, đèn chùm, đèn tường" />
-          <meta itemprop="sameAs" content="https://www.facebook.com/thegioidenledhanoii" />
-          <meta itemprop="sameAs" content="https://g.page/Thegioidenledtranduyhung" />
-          <meta itemprop="sameAs" content="https://goo.gl/maps/cmk6SUJRmpn1UXKS6" />
-          <meta itemprop="sameAs" content="http://online.gov.vn/Home/WebDetails/85212" />
-          <link itemprop="additionalType" href="https://en.wikipedia.org/wiki/LED_lamp" />
-          <link itemprop="additionalType" href="https://vi.wikipedia.org/wiki/%C4%90%C3%A8n_LED" />
-          <link itemprop="additionalType" href="https://en.wikipedia.org/wiki/Lighting" />
-          <link itemprop="additionalType" href="https://en.wiktionary.org/wiki/store" />
+          <meta
+            itemprop="description"
+            content="Siêu thị đèn LED chiếu sáng số 1 Việt Nam"
+          />
+          <meta
+            itemprop="disambiguatingDescription"
+            content="Chuyên phân phối các loại đèn LED chiếu sáng, trang trí chất lượng, chính hãng tại Hà Nội, Hồ Chí Minh. Đèn led âm trần, đèn ốp trần, đèn chùm, đèn tường"
+          />
+          <meta
+            itemprop="sameAs"
+            content="https://www.facebook.com/thegioidenledhanoii"
+          />
+          <meta
+            itemprop="sameAs"
+            content="https://g.page/Thegioidenledtranduyhung"
+          />
+          <meta
+            itemprop="sameAs"
+            content="https://goo.gl/maps/cmk6SUJRmpn1UXKS6"
+          />
+          <meta
+            itemprop="sameAs"
+            content="http://online.gov.vn/Home/WebDetails/85212"
+          />
+          <link
+            itemprop="additionalType"
+            href="https://en.wikipedia.org/wiki/LED_lamp"
+          />
+          <link
+            itemprop="additionalType"
+            href="https://vi.wikipedia.org/wiki/%C4%90%C3%A8n_LED"
+          />
+          <link
+            itemprop="additionalType"
+            href="https://en.wikipedia.org/wiki/Lighting"
+          />
+          <link
+            itemprop="additionalType"
+            href="https://en.wiktionary.org/wiki/store"
+          />
           <meta itemprop="vatID" content="0105770373" />
           <meta itemprop="email" content="denledminhhai@gmail.com" />
 
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
+          <span
+            itemprop="location"
+            itemscope=""
+            itemtype="https://schema.org/PostalAddress"
+          >
             <meta itemprop="name" content="trụ sở chính" />
-            <meta itemprop="streetAddress" content="21C Trần Duy Hưng, Cầu Giấy, HN" />
+            <meta
+              itemprop="streetAddress"
+              content="21C Trần Duy Hưng, Cầu Giấy, HN"
+            />
             <meta itemprop="addressLocality" content="Cầu Giấy" />
             <meta itemprop="addressRegion" content="Hà Nội" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
+            <span
+              itemprop="addressCountry"
+              itemscope=""
+              itemtype="https://schema.org/Country"
+            >
               <meta itemprop="name" content="Việt Nam" />
             </span>
           </span>
 
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
+          <span
+            itemprop="location"
+            itemscope=""
+            itemtype="https://schema.org/PostalAddress"
+          >
             <meta itemprop="name" content="SIÊU THỊ ĐÈN LED CẦU GIẤY" />
             <meta itemprop="streetAddress" content="21C Trần Duy Hưng" />
             <meta itemprop="addressLocality" content="Cầu Giấy" />
             <meta itemprop="addressRegion" content="Hà Nội" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
+            <span
+              itemprop="addressCountry"
+              itemscope=""
+              itemtype="https://schema.org/Country"
+            >
               <meta itemprop="name" content="Việt Nam" />
             </span>
           </span>
 
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
+          <span
+            itemprop="location"
+            itemscope=""
+            itemtype="https://schema.org/PostalAddress"
+          >
             <meta itemprop="name" content="SIÊU THỊ ĐÈN LED ECOPARK" />
             <meta itemprop="streetAddress" content="107 Thảo Nguyên" />
             <meta itemprop="addressLocality" content="Ecopark" />
             <meta itemprop="addressRegion" content="Hà Nội" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
+            <span
+              itemprop="addressCountry"
+              itemscope=""
+              itemtype="https://schema.org/Country"
+            >
               <meta itemprop="name" content="Việt Nam" />
             </span>
           </span>
 
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
+          <span
+            itemprop="location"
+            itemscope=""
+            itemtype="https://schema.org/PostalAddress"
+          >
             <meta itemprop="name" content="SIÊU THỊ ĐÈN LED QUẬN 2" />
-            <meta itemprop="streetAddress" content="148 Nguyễn Hoàng, P. AN Phú, Quận 2" />
+            <meta
+              itemprop="streetAddress"
+              content="148 Nguyễn Hoàng, P. AN Phú, Quận 2"
+            />
             <meta itemprop="addressLocality" content="Quận 2" />
             <meta itemprop="addressRegion" content="Hà Nội" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
+            <span
+              itemprop="addressCountry"
+              itemscope=""
+              itemtype="https://schema.org/Country"
+            >
               <meta itemprop="name" content="Việt Nam" />
             </span>
           </span>
 
-          <span itemprop="location" itemscope="" itemtype="https://schema.org/PostalAddress">
+          <span
+            itemprop="location"
+            itemscope=""
+            itemtype="https://schema.org/PostalAddress"
+          >
             <meta itemprop="name" content="SIÊU THỊ ĐÈN LED PHÚ QUỐC" />
-            <meta itemprop="streetAddress" content="245 Đường 30/4, Dương Đông, Phú Quốc" />
+            <meta
+              itemprop="streetAddress"
+              content="245 Đường 30/4, Dương Đông, Phú Quốc"
+            />
             <meta itemprop="addressLocality" content="Phú Quốc" />
             <meta itemprop="addressRegion" content="Kiên Giang" />
-            <span itemprop="addressCountry" itemscope="" itemtype="https://schema.org/Country">
+            <span
+              itemprop="addressCountry"
+              itemscope=""
+              itemtype="https://schema.org/Country"
+            >
               <meta itemprop="name" content="Việt Nam" />
             </span>
           </span>
 
-          <span itemprop="contactPoint" itemscope="" itemtype="https://schema.org/ContactPoint">
+          <span
+            itemprop="contactPoint"
+            itemscope=""
+            itemtype="https://schema.org/ContactPoint"
+          >
             <meta itemprop="email" content="denledminhhai@gmail.com" />
             <meta itemprop="telephone" content="+84973665115" />
             <meta itemprop="areaServed" content="VN" />
           </span>
-          <span itemprop="founder" itemscope="" itemtype="https://schema.org/Person" itemid="/#founder">
+          <span
+            itemprop="founder"
+            itemscope=""
+            itemtype="https://schema.org/Person"
+            itemid="/#founder"
+          >
             <meta itemprop="name" content="Chu Thanh Phong" />
             <meta itemprop="jobTitle" content="Co-Founder &amp; CEO" />
             <meta itemprop="alternateName" content="Chu Thanh Phong" />
             <meta itemprop="gender" content="https://schema.org/Male" />
-            <meta itemprop="sameAs" content="https://www.facebook.com/ChuThanhPhong" />
+            <meta
+              itemprop="sameAs"
+              content="https://www.facebook.com/ChuThanhPhong"
+            />
           </span>
 
           <div class="open">
@@ -98,7 +205,8 @@
               <router-link v-if="!userLocal" to="/login">
                 <span> Đăng nhập </span>
               </router-link>
-              <router-link to="/profile-client" v-else class="me-1"> <span>Xin chào {{ userLocal.lastname }}</span>
+              <router-link to="/profile-client" v-else class="me-1">
+                <span>Xin chào {{ userLocal.lastname }}</span>
               </router-link>
 
               <router-link to="/profile-client" v-else class="me-1">
@@ -111,17 +219,24 @@
       <div class="f head2">
         <div class="wrap flexJus">
           <div>
-            <span style="font: bold 15px arial;">Hãy cùng mua sắm nào!</span>
+            <span style="font: bold 15px arial">Hãy cùng mua sắm nào!</span>
           </div>
           <div class="flexJus">
+            <router-link to="/frivStore">
+              <div class="vcart2">
+                <i class="fa-solid fa-store"></i>
+              </div>
+            </router-link>
+
             <router-link to="/trang-chu/gio-hang">
-              <div id="vcart">
-                <fieldset>
-                  <u>x</u>
-                  <figure>
-                    <p>Chưa có sản phẩm nào trong giỏ hàng !</p>
-                  </figure>
-                </fieldset>
+              <div class="vcart2">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+            </router-link>
+
+            <router-link to="/ordered">
+              <div class="vcart2">
+                <i class="fa-regular fa-rectangle-list"></i>
               </div>
             </router-link>
           </div>
@@ -131,13 +246,18 @@
     </div>
 
     <div id="main">
-
       <!--san pham khuyen mai-->
       <div class="f box-tit" id="headpro">
         <div class="flexJus wrap" style="height: 40px">
-          <label @click="addMyFarvors()" class="btn" style="font: 15px arial">yêu thích</label>
+          <label @click="addMyFarvors()" class="btn" style="font: 15px arial"
+            >yêu thích</label
+          >
           <div class="flexJus">
-            <ul v-for="user in typeStore.productTypeName" :key="user.id" class="othpro flexL">
+            <ul
+              v-for="user in typeStore.productTypeName"
+              :key="user.id"
+              class="othpro flexL"
+            >
               <li style="padding-right: 10px">
                 <label>{{ user }}</label>
               </li>
@@ -150,28 +270,49 @@
           <div class="f dhtit">
             <h2>TOP sản phẩm trong cửa hàng</h2>
           </div>
-          <div class="dhpro owl-carousel owl-theme" id="dealhot" style="opacity: 1; display: block">
+          <div
+            class="dhpro owl-carousel owl-theme"
+            id="dealhot"
+            style="opacity: 1; display: block"
+          >
             <div class="owl-wrapper-outer">
-              <div class="owl-wrapper" style="
+              <div
+                class="owl-wrapper"
+                style="
                   width: 3936px;
                   left: 0px;
                   display: block;
                   background-color: #bfbfbf !important;
-                ">
-                <div v-for="user in users.slice(0, 5)" :key="user.id" class="owl-item active"
-                  style="width: 256px; margin-left: 2px; height:400px;">
-                  <router-link :to="{
-                name: 'trang-chu-chi-tiet-san-pham',
-                params: { id: user.productId },
-              }">
+                "
+              >
+                <div
+                  v-for="user in users.slice(0, 5)"
+                  :key="user.id"
+                  class="owl-item active"
+                  style="width: 256px; margin-left: 2px; height: 400px"
+                >
+                  <router-link
+                    :to="{
+                      name: 'trang-chu-chi-tiet-san-pham',
+                      params: { id: user.productId },
+                    }"
+                  >
                     <!-- /trang-chu/chi-tiet-san-pham -->
                     <a class="item pi" :title="user.title" :href="user.href">
                       <div>
-                        <img :src="user.avatarProduct" :alt="user.avatarProduct" />
+                        <img
+                          :src="user.avatarProduct"
+                          :alt="user.avatarProduct"
+                        />
                       </div>
                       <h3>{{ user.productName }}</h3>
                       <strong>
-                        {{ (user.price * (100 - user.discount) / 100)?.toLocaleString() }}₫
+                        {{
+                          (
+                            (user.price * (100 - user.discount)) /
+                            100
+                          )?.toLocaleString()
+                        }}₫
                         <u>{{ user.price?.toLocaleString() }}₫</u>
                       </strong>
 
@@ -190,7 +331,9 @@
           <label>Các sản phẩm khác</label>
           <div class="bst">
             <h2>
-              <a href="den-led-am-tran" title="Đèn Led âm trần">Đèn Led âm trần</a>
+              <a href="den-led-am-tran" title="Đèn Led âm trần"
+                >Đèn Led âm trần</a
+              >
             </h2>
 
             <h2><a href="den-ban" title="Đèn bàn">Đèn bàn</a></h2>
@@ -206,27 +349,41 @@
             <h2><a href="den-led-day" title="Đèn LED Dây">Đèn LED Dây</a></h2>
           </div>
         </div>
-        <div style="
+        <div
+          style="
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 10px;
             background-color: #eee !important;
-          ">
-          <ul v-for="user in users.slice(0, 8)" :key="user.id" class="pb Product">
+          "
+        >
+          <ul
+            v-for="user in users.slice(0, 8)"
+            :key="user.id"
+            class="pb Product"
+          >
             <li style="width: 100% !important" class="pi">
-              <router-link :to="{
-                name: 'trang-chu-chi-tiet-san-pham',
-                params: { id: user.productId },
-              }">
+              <router-link
+                :to="{
+                  name: 'trang-chu-chi-tiet-san-pham',
+                  params: { id: user.productId },
+                }"
+              >
                 <a :title="user.title">
                   <div data-l="kaadas">
                     <img :src="user.avatarProduct" :alt="user.avatarProduct" />
                   </div>
                   <h3>{{ user.productName }}</h3>
                   <strong>
-                    {{ (user.price * (100 - user.discount) / 100)?.toLocaleString() }}₫
+                    {{
+                      (
+                        (user.price * (100 - user.discount)) /
+                        100
+                      )?.toLocaleString()
+                    }}₫
                     <u>{{ user.price?.toLocaleString() }}₫</u>
-                  </strong> <span class="s s5">{{ user.view }}(Lượt xem)</span>
+                  </strong>
+                  <span class="s s5">{{ user.view }}(Lượt xem)</span>
                 </a>
               </router-link>
             </li>
@@ -239,7 +396,11 @@
       <div class="f dichvu">
         <ul class="wrap">
           <li>
-            <i><img src="https://denled.com/Content/img/Home/hoi.png" title="Hỏi chúng tôi" /></i>
+            <i
+              ><img
+                src="https://denled.com/Content/img/Home/hoi.png"
+                title="Hỏi chúng tôi"
+            /></i>
             <span>Hỏi chúng tôi</span>
             <p>
               Nếu bạn không chắc chắn về những thiết bị nào phù hợp với bạn và
@@ -248,7 +409,11 @@
             </p>
           </li>
           <li>
-            <i><img src="https://denled.com/Content/img/Home/tim.png" title="Hỏi chúng tôi" /></i>
+            <i
+              ><img
+                src="https://denled.com/Content/img/Home/tim.png"
+                title="Hỏi chúng tôi"
+            /></i>
             <span>Tìm sản phẩm</span>
             <p>
               Với nhiều sản phẩm để lựa chọn, đây là một nơi tuyệt vời để bắt
@@ -256,7 +421,11 @@
             </p>
           </li>
           <li>
-            <i><img src="https://denled.com/Content/img/Home/loca.png" title="Hỏi chúng tôi" /></i>
+            <i
+              ><img
+                src="https://denled.com/Content/img/Home/loca.png"
+                title="Hỏi chúng tôi"
+            /></i>
             <span>Ghé thăm cửa hàng</span>
             <p>
               Chào mừng bạn đến với các cửa hàng đèn led hàng đầu Việt Nam -
@@ -264,7 +433,11 @@
             </p>
           </li>
           <li>
-            <i><img src="https://denled.com/Content/img/Home/dichvu.png" title="Hỏi chúng tôi" /></i>
+            <i
+              ><img
+                src="https://denled.com/Content/img/Home/dichvu.png"
+                title="Hỏi chúng tôi"
+            /></i>
             <span>Dịch vụ của chúng tôi</span>
             <p>
               Dịch vụ khách hàng là nền tảng trong hoạt động kinh doanh của
@@ -288,8 +461,6 @@
                 width="286"
                 height="60"
               />
-              
-
             </div>
             <div class="fotb" style="width: 50%; padding: 0 40px 0 60px">
               <label>SHOWROOM</label>
@@ -302,7 +473,7 @@
                     </li>
                     <li>
                       <span>Hotline : </span
-                      ><a href="tel:0933665115">0933.66.5115</a> 
+                      ><a href="tel:0933665115">0933.66.5115</a>
                     </li>
                   </ul>
                 </div>
@@ -312,37 +483,25 @@
               <label>THÔNG TIN - HƯỚNG DẪN</label>
               <ul>
                 <li>
-                  <a
-                    title="Giới Thiệu Hệ Thống"
-                    rel="nofollow"
-                    href="/"
+                  <a title="Giới Thiệu Hệ Thống" rel="nofollow" href="/"
                     >Giới Thiệu Hệ Thống</a
                   >
                 </li>
 
                 <li>
-                  <a
-                    title="Giao hàng &amp; Thanh toán"
-                    rel="nofollow"
-                    href="/"
+                  <a title="Giao hàng &amp; Thanh toán" rel="nofollow" href="/"
                     >Giao hàng &amp; Thanh toán</a
                   >
                 </li>
 
                 <li>
-                  <a
-                    title="Hướng dẫn mua hàng Online"
-                    rel="nofollow"
-                    href="/"
+                  <a title="Hướng dẫn mua hàng Online" rel="nofollow" href="/"
                     >Hướng dẫn mua hàng Online</a
                   >
                 </li>
 
                 <li>
-                  <a
-                    title="Quy chế hoạt động"
-                    rel="nofollow"
-                    href="/"
+                  <a title="Quy chế hoạt động" rel="nofollow" href="/"
                     >Quy chế hoạt động</a
                   >
                 </li>
@@ -357,24 +516,43 @@
       </div>
       <ul id="panel">
         <li>
-          <img src="https://denled.com/Content/img/totop.svg" alt="To top" width="45" height="45" />
+          <img
+            src="https://denled.com/Content/img/totop.svg"
+            alt="To top"
+            width="45"
+            height="45"
+          />
         </li>
         <li style="padding-top: 10px; padding-bottom: 10px">
-          <img alt="Messenger" src="https://denled.com/Content/img/messenger.svg" width="45" height="45" />
+          <img
+            alt="Messenger"
+            src="https://denled.com/Content/img/messenger.svg"
+            width="45"
+            height="45"
+          />
         </li>
 
         <li>
-          <img alt="Phone" src="https://denled.com/Content/img/phone.svg" width="45" height="45" />
+          <img
+            alt="Phone"
+            src="https://denled.com/Content/img/phone.svg"
+            width="45"
+            height="45"
+          />
         </li>
       </ul>
-      <div class="zalo-chat-widget" data-oaid="2839194858446814357"
+      <div
+        class="zalo-chat-widget"
+        data-oaid="2839194858446814357"
         data-welcome-message="Rất vui khi được hỗ trợ bạn!. Nếu bạn không thể chờ thì hãy gọi hoặc nhắn tin đến số điện thoại này 0973.66.5115."
-        data-autopopup="1800" data-width="500" data-height="500" style="right: 12px"></div>
+        data-autopopup="1800"
+        data-width="500"
+        data-height="500"
+        style="right: 12px"
+      ></div>
     </div>
   </div>
 </template>
-
-
 
 <script>
 import { defineComponent, ref, reactive } from "vue";
@@ -403,14 +581,11 @@ export default defineComponent({
     const storeId2 = ref(route.params.id);
     const getUsers = () => {
       axios
-        .get(
-           `${apiPrefix}/api/v1/customer/store/view/${storeId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .get(`${apiPrefix}/api/v1/customer/store/view/${storeId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           users.value = response.data.data;
         })
@@ -422,15 +597,11 @@ export default defineComponent({
       const formData = new FormData();
       formData.append("storeid", storeId);
       try {
-        await axios.post(
-          `${apiPrefix}/api/v1/customer/favor/add`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        await axios.post(`${apiPrefix}/api/v1/customer/favor/add`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         message.success("đã thêm yêu thích");
       } catch (error) {
         console.error(error);
@@ -438,14 +609,11 @@ export default defineComponent({
     };
     const getTypeStore = () => {
       axios
-        .get(
-           `${apiPrefix}/api/v1/management/${storeId}/info/view`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .get(`${apiPrefix}/api/v1/management/${storeId}/info/view`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           console.log(response.data.data);
           typeStore.value = response.data.data;
@@ -635,11 +803,13 @@ export default defineComponent({
 @font-face {
   font-family: "FontAwesome";
   src: url("/Content/awesome/fontawesome-webfont.eot?v=4.4.0");
-  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0") format("embedded-opentype"),
+  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0")
+      format("embedded-opentype"),
     url("/Content/awesome/fontawesome-webfont.woff2?v=4.4.0") format("woff2"),
     url("/Content/awesome/fontawesome-webfont.woff?v=4.4.0") format("woff"),
     url("/Content/awesome/fontawesome-webfont.ttf?v=4.4.0") format("truetype"),
-    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular") format("svg");
+    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular")
+      format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -1288,7 +1458,8 @@ a:focus {
   width: 40%;
 }
 
-.prol img {}
+.prol img {
+}
 
 .propertyhead label {
   font: bold 18px/60px arial;
@@ -1378,7 +1549,7 @@ a:focus {
   border-radius: 5px;
 }
 
-.othpro li:hover>div {
+.othpro li:hover > div {
   display: block;
 }
 
@@ -1602,7 +1773,6 @@ a:focus {
 }
 
 @media screen and (max-width: 415px) {
-
   .tiplist h2,
   .tiplist h3,
   .tiplist h4 {
@@ -1831,6 +2001,18 @@ textarea {
   color: #ea9b40 !important;
 }
 
+.vcart2:before {
+  font: 21px/1 FontAwesome;
+  padding-right: 2px;
+}
+
+.vcart2 {
+  color: #000;
+  padding-left: 14px;
+  cursor: pointer;
+  position: relative;
+  font-size: 18px;
+}
 .nav li {
   position: static;
 }
@@ -2063,7 +2245,8 @@ textarea {
 }
 
 /*beadcrum*/
-.beadcrum {}
+.beadcrum {
+}
 
 .beadcrum li {
   display: inline-block;
@@ -2346,7 +2529,8 @@ body {
 }
 
 .brands {
-  background: url("https://denled.com/Data/upload/files/Home/BG-hang.jpg") no-repeat 0 0;
+  background: url("https://denled.com/Data/upload/files/Home/BG-hang.jpg")
+    no-repeat 0 0;
   padding: 40px 0;
   color: #fff;
   margin-top: 50px;

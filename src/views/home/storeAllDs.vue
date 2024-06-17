@@ -1,20 +1,37 @@
 <template>
   <div id="wrapper">
     <div id="header">
-      <div class="f head1" itemscope="" itemtype="http://schema.org/WebSite" itemid="https://denled.com/#website">
+      <div
+        class="f head1"
+        itemscope=""
+        itemtype="http://schema.org/WebSite"
+        itemid="https://denled.com/#website"
+      >
         <meta itemprop="url" content="https://denled.com" />
         <meta itemprop="name" content="Siêu thị đèn LED" />
-        <div class="wrap flexJus" itemscope="" itemtype="https://schema.org/Organization"
-          itemid="https://denled.com/#organization">
+        <div
+          class="wrap flexJus"
+          itemscope=""
+          itemtype="https://schema.org/Organization"
+          itemid="https://denled.com/#organization"
+        >
           <router-link to="/trang-chu-stores">
-            <a title="Siêu thị Agogo" itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject">
+            <a
+              title="Siêu thị Agogo"
+              itemprop="logo"
+              itemscope=""
+              itemtype="http://schema.org/ImageObject"
+            >
               <meta itemprop="url" content="/Content/img/logo.png" />
-              <img width="60" height="60"
+              <img
+                width="60"
+                height="60"
                 src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718287579/ftld80xpfribbbfhp1qu.png"
-                alt="Siêu thị đèn LED" />
+                alt="Siêu thị đèn LED"
+              />
             </a>
           </router-link>
-          
+
           <div class="open">
             <label style="cursor: pointer" class="oh">
               <router-link v-if="!userLocal" to="/login">
@@ -33,14 +50,21 @@
             <span style="font: bold 15px arial">Hãy cùng mua sắm nào!</span>
           </div>
           <div class="flexJus">
+            <router-link to="/frivStore">
+              <div class="vcart2">
+                <i class="fa-solid fa-store"></i>
+              </div>
+            </router-link>
+
             <router-link to="/trang-chu/gio-hang">
-              <div id="vcart">
-                <fieldset>
-                  <u>x</u>
-                  <figure>
-                    <p>Chưa có sản phẩm nào trong giỏ hàng !</p>
-                  </figure>
-                </fieldset>
+              <div class="vcart2">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+            </router-link>
+
+            <router-link to="/ordered">
+              <div class="vcart2">
+                <i class="fa-regular fa-rectangle-list"></i>
               </div>
             </router-link>
           </div>
@@ -50,30 +74,43 @@
     </div>
 
     <div id="main">
-
       <!--san pham khuyen mai-->
       <div class="f dealhot">
         <div class="wrap flexCol">
           <div class="f dhtit">
             <h2>Danh sách cửa hàng yêu thích của bạn</h2>
           </div>
-          <div class="dhpro owl-carousel owl-theme" id="dealhot" style="opacity: 1; display: block">
+          <div
+            class="dhpro owl-carousel owl-theme"
+            id="dealhot"
+            style="opacity: 1; display: block"
+          >
             <div class="owl-wrapper-outer">
               <div class="owl-wrapper">
-                <div v-for="store in stores.slice(0, 5)" :key="store.storeId" class="owl-item active" style="">
-                  <router-link :to="{
-                name: 'trang-chu',
-                params: { id: store.storeId },
-              }">
+                <div
+                  v-for="store in stores.slice(0, 5)"
+                  :key="store.storeId"
+                  class="owl-item active"
+                  style=""
+                >
+                  <router-link
+                    :to="{
+                      name: 'trang-chu',
+                      params: { id: store.storeId },
+                    }"
+                  >
                     <a style="height: 344px !important" class="item pi">
                       <div>
                         <img :src="store.image" :alt="store.image" />
                       </div>
                       <h3>{{ store.storeName }}</h3>
                       <strong style="padding-right: 5px">{{
-                store.rate
-              }}</strong>
-                      <i class="fa-solid fa-star" style="color: #ffd43b; padding-right: 5px"></i>
+                        store.rate
+                      }}</strong>
+                      <i
+                        class="fa-solid fa-star"
+                        style="color: #ffd43b; padding-right: 5px"
+                      ></i>
                       <p>{{ store.storeType }}</p>
                     </a>
                   </router-link>
@@ -84,13 +121,16 @@
         </div>
       </div>
       <div class="f dealhot">
-
         <div class="wrap flexCol">
           <div class="f boxtit flexJus">
-            <label style="font:bold 15px arial ;">Các cửa hàng uy tín khác</label>
+            <label style="font: bold 15px arial"
+              >Các cửa hàng uy tín khác</label
+            >
             <div class="bst">
               <h2>
-                <a href="den-led-am-tran" title="Đèn Led âm trần">Đèn Led âm trần</a>
+                <a href="den-led-am-tran" title="Đèn Led âm trần"
+                  >Đèn Led âm trần</a
+                >
               </h2>
 
               <h2><a href="den-ban" title="Đèn bàn">Đèn bàn</a></h2>
@@ -107,23 +147,37 @@
             </div>
           </div>
 
-          <div class="dhpro owl-carousel owl-theme" id="dealhot2" style="opacity: 1; display: block">
+          <div
+            class="dhpro owl-carousel owl-theme"
+            id="dealhot2"
+            style="opacity: 1; display: block"
+          >
             <div class="owl-wrapper-outer">
               <div class="owl-wrapper">
-                <div v-for="store in allStores.slice(0, 5)" :key="store.storeId" class="owl-item active" style="">
-                  <router-link :to="{
-                name: 'trang-chu',
-                params: { id: store.storeId },
-              }">
+                <div
+                  v-for="store in allStores.slice(0, 5)"
+                  :key="store.storeId"
+                  class="owl-item active"
+                  style=""
+                >
+                  <router-link
+                    :to="{
+                      name: 'trang-chu',
+                      params: { id: store.storeId },
+                    }"
+                  >
                     <a style="height: 344px !important" class="item pi">
                       <div>
                         <img :src="store.image" :alt="store.image" />
                       </div>
                       <h3>{{ store.storeName }}</h3>
                       <strong style="padding-right: 5px">{{
-                store.rate
-              }}</strong>
-                      <i class="fa-solid fa-star" style="color: #ffd43b; padding-right: 5px"></i>
+                        store.rate
+                      }}</strong>
+                      <i
+                        class="fa-solid fa-star"
+                        style="color: #ffd43b; padding-right: 5px"
+                      ></i>
                       <p>{{ store.storeType }}</p>
                     </a>
                   </router-link>
@@ -134,35 +188,51 @@
         </div>
       </div>
 
-
-
-
       <!--dichvu-->
       <div class="f dichvu">
         <ul class="wrap">
           <li>
-            <i><img src="https://denled.com/Content/img/Home/hoi.png" title="Hỏi chúng tôi" /></i>
+            <i
+              ><img
+                src="https://denled.com/Content/img/Home/hoi.png"
+                title="Hỏi chúng tôi"
+            /></i>
             <span>Hỏi chúng tôi</span>
             <p>
-              Nếu bạn không chắc chắn về hệ thống và cách đặt hàng, hãy liên hệ với chúng tôi.
+              Nếu bạn không chắc chắn về hệ thống và cách đặt hàng, hãy liên hệ
+              với chúng tôi.
             </p>
           </li>
           <li>
-            <i><img src="https://denled.com/Content/img/Home/tim.png" title="Hỏi chúng tôi" /></i>
+            <i
+              ><img
+                src="https://denled.com/Content/img/Home/tim.png"
+                title="Hỏi chúng tôi"
+            /></i>
             <span>Tìm sản phẩm</span>
             <p>
-              Với các hệ thống siêu thị, tạp hóa, bạn có thể dễ dàng tìm kiếm các món đồ bạn mong đợi.
+              Với các hệ thống siêu thị, tạp hóa, bạn có thể dễ dàng tìm kiếm
+              các món đồ bạn mong đợi.
             </p>
           </li>
           <li>
-            <i><img src="https://denled.com/Content/img/Home/loca.png" title="Hỏi chúng tôi" /></i>
+            <i
+              ><img
+                src="https://denled.com/Content/img/Home/loca.png"
+                title="Hỏi chúng tôi"
+            /></i>
             <span>Ghé thăm cửa hàng</span>
             <p>
-              Bạn có thể xem địa chỉ của các cửa hàng để có thể đến trực tiếp và lựa chọn sản phẩm.
+              Bạn có thể xem địa chỉ của các cửa hàng để có thể đến trực tiếp và
+              lựa chọn sản phẩm.
             </p>
           </li>
           <li>
-            <i><img src="https://denled.com/Content/img/Home/dichvu.png" title="Hỏi chúng tôi" /></i>
+            <i
+              ><img
+                src="https://denled.com/Content/img/Home/dichvu.png"
+                title="Hỏi chúng tôi"
+            /></i>
             <span>Dịch vụ của chúng tôi</span>
             <p>
               Dịch vụ khách hàng là nền tảng trong hoạt động kinh doanh của
@@ -180,9 +250,12 @@
         <div class="wrap flexJus">
           <div class="f flex">
             <div class="fotb" style="width: 30%; padding-right: 30px">
-              <img src="https://denled.com/Content/img/logo-foot.png" alt="Denled.com" width="286" height="60" />
-
-
+              <img
+                src="https://denled.com/Content/img/logo-foot.png"
+                alt="Denled.com"
+                width="286"
+                height="60"
+              />
             </div>
             <div class="fotb" style="width: 50%; padding: 0 40px 0 60px">
               <label>SHOWROOM</label>
@@ -194,7 +267,8 @@
                       <span>Địa chỉ 1 : </span>21C Trần Duy Hưng, Cầu Giấy, HN
                     </li>
                     <li>
-                      <span>Hotline : </span><a href="tel:0933665115">0933.66.5115</a>
+                      <span>Hotline : </span
+                      ><a href="tel:0933665115">0933.66.5115</a>
                     </li>
                   </ul>
                 </div>
@@ -204,19 +278,27 @@
               <label>THÔNG TIN - HƯỚNG DẪN</label>
               <ul>
                 <li>
-                  <a title="Giới Thiệu Hệ Thống" rel="nofollow" href="/">Giới Thiệu Hệ Thống</a>
+                  <a title="Giới Thiệu Hệ Thống" rel="nofollow" href="/"
+                    >Giới Thiệu Hệ Thống</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Giao hàng &amp; Thanh toán" rel="nofollow" href="/">Giao hàng &amp; Thanh toán</a>
+                  <a title="Giao hàng &amp; Thanh toán" rel="nofollow" href="/"
+                    >Giao hàng &amp; Thanh toán</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Hướng dẫn mua hàng Online" rel="nofollow" href="/">Hướng dẫn mua hàng Online</a>
+                  <a title="Hướng dẫn mua hàng Online" rel="nofollow" href="/"
+                    >Hướng dẫn mua hàng Online</a
+                  >
                 </li>
 
                 <li>
-                  <a title="Quy chế hoạt động" rel="nofollow" href="/">Quy chế hoạt động</a>
+                  <a title="Quy chế hoạt động" rel="nofollow" href="/"
+                    >Quy chế hoạt động</a
+                  >
                 </li>
               </ul>
             </div>
@@ -230,19 +312,40 @@
 
       <ul id="panel">
         <li>
-          <img src="https://denled.com/Content/img/totop.svg" alt="To top" width="45" height="45" />
+          <img
+            src="https://denled.com/Content/img/totop.svg"
+            alt="To top"
+            width="45"
+            height="45"
+          />
         </li>
         <li style="padding-top: 10px; padding-bottom: 10px">
-          <img alt="Messenger" src="https://denled.com/Content/img/messenger.svg" width="45" height="45" />
+          <img
+            alt="Messenger"
+            src="https://denled.com/Content/img/messenger.svg"
+            width="45"
+            height="45"
+          />
         </li>
 
         <li>
-          <img alt="Phone" src="https://denled.com/Content/img/phone.svg" width="45" height="45" />
+          <img
+            alt="Phone"
+            src="https://denled.com/Content/img/phone.svg"
+            width="45"
+            height="45"
+          />
         </li>
       </ul>
-      <div class="zalo-chat-widget" data-oaid="2839194858446814357"
+      <div
+        class="zalo-chat-widget"
+        data-oaid="2839194858446814357"
         data-welcome-message="Rất vui khi được hỗ trợ bạn!. Nếu bạn không thể chờ thì hãy gọi hoặc nhắn tin đến số điện thoại này 0973.66.5115."
-        data-autopopup="1800" data-width="500" data-height="500" style="right: 12px"></div>
+        data-autopopup="1800"
+        data-width="500"
+        data-height="500"
+        style="right: 12px"
+      ></div>
     </div>
   </div>
 </template>
@@ -271,17 +374,13 @@ export default defineComponent({
     const stores = ref([]);
     const allStores = ref([]);
 
-
     const getAllStores = () => {
       axios
-        .get(
-           `${apiPrefix}/api/v1/admin/store/view`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Thêm token vào headers
-            },
-          }
-        )
+        .get(`${apiPrefix}/api/v1/admin/store/view`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Thêm token vào headers
+          },
+        })
         .then((response) => {
           console.log(response.data.data, "response");
           allStores.value = response.data.data;
@@ -289,18 +388,15 @@ export default defineComponent({
         .catch((error) => {
           console.error(error);
         });
-    }
+    };
 
     const getUsers = () => {
       axios
-        .get(
-           `${apiPrefix}/api/v1/customer/favor/view`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Thêm token vào headers
-            },
-          }
-        )
+        .get(`${apiPrefix}/api/v1/customer/favor/view`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Thêm token vào headers
+          },
+        })
         .then((response) => {
           console.log(response.data.data, "response");
           stores.value = response.data.data;
@@ -327,7 +423,6 @@ export default defineComponent({
       stores,
       userLocal,
     };
-
   },
 });
 </script>
@@ -492,11 +587,13 @@ export default defineComponent({
 @font-face {
   font-family: "FontAwesome";
   src: url("/Content/awesome/fontawesome-webfont.eot?v=4.4.0");
-  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0") format("embedded-opentype"),
+  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0")
+      format("embedded-opentype"),
     url("/Content/awesome/fontawesome-webfont.woff2?v=4.4.0") format("woff2"),
     url("/Content/awesome/fontawesome-webfont.woff?v=4.4.0") format("woff"),
     url("/Content/awesome/fontawesome-webfont.ttf?v=4.4.0") format("truetype"),
-    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular") format("svg");
+    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular")
+      format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -1259,7 +1356,6 @@ a:focus {
 }
 
 @media screen and (max-width: 415px) {
-
   .tiplist h2,
   .tiplist h3,
   .tiplist h4 {
@@ -1441,6 +1537,18 @@ textarea {
   font-weight: normal;
 }
 
+.vcart2:before {
+  font: 21px/1 FontAwesome;
+  padding-right: 2px;
+}
+
+.vcart2 {
+  color: #000;
+  padding-left: 14px;
+  cursor: pointer;
+  position: relative;
+  font-size: 18px;
+}
 .hl:before,
 .oh:before {
   background: url("/Content/img/i/icon-logo.png") no-repeat;
@@ -1720,7 +1828,8 @@ textarea {
 }
 
 /*beadcrum*/
-.beadcrum {}
+.beadcrum {
+}
 
 .beadcrum li {
   display: inline-block;
@@ -2003,7 +2112,8 @@ body {
 }
 
 .brands {
-  background: url("https://denled.com/Data/upload/files/Home/BG-hang.jpg") no-repeat 0 0;
+  background: url("https://denled.com/Data/upload/files/Home/BG-hang.jpg")
+    no-repeat 0 0;
   padding: 40px 0;
   color: #fff;
   margin-top: 50px;
@@ -2676,8 +2786,6 @@ body {
   clear: both;
   margin: 0 auto;
 }
-
-
 
 .dealhot .bq u {
   font: 13px/14px arial;
