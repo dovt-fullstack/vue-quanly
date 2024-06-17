@@ -76,6 +76,8 @@ export default defineComponent({
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+    const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
+
     const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const router = useRouter();
     const users = reactive({
@@ -114,12 +116,12 @@ export default defineComponent({
       },
     };
     const resetForm = () => {
-      axios.post( `${apiPrefix}/api/v1/management/${id}/producttype/view`, formData).then((response) => {
-        message.success("Tạo mới thành công!");
-        router.push({ name: "importExport", params: { id: id } });
-      }).catch((error) => {
-        console.log(error)
-      })
+      // axios.post( `${apiPrefix}/api/v1/management/${id}/producttype/view`, formData).then((response) => {
+      //   message.success("Tạo mới thành công!");
+      //   router.push({ name: "importExport", params: { id: id } });
+      // }).catch((error) => {
+      //   console.log(error)
+      // })
       formRef.value.resetFields();
     };
     //
@@ -145,7 +147,12 @@ export default defineComponent({
 
 
 
-      axios.post( `${apiPrefix}/api/v1/management/${id}/import/insert`, formData).then((response) => {
+      axios.post( `${apiPrefix}/api/v1/management/${id}/import/insert`, formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }).then((response) => {
         message.success("Tạo mới thành công!");
         router.push({ name: "importExport", params: { id: id } });
       }).catch((error) => {
@@ -154,7 +161,7 @@ export default defineComponent({
     }
     onMounted(() => {
       //
-      resetForm();
+      // resetForm();
     })
 
 

@@ -16,21 +16,22 @@
                         <template v-if="column.key === 'index'">
                             <span>{{ index + 1 }}</span>
                         </template>
-                        <template v-if="column.key === 'userName'">
-                            <span>{{ record.storeName }}</span>
-                        </template>
+
                         <template v-if="column.key === 'imageSp'">
-                            <img :style="{ width: '50px !important' }" :src="record.avatarProduct"
-                                :alt="record.avatarProduct">
+                            <img :style="{ width: '50px !important' }" :src="record.productImg"
+                                :alt="record.productImg">
                         </template>
                         <template v-if="column.key === 'fullName'">
                             <span>{{ record.productName }}</span>
                         </template>
-                        <template v-if="column.key === 'email'">
-                            <span>{{ record.price }}</span>
+                        <template v-if="column.key === 'totalPrice'">
+                            <span>{{ record.priceTotal }}</span>
+                        </template>
+                        <template v-if="column.key === 'status'">
+                            <span>{{ record.orderStatusName }}</span>
                         </template>
                         <template v-if="column.key === 'action' && authStoreClaim !== null">
-                            <router-link :to="{ name: 'admin-chi-tiet-san-pham', params: { id: record.productId } }">
+                            <router-link :to="{ name: 'admin-chi-tiet-san-pham', params: { id: record.orderDetailId } }">
                                 <a-button title="Khóa" type="dashed" size="small" shape="" class="me-2 text-warning">xem
                                 </a-button>
                             </router-link>
@@ -70,7 +71,8 @@ export default defineComponent({
         const storeId = route.params.id;
         console.log(storeId, 'storeId')
         const storeId2 = ref(route.params.id);
-        console.log(storeId2._value, 'storeId2')
+        const customerId = ref(route.params.customerId)
+        console.log(route.params, 'storeId2')
 
         const pageParam = reactive({
             current: (Object.keys(route.query).length > 0) ? route.query.PageNumber : 1,
@@ -86,11 +88,6 @@ export default defineComponent({
                 key: "index",
             },
             {
-                title: "Tên cửa hàng",
-                dataIndex: "userName",
-                key: "userName",
-            },
-            {
                 title: "Ảnh sản phẩm",
                 dataIndex: "imageSp",
                 key: "imageSp",
@@ -101,8 +98,13 @@ export default defineComponent({
                 key: "fullName",
             },
             {
-                title: "Giá",
-                key: "email",
+                title: "Đơn giá",
+                key: "totalPrice",
+            },
+            {
+                title: "Trạng thái",
+                dataIndex: "status",
+                key: "status",
             },
 
             {
@@ -114,7 +116,7 @@ export default defineComponent({
         const token = JSON.parse(localStorage.getItem("token"));
 
         const getUsers = (args) => {
-            axios.get( `${apiPrefix}/api/v1/management/${storeId2._value}/product/view`,   {
+            axios.get( `${apiPrefix}/api/v1/management/${storeId2._value}/customer/${customerId._value}/detail`,   {
             headers: {
               Authorization: `Bearer ${token}`, // Thêm token vào headers
             },

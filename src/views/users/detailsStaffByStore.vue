@@ -106,7 +106,7 @@
               <router-link
                   :to="{
                     name: 'order-by-user',
-                    params: { id: record.storeId },
+                    params: { id: record.storeId,customerId:record.customerId },
                   }"
                 >
                 <a-button title="Xóa" type="dashed" size="small" shape="" danger

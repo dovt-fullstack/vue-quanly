@@ -348,9 +348,10 @@
                 />
               </a>
               <a
+              href = "http://localhost:9000/oauth2/authorization/google"
                 class="social-login__item social-login--google"
                 id="login-with-gg"
-                href="javascript:void(0)"
+              
               >
                 <img
                   src="https://sapo.dktcdn.net/sso-service/images/svg_sociallogin_gg_new.svg"
@@ -500,8 +501,7 @@
   </div>
 </template>
 <script>
-import { defineComponent, computed, ref, reactive } from "vue";
-
+import { defineComponent, computed, ref, reactive, onMounted } from "vue";
 import "ant-design-vue/dist/antd.min.css";
 import { message } from "ant-design-vue";
 import { useAuthStore } from "../../stores/auth.store.js";
@@ -510,12 +510,43 @@ import axios from "axios";
 export default defineComponent({
   setup() {
     const apiPrefix = import.meta.env.VITE_API_PREFIX;
-    console.log(apiPrefix)
     const authStore = useAuthStore();
     const formState = reactive({
       username: "",
       password: "",
     });
+
+
+    onMounted(() => {
+      localStorage.clear();
+      const token = new URLSearchParams(window.location.search).get('token');
+      if (token) {
+        localStorage.setItem('token', JSON.stringify(token));
+
+        const encodedToken = encodeURIComponent(token);
+        axios.get(`http://localhost:9000/api/v1/auth/validtoken?token=${encodedToken}`)
+        .then(response => {
+            if (response.data) {
+              axios.get(`http://localhost:9000/api/v1/auth/getUserFromToken?token=${encodedToken}`)
+                .then(response2 => {
+                  console.log(response2);
+                  localStorage.setItem("auth", JSON.stringify(response2.data));
+                  window.location.href = '/trang-chu-stores';
+                })
+                .catch(error => {
+                  console.error("Error fetching user data:", error);
+                  showErrorToast('Thất bại!', 'Không thể lấy thông tin người dùng.');
+                  localStorage.clear();
+                  window.location.href = '/login';
+                });
+            } else {
+              localStorage.clear();
+              window.location.href = '/login';
+            }
+          });
+      }
+    });
+
     const onFinish = (values) => {
       const { username, password } = values;
       const newValue = {
@@ -532,31 +563,31 @@ export default defineComponent({
           localStorage.setItem("auth", JSON.stringify(res.data));
           localStorage.setItem("token", JSON.stringify(res.data.accesstoken));
           if (res.data.role == "USER") {
-            console.log(1);
             window.location.href = "/trang-chu-stores";
           } else if (res.data.role == "MANAGER") {
-            console.log(res.data);
             if (res.data.storeId == 0) {
               window.location.href = "/product-type/info";
             } else {
               window.location.href = "/doanh-thu-store/" + res.data.storeId;
             }
           } else {
-            console.log(2);
             window.location.href = "/danh-sach-store";
           }
         })
         .catch((err) => {
           console.log(err);
+          showErrorToast('Thất bại!', 'Đăng nhập không thành công!');
         });
     };
+
     const onFinishFailed = (errorInfo) => {
       console.log("Failed:", errorInfo);
     };
+
     const disabled = computed(() => {
       return !(formState.username && formState.password);
     });
-    //
+
     return {
       formState,
       onFinishFailed,
@@ -566,6 +597,7 @@ export default defineComponent({
   },
 });
 </script>
+
 <style scoped>
 #components-form-demo-normal-login .login-form {
   max-width: 300px;

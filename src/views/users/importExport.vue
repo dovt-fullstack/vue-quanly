@@ -53,7 +53,7 @@
               <router-link
                 :to="{
                   name: 'admin-chi-tiet-san-pham',
-                  params: { id: record.importDetailId },
+                  params: { id: record.productId },
                 }"
               >
                 <a-button

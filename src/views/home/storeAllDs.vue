@@ -364,9 +364,38 @@ export default defineComponent({
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
     const userLocal = JSON.parse(localStorage.getItem("auth"));
-    const token = JSON.parse(localStorage.getItem("token"));
+    let token ;
+    try{
+      token = JSON.parse(localStorage.getItem("token"));
+    } catch{(error) => {
+          console.error(error);
+        }
+    };
+    
     const apiPrefix = import.meta.env.VITE_API_PREFIX;
     console.log(token);
+
+    try {
+  const eventSource = new EventSource(`http://localhost:9000/notifications?userId=${userLocal.userId}`);
+      // Tạo arr 
+      //notificomp
+  eventSource.onmessage = function(event) {
+    console.log(event.data);
+  };
+
+  eventSource.addEventListener('message', function(event) {
+    console.log("Received message: ", event.data);
+  });
+
+  eventSource.onerror = function(err) {
+    console.error("EventSource failed: ", err);
+    eventSource.close();
+  };
+} catch (e) {
+  console.error(e);
+}
+
+
 
     const router = useRouter();
     const route = useRoute();
@@ -375,6 +404,7 @@ export default defineComponent({
     const allStores = ref([]);
 
     const getAllStores = () => {
+      console.log(token);
       axios
         .get(`${apiPrefix}/api/v1/admin/store/view`, {
           headers: {

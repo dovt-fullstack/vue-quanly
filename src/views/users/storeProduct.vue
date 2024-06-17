@@ -1,117 +1,75 @@
 <template>
-  <a-card style="width: 100%">
-    <div class="row mb-3">
-      <div class="col-6">
-        <a-breadcrumb>
-          <a-breadcrumb-item>Sản phẩm của Cửa hàng</a-breadcrumb-item>
-        </a-breadcrumb>
-      </div>
-      <div class="col-6 d-flex justify-content-end">
-        <a-button class="me-2">
-          <router-link
-            :to="{ name: 'product-type/them-moi', params: { id: storeId2 } }"
-          >
-            product type
-          </router-link>
-        </a-button>
-        <a-button type="primary" title="Thêm mới">
-          <router-link
-            :to="{ name: 'product/them-moi', params: { id: storeId2 } }"
-          >
-            <i class="fa-solid fa-plus"></i>
-          </router-link>
-        </a-button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <a-table
-          :dataSource="users"
-          :columns="columns"
-          :scroll="{ x: 576 }"
-          :pagination="false"
-        >
-          <template #bodyCell="{ column, index, record }">
-            <template v-if="column.key === 'index'">
-              <span>{{ index + 1 }}</span>
-            </template>
-            <template v-if="column.key === 'userName'">
-              <span>{{ record.storeName }}</span>
-            </template>
-            <template v-if="column.key === 'imageSp'">
-              <img
-                :style="{ width: '50px !important' }"
-                :src="record.avatarProduct"
-                :alt="record.avatarProduct"
-              />
-            </template>
-            <template v-if="column.key === 'fullName'">
-              <span>{{ record.productName }}</span>
-            </template>
-            <template v-if="column.key === 'email'">
-              <span>{{ record.price }}</span>
-            </template>
-            <template v-if="column.key === 'action' && authStoreClaim !== null">
-              <a-space warp>
-                <router-link
-                  :to="{
-                    name: 'admin-product-edit',
-                    params: { id: record.id },
-                  }"
-                >
-                  <a-button
-                    type="dashed"
-                    class="me-2 text-primary"
-                    size="small"
-                    title="Sửa"
-                  >
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </a-button>
+    <a-card style="width: 100%">
+        <div class="row mb-3">
+            <div class="col-6">
+                <a-breadcrumb>
+                    <a-breadcrumb-item>Sản phẩm của Cửa hàng</a-breadcrumb-item>
+                </a-breadcrumb>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <a-button class="me-2">
+                    <router-link :to="{ name: 'product-type/them-moi' , params:{id :storeId2 } }">
+                    product type
                 </router-link>
-              </a-space>
-              <router-link
-                :to="{
-                  name: 'admin-chi-tiet-san-pham',
-                  params: { id: record.productId },
-                }"
-              >
-                <a-button
-                  title="Khóa"
-                  type="dashed"
-                  size="small"
-                  shape=""
-                  class="me-2 text-warning"
-                  >xem
+
                 </a-button>
-              </router-link>
-              <a-popconfirm
-                title="Dữ liệu sẽ không thể phục hồi, bạn muốn xóa bản ghi này?"
-                ok-text="Yes"
-                cancel-text="No"
-                @confirm="confirmRemove(record.id)"
-              >
-                <a-button title="Xóa" type="dashed" size="small" shape="" danger
-                  ><i class="fa-solid fa-trash-can"></i
-                ></a-button>
-              </a-popconfirm>
-            </template>
-          </template>
-        </a-table>
-        <div class="col-12">
-          <a-pagination
-            @change="onChange"
-            v-model:current="pageParam.current"
-            :total="pageParam.totalRecord"
-            :pageSize="pageParam.pageSize"
-            :show-total="
-              (total, range) => `${range[0]}-${range[1]} of ${total} items`
-            "
-            class="mt-2 text-end"
-          />
+                <a-button type="primary" title="Thêm mới">
+                    <router-link :to="{ name: 'product/them-moi' , params:{id :storeId2 } }">
+                        <i class="fa-solid fa-plus"></i>
+                    </router-link>
+                </a-button>
+
+            </div>
         </div>
-      </div>
-    </div>
-  </a-card>
+        <div class="row">
+            <div class="col-12">
+                <a-table :dataSource="users" :columns="columns" :scroll="{ x: 576 }" :pagination=false>
+                    <template #bodyCell="{ column, index, record }">
+                        <template v-if="column.key === 'index'">
+                            <span>{{ index + 1 }}</span>
+                        </template>
+                        <template v-if="column.key === 'producName'">
+                            <span>{{ record.productName }}</span>
+                        </template>
+                        <template v-if="column.key === 'imageSp'">
+                            <img :style="{ width: '50px !important' }" :src="record.avatarProduct"
+                                :alt="record.avatarProduct">
+                        </template>
+                        <template v-if="column.key === 'quantity'">
+                            <span>{{ record.quantity }}</span>
+                        </template>
+                        <template v-if="column.key === 'email'">
+                            <span>{{ record.price }}</span>
+                        </template>
+                        <template v-if="column.key === 'action' && authStoreClaim !== null">
+                            <a-space warp>
+                                <router-link :to="{ name: 'admin-product-edit', params: { id: record.productId} }">
+                                    <a-button type="dashed" class="me-2 text-primary" size="small" title="Sửa">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a-button>
+                                </router-link>
+                            </a-space>
+                            <router-link :to="{ name: 'admin-chi-tiet-san-pham', params: { id: record.productId } }">
+                                <a-button title="Khóa" type="dashed" size="small" shape="" class="me-2 text-warning">xem
+                                </a-button>
+                            </router-link>
+                            <a-popconfirm title="Dữ liệu sẽ không thể phục hồi, bạn muốn xóa bản ghi này?" ok-text="Yes"
+                                cancel-text="No" @confirm="confirmRemove(record.id)">
+                                <a-button title="Xóa" type="dashed" size="small" shape="" danger><i
+                                        class="fa-solid fa-trash-can"></i></a-button>
+                            </a-popconfirm>
+                        </template>
+                    </template>
+                </a-table>
+                <div class="col-12">
+                    <a-pagination @change="onChange" v-model:current="pageParam.current" :total=pageParam.totalRecord
+                        :pageSize="pageParam.pageSize"
+                        :show-total="(total, range) => `${range[0]}-${range[1]} of ${total} items`"
+                        class="mt-2 text-end" />
+                </div>
+            </div>
+        </div>
+    </a-card>
 </template>
 <script>
 import { defineComponent, ref, reactive } from "vue";
@@ -144,7 +102,7 @@ export default defineComponent({
         Object.keys(route.query).length > 0 ? route.query.PageNumber : 1,
       pageSize: Object.keys(route.query).length > 0 ? route.query.PageSize : 10,
       totalRecord: 0,
-      userName: Object.keys(route.query).length > 0 ? route.query.UserName : "",
+      producName: Object.keys(route.query).length > 0 ? route.query.UserName : "",
       statusFilter: false,
     });
     const columns = [
@@ -153,9 +111,9 @@ export default defineComponent({
         key: "index",
       },
       {
-        title: "Tên cửa hàng",
-        dataIndex: "userName",
-        key: "userName",
+        title: "Tên sản phẩm",
+        dataIndex: "producName",
+        key: "producName",
       },
       {
         title: "Ảnh sản phẩm",
@@ -163,9 +121,9 @@ export default defineComponent({
         key: "imageSp",
       },
       {
-        title: "Tên sản phẩm",
-        dataIndex: "fullName",
-        key: "fullName",
+        title: "Số lượng",
+        dataIndex: "quantity",
+        key: "quantity",
       },
       {
         title: "Giá",
@@ -243,7 +201,7 @@ export default defineComponent({
           Object.keys(route.query).length > 0 ? route.query.PageNumber : 1;
         pageParam.pageSize =
           Object.keys(route.query).length > 0 ? route.query.PageSize : 10;
-        pageParam.userName =
+        pageParam.producName =
           Object.keys(route.query).length > 0 ? route.query.UserName : "";
         pageParam.statusFilter = true;
         getUsers(pageParam);

@@ -59,6 +59,7 @@ export default defineComponent({
           ` https://charismatic-friendship-production.up.railway.app/api/v1/product/info/${productId}`
         );
         if (response.data.status === "OK") {
+          console.log(response.data)
           product.value = response.data.data;
         } else {
           console.error(response.data.message);

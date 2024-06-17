@@ -146,7 +146,7 @@ const adminRoutes = [
         component: () => import("../views/users/detailsOrderbyStore.vue"),
       },
       {
-        path: "order-by-user/:id",
+        path: "order-by-user/:id/customer/:customerId",
         name: "order-by-user",
         meta: { title: "Danh sách sản phẩm đã mua" },
         component: () => import("../views/users/orderByUser.vue"),
@@ -164,6 +164,13 @@ const adminRoutes = [
         meta: { title: "ProductByStore" },
         component: () => import("../views/users/storeProduct.vue"),
       },
+      {
+        path: "product/edit/:id",
+        name: "admin-product-edit",
+        meta: { title: "sửa - product" },
+        component: () => import("../views/users/editProduct.vue"),
+      },
+
       {
         path: "thanh-vien/them-moi",
         name: "admin-users-create",
@@ -196,12 +203,6 @@ const adminRoutes = [
         component: () => import("../views/users/createProduct.vue"),
       },
 
-      {
-        path: "product/edit/:id",
-        name: "admin-product-edit",
-        meta: { title: "sửa - product" },
-        component: () => import("../views/users/editProduct.vue"),
-      },
 
       {
         path: "danh-sach-store/them-moi",
