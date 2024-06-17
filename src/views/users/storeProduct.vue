@@ -28,15 +28,15 @@
                         <template v-if="column.key === 'index'">
                             <span>{{ index + 1 }}</span>
                         </template>
-                        <template v-if="column.key === 'userName'">
-                            <span>{{ record.storeName }}</span>
+                        <template v-if="column.key === 'producName'">
+                            <span>{{ record.productName }}</span>
                         </template>
                         <template v-if="column.key === 'imageSp'">
                             <img :style="{ width: '50px !important' }" :src="record.avatarProduct"
                                 :alt="record.avatarProduct">
                         </template>
-                        <template v-if="column.key === 'fullName'">
-                            <span>{{ record.productName }}</span>
+                        <template v-if="column.key === 'quantity'">
+                            <span>{{ record.quantity }}</span>
                         </template>
                         <template v-if="column.key === 'email'">
                             <span>{{ record.price }}</span>
@@ -77,160 +77,169 @@ import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
 import { message } from "ant-design-vue";
 import { useMenu } from "../../stores/use-menu.js";
-import { onUpdated, onMounted } from 'vue'
-import ApiViewData from '../../api/ApiViewData.js';
-import ApiUser from '../../api/ApiUser.js';
+import { onUpdated, onMounted } from "vue";
+import ApiViewData from "../../api/ApiViewData.js";
+import ApiUser from "../../api/ApiUser.js";
 import { useAuthStore } from "../../stores/auth.store.js";
 import axios from "axios";
 export default defineComponent({
-    setup() {
-        useMenu().onSelectedKeys(["admin-users"]);
-        const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
-        const router = useRouter();
-        const apiPrefix = import.meta.env.VITE_API_PREFIX;
-        const route = useRoute();
-        const errors = ref([]);
-        const users = ref([]);
-        const storeId = route.params.id;
-        console.log(storeId, 'storeId')
-        const storeId2 = ref(route.params.id);
-        console.log(storeId2._value, 'storeId2')
+  setup() {
+    useMenu().onSelectedKeys(["admin-users"]);
+    const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+    const router = useRouter();
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
+    const route = useRoute();
+    const errors = ref([]);
+    const users = ref([]);
+    const storeId = route.params.id;
+    console.log(storeId, "storeId");
+    const storeId2 = ref(route.params.id);
+    console.log(storeId2._value, "storeId2");
 
-        const pageParam = reactive({
-            current: (Object.keys(route.query).length > 0) ? route.query.PageNumber : 1,
-            pageNumber: (Object.keys(route.query).length > 0) ? route.query.PageNumber : 1,
-            pageSize: (Object.keys(route.query).length > 0) ? route.query.PageSize : 10,
-            totalRecord: 0,
-            userName: (Object.keys(route.query).length > 0) ? route.query.UserName : '',
-            statusFilter: false
-        });
-        const columns = [
-            {
-                title: "#",
-                key: "index",
-            },
-            {
-                title: "Tên cửa hàng",
-                dataIndex: "userName",
-                key: "userName",
-            },
-            {
-                title: "Ảnh sản phẩm",
-                dataIndex: "imageSp",
-                key: "imageSp",
-            },
-            {
-                title: "Tên sản phẩm",
-                dataIndex: "fullName",
-                key: "fullName",
-            },
-            {
-                title: "Giá",
-                key: "email",
-            },
+    const pageParam = reactive({
+      current: Object.keys(route.query).length > 0 ? route.query.PageNumber : 1,
+      pageNumber:
+        Object.keys(route.query).length > 0 ? route.query.PageNumber : 1,
+      pageSize: Object.keys(route.query).length > 0 ? route.query.PageSize : 10,
+      totalRecord: 0,
+      producName: Object.keys(route.query).length > 0 ? route.query.UserName : "",
+      statusFilter: false,
+    });
+    const columns = [
+      {
+        title: "#",
+        key: "index",
+      },
+      {
+        title: "Tên sản phẩm",
+        dataIndex: "producName",
+        key: "producName",
+      },
+      {
+        title: "Ảnh sản phẩm",
+        dataIndex: "imageSp",
+        key: "imageSp",
+      },
+      {
+        title: "Số lượng",
+        dataIndex: "quantity",
+        key: "quantity",
+      },
+      {
+        title: "Giá",
+        key: "email",
+      },
 
-            {
-                title: "Tác vụ",
-                key: "action",
-                fixed: "right",
-            },
-        ];
+      {
+        title: "Tác vụ",
+        key: "action",
+        fixed: "right",
+      },
+    ];
 
     const token = JSON.parse(localStorage.getItem("token"));
-        const getUsers = (args) => {
-            axios.get( `${apiPrefix}/api/v1/management/${storeId2._value}/product/view`,  {
-            headers: {
-              Authorization: `Bearer ${token}`, // Thêm token vào headers
-            },
-          }).then((response) => {
-                console.log(response.data.data, 'response')
-                users.value = response.data.data;
-            }).catch((error) => {
-                console.error(error)
-            })
-        };
-        const confirmRemove = (id) => {
-            ApiUser.DeleteById(id)
-                .then((response) => {
-                    console.log(response);
-                    if (response.status == 200) {
-                        message.success("Xóa thành công!");
-                        // router.push({ name: "admin-users" });
-                    }
-                    getUsers(pageParam);
-                })
-                .catch((error) => {
-                    message.error(error.message);
-                    if (error.response.data.hasOwnProperty('errors')) {
-                        errors.value = error.response.data.errors;
-                    } else {
-                        errors.value = error.response.data;
-                    }
-                });
-        };
-        const confirmBanned = (id) => {
-            ApiUser.BannedById(id).then((response) => {
-                if (response.status == 200) {
-                    message.success("Khóa thành công!");
-                } else {
-                    message.error("Lỗi! Tác vụ thực hiện không thành công.");
-                }
-                getUsers(pageParam);
-            })
-                .catch((error) => {
-                    message.error(error.message);
-                    if (error.response.data.hasOwnProperty('errors')) {
-                        errors.value = error.response.data.errors;
-                    } else {
-                        errors.value = error.response.data;
-                    }
-                });
-        };
-        //
-        onUpdated(() => {
-            //
-            if (Object.keys(route.query).length === 0) {
-                pageParam.current = (Object.keys(route.query).length > 0) ? route.query.PageNumber : 1;
-                pageParam.pageNumber = (Object.keys(route.query).length > 0) ? route.query.PageNumber : 1;
-                pageParam.pageSize = (Object.keys(route.query).length > 0) ? route.query.PageSize : 10;
-                pageParam.userName = (Object.keys(route.query).length > 0) ? route.query.UserName : '';
-                pageParam.statusFilter = true;
-                getUsers(pageParam);
-            }
+    const getUsers = (args) => {
+      axios
+        .get(`${apiPrefix}/api/v1/management/${storeId2._value}/product/view`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Thêm token vào headers
+          },
         })
-        onMounted(() => {
-            // chay lan dau tien
-            getUsers(pageParam);
+        .then((response) => {
+          console.log(response.data.data, "response");
+          users.value = response.data.data;
         })
-        //
-        function onChange(page, pageSize) {
-            pageParam.pageNumber = page;
-            pageParam.pageSize = pageSize;
-            //
-            pageParam.statusFilter = true;
-            getUsers(pageParam);
-        }
-        //
-        const clickFrmFilter = (event) => {
-            pageParam.statusFilter = true;
-            getUsers(pageParam);
-        }
-        //
-        return {
-            route,
-            router,
-            authStoreClaim,
-            errors,
-            users,
-            columns,
-            pageParam,
-            storeId2,
-            onChange,
-            clickFrmFilter,
-            confirmRemove,
-            confirmBanned
-        };
-        //
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+    const confirmRemove = (id) => {
+      ApiUser.DeleteById(id)
+        .then((response) => {
+          console.log(response);
+          if (response.status == 200) {
+            message.success("Xóa thành công!");
+            // router.push({ name: "admin-users" });
+          }
+          getUsers(pageParam);
+        })
+        .catch((error) => {
+          message.error(error.message);
+          if (error.response.data.hasOwnProperty("errors")) {
+            errors.value = error.response.data.errors;
+          } else {
+            errors.value = error.response.data;
+          }
+        });
+    };
+    const confirmBanned = (id) => {
+      ApiUser.BannedById(id)
+        .then((response) => {
+          if (response.status == 200) {
+            message.success("Khóa thành công!");
+          } else {
+            message.error("Lỗi! Tác vụ thực hiện không thành công.");
+          }
+          getUsers(pageParam);
+        })
+        .catch((error) => {
+          message.error(error.message);
+          if (error.response.data.hasOwnProperty("errors")) {
+            errors.value = error.response.data.errors;
+          } else {
+            errors.value = error.response.data;
+          }
+        });
+    };
+    //
+    onUpdated(() => {
+      //
+      if (Object.keys(route.query).length === 0) {
+        pageParam.current =
+          Object.keys(route.query).length > 0 ? route.query.PageNumber : 1;
+        pageParam.pageNumber =
+          Object.keys(route.query).length > 0 ? route.query.PageNumber : 1;
+        pageParam.pageSize =
+          Object.keys(route.query).length > 0 ? route.query.PageSize : 10;
+        pageParam.producName =
+          Object.keys(route.query).length > 0 ? route.query.UserName : "";
+        pageParam.statusFilter = true;
+        getUsers(pageParam);
+      }
+    });
+    onMounted(() => {
+      // chay lan dau tien
+      getUsers(pageParam);
+    });
+    //
+    function onChange(page, pageSize) {
+      pageParam.pageNumber = page;
+      pageParam.pageSize = pageSize;
+      //
+      pageParam.statusFilter = true;
+      getUsers(pageParam);
     }
+    //
+    const clickFrmFilter = (event) => {
+      pageParam.statusFilter = true;
+      getUsers(pageParam);
+    };
+    //
+    return {
+      route,
+      router,
+      authStoreClaim,
+      errors,
+      users,
+      columns,
+      pageParam,
+      storeId2,
+      onChange,
+      clickFrmFilter,
+      confirmRemove,
+      confirmBanned,
+    };
+    //
+  },
 });
 </script>

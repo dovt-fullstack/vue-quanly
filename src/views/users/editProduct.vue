@@ -79,9 +79,9 @@
               </a-form-item> -->
               <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
                 <a-button class="me-0 me-sm-2 mb-3 mb-sm-0">
-                  <router-link :to="{ name: 'admin-users' }">
+                  <a-button @click="goBack" class="me-0 me-sm-2 mb-3 mb-sm-0">
                     <span>Quay lại</span>
-                  </router-link>
+                  </a-button>
                 </a-button>
                 <a-button class="me-0 me-sm-2 mb-3 mb-sm-0 bg-info text-light" @click="resetForm">Reset</a-button>
                 <a-button type="primary" html-type="submit" class="bg-success" :loading=formState.loading>Lưu</a-button>
@@ -178,26 +178,35 @@ export default defineComponent({
       formRef.value.resetFields();
     };
 
-
+    const goBack = () => {
+      // Navigate back to the previous page
+      if (history.length > 1) {
+        // If there's history available, go back
+        history.go(-1);
+      } else {
+        // Otherwise, fallback to home or another default route
+        this.$router.push("/");
+      }
+    };
 
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-      `${apiPrefix}/api/v1/product/info/${productId}`
-    );
-    console.log(response.data.data, "response");
-    const data = response.data.data;
-    storeId = data.storeId;
-    productTypeId = data.productTypeId;
-    formState.productName = data.productName;
-    formState.price = data.price;
-    formState.quantity = data.quantity;
-    formState.discount = data.discount;
-    formState.status = data.status;
-    formState.description = data.description;
-    formState.productType = data.productType;
-    formState.avatarProduct = data.avatarProduct;
-    formState.loading = false
+          `${apiPrefix}/api/v1/product/info/${productId}`
+        );
+        console.log(response.data.data, "response");
+        const data = response.data.data;
+        storeId = data.storeId;
+        productTypeId = data.productTypeId;
+        formState.productName = data.productName;
+        formState.price = data.price;
+        formState.quantity = data.quantity;
+        formState.discount = data.discount;
+        formState.status = data.status;
+        formState.description = data.description;
+        formState.productType = data.productType;
+        formState.avatarProduct = data.avatarProduct;
+        formState.loading = false
       } catch (error) {
         console.error(error);
       }
@@ -294,9 +303,9 @@ export default defineComponent({
       } catch (error) {
         console.error("Error during form submission:", error);
         message.error("Có lỗi xảy ra khi sửa sản phẩm: " + error.message);
-      }finally {
-      formState.loading = false; // Tắt trạng thái chờ khi hoàn thành
-  }
+      } finally {
+        formState.loading = false; // Tắt trạng thái chờ khi hoàn thành
+      }
     };
 
     onMounted(() => {
@@ -315,6 +324,7 @@ export default defineComponent({
       resetForm,
       createUsers,
       previewFiles,
+      goBack,
       newImage,
       handleFileUpload
     };

@@ -146,7 +146,7 @@ const adminRoutes = [
         component: () => import("../views/users/detailsOrderbyStore.vue"),
       },
       {
-        path: "order-by-user/:id",
+        path: "order-by-user/:id/customer/:customerId",
         name: "order-by-user",
         meta: { title: "Danh sách sản phẩm đã mua" },
         component: () => import("../views/users/orderByUser.vue"),
