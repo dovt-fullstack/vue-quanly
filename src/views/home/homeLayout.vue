@@ -609,7 +609,7 @@ export default defineComponent({
     };
     const getTypeStore = () => {
       axios
-        .get(`${apiPrefix}/api/v1/management/${storeId}/info/view`, {
+        .get(`${apiPrefix}/api/v1/customer/${storeId}/info/view`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
