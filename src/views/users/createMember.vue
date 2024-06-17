@@ -70,6 +70,7 @@
     setup() {
       useMenu().onSelectedKeys(["admin-users"]);
       const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+      const apiPrefix = import.meta.env.VITE_API_PREFIX;
       const router = useRouter();
       const users = reactive({
         optionsLevelManage: [],
@@ -208,7 +209,7 @@
         }
         console.log('formState');
         console.log(formState, 'formState');
-        axios.post('https://charismatic-friendship-production.up.railway.app/api/v1/auth/register/user', newDataPost).then((response) => {
+        axios.post(`${apiPrefix}/api/v1/auth/register/user`, newDataPost).then((response) => {
           message.success("Tạo mới thành công!");
           router.push({ name: "admin-users" });
         }).catch((error) => {

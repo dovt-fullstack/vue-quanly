@@ -501,6 +501,7 @@ import { useRouter } from "vue-router";
 
 export default defineComponent({
     setup() {
+        const apiPrefix = import.meta.env.VITE_API_PREFIX;
         const authStore = useAuthStore();
         const router = useRouter();
 
@@ -532,7 +533,7 @@ export default defineComponent({
             };
             axios
                 .post(
-                    "https://charismatic-friendship-production.up.railway.app/api/v1/auth/authenticate",
+                    `${apiPrefix}/api/v1/auth/authenticate`,
                     newValue
                 )
                 .then((res) => {
@@ -560,7 +561,7 @@ export default defineComponent({
         }
         console.log('formState');
         console.log(formState, 'formState');
-        axios.post('https://charismatic-friendship-production.up.railway.app/api/v1/auth/register/user', newDataPost).then((response) => {
+        axios.post(`${apiPrefix}/api/v1/auth/register/user`, newDataPost).then((response) => {
           message.success("Tạo mới thành công!");
           router.push({ name: "login" });
 
@@ -577,7 +578,7 @@ export default defineComponent({
             }
             console.log('formState');
             console.log(newDataPost, 'formState');
-            axios.post('https://charismatic-friendship-production.up.railway.app/api/v1/auth/register/shipper', newDataPost).then((response) => {
+            axios.post(`${apiPrefix}/api/v1/auth/register/shipper`, newDataPost).then((response) => {
                 message.success("Tạo mới thành công!");
                 router.push({ name: "login" });
             }).catch((error) => {
@@ -593,7 +594,7 @@ export default defineComponent({
             }
             console.log('formState');
             console.log(formState, 'formState');
-            axios.post('https://charismatic-friendship-production.up.railway.app/api/v1/auth/register/manager', newDataPost).then((response) => {
+            axios.post(`${apiPrefix}/api/v1/auth/register/manager`, newDataPost).then((response) => {
                 message.success("Tạo mới thành công!");
                 router.push({ name: "login" });
 

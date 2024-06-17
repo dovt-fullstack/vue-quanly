@@ -119,6 +119,7 @@ export default defineComponent({
     useMenu().onSelectedKeys(["admin-users"]);
     const router = useRouter();
     const route = useRoute();
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const productId = route.params.id;
     const formRef = ref();
     const errors = ref({});
@@ -187,7 +188,7 @@ export default defineComponent({
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/product/info/${productId}`
+           `${apiPrefix}/api/v1/product/info/${productId}`
         );
         console.log(response.data.data, "response");
         const data = response.data.data;
@@ -201,7 +202,7 @@ export default defineComponent({
       }
       try{
         const response = await axios.get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1//management/{storeid}/producttype/view`
+           `${apiPrefix}/api/v1//management/{storeid}/producttype/view`
         );
         console.log(response.data.data, "response");
         const data = response.data.data;
@@ -218,7 +219,7 @@ export default defineComponent({
       formData.append("price", formState.price);
       axios
         .put(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/product/edit`,
+           `${apiPrefix}/api/v1/management/${id}/product/edit`,
           formData,
           {
             headers: {

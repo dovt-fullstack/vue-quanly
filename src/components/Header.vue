@@ -148,6 +148,7 @@ import { useRoute } from "vue-router";
 
 export default defineComponent({
   setup() {
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const authStore = useAuthStore();
     const route = useRoute();
     const userLocal = JSON.parse(localStorage.getItem("auth"));

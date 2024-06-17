@@ -76,6 +76,7 @@ export default defineComponent({
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const router = useRouter();
     const users = reactive({
       optionsLevelManage: [],
@@ -113,7 +114,7 @@ export default defineComponent({
       },
     };
     const resetForm = () => {
-      axios.post(`https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/producttype/view`, formData).then((response) => {
+      axios.post( `${apiPrefix}/api/v1/management/${id}/producttype/view`, formData).then((response) => {
         message.success("Tạo mới thành công!");
         router.push({ name: "importExport", params: { id: id } });
       }).catch((error) => {
@@ -144,7 +145,7 @@ export default defineComponent({
 
 
 
-      axios.post(`https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/import/insert`, formData).then((response) => {
+      axios.post( `${apiPrefix}/api/v1/management/${id}/import/insert`, formData).then((response) => {
         message.success("Tạo mới thành công!");
         router.push({ name: "importExport", params: { id: id } });
       }).catch((error) => {

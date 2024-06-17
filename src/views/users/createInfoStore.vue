@@ -97,6 +97,7 @@ export default defineComponent({
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const router = useRouter();
     const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
 
@@ -211,7 +212,7 @@ export default defineComponent({
       //  http://localhost:9000/api/v1/management/store/1/insert
       axios
         .post(
-          "https://charismatic-friendship-production.up.railway.app/api/v1/management/store/1/insert",
+          `${apiPrefix}/api/v1/management/store/1/insert`,
           formData,
           {
             headers: {

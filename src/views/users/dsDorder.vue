@@ -120,6 +120,7 @@ export default defineComponent({
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const router = useRouter();
     const route = useRoute();
     const errors = ref([]);
@@ -146,7 +147,7 @@ const isDrawerVisible = ref(false);
         };
         const getIdDh = async (idI) => {
             showDrawer()
-            const { data } = await axios.get(`https://charismatic-friendship-production.up.railway.app/api/v1/shipper/orderdetail?orderid=${idI}`, {
+            const { data } = await axios.get( `${apiPrefix}/api/v1/shipper/orderdetail?orderid=${idI}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -200,7 +201,7 @@ const isDrawerVisible = ref(false);
     const getUsers = (args) => {
       axios
         .get(
-          "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/orderlist/view",
+          `${apiPrefix}/api/v1/shipper/orderlist/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -280,8 +281,8 @@ const isDrawerVisible = ref(false);
     const giveOrder = async (orderId) => {
       try {
         const data = await axios.get(
-          "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/changestatus1/" +
-            orderId,
+          `${apiPrefix}p/api/v1/shipper/changestatus1/${orderId}`
+            ,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -296,8 +297,8 @@ const isDrawerVisible = ref(false);
     const doneOrder = async (orderId) => {
       try {
         const data = await axios.get(
-          "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/changestatus2/" +
-            orderId,
+          `${apiPrefix}/api/v1/shipper/changestatus2/${orderId}`
+            ,
           {
             headers: {
               Authorization: `Bearer ${token}`,

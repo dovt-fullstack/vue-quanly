@@ -98,6 +98,7 @@
     setup() {
       useMenu().onSelectedKeys(["admin-users"]);
       const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
+      const apiPrefix = import.meta.env.VITE_API_PREFIX;
       const router = useRouter();
       const route = useRoute();
       const errors = ref([]);
@@ -153,7 +154,7 @@
       const getUsers = (args) => {
         axios
           .get(
-            "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/orderlist/taken",
+            `${apiPrefix}/api/v1/shipper/orderlist/taken`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -233,11 +234,11 @@
       const giveOrder = async (orderId) => {
         try {
           const data = await axios.get(
-            "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/changestatus1/" +
-              orderId,
+            `${apiPrefix}/api/v1/shipper/changestatus1/${orderId}`
+              ,
             {
               headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer${token}` ,
               },
             }
           );
@@ -249,8 +250,8 @@
       const doneOrder = async (orderId) => {
         try {
           const data = await axios.get(
-            "https://charismatic-friendship-production.up.railway.app/api/v1/shipper/changestatus2/" +
-              orderId,
+            `${apiPrefix}/api/v1/shipper/changestatus2/${orderId}`
+              ,
             {
               headers: {
                 Authorization: `Bearer ${token}`,

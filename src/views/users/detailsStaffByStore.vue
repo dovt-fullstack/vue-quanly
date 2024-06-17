@@ -170,6 +170,7 @@ import axios from "axios";
 export default defineComponent({
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
     const router = useRouter();
     const route = useRoute();
@@ -216,7 +217,7 @@ export default defineComponent({
     const getUsers = (args) => {
       axios
         .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${id}/customer/view`,{
+           `${apiPrefix}/api/v1/management/${id}/customer/view`,{
             headers: {
               Authorization: `Bearer ${token}`, // Thêm token vào headers
             },

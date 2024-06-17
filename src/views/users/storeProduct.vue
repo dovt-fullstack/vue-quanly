@@ -129,6 +129,7 @@ export default defineComponent({
     useMenu().onSelectedKeys(["admin-users"]);
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
     const router = useRouter();
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const route = useRoute();
     const errors = ref([]);
     const users = ref([]);
@@ -181,14 +182,11 @@ export default defineComponent({
     const token = JSON.parse(localStorage.getItem("token"));
     const getUsers = (args) => {
       axios
-        .get(
-          `https://charismatic-friendship-production.up.railway.app/api/v1/management/${storeId2._value}/product/view`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Thêm token vào headers
-            },
-          }
-        )
+        .get(`${apiPrefix}/api/v1/management/${storeId2._value}/product/view`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Thêm token vào headers
+          },
+        })
         .then((response) => {
           console.log(response.data.data, "response");
           users.value = response.data.data;
