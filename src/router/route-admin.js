@@ -165,6 +165,13 @@ const adminRoutes = [
         component: () => import("../views/users/storeProduct.vue"),
       },
       {
+        path: "product/edit/:id",
+        name: "admin-product-edit",
+        meta: { title: "sửa - product" },
+        component: () => import("../views/users/editProduct.vue"),
+      },
+
+      {
         path: "thanh-vien/them-moi",
         name: "admin-users-create",
         meta: { title: "Thêm mới - Thành viên" },
@@ -196,12 +203,6 @@ const adminRoutes = [
         component: () => import("../views/users/createProduct.vue"),
       },
 
-      {
-        path: "product/edit/:id",
-        name: "admin-product-edit",
-        meta: { title: "sửa - product" },
-        component: () => import("../views/users/editProduct.vue"),
-      },
 
       {
         path: "danh-sach-store/them-moi",

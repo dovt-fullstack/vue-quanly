@@ -43,7 +43,7 @@
                         </template>
                         <template v-if="column.key === 'action' && authStoreClaim !== null">
                             <a-space warp>
-                                <router-link :to="{ name: 'admin-product-edit', params: { id: record.id } }">
+                                <router-link :to="{ name: 'admin-product-edit', params: { id: record.productId} }">
                                     <a-button type="dashed" class="me-2 text-primary" size="small" title="Sửa">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a-button>
