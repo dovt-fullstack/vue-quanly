@@ -260,7 +260,6 @@ export default defineComponent({
         fixed: "right",
       },
     ];
-    // api/v1/management/1/order/view
 
     const getUsers = (args) => {
       axios

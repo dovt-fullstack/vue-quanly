@@ -36,15 +36,6 @@
               class="form-group position-relative"
               id="username-input-wrapper"
             >
-
-              <!-- <input
-                class="form-input country-phone-input valid"
-                id="username"
-                name="username"
-                placeholder="Email/Số điện thoại của bạn"
-                value=""
-                aria-invalid="false"
-              /> -->
               <a-form-item
                 name="username"
                 :rules="[
@@ -70,14 +61,6 @@
               </div>
             </div>
             <div class="form-group" id="password-input-wrapper">
-              <!-- <input
-                class="form-input"
-                id="password"
-                name="password"
-                placeholder="Mật khẩu đăng nhập cửa hàng"
-                type="password"
-                autocomplete="current-password"
-              /> -->
               <a-form-item
                 name="password"
                 autocomplete="off"
@@ -96,12 +79,6 @@
                 >
                 </a-input-password>
               </a-form-item>
-              <!-- <a href="javascript:;" onclick="Components.Common.toggleShowPassword(this)"
-                                class="input-inline-button">
-                                <img class="icon-eye-slash"
-                                    src="https://sapo.dktcdn.net/sso-service/images/eye-slash.svg" />
-                                <img class="icon-eye" src="https://sapo.dktcdn.net/sso-service/images/eye.svg" />
-                            </a> -->
               <div class="has-error padding-md-left padding-sm-top">
                 <span class="help-block">
                   <label
@@ -117,7 +94,7 @@
             <div class="col-6 forget-pass">
               <a
                 href="javascript:void(0)"
-                onclick="login.onForgotPassword()"
+                onclick="onForgotPassword()"
                 class="forgot-pos-password"
                 >Quên mật khẩu</a
               >
@@ -170,21 +147,9 @@
             <span class="social-login__label">Hoặc đăng nhập với</span>
             <div class="social-login__btn-group mt-3">
               <a
-                class="social-login__item social-login--facebook"
-                id="login-with-fb"
-                href="javascript:void(0)"
-              >
-                <img
-                  src="https://sapo.dktcdn.net/sso-service/images/svg_sociallogin_fb_new.svg"
-                  alt="sapo"
-                  class="fade show"
-                />
-              </a>
-              <a
               href = "http://localhost:9000/oauth2/authorization/google"
                 class="social-login__item social-login--google"
                 id="login-with-gg"
-              
               >
                 <img
                   src="https://sapo.dktcdn.net/sso-service/images/svg_sociallogin_gg_new.svg"
@@ -196,8 +161,6 @@
           </div>
         </a-form>
       </div>
-      
-      
     </div>
   </div>
 </template>
@@ -267,7 +230,7 @@ export default defineComponent({
             window.location.href = "/trang-chu-stores";
           } else if (res.data.role == "MANAGER") {
             if (res.data.storeId == 0) {
-              window.location.href = "/product-type/info";
+              window.location.href = "/store/info-them-moi";
             } else {
               window.location.href = "/doanh-thu-store/" + res.data.storeId;
             }

@@ -208,34 +208,7 @@ export default defineComponent({
                     </div>
                 </div>
             </div>
-            <div class="forgot-pass-view hidden">
-                <div class="header">
-
-
-                    <img class="fade show sapo-logo" alt="Sapo"
-                        src="https://sapo.dktcdn.net/sso-service/images/Sapo-logo.svg" />
-                    <div class="title mt-3">
-                        <h1 class="title-center h4">Bạn quên mật khẩu?</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="typing-domain-view hidden">
-                <div class="header">
-
-
-                    <img class="fade show sapo-logo" alt="Sapo"
-                        src="https://sapo.dktcdn.net/sso-service/images/Sapo-logo.svg" />
-                    <div class="title mt-3">
-                        <h1 class="title-center h4">Đăng nhập tài khoản</h1>
-                    </div>
-                </div>
-            </div>
-
-            <div class="recently-login-view recently-login-block hidden">
-                <div class="recently-login-block--another-acc text-right pb-5">
-                    <a href="javascript:;" class="recently-login-block--another-acc-action">Đăng nhập tài khoản khác</a>
-                </div>
-            </div>
+            
             <div class="login-form-view login-form-block">
                 <div class="form-group px-3 text-center hidden" id="domain-info-wrapper"
                     style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden">
@@ -353,14 +326,7 @@ export default defineComponent({
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row margin-sm-bottom">
-                        <div class="form-checkbox checkbox-confirm d-flex col-6"></div>
-                        <div class="col-6 forget-pass">
-                            <a href="javascript:void(0)" onclick="login.onForgotPassword()"
-                                class="forgot-pos-password">Quên
-                                mật khẩu</a>
-                        </div>
-                    </div>
+
                     <div class="mb-3 justify-content-center d-none" id="g-recaptcha-wrapper">
                         <div class="g-recaptcha" data-sitekey="6LcyV7InAAAAAK-HaWzFi2P6qGdW0jrspU54bMxo">
                             <div style="width: 304px; height: 78px">
@@ -396,97 +362,10 @@ export default defineComponent({
                         </button>
 
                     </div>
-                    <div class="social-login mt-3 text-center">
-                        <span class="social-login__label">Hoặc đăng nhập với</span>
-                        <div class="social-login__btn-group mt-3">
-                            <a class="social-login__item social-login--facebook" id="login-with-fb"
-                                href="javascript:void(0)">
-                                <img src="https://sapo.dktcdn.net/sso-service/images/svg_sociallogin_fb_new.svg"
-                                    alt="sapo" class="fade show" />
-                            </a>
-                            <a class="social-login__item social-login--google" id="login-with-gg"
-                                href="javascript:void(0)">
-                                <img src="https://sapo.dktcdn.net/sso-service/images/svg_sociallogin_gg_new.svg"
-                                    alt="sapo" class="fade show" />
-                            </a>
-                        </div>
-                    </div>
+                
                 </a-form>
             </div>
-            <div class="forgot-pass-view forgot-pass-block hidden">
-                <form id="form-forgot-pass">
-                    <div class="form-group domain-input-wrapper position-relative">
-                        <input class="form-input" name="forgot-pass-domain" id="forgot-pass-domain-input"
-                            placeholder="Nhập tên domain cửa hàng của bạn" />
-                        <div class="suffix-domain-select-wrapper hidden">
-                            <button class="btn dropdown-toggle suffix-domain-select-item__btn" type="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="suffix-domain-btn_text">.mysapogo.com</span>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item suffix-domain-select-item" href="javascript:;"
-                                    onclick="login.changeSuffixDomain('mysapogo.com')">mysapogo.com</a>
-                                <a class="dropdown-item suffix-domain-select-item" href="javascript:;"
-                                    onclick="login.changeSuffixDomain('mysapo.net')">mysapo.net</a>
-                            </div>
-                            <input class="hidden suffix-domain" name="suffix-domain" value="mysapogo.com" />
-                        </div>
-                        <span class="subdomain-inline">.mysapogo.com</span>
-                    </div>
-                    <div class="text-center mb-3" style="clear: both">
-                        <button class="btn-login" type="submit" disabled="" id="forgot-pass-submit">
-                            Quên mật khẩu
-                        </button>
-                    </div>
-                </form>
-            </div>
-            <div class="typing-domain-view forgot-pass-block hidden">
-                <div id="forgot-domain-notification"></div>
-                <form id="form-typing-domain">
-                    <div class="form-group">
-                        <div class="form-group domain-input-wrapper" id="add-domain-input-wrapper"
-                            style="position: relative">
-                            <input class="form-input" id="typing-domain-input" name="domain"
-                                placeholder="Nhập domain cửa hàng của bạn" value="" />
-                            <div class="suffix-domain-select-wrapper hidden">
-                                <button id="suffix-domain-btn"
-                                    class="btn dropdown-toggle suffix-domain-select-item__btn" type="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="suffix-domain-btn_text">.mysapogo.com</span>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item suffix-domain-select-item" href="javascript:;"
-                                        onclick="login.changeSuffixDomain('mysapogo.com')">mysapogo.com</a>
-                                    <a class="dropdown-item suffix-domain-select-item" href="javascript:;"
-                                        onclick="login.changeSuffixDomain('mysapo.net')">mysapo.net</a>
-                                </div>
-                            </div>
-                            <span class="subdomain-inline">.mysapogo.com</span>
-                            <input id="suffix-domain" class="hidden" name="suffix-domain" value="mysapogo.com" />
-                            <div class="has-error padding-md-left padding-sm-top">
-                                <span class="help-block">
-                                    <label for="domain" class="help-block field-validation-valid"></label>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row margin-sm-bottom">
-                        <div class="form-checkbox checkbox-confirm d-flex col-6"></div>
-                        <div class="col-6 forget-pass">
-                            <a href="javascript:void(0)" id="forgot-store-link" onclick="login.onForgotDomain()"
-                                class="forgot-pos-password enabled">Quên domain cửa hàng?</a>
-                        </div>
-                    </div>
-                    <div class="text-center mb-3" style="clear: both">
-                        <button class="btn-login" type="submit" id="typing-domain-submit">
-                            Đăng nhập
-                        </button>
-                    </div>
-                </form>
-                <form action="/forgot-stores" method="post" id="form-forgot-store">
-                    <input type="text" name="email" hidden="" />
-                </form>
-            </div>
+            
         </div>
     </div>
 </template>
@@ -559,16 +438,23 @@ export default defineComponent({
                 email: formState.username,
                 password: formState.password
         }
-        console.log('formState');
-        console.log(formState, 'formState');
-        axios.post(`${apiPrefix}/api/v1/auth/register/user`, newDataPost).then((response) => {
-          message.success("Tạo mới thành công!");
-          router.push({ name: "login" });
-
-        }).catch((error) => {
-          console.log(error)
+    axios.post(`${apiPrefix}/api/v1/auth/register/user`, newDataPost)
+        .then((response) => {
+            message.success("Tạo mới thành công!");
+            router.push({ name: "login" });
+            console.log(response.message);
         })
+        .catch((error) => {
+            console.log(123);
+            if (error.response && error.response.data && error.response.data.message) {
+                showErrorToast('Thất bại!', error.response.data.message);
+            } else {
+                showErrorToast('Thất bại!', 'Đã xảy ra lỗi không xác định.');
+            }
+        });
         }
+
+
         const resigterShipper = async () => {
             const newDataPost = {
                 firstName: formState.firstName,
@@ -576,15 +462,29 @@ export default defineComponent({
                 email: formState.username,
                 password: formState.password
             }
-            console.log('formState');
             console.log(newDataPost, 'formState');
-            axios.post(`${apiPrefix}/api/v1/auth/register/shipper`, newDataPost).then((response) => {
+            axios.post(`${apiPrefix}/api/v1/auth/register/shipper`, newDataPost)
+            .then((response) => {
                 message.success("Tạo mới thành công!");
                 router.push({ name: "login" });
             }).catch((error) => {
-                console.log(error)
-            })
+            console.log(error);
+            if (error.response && error.response.data && error.response.data.message) {
+                showErrorToast('Thất bại!', error.response.data.message);
+            } else {
+                showErrorToast('Thất bại!', 'Đã xảy ra lỗi không xác định.');
+            }
+        });
         }
+
+
+        
+        const showErrorToast = (title, content) => {
+      message.error({
+        content: content,
+        duration: 2,
+      });
+    };
         const resigterManager = async () => {
             const newDataPost = {
                 firstName: formState.firstName,
@@ -599,8 +499,13 @@ export default defineComponent({
                 router.push({ name: "login" });
 
             }).catch((error) => {
-                console.log(error)
-            })
+            console.log(error);
+            if (error.response && error.response.data && error.response.data.message) {
+                showErrorToast('Thất bại!', error.response.data.message);
+            } else {
+                showErrorToast('Thất bại!', 'Đã xảy ra lỗi không xác định.');
+            }
+        });
         }
         //
         return {
@@ -6929,51 +6834,52 @@ a.close.disabled {
 }
 
 .toast {
-    max-width: 350px;
-    overflow: hidden;
-    font-size: .875rem;
-    background-color: hsla(0, 0%, 100%, .85);
-    background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, .1);
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    opacity: 0;
-    border-radius: .25rem
+  max-width: 350px;
+  overflow: hidden;
+  font-size: 0.875rem;
+  background-color: hsla(0, 0%, 100%, 0.85);
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  border-radius: 0.25rem;
 }
 
 .toast:not(:last-child) {
-    margin-bottom: .75rem
+  margin-bottom: 0.75rem;
 }
 
 .toast.showing {
-    opacity: 1
+  opacity: 1;
 }
 
 .toast.show {
-    display: block;
-    opacity: 1
+  display: block;
+  opacity: 1;
 }
 
 .toast.hide {
-    display: none
+  display: none;
 }
 
 .toast-header {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    padding: .25rem .75rem;
-    color: #6c757d;
-    background-color: hsla(0, 0%, 100%, .85);
-    background-clip: padding-box;
-    border-bottom: 1px solid rgba(0, 0, 0, .05)
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  color: #6c757d;
+  background-color: hsla(0, 0%, 100%, 0.85);
+  background-clip: padding-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .toast-body {
-    padding: .75rem
+  padding: 0.75rem;
 }
+
 
 .modal-open {
     overflow: hidden

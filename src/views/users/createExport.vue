@@ -149,10 +149,7 @@ export default defineComponent({
       formData.append("quantity", formState.quantity);
       formData.append("priceOut", formState.priceOut);
       formData.append("producttypename", formState.producttypename);
-      // https://charismatic-friendship-production.up.railway.app/api/v1/management/1/import/insert
-      // https://charismatic-friendship-production.up.railway.app/api/v1/management/1/import/insert
-      // https://charismatic-friendship-production.up.railway.app/api/v1/management/{storeid}/producttype/view
-
+      
 
 
       axios.post( `${apiPrefix}/api/v1/management/${id}/import/insert`, formData,

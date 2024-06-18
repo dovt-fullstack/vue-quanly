@@ -15,18 +15,24 @@
   import axios from "axios";
   const token = JSON.parse(localStorage.getItem("token"));
   const apiPrefix = import.meta.env.VITE_API_PREFIX;
-
+  const auth = localStorage.getItem("auth");
+  const storeId = JSON.parse(auth).storeId;
   export default defineComponent({
+
+
 
     data() {
       return {
         store: {}
       };
     },
+
+
+
     async created() {
       try {
         const response = await axios.get(
-           `${apiPrefix}/api/v1/management/1/info/view`,
+           `${apiPrefix}/api/v1/management/${storeId}/info/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

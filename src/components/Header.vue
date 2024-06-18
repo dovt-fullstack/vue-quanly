@@ -80,7 +80,7 @@
                   vertical-align: middle;
                   white-space: nowrap;
                 "
-                ><span>{{ userLocal?.lastname[0] }}</span></span
+                ><span>{{ userLocal && userLocal.lastname ? userLocal.lastname.charAt(0) : '' }}</span></span
               >
             </div>
           </div>
