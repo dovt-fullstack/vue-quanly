@@ -507,7 +507,7 @@
 
                     <div class="MuiListItemText-root menuItemTitle">
                       <a
-                        href="/importExport/1"
+                      :href="'/importExport/' + storeId.storeId"
                         class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                         >Hoá đơn</a
                       >
@@ -534,7 +534,9 @@
                     </div>
                     <div class="MuiListItemText-root menuItemTitle">
                       <a
-                        href="/store/staff/1"
+                        :href="'/store/staff/'+ storeId.storeId"
+                      
+
                         class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                         >Khách hàng</a
                       >
@@ -558,7 +560,8 @@
 
                     <div class="MuiListItemText-root menuItemTitle">
                       <a
-                        href="/doanh-thu-store/1"
+                      
+                       :href="'/doanh-thu-store/' + storeId.storeId"
                         class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                         >Doanh thu</a
                       >
@@ -582,7 +585,7 @@
 
                     <div class="MuiListItemText-root menuItemTitle">
                       <a
-                        href="/ProductByStore/1"
+                        :href="'/ProductByStore/'+ storeId.storeId"
                         class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                         >Sản phẩm</a
                       >
@@ -606,7 +609,7 @@
 
                     <div class="MuiListItemText-root menuItemTitle">
                       <a
-                        href="/danh-sach-order-store/1"
+                        :href="'/danh-sach-order-store/' + storeId.storeId"
                         class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                         >Đơn hàng</a
                       >
@@ -725,9 +728,11 @@ export default {
       this.$router.push({ name: "ProductByStore", params: { storeId } });
     },
   },
+
   data() {
     return {
       role: null,
+      storeId : JSON.parse(localStorage.getItem("auth"))
     };
   },
 

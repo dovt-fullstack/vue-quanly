@@ -37,7 +37,7 @@
                         </template>
                         <template v-if="column.key === 'action' && authStoreClaim !== null">
 
-                            <a-button @click="getIdDh(record.orderDetailId)" type="dashed" size="small" title="Sửa">
+                            <a-button @click="getIdDh(record.orderDetailId)" type="dashed" size="small" >
                                 Chi tiết
                             </a-button>
                             <a-button title="Khóa" @click="doneOrder(record.orderDetailId)" type="dashed" size="small"
