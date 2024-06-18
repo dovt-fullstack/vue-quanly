@@ -570,7 +570,11 @@ export default defineComponent({
             } else {
               window.location.href = "/doanh-thu-store/" + res.data.storeId;
             }
-          } else {
+          } else if (res.data.role == "SHIPPER"){
+            window.location.href = "/danh-sach-don";
+          }
+          
+          else {
             window.location.href = "/danh-sach-store";
           }
         })

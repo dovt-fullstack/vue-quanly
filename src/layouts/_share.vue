@@ -12,7 +12,7 @@
             <div class="MuiBox-root jss157 menuTopHeader">
               <div class="MuiBox-root jss158 menuTopLogo">
                 <a
-                  href="/"
+                  href="/dashboards"
                   style="color: white; padding-left: 20px"
                   class="MuiTypography-root MuiTypography-h3"
                   >Tổng quan</a
@@ -103,7 +103,7 @@
                     </div>
                     <div class="MuiListItemText-root menuItemTitle">
                       <span
-                        @click="navigateTo('danh-sach-don-accept')"
+                        @click="navigateTo('danh-sach-don-da-nhan')"
                         class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                         >Đơn đã nhận</span
                       >
@@ -144,7 +144,7 @@
                     </div>
                     <div class="MuiListItemText-root menuItemTitle">
                       <span
-                        @click="navigateTo('danh-sach-don-accept-o')"
+                        @click="navigateTo('danh-sach-don-da-giao')"
                         class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                         >Đơn đã giao</span
                       >

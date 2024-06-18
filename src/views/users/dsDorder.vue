@@ -9,12 +9,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <a-table
-          :dataSource="users"
-          :columns="columns"
-          :scroll="{ x: 576 }"
-          :pagination="false"
-        >
+        <a-table :dataSource="users" :columns="columns" :scroll="{ x: 576 }" :pagination="false">
           <template #bodyCell="{ column, index, record }">
             <template v-if="column.key === 'index'">
               <span>{{ index + 1 }}</span>
@@ -32,11 +27,7 @@
               <span>{{ record.productName }}</span>
             </template>
             <template v-if="column.key === 'email3'">
-              <img
-                :style="{ width: '50px !important' }"
-                :src="record.productImg"
-                :alt="record.productImg"
-              />
+              <img :style="{ width: '50px !important' }" :src="record.productImg" :alt="record.productImg" />
             </template>
             <template v-if="column.key === 'email4'">
               <span>{{ record.priceTotal?.toLocaleString() }} VND</span>
@@ -44,19 +35,13 @@
             <template v-if="column.key === 'action' && authStoreClaim !== null">
             </template>
             <template v-if="column.key === 'action' && authStoreClaim !== null">
-           
+
               <a-button @click="getIdDh(record.orderDetailId)" type="dashed" size="small" title="Sửa">
-                                Chi tiết
-                            </a-button>
-                <a-button
-                  @click="giveOrder(record.orderDetailId)"
-                  type="dashed"
-                 
-                  size="small"
-                  title="Sửa"
-                >
-                  Nhân đơn
-                </a-button>
+                Chi tiết
+              </a-button>
+              <a-button @click="giveOrder(record.orderDetailId)" type="dashed" size="small" title="Sửa">
+                Nhận đơn
+              </a-button>
               <!-- <a-button
                 title="Khóa"
                 @click="doneOrder(record.orderDetailId)"
@@ -71,32 +56,25 @@
           </template>
         </a-table>
         <div class="col-12">
-          <a-pagination
-            @change="onChange"
-            v-model:current="pageParam.current"
-            :total="pageParam.totalRecord"
-            :pageSize="pageParam.pageSize"
-            :show-total="
-              (total, range) => `${range[0]}-${range[1]} of ${total} items`
-            "
-            class="mt-2 text-end"
-          />
+          <a-pagination @change="onChange" v-model:current="pageParam.current" :total="pageParam.totalRecord"
+            :pageSize="pageParam.pageSize" :show-total="(total, range) => `${range[0]}-${range[1]} of ${total} items`
+          " class="mt-2 text-end" />
         </div>
       </div>
     </div>
   </a-card>
   <a-drawer title="Chi tiết" :visible="isDrawerVisible" :width="850" @close="handleClose" :destroyOnClose="true">
-        <div class="giohang orderhome">
-            <p style="color: black;">Tên khách hàng : {{ dataId.customerName }}</p>
-            <p>Số điện thoại : {{ dataId.customerPhone }}</p>
-            <p>Tổng tiền :{{ dataId.priceTotal }}</p>
-            <p>Tên sản phẩm :{{ dataId.productName }}</p>
-            <p>Số lượng :{{ dataId.quantity }}</p>
-            <p>Địa chỉ :{{ dataId.address }}</p>
+    <div class="giohang orderhome">
+      <p style="color: black;">Tên khách hàng : {{ dataId.customerName }}</p>
+      <p>Số điện thoại : {{ dataId.customerPhone }}</p>
+      <p>Tổng tiền :{{ dataId.priceTotal }}</p>
+      <p>Tên sản phẩm :{{ dataId.productName }}</p>
+      <p>Số lượng :{{ dataId.quantity }}</p>
+      <p>Địa chỉ :{{ dataId.address }}</p>
 
 
-        </div>
-    </a-drawer>
+    </div>
+  </a-drawer>
 </template>
 <script>
 import { defineComponent, ref, reactive } from "vue";
@@ -111,12 +89,12 @@ import { useAuthStore } from "../../stores/auth.store.js";
 import axios from "axios";
 export default defineComponent({
   components: {
-        "a-form": Form,
-        "a-form-item": Form.Item,
-        "a-drawer": Drawer,
-        "a-button": Button,
-        "a-input-number": InputNumber,
-    },
+    "a-form": Form,
+    "a-form-item": Form.Item,
+    "a-drawer": Drawer,
+    "a-button": Button,
+    "a-input-number": InputNumber,
+  },
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
@@ -128,7 +106,7 @@ export default defineComponent({
     const dataId = ref({});
     const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
 
-const isDrawerVisible = ref(false);
+    const isDrawerVisible = ref(false);
     const pageParam = reactive({
       current: Object.keys(route.query).length > 0 ? route.query.PageNumber : 1,
       pageNumber:
@@ -140,26 +118,26 @@ const isDrawerVisible = ref(false);
     });
 
     const showDrawer = () => {
-            isDrawerVisible.value = true;
-        };
-        const handleClose = () => {
-            isDrawerVisible.value = false;
-        };
-        const getIdDh = async (idI) => {
-            showDrawer()
-            const { data } = await axios.get( `${apiPrefix}/api/v1/shipper/orderdetail?orderid=${idI}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            if (data.status === "OK") {
-                dataId.value = data.data
-                console.log(dataId.data, 'dataId.data')
-            } else {
-                console.error(data.message);
-            }
+      isDrawerVisible.value = true;
+    };
+    const handleClose = () => {
+      isDrawerVisible.value = false;
+    };
+    const getIdDh = async (idI) => {
+      showDrawer()
+      const { data } = await axios.get(`${apiPrefix}/api/v1/shipper/orderdetail?orderid=${idI}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      if (data.status === "OK") {
+        dataId.value = data.data
+        console.log(dataId.data, 'dataId.data')
+      } else {
+        console.error(data.message);
+      }
 
-        }
+    }
     const columns = [
       {
         title: "#",
@@ -280,25 +258,28 @@ const isDrawerVisible = ref(false);
     };
     const giveOrder = async (orderId) => {
       try {
+
         const data = await axios.get(
-          `${apiPrefix}p/api/v1/shipper/changestatus1/${orderId}`
-            ,
+          `${apiPrefix}/api/v1/shipper/changestatus1/${orderId}`
+          ,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
+        console.log(data)
+        window.location.href = "/danh-sach-don-da-nhan";
         message.success("success");
       } catch (e) {
-        message.error(e.response.data.message);
+        message.error(e.response.data);
       }
     };
     const doneOrder = async (orderId) => {
       try {
         const data = await axios.get(
           `${apiPrefix}/api/v1/shipper/changestatus2/${orderId}`
-            ,
+          ,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -359,10 +340,10 @@ const isDrawerVisible = ref(false);
       giveOrder,
       doneOrder,
       isDrawerVisible,
-            showDrawer,
-            handleClose,
-            dataId,
-            getIdDh
+      showDrawer,
+      handleClose,
+      dataId,
+      getIdDh
     };
     //
   },

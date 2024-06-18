@@ -42,14 +42,14 @@ const adminRoutes = [
         component: () => import("../views/users/dsDorder.vue"),
       },
       {
-        path: "danh-sach-don-accept",
-        name: "danh-sach-don-accept",
+        path: "danh-sach-don-da-nhan",
+        name: "danh-sach-don-da-nhan",
         meta: { title: "Dánh sách đơn đã nhận" },
         component: () => import("../views/users/dsAccept.vue"),
       },
       {
-        path: "danh-sach-don-accept-o",
-        name: "danh-sach-don-accept-o",
+        path: "danh-sach-don-da-giao",
+        name: "danh-sach-don-da-giao",
         meta: { title: "Dánh sách đơn đã giao" },
         component: () => import("../views/users/dsOrdero.vue"),
       },

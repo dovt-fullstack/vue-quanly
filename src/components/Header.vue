@@ -54,7 +54,7 @@
         >
           <div
             class="sb-avatar__text"
-            title="thanhdo vu"
+            title=""
             style="
               width: 30px;
               height: 30px;
@@ -80,7 +80,7 @@
                   vertical-align: middle;
                   white-space: nowrap;
                 "
-                ><span>T</span></span
+                ><span>{{ userLocal?.lastname[0] }}</span></span
               >
             </div>
           </div>
