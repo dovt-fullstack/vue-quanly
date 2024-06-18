@@ -57,10 +57,8 @@
                 <input type="file" @change="handleFileUpload" />
               </a-form-item>
               <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-                <a-button class="me-0 me-sm-2 mb-3 mb-sm-0">
-                  <router-link :to="{ name: 'admin-users' }">
+                <a-button @click="goBack" class="me-0 me-sm-2 mb-3 mb-sm-0">
                     <span>Quay lại</span>
-                  </router-link>
                 </a-button>
                 <a-button
                   class="me-0 me-sm-2 mb-3 mb-sm-0 bg-info text-light"
@@ -197,6 +195,17 @@ export default defineComponent({
           console.log(error);
         });
     };
+    const goBack = () => {
+      // Navigate back to the previous page
+      if (history.length > 1) {
+        // If there's history available, go back
+        history.go(-1);
+      } else {
+        // Otherwise, fallback to home or another default route
+        this.$router.push("/");
+      }
+    };
+
     const filterOptionStatus = (input, option) => {
       return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
     };
@@ -274,6 +283,8 @@ export default defineComponent({
       // preview
       handleChangeUpload,
       handleRemoveAvatar,
+      goBack
+
     };
   },
 });

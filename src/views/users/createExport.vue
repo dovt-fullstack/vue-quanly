@@ -38,14 +38,12 @@
                 <small v-if="errors && errors.priceOut" class="text-danger">{{ errors.priceOut[0] }}</small>
               </a-form-item>
 
-              <a-form-item has-feedback label="producttypename" required name="producttypename">
+              <a-form-item has-feedback label="Loại sản phẩm" required name="producttypename">
                 <a-input v-model:value="formState.producttypename" autocomplete="off" />
               </a-form-item>
               <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-                <a-button class="me-0 me-sm-2 mb-3 mb-sm-0">
-                  <router-link :to="{ name: 'admin-users' }">
+                <a-button @click="goBack" class="me-0 me-sm-2 mb-3 mb-sm-0">
                     <span>Quay lại</span>
-                  </router-link>
                 </a-button>
                 <a-button class="me-0 me-sm-2 mb-3 mb-sm-0 bg-info text-light" @click="resetForm">Reset</a-button>
                 <a-button type="primary" html-type="submit" class="bg-success">Lưu</a-button>
@@ -115,6 +113,16 @@ export default defineComponent({
         span: 14,
       },
     };
+    const goBack = () => {
+      // Navigate back to the previous page
+      if (history.length > 1) {
+        // If there's history available, go back
+        history.go(-1);
+      } else {
+        // Otherwise, fallback to home or another default route
+        this.$router.push("/");
+      }
+    };
     const resetForm = () => {
       // axios.post( `${apiPrefix}/api/v1/management/${id}/producttype/view`, formData).then((response) => {
       //   message.success("Tạo mới thành công!");
@@ -179,6 +187,7 @@ export default defineComponent({
       //
       users,
       createUsers,
+      goBack
       // preview
     };
   },

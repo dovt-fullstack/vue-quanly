@@ -38,11 +38,9 @@
                                 <a-input v-model:value="formState.passWord" type="password" autocomplete="off" />
                             </a-form-item>
                             <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-                                <a-button class="me-0 me-sm-2 mb-3 mb-sm-0">
-                                    <router-link :to="{ name: 'admin-users' }">
-                                        <span>Quay lại</span>
-                                    </router-link>
-                                </a-button>
+                                <a-button @click="goBack" class="me-0 me-sm-2 mb-3 mb-sm-0">
+                    <span>Quay lại</span>
+                </a-button>
                                 <a-button class="me-0 me-sm-2 mb-3 mb-sm-0 bg-info text-light"
                                     @click="resetForm">Reset</a-button>
                                 <a-button type="primary" html-type="submit" class="bg-success">Lưu</a-button>
@@ -165,7 +163,16 @@ export default defineComponent({
         const resetForm = () => {
             formRef.value.resetFields();
         };
-        //
+           const goBack = () => {
+      // Navigate back to the previous page
+      if (history.length > 1) {
+        // If there's history available, go back
+        history.go(-1);
+      } else {
+        // Otherwise, fallback to home or another default route
+        this.$router.push("/");
+      }
+    };
         const getOptionsLevelManage = () => {
             ApiViewData.GetOptionsLevelManage().then((response) => {
                 users.optionsLevelManage = response.data;
@@ -261,7 +268,8 @@ export default defineComponent({
             createUsers,
             // preview
             handleChangeUpload,
-            handleRemoveAvatar
+            handleRemoveAvatar,
+            goBack
         };
     },
 });

@@ -78,11 +78,11 @@
                 >
               </a-form-item> -->
               <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-                <a-button class="me-0 me-sm-2 mb-3 mb-sm-0">
-                  <a-button @click="goBack" class="me-0 me-sm-2 mb-3 mb-sm-0">
-                    <span>Quay lại</span>
-                  </a-button>
+
+                <a-button @click="goBack" class="me-0 me-sm-2 mb-3 mb-sm-0">
+                  <span>Quay lại</span>
                 </a-button>
+
                 <a-button class="me-0 me-sm-2 mb-3 mb-sm-0 bg-info text-light" @click="resetForm">Reset</a-button>
                 <a-button type="primary" html-type="submit" class="bg-success" :loading=formState.loading>Lưu</a-button>
               </a-form-item>

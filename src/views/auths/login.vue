@@ -1,18 +1,6 @@
 <template>
   <div class="login-style sapo-sso">
     <div class="container form form-login">
-      <div class="recently-login-view hidden">
-        <div class="header">
-          <img
-            class="fade show sapo-logo"
-            alt="Sapo"
-            src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718268402/zu43thyvdywlzfuhxfm6.webp"
-          />
-          <div class="title mt-3">
-            <h1 class="title-center h4">Cửa hàng truy cập gần đây</h1>
-          </div>
-        </div>
-      </div>
       <div class="login-form-view">
         <div class="header">
           <div class="header-image">
@@ -27,55 +15,10 @@
           </div>
         </div>
       </div>
-      <div class="forgot-pass-view hidden">
-        <div class="header">
-          <img
-            class="fade show sapo-logo"
-            alt="Sapo"
-            src="https://sapo.dktcdn.net/sso-service/images/Sapo-logo.svg"
-          />
-          <div class="title mt-3">
-            <h1 class="title-center h4">Bạn quên mật khẩu?</h1>
-          </div>
-        </div>
-      </div>
-      <div class="typing-domain-view hidden">
-        <div class="header">
-          <img
-            class="fade show sapo-logo"
-            alt="Sapo"
-            src="https://sapo.dktcdn.net/sso-service/images/Sapo-logo.svg"
-          />
-          <div class="title mt-3">
-            <h1 class="title-center h4">Đăng nhập vào cửa hàng của bạn</h1>
-          </div>
-        </div>
-      </div>
 
-      <div class="recently-login-view recently-login-block hidden">
-        <div class="recently-login-block--another-acc text-right pb-5">
-          <a
-            href="javascript:;"
-            class="recently-login-block--another-acc-action"
-            >Đăng nhập tài khoản khác</a
-          >
-        </div>
-      </div>
+
+
       <div class="login-form-view login-form-block">
-        <div
-          class="form-group px-3 text-center hidden"
-          id="domain-info-wrapper"
-          style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden"
-        >
-          <span>Truy cập cửa hàng</span>
-          <b
-            id="domain-info"
-            data-placement="top"
-            data-toggle="tooltip"
-            data-original-title=""
-            title=""
-          ></b>
-        </div>
         <a-form
           :model="formState"
           @finish="onFinish"
@@ -86,116 +29,14 @@
           name="normal_login"
           novalidate="novalidate"
         >
-          <input
-            type="hidden"
-            name="_csrf"
-            value="9964c1a0-1062-4da3-9b04-2a765d603931"
-          />
+
           <div class="form-login-info">
-            <input
-              id="client-id"
-              style="display: none"
-              name="clientId"
-              value="a2KG8sj3g1"
-            />
-            <input id="login-token" style="display: none" name="LoginToken" />
-
-            <input
-              id="country-code"
-              style="display: none"
-              name="countryCode"
-              value="66"
-            />
-            <input id="service-type" type="hidden" name="Product" value="pos" />
-
-            <div
-              class="form-group domain-input-wrapper d-none"
-              id="domain-input-wrapper"
-            >
-              <input
-                class="form-input"
-                id="domain"
-                name="domain"
-                placeholder="Nhập tên domain cửa hàng của bạn"
-                value=""
-              />
-              <div class="suffix-domain-select-wrapper hidden">
-                <button
-                  class="btn dropdown-toggle suffix-domain-select-item__btn"
-                  type="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <span class="suffix-domain-btn_text">.mysapogo.com</span>
-                </button>
-                <div class="dropdown-menu">
-                  <a
-                    class="dropdown-item suffix-domain-select-item"
-                    href="javascript:;"
-                    onclick="login.changeSuffixDomain('mysapogo.com')"
-                    >mysapogo.com</a
-                  >
-                  <a
-                    class="dropdown-item suffix-domain-select-item"
-                    href="javascript:;"
-                    onclick="login.changeSuffixDomain('mysapo.net')"
-                    >mysapo.net</a
-                  >
-                </div>
-                <input
-                  class="hidden suffix-domain"
-                  name="suffix-domain"
-                  value="mysapogo.com"
-                />
-              </div>
-              <span class="subdomain-inline">.mysapogo.com</span>
-              <div class="has-error padding-md-left padding-sm-top">
-                <span class="help-block">
-                  <label
-                    for="domain"
-                    class="help-block field-validation-valid"
-                  ></label>
-                </span>
-              </div>
-            </div>
 
             <div
               class="form-group position-relative"
               id="username-input-wrapper"
             >
-              <div class="input-group-prepend country-select-wrapper">
-                <button
-                  id="login-country-select-item-btn"
-                  class="btn btn-outline-light dropdown-toggle country-select-item__btn"
-                  type="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <span class="country-flag th-flag"></span>
-                </button>
-                <div class="dropdown-menu">
-                  <a
-                    class="dropdown-item country-select-item"
-                    href="javascript:;"
-                    onclick="login.changeLoginCountry('84', 'vn')"
-                    ><span class="country-flag vn-flag"></span
-                    ><span class="country-select-item__name"
-                      >Vietnam (Việt Nam)</span
-                    ><span class="country-select-item__code">+84</span></a
-                  >
-                  <a
-                    class="dropdown-item country-select-item"
-                    href="javascript:;"
-                    onclick="login.changeLoginCountry('66', 'th')"
-                    ><span class="country-flag th-flag"></span
-                    ><span class="country-select-item__name"
-                      >Thailand (ไทย)</span
-                    ><span class="country-select-item__code">+66</span></a
-                  >
-                </div>
-              </div>
+
               <!-- <input
                 class="form-input country-phone-input valid"
                 id="username"
@@ -219,14 +60,6 @@
                 </a-input>
               </a-form-item>
 
-              <!-- <a-form-item label="Password" name="password" autocomplete="off"
-                                :rules="[{ required: true, message: 'Please input your password!' }]">
-                                <a-input-password v-model:value="formState.password" autocomplete="off">
-                                    <template #prefix>
-                                        <LockOutlined class="site-form-item-icon" />
-                                    </template>
-                                </a-input-password>
-                            </a-form-item> -->
               <div class="has-error padding-md-left padding-sm-top">
                 <span class="help-block">
                   <label
@@ -363,140 +196,8 @@
           </div>
         </a-form>
       </div>
-      <div class="forgot-pass-view forgot-pass-block hidden">
-        <form id="form-forgot-pass">
-          <div class="form-group domain-input-wrapper position-relative">
-            <input
-              class="form-input"
-              name="forgot-pass-domain"
-              id="forgot-pass-domain-input"
-              placeholder="Nhập tên domain cửa hàng của bạn"
-            />
-            <div class="suffix-domain-select-wrapper hidden">
-              <button
-                class="btn dropdown-toggle suffix-domain-select-item__btn"
-                type="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <span class="suffix-domain-btn_text">.mysapogo.com</span>
-              </button>
-              <div class="dropdown-menu">
-                <a
-                  class="dropdown-item suffix-domain-select-item"
-                  href="javascript:;"
-                  onclick="login.changeSuffixDomain('mysapogo.com')"
-                  >mysapogo.com</a
-                >
-                <a
-                  class="dropdown-item suffix-domain-select-item"
-                  href="javascript:;"
-                  onclick="login.changeSuffixDomain('mysapo.net')"
-                  >mysapo.net</a
-                >
-              </div>
-              <input
-                class="hidden suffix-domain"
-                name="suffix-domain"
-                value="mysapogo.com"
-              />
-            </div>
-            <span class="subdomain-inline">.mysapogo.com</span>
-          </div>
-          <div class="text-center mb-3" style="clear: both">
-            <button
-              class="btn-login"
-              type="submit"
-              disabled=""
-              id="forgot-pass-submit"
-            >
-              Quên mật khẩu
-            </button>
-          </div>
-        </form>
-      </div>
-      <div class="typing-domain-view forgot-pass-block hidden">
-        <div id="forgot-domain-notification"></div>
-        <form id="form-typing-domain">
-          <div class="form-group">
-            <div
-              class="form-group domain-input-wrapper"
-              id="add-domain-input-wrapper"
-              style="position: relative"
-            >
-              <input
-                class="form-input"
-                id="typing-domain-input"
-                name="domain"
-                placeholder="Nhập domain cửa hàng của bạn"
-                value=""
-              />
-              <div class="suffix-domain-select-wrapper hidden">
-                <button
-                  id="suffix-domain-btn"
-                  class="btn dropdown-toggle suffix-domain-select-item__btn"
-                  type="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <span class="suffix-domain-btn_text">.mysapogo.com</span>
-                </button>
-                <div class="dropdown-menu">
-                  <a
-                    class="dropdown-item suffix-domain-select-item"
-                    href="javascript:;"
-                    onclick="login.changeSuffixDomain('mysapogo.com')"
-                    >mysapogo.com</a
-                  >
-                  <a
-                    class="dropdown-item suffix-domain-select-item"
-                    href="javascript:;"
-                    onclick="login.changeSuffixDomain('mysapo.net')"
-                    >mysapo.net</a
-                  >
-                </div>
-              </div>
-              <span class="subdomain-inline">.mysapogo.com</span>
-              <input
-                id="suffix-domain"
-                class="hidden"
-                name="suffix-domain"
-                value="mysapogo.com"
-              />
-              <div class="has-error padding-md-left padding-sm-top">
-                <span class="help-block">
-                  <label
-                    for="domain"
-                    class="help-block field-validation-valid"
-                  ></label>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row margin-sm-bottom">
-            <div class="form-checkbox checkbox-confirm d-flex col-6"></div>
-            <div class="col-6 forget-pass">
-              <a
-                href="javascript:void(0)"
-                id="forgot-store-link"
-                onclick="login.onForgotDomain()"
-                class="forgot-pos-password enabled"
-                >Quên domain cửa hàng?</a
-              >
-            </div>
-          </div>
-          <div class="text-center mb-3" style="clear: both">
-            <button class="btn-login" type="submit" id="typing-domain-submit">
-              Đăng nhập
-            </button>
-          </div>
-        </form>
-        <form action="/forgot-stores" method="post" id="form-forgot-store">
-          <input type="text" name="email" hidden="" />
-        </form>
-      </div>
+      
+      
     </div>
   </div>
 </template>
@@ -580,8 +281,12 @@ export default defineComponent({
         })
         .catch((err) => {
           console.log(err);
-          showErrorToast('Thất bại!', 'Đăng nhập không thành công!');
-        });
+          if (err.response && err.response.status !== 200) {
+            showErrorToast('Thất bại!', 'Tài khoản hoặc mật khẩu không đúng!');
+            console.log(err.response)
+          } else {
+            showErrorToast('Thất bại!', 'Đăng nhập không thành công!');
+          }        });
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -591,6 +296,12 @@ export default defineComponent({
     const disabled = computed(() => {
       return !(formState.username && formState.password);
     });
+        const showErrorToast = (title, content) => {
+      message.error({
+        content: content,
+        duration: 2,
+      });
+    };
 
     return {
       formState,

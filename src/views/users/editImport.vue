@@ -9,11 +9,11 @@
             >
           </a-breadcrumb-item>
           <a-breadcrumb-item>
-            <router-link :to="{ name: 'admin-users' }">Product</router-link>
+            <router-link :to="{ name: 'admin-users' }">Hóa đơn</router-link>
           </a-breadcrumb-item>
           <a-breadcrumb-item>sửa</a-breadcrumb-item>
         </a-breadcrumb>
-        <h1>Sửa sản phẩm</h1>
+        <h1>Sửa hóa đơn</h1>
       </div>
       <div class="col-12 col-sm-12 mb-3">
         <a-form
@@ -48,10 +48,8 @@
               </a-form-item>
 
               <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-                <a-button class="me-0 me-sm-2 mb-3 mb-sm-0">
-                  <router-link :to="{ name: 'admin-users' }">
+                <a-button @click="goBack" class="me-0 me-sm-2 mb-3 mb-sm-0">
                     <span>Quay lại</span>
-                  </router-link>
                 </a-button>
                 <a-button
                   class="me-0 me-sm-2 mb-3 mb-sm-0 bg-info text-light"
@@ -136,6 +134,17 @@ export default defineComponent({
     const resetForm = () => {
       formRef.value.resetFields();
     };
+    const goBack = () => {
+      // Navigate back to the previous page
+      if (history.length > 1) {
+        // If there's history available, go back
+        history.go(-1);
+      } else {
+        // Otherwise, fallback to home or another default route
+        this.$router.push("/");
+      }
+    };
+
 
     const handleFileUpload = (event) => {
       const file = event.target.files[0];
@@ -194,6 +203,7 @@ export default defineComponent({
       resetForm,
       handleFileUpload,
       createUsers,
+      goBack
     };
   },
 });

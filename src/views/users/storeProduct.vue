@@ -38,9 +38,16 @@
                         <template v-if="column.key === 'quantity'">
                             <span>{{ record.quantity }}</span>
                         </template>
-                        <template v-if="column.key === 'email'">
+                        <template v-if="column.key === 'price'">
                             <span>{{ record.price }}</span>
                         </template>
+                        <template v-if="column.key === 'status'">
+    <a-tag :class="record.status ? 'status-selling' : 'status-stopped'">
+        {{ record.status ? 'Đang bán' : 'Ngừng bán' }}
+    </a-tag>
+</template>
+
+
                         <template v-if="column.key === 'action' && authStoreClaim !== null">
                             <a-space warp>
                                 <router-link :to="{ name: 'admin-product-edit', params: { id: record.productId} }">
@@ -50,11 +57,11 @@
                                 </router-link>
                             </a-space>
                             <router-link :to="{ name: 'admin-chi-tiet-san-pham', params: { id: record.productId } }">
-                                <a-button title="Khóa" type="dashed" size="small" shape="" class="me-2 text-warning">xem
+                                <a-button title="Xem chi tiết" type="dashed" size="small" shape="" class="me-2 text-warning">Xem
                                 </a-button>
                             </router-link>
                             <a-popconfirm title="Dữ liệu sẽ không thể phục hồi, bạn muốn xóa bản ghi này?" ok-text="Yes"
-                                cancel-text="No" @confirm="confirmRemove(record.id)">
+                                cancel-text="No" @confirm="confirmRemove(record.productId)">
                                 <a-button title="Xóa" type="dashed" size="small" shape="" danger><i
                                         class="fa-solid fa-trash-can"></i></a-button>
                             </a-popconfirm>
@@ -127,7 +134,11 @@ export default defineComponent({
       },
       {
         title: "Giá",
-        key: "email",
+        key: "price",
+      },
+      {
+        title: "Trạng thái",
+        key: "status",
       },
 
       {
@@ -153,23 +164,35 @@ export default defineComponent({
           console.error(error);
         });
     };
-    const confirmRemove = (id) => {
-      ApiUser.DeleteById(id)
+
+    const fetchProducts = () => {
+      axios
+        .get(`${apiPrefix}/api/v1/management/${storeId2.value}/product/view`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
-          console.log(response);
-          if (response.status == 200) {
-            message.success("Xóa thành công!");
-            // router.push({ name: "admin-users" });
-          }
-          getUsers(pageParam);
+          users.value = response.data.data;
         })
         .catch((error) => {
-          message.error(error.message);
-          if (error.response.data.hasOwnProperty("errors")) {
-            errors.value = error.response.data.errors;
-          } else {
-            errors.value = error.response.data;
-          }
+          console.error(error);
+        });
+    };
+
+    const confirmRemove = (id) => {
+      axios
+        .get(`${apiPrefix}/api/v1/management/${storeId2._value}/product/delete?productId=${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Thêm token vào headers
+          },
+        })
+        .then((response) => {
+          console.log(response.data.data, "response");
+          users.value = response.data.data;
+        })
+        .catch((error) => {
+          console.error(error);
         });
     };
     const confirmBanned = (id) => {
@@ -210,6 +233,8 @@ export default defineComponent({
     onMounted(() => {
       // chay lan dau tien
       getUsers(pageParam);
+      fetchProducts();
+
     });
     //
     function onChange(page, pageSize) {
@@ -243,3 +268,20 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+.status-selling {
+    background-color: #56b725; /* Màu xanh */
+    color: black;
+    border-radius: 3px;
+    border: 1px solid;
+}
+
+.status-stopped {
+    background-color: #f5222d; /* Màu đỏ */
+    color: black;
+    border-radius: 3px;
+    border: 1px solid;
+
+}
+</style>
+
