@@ -24,7 +24,7 @@
               'text-danger': !product.status,
             }"
           >
-            {{ product.status ? "Available" : "Unavailable" }}
+            {{ product.status ? " Đang bán" : " Ngừng bán" }}
           </span>
         </p>
         <p class="mb-1"><strong>Views:</strong> {{ product.view }}</p>

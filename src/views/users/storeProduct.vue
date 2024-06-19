@@ -136,7 +136,7 @@ setup() {
   };
   const confirmRemove = (id) => {
     axios
-      .delete(`${apiPrefix}/api/v1/management/${storeId2.value}/product/delete?productId=${id}`, {
+      .get(`${apiPrefix}/api/v1/management/${storeId2.value}/product/delete?productId=${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then((response) => {
