@@ -95,14 +95,22 @@
             </a>
             <template #overlay>
               <a-menu>
-                <a-menu-item>
-                  <a @click="handleClickLogout">Đăng xuất</a>
-                </a-menu-item>
+
                 <a-menu-item>
                   <router-link :to="{ name: 'profile-user' }">
-                    <a>Profile</a>
+                    <a>Trang cá nhân</a>
                   </router-link>
                 </a-menu-item>
+
+                <a-menu-item>
+                  <router-link :to="{ name: 'change-password' }">
+                    <a>Đổi mật khẩu</a>
+                  </router-link>
+                </a-menu-item>
+                <a-menu-item>
+                  <a @click="handleClickLogout"  style="color: red;">Đăng xuất</a>
+                </a-menu-item>
+
               </a-menu>
             </template>
           </a-dropdown>

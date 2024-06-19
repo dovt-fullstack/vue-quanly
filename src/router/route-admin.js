@@ -138,6 +138,7 @@ const adminRoutes = [
         meta: { title: "Thông tin cá nhân" },
         component: () => import("../views/users/profileUser.vue"),
       },
+
       // importExport
       {
         path: "danh-sach-order-store/:id",
@@ -284,6 +285,7 @@ const adminRoutes = [
     meta: { title: "Đăng nhập" },
     component: () => import("../views/auths/login.vue"),
   },
+
   {
     path: "/forgetpassword",
     name: "forgetpassword",
@@ -345,6 +347,12 @@ const adminRoutes = [
     name: "profile-client",
     meta: { title: "Thông tin cá nhân" },
     component: () => import("../views/users/profileUserNew.vue"),
+  },
+  {
+    path: "/change-password",
+    name: "change-password",
+    meta: { title: "Đổi mật khẩu" },
+    component: () => import("../views/auths/changePassword.vue"),
   },
   {
     path: "/404",

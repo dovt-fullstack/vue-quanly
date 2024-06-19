@@ -2,16 +2,7 @@
   <a-card style="width: 100%">
     <div class="row mb-3">
       <div class="col-12">
-        <a-breadcrumb>
-          <a-breadcrumb-item>
-            <router-link :to="{ name: 'admin-dashboards' }">Trang chủ</router-link>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item>
-            <router-link :to="{ name: 'admin-users' }">Info store</router-link>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item>Thêm mới</a-breadcrumb-item>
-        </a-breadcrumb>
-        <h1></h1>
+        <h1>Hãy bắt đầu tạo thông tin về cửa hàng của bạn</h1>
       </div>
       <div class="col-12 col-sm-12 mb-3">
         <!-- @submit.prevent="createUsers()" -->

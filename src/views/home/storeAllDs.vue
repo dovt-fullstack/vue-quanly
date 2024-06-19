@@ -376,7 +376,7 @@ export default defineComponent({
     console.log(token);
 
     try {
-  const eventSource = new EventSource(`http://localhost:9000/notifications?userId=${userLocal.userId}`);
+  const eventSource = new EventSource(`${apiPrefix}/notifications?userId=${userLocal.userId}`);
       // Tạo arr 
       //notificomp
   eventSource.onmessage = function(event) {

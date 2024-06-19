@@ -221,7 +221,6 @@ export default defineComponent({
       // storetypeid
       console.log("formState");
       console.log(formData, "formState");
-      //  http://localhost:9000/api/v1/management/store/1/insert
       axios
         .post(
           `${apiPrefix}/api/v1/management/info/insert`,

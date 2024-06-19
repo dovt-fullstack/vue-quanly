@@ -72,7 +72,7 @@
                   class="password-login"
                   id="password"
                   name="password"
-                  placeholder="Mật khẩu đăng nhập cửa hàng"
+                  placeholder="Mật khẩu của bạn"
                   type="password"
                   autocomplete="current-password"
                   v-model:value="formState.password"
@@ -89,9 +89,17 @@
               </div>
             </div>
           </div>
-          <div class="form-group row margin-sm-bottom">
-            <div class="form-checkbox checkbox-confirm d-flex col-6"></div>
-            <div class="col-6 forget-pass">
+          <div class="form-group row margin-sm-bottom d-flex">
+            <div class="col-4">
+              <a
+
+                href="/register"
+                onclick="onForgotPassword()"
+                class="forgot-pos-password"
+                >Đăng kí tài khoản mới</a
+              >
+            </div>
+            <div class="col-8">
               <a
 
                 href="/forgetPassword"
@@ -180,6 +188,7 @@ export default defineComponent({
       username: "",
       password: "",
     });
+
 
 
     onMounted(() => {
