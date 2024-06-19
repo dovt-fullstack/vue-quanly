@@ -93,7 +93,8 @@
             <div class="form-checkbox checkbox-confirm d-flex col-6"></div>
             <div class="col-6 forget-pass">
               <a
-                href="javascript:void(0)"
+
+                href="/forgetPassword"
                 onclick="onForgotPassword()"
                 class="forgot-pos-password"
                 >Quên mật khẩu</a

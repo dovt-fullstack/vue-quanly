@@ -285,6 +285,20 @@ const adminRoutes = [
     component: () => import("../views/auths/login.vue"),
   },
   {
+    path: "/forgetpassword",
+    name: "forgetpassword",
+    meta: { title: "Quên mật khẩu" },
+    component: () => import("../views/auths/forgetPassword.vue"),
+  },
+  {
+    path: "/checkresetpassword",
+    name: "checkresetpassword",
+    meta: { title: "Mã quên mật khẩu" },
+    component: () => import("../views/auths/checkresetpassword.vue")
+  }
+,
+
+  {
     path: "/register",
     name: "register",
     meta: { title: "Đăng ký" },
