@@ -8,6 +8,20 @@
       </div>
       <div class="col-6 d-flex justify-content-end"></div>
     </div>
+    <div class="row mb-3">
+      <div class="col-12">
+        <a-form @submit.prevent="onSearch">
+          <a-form-item>
+            <a-input
+              placeholder="Tìm kiếm sản phẩm"
+              v-model:value="searchKeyword"
+              @pressEnter="onSearch"
+            />
+          </a-form-item>
+          <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
+        </a-form>
+      </div>
+    </div>
     <!-- <div class="row">
             <div class="col-12">
                 <a-form @keyup.enter="clickFrmFilter($event)" layout="inline" class="p-3 border">
@@ -131,11 +145,11 @@
         <div class="col-12">
           <a-pagination
             @change="onChange"
-            v-model:current="pageParam.current"
-            :total="pageParam.totalRecord"
+            v-model:current="pageParam.currentPage"
+            :total="pageParam.totalItems"
             :pageSize="pageParam.pageSize"
             :show-total="
-              (total, range) => `${range[0]}-${range[1]} of ${total} items`
+              (total, range) => `${range[0]}-${range[1]} của ${total} sản phẩm`
             "
             class="mt-2 text-end"
           />
@@ -216,14 +230,12 @@ export default defineComponent({
     const users = ref([]);
     const token = JSON.parse(localStorage.getItem("token"));
 
+    const searchKeyword = ref("");
     const pageParam = reactive({
-      current: Object.keys(route.query).length > 0 ? route.query.PageNumber : 1,
-      pageNumber:
-        Object.keys(route.query).length > 0 ? route.query.PageNumber : 1,
-      pageSize: Object.keys(route.query).length > 0 ? route.query.PageSize : 10,
-      totalRecord: 0,
-      userName: Object.keys(route.query).length > 0 ? route.query.UserName : "",
-      statusFilter: false,
+      currentPage: 1,
+      pageSize: 1,
+      totalItems: 0,
+      totalPages: 0,
     });
     const columns = [
       {
@@ -261,18 +273,19 @@ export default defineComponent({
       },
     ];
 
-    const getUsers = (args) => {
+    const getUsers = (page, size, keyword = "") => {
       axios
-        .get(
-           `${apiPrefix}/api/v1/management/${id}/order/view?size=50`,{
-            headers: {
-              Authorization: `Bearer ${token}`, // Thêm token vào headers
-            },
-          }
-        )
+        .get(`${apiPrefix}/api/v1/management/${id}/order/view`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: { page, size, keyword },
+        })
         .then((response) => {
           console.log(response.data.data, "response");
           users.value = response.data.data;
+          pageParam.totalItems = response.data.pagination.totalItems;
+          pageParam.totalPages = response.data.pagination.totalPages;
         })
         .catch((error) => {
           console.error(error);
@@ -304,14 +317,13 @@ export default defineComponent({
     };
     const fetchIdOrder = async (idOrder) => {
       const { data } = await axios.get(
-         `${apiPrefix}/api/v1/management/${id}/orderdetail/view/${idOrder}`,
+        `${apiPrefix}/api/v1/management/${id}/orderdetail/view/${idOrder}`,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       console.log(data, "ccd");
+
       dataIdOrder.value = data.data;
     };
     const confirmRemove = (id) => {
@@ -384,33 +396,21 @@ export default defineComponent({
         });
     };
     //
-    onUpdated(() => {
-      //
-      if (Object.keys(route.query).length === 0) {
-        pageParam.current =
-          Object.keys(route.query).length > 0 ? route.query.PageNumber : 1;
-        pageParam.pageNumber =
-          Object.keys(route.query).length > 0 ? route.query.PageNumber : 1;
-        pageParam.pageSize =
-          Object.keys(route.query).length > 0 ? route.query.PageSize : 10;
-        pageParam.userName =
-          Object.keys(route.query).length > 0 ? route.query.UserName : "";
-        pageParam.statusFilter = true;
-        getUsers(pageParam);
-      }
-    });
+    const onChange = (page, pageSize) => {
+      pageParam.currentPage = page;
+      pageParam.pageSize = pageSize;
+      getUsers(page, pageSize, searchKeyword.value);
+    };
+    const onSearch = () => {
+      pageParam.currentPage = 1;
+      getUsers(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
+    };
+
+    //
     onMounted(() => {
       // chay lan dau tien
-      getUsers(pageParam);
+      getUsers(pageParam.currentPage, pageParam.pageSize);
     });
-    //
-    function onChange(page, pageSize) {
-      pageParam.pageNumber = page;
-      pageParam.pageSize = pageSize;
-      //
-      pageParam.statusFilter = true;
-      getUsers(pageParam);
-    }
     //
     const clickFrmFilter = (event) => {
       pageParam.statusFilter = true;
@@ -442,6 +442,8 @@ export default defineComponent({
       dataIdOrder,
       giveOrder,
       doneOrder,
+      searchKeyword,
+      onSearch,
     };
     //
   },
