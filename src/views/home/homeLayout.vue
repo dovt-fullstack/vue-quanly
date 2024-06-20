@@ -199,7 +199,16 @@
               content="https://www.facebook.com/ChuThanhPhong"
             />
           </span>
-
+          <div class="row mb-3">
+          <div class="col-12">
+              <a-form @submit.prevent="onSearch">
+                  <a-form-item>
+                      <a-input placeholder="Tìm kiếm sản phẩm" v-model:value="searchKeyword" @pressEnter="onSearch" />
+                  </a-form-item>
+                  <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
+              </a-form>
+          </div>
+      </div>
           <div class="open">
             <label style="cursor: pointer" class="oh">
               <router-link v-if="!userLocal" to="/login">
@@ -579,15 +588,25 @@ export default defineComponent({
     const token = JSON.parse(localStorage.getItem("token"));
     const storeId = route.params.id;
     const storeId2 = ref(route.params.id);
-    const getUsers = () => {
+    const searchKeyword = ref("");
+  const pageParam = reactive({
+    currentPage: 1,
+    pageSize: 10,
+    totalItems: 0,
+    totalPages: 0
+  });
+    const getUsers = (page, size, keyword = "") => {
       axios
         .get(`${apiPrefix}/api/v1/customer/store/view/${storeId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
+        params: { page, size, keyword }
         })
         .then((response) => {
+        const data = response.data;
+
           users.value = response.data.data;
+          pageParam.totalItems = data.pagination.totalItems;
+        pageParam.totalPages = data.pagination.totalPages;
         })
         .catch((error) => {
           console.error(error);
@@ -624,8 +643,13 @@ export default defineComponent({
         });
     };
     console.log(typeStore.value.productTypeName, "cs");
+    const onSearch = () => {
+    pageParam.currentPage = 1;
+    getUsers(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
+  };
     onMounted(() => {
-      getUsers();
+      getUsers(pageParam.currentPage, pageParam.pageSize);
+
       getTypeStore();
     });
 
@@ -637,6 +661,9 @@ export default defineComponent({
       userLocal,
       typeStore,
       addMyFarvors,
+    onSearch,
+    searchKeyword,
+
     };
     //
   },
