@@ -30,18 +30,24 @@
         >
           <div class="row">
             <div class="col-12 col-sm-9">
-              <a-form-item ref="userName" label="name" required name="userName">
-                <a-input v-model:value="formState.userName" />
-                <small v-if="errors && errors.UserName" class="text-danger">{{
-                  errors.UserName[0]
-                }}</small>
+              <a-form-item ref="productType" label="Loại sản phẩm" required name="productType">
+                <a-input v-model:value="formState.productType" />
+                <small v-if="errors && errors.productType" class="text-danger">{{ errors.productType[0] }}</small>
               </a-form-item>
+
+              <a-form-item label="Hình ảnh">
+                <input type="file" @change="previewFiles" />
+                <div class="avatar-container">
+                  <img v-if="newImage" :src="newImage" class="avatar" alt="avatar" />
+                </div>
+              </a-form-item>
+<!-- 
               <a-form-item ref="fullName" label="avatar" name="fullName">
                 <input type="file" @change="handleFileUpload" />
                 <small v-if="errors && errors.FullName" class="text-danger">{{
                   errors.FullName[0]
                 }}</small>
-              </a-form-item>
+              </a-form-item> -->
               <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
                 <a-button @click="goBack" class="me-0 me-sm-2 mb-3 mb-sm-0">
                     <span>Quay lại</span>
@@ -51,9 +57,8 @@
                   @click="resetForm"
                   >Reset</a-button
                 >
-                <a-button type="primary" html-type="submit" class="bg-success"
-                  >Lưu</a-button
-                >
+                <a-button type="primary" html-type="submit" class="bg-success" :loading=formState.loading>Lưu</a-button>
+
               </a-form-item>
             </div>
           </div>
@@ -83,6 +88,7 @@ export default defineComponent({
     const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
     const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const router = useRouter();
+    const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
     const users = reactive({
       optionsLevelManage: [],
       optionsRole: [],
@@ -91,34 +97,23 @@ export default defineComponent({
     const errors = ref({});
     const formRef = ref();
     const route = useRoute();
+    let productTypeId;
+
     const id = route.params.id;
     const formState = reactive({
-      userName: "",
-      fullName: "",
-      avatarFile: "",
+      producttypeName: "",
+      loading: false,
+      avatarFile: null,
+      avatarProduct: "",
+      productType: "",
+
+
     });
     const fileAvatar = ref(null);
-    let validatePass = async (rule, value) => {
-      if (value === "") {
-        return Promise.reject("Please input the password");
-      } else {
-        if (formState.rePassWord !== "") {
-          formRef.value.validateFields("rePassWord");
-        }
-        return Promise.resolve();
-      }
-    };
-    let validatePass2 = async (rule, value) => {
-      if (value === "") {
-        return Promise.reject("Please input the password again");
-      } else if (value !== formState.passWord) {
-        return Promise.reject("Two inputs don't match!");
-      } else {
-        return Promise.resolve();
-      }
-    };
+
+
     const rules = {
-      userName: [
+      producttypeName: [
         {
           required: true,
           message: "name không để trống.",
@@ -141,6 +136,16 @@ export default defineComponent({
         span: 14,
       },
     };
+    const goBack = () => {
+      // Navigate back to the previous page
+      if (history.length > 1) {
+        // If there's history available, go back
+        history.go(-1);
+      } else {
+        // Otherwise, fallback to home or another default route
+        this.$router.push("/");
+      }
+    };
     const resetForm = () => {
       formRef.value.resetFields();
     };
@@ -155,16 +160,7 @@ export default defineComponent({
           console.log(error);
         });
     };
-    const goBack = () => {
-      // Navigate back to the previous page
-      if (history.length > 1) {
-        // If there's history available, go back
-        history.go(-1);
-      } else {
-        // Otherwise, fallback to home or another default route
-        this.$router.push("/");
-      }
-    };
+
     const filterOptionLevelManage = (input, option) => {
       return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
     };
@@ -181,6 +177,30 @@ export default defineComponent({
     const filterOptionRole = (input, option) => {
       return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
     };
+
+    const previewFiles = (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+      if (!isJpgOrPng) {
+        message.error('You can only upload JPG/PNG file!');
+        return;
+      }
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        message.error('Image must smaller than 2MB!');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        newImage.value = reader.result; // Set the base64 string for preview
+        avatarFile.value = file; // Store the file object for submission
+      };
+      reader.readAsDataURL(file);
+    };
+
     const getOptionsStatus = () => {
       ApiViewData.GetOptionsStatus()
         .then((response) => {
@@ -199,19 +219,40 @@ export default defineComponent({
       const file = event.target.files[0];
       formState.avatarFile = file; // Store the file object in formState
     };
+
+    const avatarFile = ref(null); // Store the file object
+    const newImage = ref('');
+
+
+    const fetchProduct = async () => {
+      try {
+        const response = await axios.get(
+          `${apiPrefix}/api/v1/management/${storeId}/producttype/view`
+        );
+        console.log(response.data.data, "response");
+        const data = response.data.data;
+
+      } catch (error) {
+        console.error(error);
+      }
+
+    };
+
     const createUsers = () => {
       const formData = new FormData();
-      formData.append("name", formState.userName);
+      formState.loading = true;
+      formData.append("name", formState.producttypeName);
       formData.append("avatar", formState.avatarFile); // avatarFile will hold the file object
-      console.log("formState");
-      console.log(formState, "formState");
       axios
         .post(
            `${apiPrefix}/api/v1/management/${id}/producttype/insert`,
           formData,
           {
             headers: {
+
               "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+
             },
           }
         )
@@ -230,6 +271,8 @@ export default defineComponent({
     };
     onMounted(() => {
       //
+      fetchProduct();
+
       resetForm();
       getOptionsLevelManage();
       getOptionsStatus();
@@ -242,7 +285,7 @@ export default defineComponent({
         formState.urlAvatar = value;
         formState.rmavatar = "no";
       }).catch((err) => {
-        console.log(err); // 👉️ "Something went wrong"
+        console.log(err); 
       });
     };
     const handleRemoveAvatar = () => {
@@ -258,8 +301,10 @@ export default defineComponent({
       fileAvatar,
       formRef,
       rules,
+      newImage,
       layout,
       resetForm,
+      previewFiles,
       //
       handleFileUpload,
       getOptionsLevelManage,
@@ -278,3 +323,12 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+
+.avatar {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #cbcbcb;
+  margin-top: 10px;
+}
+</style>

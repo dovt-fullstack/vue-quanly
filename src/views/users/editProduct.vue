@@ -44,19 +44,27 @@
               </a-form-item>
 
               <a-form-item ref="status" label="Trạng thái" name="status">
-                <a-switch v-model:checked="formState.status" checked-children="Đang bán"
-                  un-checked-children="Ngừng bán" />
-                <small v-if="errors && errors.status" class="text-danger">{{ errors.status[0] }}</small>
-              </a-form-item>
+          <a-switch v-model:checked="isSelling" checked-children="Đang bán" un-checked-children="Ngừng bán" />
+          <small v-if="errors && errors.status" class="text-danger">{{ errors.status[0] }}</small>
+        </a-form-item>
 
               <a-form-item ref="description" label="Mô tả" required name="description">
                 <a-textarea v-model:value="formState.description" />
                 <small v-if="errors && errors.description" class="text-danger">{{ errors.description[0] }}</small>
               </a-form-item>
-              <a-form-item ref="productType" label="Loại sản phẩm" required name="productType">
-                <a-input v-model:value="formState.productType" />
-                <small v-if="errors && errors.productType" class="text-danger">{{ errors.productType[0] }}</small>
-              </a-form-item>
+
+
+              <a-form-item ref="productTypeId" label="Loại sản phẩm" name="productTypeId">
+          <a-select v-model:value="formState.productTypeId" style="width: 100%" placeholder="Chọn loại sản phẩm"
+            @change="handleChange">
+            <a-select-option v-for="typee in productTypes" :key="typee.productTypeId"
+              :value="typee.productTypeId">
+              {{ typee.productTypeName }}
+            </a-select-option>
+          </a-select>
+        </a-form-item>
+
+
               <a-form-item label="Ảnh đại diện mới">
                 <input type="file" @change="previewFiles" />
                 <div class="avatar-container">
@@ -96,7 +104,7 @@
 </template>
 
 <script>
-import { onMounted, defineComponent, ref, reactive, toRefs } from "vue";
+import { onMounted, defineComponent, ref, reactive, toRefs,watch  } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { message } from "ant-design-vue";
 import { useMenu } from "../../stores/use-menu.js";
@@ -120,6 +128,10 @@ export default defineComponent({
       price: "",
       description: "",
       productType: "",
+
+      productTypeId: "",
+      productTypeName: '',
+      status: 0,
       avatarProduct: "",
       avatarFile: null,
       discount: "",
@@ -127,6 +139,14 @@ export default defineComponent({
       loading: false,
 
     });
+    const isSelling = ref(false);
+
+    watch(isSelling, (newVal) => {
+      formState.status = newVal ? 1 : 0;
+    });
+
+    const productTypes = ref([]);
+
     const handleFileUpload = (event) => {
       const file = event.target.files[0];
       this.formState.avatarFile = file; // Store the file object in formState
@@ -156,7 +176,7 @@ export default defineComponent({
           trigger: "change",
         },
       ],
-      productType: [
+      productTypeId: [
         {
           required: true,
           message: "Loại sản phẩm không để trống.",
@@ -173,6 +193,10 @@ export default defineComponent({
         span: 14,
       },
     };
+    const handleChange = (value) => {
+      console.log('Selected productTypeName:', value);
+      console.log('formState.productTypeName:', this.formState.productTypeId);
+    }
 
     const resetForm = () => {
       formRef.value.resetFields();
@@ -197,26 +221,38 @@ export default defineComponent({
         console.log(response.data.data, "response");
         const data = response.data.data;
         storeId = data.storeId;
-        productTypeId = data.productTypeId;
         formState.productName = data.productName;
         formState.price = data.price;
         formState.quantity = data.quantity;
         formState.discount = data.discount;
         formState.status = data.status;
+        isSelling.value = data.status === 1;
+
         formState.description = data.description;
-        formState.productType = data.productType;
+        formState.productTypeId = data.productTypeId;
         formState.avatarProduct = data.avatarProduct;
         formState.loading = false
       } catch (error) {
         console.error(error);
       }
       try {
-        const response = await axios.get(
-          `${apiPrefix}/api/v1/management/${storeId}/producttype/view`
-        );
-        console.log(response.data.data, "response");
-        const data = response.data.data;
 
+        const response = await axios.get(
+          `${apiPrefix}/api/v1/management/${storeId}/producttype/view`,
+          {
+            headers: {
+
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+
+            },
+          });
+        if (response.data.status === "OK") {
+          console.log(response.data)
+          productTypes.value = response.data.data;
+        } else {
+          console.error(response.data.message);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -267,6 +303,9 @@ export default defineComponent({
         } else {
           throw new Error("Product Name is missing");
         }
+        formData.append("discount", formState.discount);
+        formData.append("quantity", formState.quantity);
+
 
         if (formState.description) {
           formData.append("description", formState.description);
@@ -274,7 +313,7 @@ export default defineComponent({
           throw new Error("Description is missing");
         }
 
-        formData.append("productType", productTypeId);
+        formData.append("productType", formState.productTypeId);
 
 
         if (avatarFile.value) {
@@ -282,6 +321,7 @@ export default defineComponent({
         } else {
           formData.append('avatar', formState.avatarProduct);
         }
+        formData.append("status", isSelling.value);
 
         for (let pair of formData.entries()) {
           console.log(pair[0] + ', ' + pair[1]);
@@ -300,6 +340,7 @@ export default defineComponent({
 
         message.success("Sửa thành công!");
         formState.loading = false;
+        router.push({ name: "ProductByStore", params: { id: storeId } });
       } catch (error) {
         console.error("Error during form submission:", error);
         message.error("Có lỗi xảy ra khi sửa sản phẩm: " + error.message);
@@ -315,6 +356,7 @@ export default defineComponent({
     return {
       ...toRefs(formState),
       errors,
+      isSelling,
       route,
       router,
       formRef,
@@ -324,6 +366,9 @@ export default defineComponent({
       resetForm,
       createUsers,
       previewFiles,
+      productTypes,
+      handleChange,
+
       goBack,
       newImage,
       handleFileUpload
@@ -339,6 +384,7 @@ export default defineComponent({
 .avatar {
   width: 200px;
   height: 200px;
-  border: 4px solid #fff;
+  border: 1px solid #cbcbcb;
+  margin-top: 10px;
 }
 </style>

@@ -52,21 +52,15 @@
               <span>{{ record.orderStatusName }}</span>
             </template>
             <template v-if="column.key === 'action' && authStoreClaim !== null">
-              <router-link
-                :to="{
-                  name: 'admin-chi-tiet-san-pham',
-                  params: { id: record.orderDetailId },
-                }"
-              >
-                <a-button
-                  title="Khóa"
-                  type="dashed"
-                  size="small"
-                  shape=""
-                  class="me-2 text-warning"
-                  >xem
-                </a-button>
-              </router-link>
+              <a-button
+                @click="showDrawer(record.orderDetailId)"
+                title="Xem"
+                type="dashed"
+                size="small"
+                shape=""
+                blue
+                ><i class="fa-solid fa-eye"></i
+              ></a-button>
             </template>
           </template>
         </a-table>
@@ -85,6 +79,46 @@
       </div>
     </div>
   </a-card>
+
+  <div>
+    <a-drawer
+      title="Chi tiết đơn hàng "
+      :visible="isDrawerVisible"
+      :width="850"
+      @close="handleClose"
+      :destroyOnClose="true"
+    >
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Tên sản phẩm :</p>
+        <p style="color: black">{{ dataIdOrder.productName }}</p>
+      </div>
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Tên cửa hàng :</p>
+        <p style="color: black">{{ dataIdOrder.storeName }}</p>
+      </div>
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Tên khách hàng :</p>
+        <p style="color: black">{{ dataIdOrder.customerName }}</p>
+      </div>
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Số lượng sản phẩm :</p>
+        <p style="color: black">{{ dataIdOrder.quantity }}</p>
+      </div>
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Tổng tiền :</p>
+        <p style="color: black">
+          {{ dataIdOrder.priceTotal?.toLocaleString() }} VND
+        </p>
+      </div>
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Số điện thoại khách hàng :</p>
+        <p style="color: black">
+          {{ dataIdOrder.customerPhone }}
+        </p>
+      </div>
+    </a-drawer>
+  </div>
+
 </template>
 <script>
 import { defineComponent, ref, reactive } from "vue";
@@ -112,10 +146,35 @@ export default defineComponent({
     const customerId = ref(route.params.customerId);
     console.log(route.params, "storeId2");
 
+    const isDrawerVisible = ref(false);
+
+    const dataIdOrder = ref({});
+
+    const fetchIdOrder = async (idOrder) => {
+      const { data } = await axios.get(
+        `${apiPrefix}/api/v1/management/${storeId}/orderdetail/view/${idOrder}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log(data, "ccd");
+
+      dataIdOrder.value = data.data;
+    };
+
+
+    const showDrawer = (id) => {
+      isDrawerVisible.value = true;
+      fetchIdOrder(id);
+    };
+    const handleClose = () => {
+      isDrawerVisible.value = false;
+    };
+
     const searchKeyword = ref("");
     const pageParam = reactive({
       currentPage: 1,
-      pageSize: 1,
+      pageSize: 10,
       totalItems: 0,
       totalPages: 0,
     });
@@ -241,12 +300,15 @@ export default defineComponent({
       users,
       columns,
       pageParam,
+      handleClose,
+      showDrawer,
       onChange,
       clickFrmFilter,
       confirmRemove,
       confirmBanned,
       searchKeyword,
-
+      isDrawerVisible,
+      dataIdOrder,
       onSearch,
     };
     //

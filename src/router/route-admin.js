@@ -65,6 +65,12 @@ const adminRoutes = [
         meta: { title: "Chi tiết - sản phẩm" },
         component: () => import("../views/users/detailsProduct.vue"),
       },
+      {
+        path: "don-hang/chi-tiet/:id",
+        name: "admin-chi-tiet-don-hang",
+        meta: { title: "Chi tiết - đơn hàng" },
+        component: () => import("../views/users/detailsOrderbyStore.vue"),  
+      },
 
       {
         path: "ket-qua-do/sua/:id/:recordingDate",

@@ -12,11 +12,7 @@
       <div class="col-12">
         <a-form @submit.prevent="onSearch">
           <a-form-item>
-            <a-input
-              placeholder="Tìm kiếm sản phẩm"
-              v-model:value="searchKeyword"
-              @pressEnter="onSearch"
-            />
+            <a-input placeholder="Tìm kiếm sản phẩm" v-model:value="searchKeyword" @pressEnter="onSearch" />
           </a-form-item>
           <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
         </a-form>
@@ -51,23 +47,14 @@
         </div> -->
     <div class="row">
       <div class="col-12">
-        <a-table
-          :dataSource="users"
-          :columns="columns"
-          :scroll="{ x: 576 }"
-          :pagination="false"
-        >
+        <a-table :dataSource="users" :columns="columns" :scroll="{ x: 576 }" :pagination="false">
           <template #bodyCell="{ column, index, record }">
             <template v-if="column.key === 'index'">
               <span>{{ index + 1 }}</span>
             </template>
             <!-- imageSp -->
             <template v-if="column.key === 'imageSp'">
-              <img
-                :style="{ width: '50px !important' }"
-                :src="record.productImg"
-                :alt="record.productImg"
-              />
+              <img :style="{ width: '50px !important' }" :src="record.productImg" :alt="record.productImg" />
             </template>
             <template v-if="column.key === 'userName'">
               <span>{{ record.productName }}</span>
@@ -82,89 +69,24 @@
               <span>{{ record.orderStatusName }}</span>
             </template>
             <template v-if="column.key === 'action' && authStoreClaim !== null">
-              <!-- giveOrder,
-      doneOrder -->
-              <!-- <a-space warp>
-                <a-button
-                  @click="giveOrder(record.orderDetailId)"
-                  type="dashed"
-                  class="me-2 text-primary"
-                  size="small"
-                  title="Sửa"
-                >
-                  Nhân đơn
-                </a-button>
-              </a-space>
 
-              <a-button
-                title="Khóa"
-                @click="doneOrder(record.orderDetailId)"
-                type="dashed"
-                size="small"
-                shape=""
-                class="me-2 text-warning"
-              >
-                Hoàn thành đơn
-              </a-button> -->
+              <a-button @click="showDrawer(record.orderDetailId)" title="Xem" type="dashed" size="small" shape=""
+                blue><i class="fa-solid fa-eye"></i></a-button>
 
-              <a-button
-                @click="showDrawer(record.orderDetailId)"
-                title="Xóa"
-                type="dashed"
-                size="small"
-                shape=""
-                blue
-                ><i class="fa-solid fa-eye"></i
-              ></a-button>
-
-              <!-- <a-popconfirm
-                title="Bạn muốn Khóa bản ghi này?"
-                ok-text="Yes"
-                cancel-text="No"
-              >
-                <router-link
-                  :to="{
-                    name: 'admin-store-all-staff',
-                    params: { id: record.storeId },
-                  }"
-                >
-                  <a-button
-                    title="Khóa"
-                    type="dashed"
-                    size="small"
-                    shape=""
-                    class="me-2 text-warning"
-                  >
-                    staff
-                  </a-button>
-                </router-link>
-              </a-popconfirm> -->
             </template>
           </template>
         </a-table>
         <div class="col-12">
-          <a-pagination
-            @change="onChange"
-            v-model:current="pageParam.currentPage"
-            :total="pageParam.totalItems"
-            :pageSize="pageParam.pageSize"
-            :show-total="
-              (total, range) => `${range[0]}-${range[1]} của ${total} sản phẩm`
-            "
-            class="mt-2 text-end"
-          />
+          <a-pagination @change="onChange" v-model:current="pageParam.currentPage" :total="pageParam.totalItems"
+            :pageSize="pageParam.pageSize" :show-total="(total, range) => `${range[0]}-${range[1]} của ${total} sản phẩm`
+          " class="mt-2 text-end" />
         </div>
       </div>
     </div>
   </a-card>
   <div>
-    <a-drawer
-      title="Chi tiết đơn hàng "
-      :visible="isDrawerVisible"
-      :width="850"
-      @close="handleClose"
-      :destroyOnClose="true"
-    >
+    <a-drawer title="Chi tiết đơn hàng " :visible="isDrawerVisible" :width="850" @close="handleClose"
+      :destroyOnClose="true">
       <div style="display: flex; gap: 10px" class="giohang orderhome">
         <p>Tên sản phẩm :</p>
         <p style="color: black">{{ dataIdOrder.productName }}</p>
@@ -178,7 +100,7 @@
         <p style="color: black">{{ dataIdOrder.customerName }}</p>
       </div>
       <div style="display: flex; gap: 10px" class="giohang orderhome">
-        <p>Số lượng order :</p>
+        <p>Số lượng sản phẩm :</p>
         <p style="color: black">{{ dataIdOrder.quantity }}</p>
       </div>
       <div style="display: flex; gap: 10px" class="giohang orderhome">
@@ -193,6 +115,21 @@
           {{ dataIdOrder.customerPhone }}
         </p>
       </div>
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+        <p>Ngày đặt hàng :</p>
+        <p style="color: black">
+          {{ formatDate(dataIdOrder.createdAt) }}
+        </p>
+      </div>
+      <div style="display: flex; gap: 10px" class="giohang orderhome">
+  <p>
+    {{ getOrderStatusLabel(dataIdOrder.orderStatusId) }} :
+  </p>
+  <p style="color: black">
+    {{ formatDate(dataIdOrder.updatedAt) }}
+  </p>
+</div>
+
     </a-drawer>
   </div>
 </template>
@@ -233,7 +170,7 @@ export default defineComponent({
     const searchKeyword = ref("");
     const pageParam = reactive({
       currentPage: 1,
-      pageSize: 1,
+      pageSize: 10,
       totalItems: 0,
       totalPages: 0,
     });
@@ -272,6 +209,28 @@ export default defineComponent({
         fixed: "right",
       },
     ];
+
+    const formatDate = (dateString) => {
+      try {
+        // Cắt chuỗi theo các thành phần thời gian và ngày
+        const year = dateString.slice(2, 4); // Lấy hai chữ số cuối của năm
+        const month = dateString.slice(5, 7); // Lấy tháng
+        const day = dateString.slice(8, 10); // Lấy ngày
+        const hours = dateString.slice(11, 13); // Lấy giờ
+        const minutes = dateString.slice(14, 16); // Lấy phút
+        const seconds = dateString.slice(17, 19); // Lấy giây
+
+        // Ghép lại thành định dạng mong muốn
+        return `${hours}:${minutes}:${seconds}    ${day}-${month}-${year}`;
+      } catch (error) {
+        console.error('Error formatting date:', error);
+        return "Invalid date";
+      }
+
+      // Ghép lại thành định dạng mong muốn
+      return `${hours}:${minutes}:${seconds} ${day}-${month}-${year}`;
+    };
+
 
     const getUsers = (page, size, keyword = "") => {
       axios
@@ -315,6 +274,23 @@ export default defineComponent({
       //     message.error(`Lỗi! ${error.response.statusText}`);
       // });
     };
+
+
+    const getOrderStatusLabel = (statusId) => {
+      switch (statusId) {
+        case 1:
+          return "Ngày đặt hàng";
+        case 2:
+          return "Ngày giao hàng";
+        case 3:
+          return "Ngày giao thành công";
+        case 4:
+          return "Ngày hủy đơn";
+        default:
+          return "Trạng thái không xác định";
+      }
+    }
+
     const fetchIdOrder = async (idOrder) => {
       const { data } = await axios.get(
         `${apiPrefix}/api/v1/management/${id}/orderdetail/view/${idOrder}`,
@@ -426,6 +402,8 @@ export default defineComponent({
     };
     return {
       route,
+      formatDate,
+      getOrderStatusLabel,
       router,
       authStoreClaim,
       errors,

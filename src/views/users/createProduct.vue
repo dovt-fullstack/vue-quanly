@@ -19,8 +19,8 @@
           @finish="createUsers()">
           <div class="row">
             <div class="col-12 ">
-              <a-form-item ref="userName" label="Tên sản phẩm" required name="userName">
-                <a-input v-model:value="formState.userName" />
+              <a-form-item ref="productName" label="Tên sản phẩm" required name="productName">
+                <a-input v-model:value="formState.productName" />
                 <small v-if="errors && errors.UserName" class="text-danger">{{ errors.UserName[0] }}</small>
               </a-form-item>
               <a-form-item ref="price" label="Giá bán" required name="price">
@@ -31,21 +31,35 @@
                 <a-input v-model:value="formState.description" />
                 <small v-if="errors && errors.description" class="text-danger">{{ errors.description[0] }}</small>
               </a-form-item>
-              <a-form-item ref="producttypename" label="Loại sản phẩm" required name="producttypename">
-                <a-input v-model:value="formState.producttypename" />
-                <small v-if="errors && errors.producttypename" class="text-danger">{{ errors.producttypename[0]
-                  }}</small>
+
+
+              <a-form-item ref="productTypeName" label="Loại sản phẩm" name="productTypeId">
+                <a-select v-model:value="formState.productTypeName" style="width: 100%" placeholder="Chọn loại sản phẩm"
+                  @change="handleChange">
+                  <a-select-option v-for="typee in productTypes" :key="typee.productTypeName"
+                    :value="typee.productTypeName">
+                    {{ typee.productTypeName }}
+                  </a-select-option>
+                </a-select>
               </a-form-item>
-              <a-form-item ref="fullName" label="Hình ảnh" name="fullName">
-                <input type="file" @change="handleFileUpload" />
-                <small v-if="errors && errors.FullName" class="text-danger">{{ errors.FullName[0] }}</small>
+
+
+
+              <a-form-item label="Ảnh đại diện mới">
+                <input type="file" @change="previewFiles" />
+                <div class="avatar-container">
+                  <img v-if="newImage" :src="newImage" class="avatar" alt="avatar" />
+                </div>
               </a-form-item>
+
+
+
               <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
                 <a-button @click="goBack" class="me-0 me-sm-2 mb-3 mb-sm-0">
-                    <span>Quay lại</span>
+                  <span>Quay lại</span>
                 </a-button>
                 <a-button class="me-0 me-sm-2 mb-3 mb-sm-0 bg-info text-light" @click="resetForm">Reset</a-button>
-                <a-button type="primary" html-type="submit" class="bg-success">Lưu</a-button>
+                <a-button type="primary" html-type="submit" class="bg-success" :loading=formState.loading>Lưu</a-button>
               </a-form-item>
             </div>
           </div>
@@ -87,36 +101,31 @@ export default defineComponent({
 
     const id = route.params.id
     const formState = reactive({
-      userName: '',
+      productTypeId: "",
+
+      productName: '',
       fullName: '',
       price: '',
       description: '',
       producttypename: '',
+      productTypeName: '',
+
       avatar: '',
-      avatarFile: ''
+      avatarFile: null,
+      loading: false,
     });
+    const productTypes = ref([]);
+
+    const avatarFile = ref(null); // Store the file object
+    const newImage = ref('');
+
     const fileAvatar = ref(null)
-    let validatePass = async (rule, value) => {
-      if (value === '') {
-        return Promise.reject('Please input the password');
-      } else {
-        if (formState.rePassWord !== '') {
-          formRef.value.validateFields('rePassWord');
-        }
-        return Promise.resolve();
-      }
-    };
-    let validatePass2 = async (rule, value) => {
-      if (value === '') {
-        return Promise.reject('Please input the password again');
-      } else if (value !== formState.passWord) {
-        return Promise.reject("Two inputs don't match!");
-      } else {
-        return Promise.resolve();
-      }
-    };
+    const handleChange = (value) => {
+      console.log('Selected productTypeName:', value);
+      console.log('formState.productTypeName:', this.formState.productTypeName);
+    }
     const rules = {
-      userName: [
+      productName: [
         {
           required: true,
           message: 'name không để trống.',
@@ -143,7 +152,29 @@ export default defineComponent({
     const resetForm = () => {
       formRef.value.resetFields();
     };
-    
+    const fetchProduct = async () => {
+      try {
+
+        const response = await axios.get(
+          `${apiPrefix}/api/v1/management/${id}/producttype/view`,
+          {
+            headers: {
+
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+
+            },
+          });
+        if (response.data.status === "OK") {
+          console.log(response.data)
+          productTypes.value = response.data.data;
+        } else {
+          console.error(response.data.message);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
     const goBack = () => {
       // Navigate back to the previous page
       if (history.length > 1) {
@@ -193,37 +224,97 @@ export default defineComponent({
     //
     const handleFileUpload = (event) => {
       const file = event.target.files[0];
-      formState.avatarFile = file; 
+      formState.avatarFile = file;
     }
     const createUsers = () => {
       const formData = new FormData();
-      formData.append('name', formState.userName);
-      formData.append('avatar', formState.avatarFile);
-      formData.append('description', formState.description);
-      formData.append('producttypename', formState.producttypename);
-      formData.append('price', formState.price);
+      formState.loading = true;
 
-      axios.post( `${apiPrefix}/api/v1/management/${id}/product/insert`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,
+      try {
+        formData.append("producttypename", formState.productTypeName);
 
+        if (formState.price) {
+          formData.append("price", formState.price);
+        } else {
+          throw new Error("Price is missing");
         }
-      })
-        .then((response) => {
-          message.success("Tạo mới thành công!");
-          router.push({ name: "dashboards" });
+
+        if (formState.productName) {
+          formData.append("name", formState.productName);
+        } else {
+          throw new Error("Product Name is missing");
+        }
+        if (formState.description) {
+          formData.append("description", formState.description);
+        } else {
+          throw new Error("Description is missing");
+        }
+
+        if (avatarFile.value) {
+          formData.append('avatar', avatarFile.value);
+        }
+
+        for (let pair of formData.entries()) {
+          console.log(pair[0] + ', ' + pair[1]);
+        }
+
+
+        
+
+        axios.post(`${apiPrefix}/api/v1/management/${id}/product/insert`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+          }
         })
-        .catch((error) => {
-          console.log(error);
-        });
+          .then((response) => {
+            message.success("Tạo mới thành công!");
+            router.push({ name: "ProductByStore", params: { id: id } });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+      } catch (error) {
+        console.error("Error during form submission:", error);
+        message.error("Có lỗi xảy ra: " + error.message);
+      } finally {
+        formState.loading = false; // Tắt trạng thái chờ khi hoàn thành
+      }
+
+
+
+
     }
+    const previewFiles = (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+      if (!isJpgOrPng) {
+        message.error('You can only upload JPG/PNG file!');
+        return;
+      }
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        message.error('Image must smaller than 2MB!');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        newImage.value = reader.result; // Set the base64 string for preview
+        avatarFile.value = file; // Store the file object for submission
+      };
+      reader.readAsDataURL(file);
+    };
+
+
     onMounted(() => {
       //
       resetForm();
-      getOptionsLevelManage();
-      getOptionsStatus();
-      getOptionsRole();
+      fetchProduct();
+
     })
     const handleChangeUpload = (e) => {
       var p = BaseCommon.GetBase64(e.target.files[0]);
@@ -249,7 +340,10 @@ export default defineComponent({
       rules,
       layout,
       resetForm,
-      //
+      productTypes,
+      handleChange,
+
+
       handleFileUpload,
       getOptionsLevelManage,
       getOptionsStatus,
@@ -262,8 +356,18 @@ export default defineComponent({
       // preview
       handleChangeUpload,
       handleRemoveAvatar,
-      goBack
+      goBack,
+      newImage,
+      previewFiles
     };
   },
 });
 </script>
+<style>
+.avatar {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #cbcbcb;
+  margin-top: 10px;
+}
+</style>

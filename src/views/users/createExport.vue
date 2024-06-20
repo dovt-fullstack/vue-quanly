@@ -38,12 +38,20 @@
                 <small v-if="errors && errors.priceOut" class="text-danger">{{ errors.priceOut[0] }}</small>
               </a-form-item>
 
-              <a-form-item has-feedback label="Loại sản phẩm" required name="producttypename">
-                <a-input v-model:value="formState.producttypename" autocomplete="off" />
+              <a-form-item ref="productTypeName" label="Loại sản phẩm" name="productTypeId">
+                <a-select v-model:value="formState.productTypeName" style="width: 100%" placeholder="Chọn loại sản phẩm"
+                  @change="handleChange">
+                  <a-select-option v-for="typee in productTypes" :key="typee.productTypeName"
+                    :value="typee.productTypeName">
+                    {{ typee.productTypeName }}
+                  </a-select-option>
+                </a-select>
               </a-form-item>
+
+
               <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
                 <a-button @click="goBack" class="me-0 me-sm-2 mb-3 mb-sm-0">
-                    <span>Quay lại</span>
+                  <span>Quay lại</span>
                 </a-button>
                 <a-button class="me-0 me-sm-2 mb-3 mb-sm-0 bg-info text-light" @click="resetForm">Reset</a-button>
                 <a-button type="primary" html-type="submit" class="bg-success">Lưu</a-button>
@@ -88,6 +96,7 @@ export default defineComponent({
     const route = useRoute()
     const id = route.params.id
     const formState = reactive({
+      productTypeId: "",
       userName: '',
       fullName: '',
       email: '',
@@ -96,12 +105,14 @@ export default defineComponent({
       priceOut: '',
       roleID: '',
       status: '',
-      producttypename: '',
+      productTypeName: '',
       fileAvatar: null,
       rmavatar: "yes",
       //
       change_password: false,
     });
+    const productTypes = ref([]);
+
     const fileAvatar = ref(null)
     const rules = {
     };
@@ -124,7 +135,7 @@ export default defineComponent({
       }
     };
     const resetForm = () => {
-      // axios.post( `${apiPrefix}/api/v1/management/${id}/producttype/view`, formData).then((response) => {
+      // axios.post( `${apiPrefix}/api/v1/management/${id}/productType/view`, formData).then((response) => {
       //   message.success("Tạo mới thành công!");
       //   router.push({ name: "importExport", params: { id: id } });
       // }).catch((error) => {
@@ -132,6 +143,40 @@ export default defineComponent({
       // })
       formRef.value.resetFields();
     };
+
+
+    const handleChange = (value) => {
+      console.log('Selected productTypeName:', value);
+      console.log('formState.productTypeName:', this.formState.productTypeName);
+    }
+
+    const fetchProduct = async () => {
+      try {
+
+        const response = await axios.get(
+          `${apiPrefix}/api/v1/management/${id}/producttype/view`,
+          {
+            headers: {
+
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+
+            },
+          });
+        if (response.data.status === "OK") {
+          console.log(response.data)
+          productTypes.value = response.data.data;
+        } else {
+          console.error(response.data.message);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+
+
+
     //
 
     //
@@ -141,32 +186,35 @@ export default defineComponent({
         priceIn: formState.fullName,
         quantity: formState.quantity,
         priceOut: formState.priceOut,
-        producttypename: formState.producttypename
+        productTypename: formState.productTypename
       }
       const formData = new FormData();
       formData.append("productname", formState.userName);
       formData.append("priceIn", formState.fullName);
       formData.append("quantity", formState.quantity);
       formData.append("priceOut", formState.priceOut);
-      formData.append("producttypename", formState.producttypename);
-      
+      formData.append("producttypename", formState.productTypeName);
 
 
-      axios.post( `${apiPrefix}/api/v1/management/${id}/import/insert`, formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }).then((response) => {
-        message.success("Tạo mới thành công!");
-        router.push({ name: "importExport", params: { id: id } });
-      }).catch((error) => {
-        console.log(error)
-      })
+
+
+      axios.post(`${apiPrefix}/api/v1/management/${id}/import/insert`, formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }).then((response) => {
+          message.success("Tạo mới thành công!");
+          router.push({ name: "importExport", params: { id: id } });
+        }).catch((error) => {
+          console.log(error)
+        })
     }
     onMounted(() => {
       //
       // resetForm();
+      fetchProduct();
+
     })
 
 
@@ -177,6 +225,7 @@ export default defineComponent({
       errors,
       formState,
       fileAvatar,
+      productTypes,
       formRef,
       rules,
       layout,
@@ -184,6 +233,7 @@ export default defineComponent({
       //
       users,
       createUsers,
+      handleChange,
       goBack
       // preview
     };

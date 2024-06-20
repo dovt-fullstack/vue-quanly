@@ -25,7 +25,7 @@
         <a-form @submit.prevent="onSearch">
           <a-form-item>
             <a-input
-              placeholder="Tìm kiếm sản phẩm"
+              placeholder="Tìm kiếm"
               v-model:value="searchKeyword"
               @pressEnter="onSearch"
             />
@@ -81,6 +81,9 @@
             </template>
             <template v-if="column.key === 'email'">
               <span>{{ record.totalOrder }}</span>
+            </template>
+            <template v-if="column.key === 'totalPayment'">
+              <span>{{ record.totalPayment }}</span>
             </template>
 
             <template v-if="column.key === 'action' && authStoreClaim !== null">
@@ -199,7 +202,7 @@ export default defineComponent({
     const searchKeyword = ref("");
     const pageParam = reactive({
       currentPage: 1,
-      pageSize: 1,
+      pageSize: 10,
       totalItems: 0,
       totalPages: 0,
     });
@@ -214,13 +217,17 @@ export default defineComponent({
         key: "userName",
       },
       {
-        title: "Sđt",
+        title: "Số điện thoại",
         dataIndex: "fullName",
         key: "fullName",
       },
       {
-        title: "Số lượng order",
+        title: "Số lượng đơn hàng",
         key: "email",
+      },
+      {
+        title: "Tổng chi",
+        key: "totalPayment",
       },
 
       {

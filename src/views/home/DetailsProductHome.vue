@@ -116,6 +116,9 @@
                     )?.toLocaleString()
                   }}₫
                 </b>
+                <b v-else>
+    {{ (product.price) }}₫
+  </b>
               </span>
 
               <!--tieu ban-->
@@ -312,11 +315,17 @@ export default defineComponent({
     const productId = route.params.id;
     const router = useRouter();
     const userLocal = JSON.parse(localStorage.getItem("auth"));
+    const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
 
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `${apiPrefix}/api/v1/product/info/${productId}`
+          `${apiPrefix}/api/v1/product/info/${productId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+
         );
         if (response.data.status === "OK") {
           product.value = response.data.data;
@@ -327,7 +336,6 @@ export default defineComponent({
         console.error(error);
       }
     };
-    const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
     const handelAddCart = () => {
       const newData = Number(numberItem.value);
       if (newData < 1) {

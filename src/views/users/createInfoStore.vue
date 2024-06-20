@@ -144,7 +144,13 @@ export default defineComponent({
         console.log(13132223)
 
         const response = await axios.get(
-          ` ${apiPrefix}/api/v1/auth/storetype/view`
+          ` ${apiPrefix}/api/v1/storetype/view`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+
         );
         if (response.data.status === "OK") {
           console.log(response.data)
@@ -353,7 +359,7 @@ export default defineComponent({
         formState.urlAvatar = value;
         formState.rmavatar = "no";
       }).catch((err) => {
-        console.log(err); // 👉️ "Something went wrong"
+        console.log(err);
       });
     };
     const handleRemoveAvatar = () => {
