@@ -199,16 +199,7 @@
               content="https://www.facebook.com/ChuThanhPhong"
             />
           </span>
-          <div class="row mb-3">
-          <div class="col-12">
-              <a-form @submit.prevent="onSearch">
-                  <a-form-item>
-                      <a-input placeholder="Tìm kiếm sản phẩm" v-model:value="searchKeyword" @pressEnter="onSearch" />
-                  </a-form-item>
-                  <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
-              </a-form>
-          </div>
-      </div>
+        
           <div class="open">
             <label style="cursor: pointer" class="oh">
               <router-link v-if="!userLocal" to="/login">
@@ -278,7 +269,18 @@
         <div class="wrap flexCol">
           <div class="f dhtit">
             <h2>TOP sản phẩm trong cửa hàng</h2>
+            <div class="row mb-3">
+          <div class="col-12">
+              <a-form @submit.prevent="onSearch">
+                  <a-form-item>
+                      <a-input style="width: 300px;" placeholder="Tìm kiếm sản phẩm" v-model:value="searchKeyword" @pressEnter="onSearch" />
+                  </a-form-item>
+                  <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
+              </a-form>
           </div>
+      </div>
+          </div>
+          
           <div
             class="dhpro owl-carousel owl-theme"
             id="dealhot"
@@ -329,10 +331,18 @@
                     </a>
                   </router-link>
                 </div>
+            
               </div>
             </div>
           </div>
+          <div class="col-12">
+                  <a-pagination @change="onChange" v-model:current="pageParam.currentPage" 
+                                :total="pageParam.totalItems" :pageSize="pageParam.pageSize"
+                                :show-total="(total, range) => `${range[0]}-${range[1]} của ${total} sản phẩm`"
+                                class="mt-2 text-end" />
+              </div>
         </div>
+        
       </div>
 
       <div class="wrap flexCol">
@@ -647,6 +657,11 @@ export default defineComponent({
     pageParam.currentPage = 1;
     getUsers(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
   };
+  const onChange = (page, pageSize) => {
+    pageParam.currentPage = page;
+    pageParam.pageSize = pageSize;
+    fetchProducts(page, pageSize, searchKeyword.value);
+  };
     onMounted(() => {
       getUsers(pageParam.currentPage, pageParam.pageSize);
 
@@ -662,8 +677,10 @@ export default defineComponent({
       typeStore,
       addMyFarvors,
     onSearch,
-    searchKeyword,
+    pageParam,
 
+    searchKeyword,
+    onChange
     };
     //
   },
