@@ -269,6 +269,16 @@
       <div class="orderbox">
         <h1 style="padding: 30px">Danh sách đơn đã đặt</h1>
         <div class="giohang orderhome">
+          <div class="row mb-3">
+          <div class="col-12">
+              <a-form @submit.prevent="onSearch">
+                  <a-form-item>
+                      <a-input placeholder="Tìm kiếm sản phẩm" v-model:value="searchKeyword" @pressEnter="onSearch" />
+                  </a-form-item>
+                  <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
+              </a-form>
+          </div>
+      </div>
           <form name="giohang" id="cart">
             <ul class="listcart">
               <li
@@ -324,7 +334,12 @@
             />
             <input type="hidden" name="_w_action" value="UpdatePOST" />
           </form>
-
+          <div class="col-12">
+                  <a-pagination @change="onChange" v-model:current="pageParam.currentPage" 
+                                :total="pageParam.totalItems" :pageSize="pageParam.pageSize"
+                                :show-total="(total, range) => `${range[0]}-${range[1]} của ${total} sản phẩm`"
+                                class="mt-2 text-end" />
+              </div>
           <!-- <div class="fpanel">
             <div class="da">
               <p class="state">Đơn hàng đang được gửi ...</p>
@@ -624,7 +639,13 @@ export default defineComponent({
     const token = JSON.parse(localStorage.getItem("token"));
     const myOrder = ref([]);
     // https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/view
-
+    const searchKeyword = ref("");
+  const pageParam = reactive({
+    currentPage: 1,
+    pageSize: 5,
+    totalItems: 0,
+    totalPages: 0
+  });
     const showDrawer = () => {
       isDrawerVisible.value = true;
     };
@@ -710,22 +731,32 @@ export default defineComponent({
         console.error(error);
       }
     };
-    const fetchMyOrder = async () => {
+    const fetchMyOrder = async (page, size, keyword = "") => {
       try {
         const response = await axios.get(
           `${apiPrefix}/api/v1/customer/orderdetail/view`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
+        params: { page, size, keyword }
           }
         );
         console.log(response.data, "data");
+        pageParam.totalItems = response.data.pagination.totalItems;
+        pageParam.totalPages = response.data.pagination.totalPages;
         myOrder.value = response.data.data;
       } catch (error) {
         console.error(error);
       }
     };
+    const onChange = (page, pageSize) => {
+    pageParam.currentPage = page;
+    pageParam.pageSize = pageSize;
+    fetchMyOrder(page, pageSize, searchKeyword.value);
+  };
+  const onSearch = () => {
+    pageParam.currentPage = 1;
+    fetchMyOrder(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
+  };
     // https://charismatic-friendship-production.up.railway.app/api/v1/customer/orderdetail/view
     const byProductCart = async (idCart) => {
       const formData = new FormData();
@@ -831,7 +862,7 @@ export default defineComponent({
     onMounted(() => {
       fetchProduct();
       getMyfavorite();
-      fetchMyOrder();
+      fetchMyOrder(pageParam.currentPage, pageParam.pageSize);
     });
     return {
       router,
@@ -848,12 +879,16 @@ export default defineComponent({
       handleClose,
       handleSubmit,
       isDrawerVisible2,
+      pageParam,
       handleClose2,
       showDrawer2,
       cancelOderMyFarvor,
       myOrder,
       myFarve,
       cancelOder,
+      searchKeyword,
+    onChange,
+    onSearch,
     };
   },
 });

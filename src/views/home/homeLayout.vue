@@ -199,7 +199,7 @@
               content="https://www.facebook.com/ChuThanhPhong"
             />
           </span>
-        
+
           <div class="open">
             <label style="cursor: pointer" class="oh">
               <router-link v-if="!userLocal" to="/login">
@@ -270,17 +270,22 @@
           <div class="f dhtit">
             <h2>TOP sản phẩm trong cửa hàng</h2>
             <div class="row mb-3">
-          <div class="col-12">
-              <a-form @submit.prevent="onSearch">
+              <div class="col-12">
+                <a-form @submit.prevent="onSearch">
                   <a-form-item>
-                      <a-input style="width: 300px;" placeholder="Tìm kiếm sản phẩm tại đây" v-model:value="searchKeyword" @pressEnter="onSearch" />
+                    <a-input
+                      style="width: 300px"
+                      placeholder="Tìm kiếm sản phẩm"
+                      v-model:value="searchKeyword"
+                      @pressEnter="onSearch"
+                    />
                   </a-form-item>
                   <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
-              </a-form>
+                </a-form>
+              </div>
+            </div>
           </div>
-      </div>
-          </div>
-          
+
           <div
             class="dhpro owl-carousel owl-theme"
             id="dealhot"
@@ -331,23 +336,43 @@
                     </a>
                   </router-link>
                 </div>
-            
               </div>
             </div>
           </div>
           <div class="col-12">
-                  <a-pagination @change="onChange" v-model:current="pageParam.currentPage" 
-                                :total="pageParam.totalItems" :pageSize="pageParam.pageSize"
-                                :show-total="(total, range) => `${range[0]}-${range[1]} của ${total} sản phẩm`"
-                                class="mt-2 text-end" />
-              </div>
+            <a-pagination
+              @change="onChange"
+              v-model:current="pageParam.currentPage"
+              :total="pageParam.totalItems"
+              :pageSize="pageParam.pageSize"
+              :show-total="
+                (total, range) =>
+                  `${range[0]}-${range[1]} của ${total} sản phẩm`
+              "
+              class="mt-2 text-end"
+            />
+          </div>
         </div>
-        
       </div>
 
       <div class="wrap flexCol">
         <div class="f boxtit flexJus">
           <label>Các sản phẩm khác</label>
+          <div class="row mb-3">
+              <div class="col-12">
+                <a-form @submit.prevent="onSearch2">
+                  <a-form-item>
+                    <a-input
+                      style="width: 300px; border:1px solid #ccc"
+                      placeholder="Tìm kiếm sản phẩm"
+                      v-model:value="searchKeyword2"
+                      @pressEnter="onSearch2"
+                    />
+                  </a-form-item>
+                  <a-button type="primary" @click="onSearch2">Tìm kiếm</a-button>
+                </a-form>
+              </div>
+            </div>
           <div class="bst">
             <h2>
               <a href="den-led-am-tran" title="Đèn Led âm trần"
@@ -377,7 +402,7 @@
           "
         >
           <ul
-            v-for="user in users.slice(0, 8)"
+            v-for="user in users2.slice(0, 8)"
             :key="user.id"
             class="pb Product"
           >
@@ -407,7 +432,21 @@
               </router-link>
             </li>
           </ul>
+          
         </div>
+        <div class="col-12">
+            <a-pagination
+              @change="onChange2"
+              v-model:current="pageParam2.currentPage"
+              :total="pageParam2.totalItems"
+              :pageSize="pageParam2.pageSize"
+              :show-total="
+                (total, range) =>
+                  `${range[0]}-${range[1]} của ${total} sản phẩm`
+              "
+              class="mt-2 text-end"
+            />
+          </div>
       </div>
 
       <!--bai viet-->
@@ -599,24 +638,48 @@ export default defineComponent({
     const storeId = route.params.id;
     const storeId2 = ref(route.params.id);
     const searchKeyword = ref("");
-  const pageParam = reactive({
-    currentPage: 1,
-    pageSize: 10,
-    totalItems: 0,
-    totalPages: 0
-  });
+    const pageParam = reactive({
+      currentPage: 1,
+      pageSize: 1,
+      totalItems: 0,
+      totalPages: 0,
+    });
+    const users2 = ref([]);
+    const searchKeyword2 = ref("");
+    const pageParam2 = reactive({
+      currentPage: 1,
+      pageSize: 1,
+      totalItems: 0,
+      totalPages: 0,
+    });
     const getUsers = (page, size, keyword = "") => {
       axios
         .get(`${apiPrefix}/api/v1/customer/store/view/${storeId}`, {
           headers: { Authorization: `Bearer ${token}` },
-        params: { page, size, keyword }
+          params: { page, size, keyword },
         })
         .then((response) => {
-        const data = response.data;
+          const data = response.data;
 
           users.value = response.data.data;
           pageParam.totalItems = data.pagination.totalItems;
-        pageParam.totalPages = data.pagination.totalPages;
+          pageParam.totalPages = data.pagination.totalPages;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+    const getUsers2 = (page, size, keyword = "") => {
+      axios
+        .get(`${apiPrefix}/api/v1/customer/store/view/${storeId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+          params: { page, size, keyword },
+        })
+        .then((response) => {
+          const data = response.data;
+          users2.value = response.data.data;
+          pageParam2.totalItems = data.pagination.totalItems;
+          pageParam2.totalPages = data.pagination.totalPages;
         })
         .catch((error) => {
           console.error(error);
@@ -654,16 +717,26 @@ export default defineComponent({
     };
     console.log(typeStore.value.productTypeName, "cs");
     const onSearch = () => {
-    pageParam.currentPage = 1;
-    getUsers(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
-  };
-  const onChange = (page, pageSize) => {
-    pageParam.currentPage = page;
-    pageParam.pageSize = pageSize;
-    fetchProducts(page, pageSize, searchKeyword.value);
-  };
+      pageParam.currentPage = 1;
+      getUsers(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
+    };
+    const onChange = (page, pageSize) => {
+      pageParam.currentPage = page;
+      pageParam.pageSize = pageSize;
+      getUsers(page, pageSize, searchKeyword.value);
+    };
+    const onSearch2 = () => {
+      pageParam2.currentPage = 1;
+      getUsers2(pageParam2.currentPage, pageParam2.pageSize, searchKeyword2.value);
+    };
+    const onChange2 = (page, pageSize) => {
+      pageParam2.currentPage = page;
+      pageParam2.pageSize = pageSize;
+      getUsers2(page, pageSize, searchKeyword2.value);
+    };
     onMounted(() => {
       getUsers(pageParam.currentPage, pageParam.pageSize);
+      getUsers2(pageParam2.currentPage, pageParam2.pageSize);
 
       getTypeStore();
     });
@@ -672,15 +745,22 @@ export default defineComponent({
       route,
       router,
       users,
+      users2,
+
       storeId2,
       userLocal,
       typeStore,
       addMyFarvors,
-    onSearch,
-    pageParam,
+      onSearch,
+      pageParam,
 
-    searchKeyword,
-    onChange
+      searchKeyword,
+      onChange,
+      onSearch2,
+      pageParam2,
+
+      searchKeyword2,
+      onChange2,
     };
     //
   },
