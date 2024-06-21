@@ -308,6 +308,18 @@
           </form>
         </div>
       </div>
+      <div class="col-12">
+        <a-pagination
+          @change="onChange"
+          v-model:current="pageParam.currentPage"
+          :total="pageParam.totalItems"
+          :pageSize="pageParam.pageSize"
+          :show-total="
+            (total, range) => `${range[0]}-${range[1]} của ${total} sản phẩm`
+          "
+          class="mt-2 text-end"
+        />
+      </div>
     </div>
     <div id="footer">
       <div class="f" style="padding: 40px 0">
@@ -591,7 +603,13 @@ export default defineComponent({
     const token = JSON.parse(localStorage.getItem("token"));
     const myOrder = ref([]);
     // https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/view
-
+    const searchKeyword = ref("");
+    const pageParam = reactive({
+      currentPage: 1,
+      pageSize: 1,
+      totalItems: 0,
+      totalPages: 0,
+    });
     const showDrawer = () => {
       isDrawerVisible.value = true;
       fetchMyOrder();
@@ -607,18 +625,19 @@ export default defineComponent({
       isDrawerVisible.value = false;
     };
 
-    const fetchProduct = async () => {
+    const fetchProduct = async (page, size, keyword = "") => {
       try {
         const response = await axios.get(
           `${apiPrefix}/api/v1/customer/cartitem/view`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
+            params: { page, size, keyword },
           }
         );
         console.log(response.data, "data");
         product.value = response.data.data;
+        pageParam.totalItems = response.data.pagination.totalItems;
+        pageParam.totalPages = response.data.pagination.totalPages;
         allTotal.value = 0;
         // allTotal.value = response.data.data.reduce((total, product) => {
         //   console.log(total, product);
@@ -631,16 +650,17 @@ export default defineComponent({
         console.error(error);
       }
     };
-    const getMyfavorite = async () => {
+    const getMyfavorite = async (page, size, keyword = "") => {
       const response = await axios.get(
         `${apiPrefix}/api/v1/customer/favor/view`,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
+            params: { page, size, keyword },
         }
       );
       myFarve.value = response.data.data;
+      pageParam.totalItems = response.data.pagination.totalItems;
+        pageParam.totalPages = response.data.pagination.totalPages;
     };
     const cancelOder = async (id) => {
       try {
@@ -796,9 +816,22 @@ export default defineComponent({
         }
       });
     };
+    const onChange = (page, pageSize) => {
+      pageParam.currentPage = page;
+      pageParam.pageSize = pageSize;
+      getMyfavorite(page, pageSize, searchKeyword.value);
+    };
+    const onSearch = () => {
+      pageParam.currentPage = 1;
+      getMyfavorite(
+        pageParam.currentPage,
+        pageParam.pageSize,
+        searchKeyword.value
+      );
+    };
     onMounted(() => {
+      getMyfavorite(pageParam.currentPage, pageParam.pageSize);
       fetchProduct();
-      getMyfavorite();
     });
     return {
       router,
@@ -806,6 +839,9 @@ export default defineComponent({
       product,
       userLocal,
       deleteProduct,
+      searchKeyword,
+      onChange,
+      onSearch,
       decrement,
       increment,
       allTotal,
@@ -820,6 +856,7 @@ export default defineComponent({
       cancelOderMyFarvor,
       myOrder,
       myFarve,
+      pageParam,
       cancelOder,
     };
   },

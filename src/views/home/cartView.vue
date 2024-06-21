@@ -271,8 +271,17 @@
         <div class="dieuhuong">
           <a>Giỏ hàng của bạn</a>
         </div>
-
         <div class="giohang orderhome">
+          <div class="row mb-3">
+          <div class="col-12">
+              <a-form @submit.prevent="onSearch">
+                  <a-form-item>
+                      <a-input placeholder="Tìm kiếm sản phẩm" v-model:value="searchKeyword" @pressEnter="onSearch" />
+                  </a-form-item>
+                  <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
+              </a-form>
+          </div>
+      </div>
           <form method="post" name="giohang" id="cart">
             <ul class="listcart">
               <li v-for="product in product" :key="product.id" class="cartitem">
@@ -323,7 +332,12 @@
             />
             <input type="hidden" name="_w_action" value="UpdatePOST" />
           </form>
-
+          <div class="col-12">
+                  <a-pagination @change="onChange" v-model:current="pageParam.currentPage" 
+                                :total="pageParam.totalItems" :pageSize="pageParam.pageSize"
+                                :show-total="(total, range) => `${range[0]}-${range[1]} của ${total} sản phẩm`"
+                                class="mt-2 text-end" />
+              </div>
           <!--.box_27-->
           <!-- <form method="post" name="order" id="fod">
             <div class="fpanel">
@@ -711,7 +725,13 @@ export default defineComponent({
     const token = JSON.parse(localStorage.getItem("token"));
     const myOrder = ref([]);
     // https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/view
-
+    const searchKeyword = ref("");
+  const pageParam = reactive({
+    currentPage: 1,
+    pageSize: 2,
+    totalItems: 0,
+    totalPages: 0
+  });
     const showDrawer = () => {
       isDrawerVisible.value = true;
       fetchMyOrder();
@@ -727,18 +747,19 @@ export default defineComponent({
       isDrawerVisible.value = false;
     };
 
-    const fetchProduct = async () => {
+    const fetchProduct = async (page, size, keyword = "") => {
       try {
         const response = await axios.get(
           `${apiPrefix}/api/v1/customer/cartitem/view`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
+        params: { page, size, keyword }
           }
         );
         console.log(response.data, "data");
         product.value = response.data.data;
+        pageParam.totalItems = response.data.pagination.totalItems;
+        pageParam.totalPages =response.data.pagination.totalPages;
         allTotal.value = 0;
         // allTotal.value = response.data.data.reduce((total, product) => {
         //   console.log(total, product);
@@ -751,6 +772,15 @@ export default defineComponent({
         console.error(error);
       }
     };
+    const onChange = (page, pageSize) => {
+    pageParam.currentPage = page;
+    pageParam.pageSize = pageSize;
+    fetchProduct(page, pageSize, searchKeyword.value);
+  };
+  const onSearch = () => {
+    pageParam.currentPage = 1;
+    fetchProduct(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
+  };
     const getMyfavorite = async () => {
       const response = await axios.get(
         `${apiPrefix}/api/v1/customer/favor/view`,
@@ -917,7 +947,7 @@ export default defineComponent({
       });
     };
     onMounted(() => {
-      fetchProduct();
+      fetchProduct(pageParam.currentPage, pageParam.pageSize);
       getMyfavorite();
     });
     return {
@@ -941,6 +971,10 @@ export default defineComponent({
       myOrder,
       myFarve,
       cancelOder,
+      searchKeyword,
+      pageParam,
+    onChange,
+    onSearch,
     };
   },
 });
