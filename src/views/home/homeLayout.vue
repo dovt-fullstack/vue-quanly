@@ -273,7 +273,7 @@
           <div class="col-12">
               <a-form @submit.prevent="onSearch">
                   <a-form-item>
-                      <a-input style="width: 300px;" placeholder="Tìm kiếm sản phẩm" v-model:value="searchKeyword" @pressEnter="onSearch" />
+                      <a-input style="width: 300px;" placeholder="Tìm kiếm sản phẩm tại đây" v-model:value="searchKeyword" @pressEnter="onSearch" />
                   </a-form-item>
                   <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
               </a-form>
