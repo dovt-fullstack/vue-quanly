@@ -490,6 +490,33 @@
                     </div>
                   </div>
                   <div
+                    v-if="role == 'ADMIN'"
+                    class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
+                    tabindex="0"
+                    role="button"
+                    aria-disabled="false"
+                  >
+                    <div class="MuiListItemIcon-root">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5Zm0 8c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3-1.346 3-3 3Zm9 11v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1h2Z"
+                          fill="currentColor"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div class="MuiListItemText-root menuItemTitle">
+                      <span
+                        @click="navigateTo('admin-account')"
+                        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                        >Danh sách tài khoản</span
+                      >
+                    </div>
+                  </div>
+                  <div
                     v-if="role == 'MANAGER'"
                     class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
                     tabindex="0"
@@ -534,9 +561,8 @@
                     </div>
                     <div class="MuiListItemText-root menuItemTitle">
                       <a
-                        :href="'/store/staff/'+ storeId.storeId"
-                      
-
+                        :href="'/store/customer/'+ storeId.storeId"
+                    
                         class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                         >Khách hàng</a
                       >

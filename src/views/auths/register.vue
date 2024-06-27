@@ -352,13 +352,13 @@ export default defineComponent({
                     </div>
                     <div class="btn-register text-center mb-3" style="">
                         <button @click="resigterUser" class="btn-login" type="button">
-                            Đăng Kí User
+                            Quản lý
                         </button>
                         <button @click="resigterShipper" class="btn-login" type="button">
-                            Đăng Kí Shipper
+                            Người mua hàng
                         </button>
                         <button @click="resigterManager"  class="btn-login" type="button">
-                            Đăng Kí Manager
+                            Người giao hàng
                         </button>
 
                     </div>
@@ -12268,7 +12268,7 @@ input:disabled {
 }
 
 button.btn-login.sapo-btn-md {
-    width: 114px;
+    width: 100px;
     border-radius: 3px;
     height: 36px;
     line-height: 36px;
@@ -13472,7 +13472,7 @@ screen and (max-width:500px) {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     white-space: nowrap;
-    font-size: 24px;
+    font-size: 20px;
     transition: all .5s ease
 }
 

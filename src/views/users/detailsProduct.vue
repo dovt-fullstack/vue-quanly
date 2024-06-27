@@ -2,11 +2,7 @@
   <a-card style="width: 100%" class="product-detail-card">
     <div class="row">
       <div class="col-md-4 text-center">
-        <img
-          :src="product.avatarProduct"
-          alt="Product Image"
-          class="product-image img-fluid rounded"
-        />
+        <img :src="product.avatarProduct" alt="Product Image" class="product-image img-fluid rounded" />
       </div>
       <div class="col-md-8">
         <h2 class="my-3">{{ product.productName }}</h2>
@@ -18,12 +14,10 @@
         <p class="mb-1"><strong>Quantity:</strong> {{ product.quantity }}</p>
         <p class="mb-1">
           <strong>Status:</strong>
-          <span
-            :class="{
-              'text-success': product.status,
-              'text-danger': !product.status,
-            }"
-          >
+          <span :class="{
+          'text-success': product.status,
+          'text-danger': !product.status,
+        }">
             {{ product.status ? " Đang bán" : " Ngừng bán" }}
           </span>
         </p>
@@ -44,6 +38,7 @@
 import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
+import { message } from "ant-design-vue";
 
 export default defineComponent({
   name: "ProductDetail",
@@ -57,18 +52,37 @@ export default defineComponent({
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          ` ${apiPrefix}/api/v1/product/info/${productId}`
+          `${apiPrefix}/api/v1/product/info/${productId}`
         );
         if (response.data.status === "OK") {
-          console.log(response.data)
+          console.log(response.data);
           product.value = response.data.data;
-        } else {
+        } else if (response.data.status === "FAILED") {
+          // Hiển thị thông báo lỗi từ response
+          message.error(response.data.message);
           console.error(response.data.message);
+        } else {
+          // Xử lý các trạng thái khác nếu có
+          message.error("Unexpected response status");
+          console.error("Unexpected response status:", response.data);
         }
       } catch (error) {
-        console.error(error);
+        if (error.response) {
+          // Lỗi phản hồi từ server
+          message.error(error.response.data.message || "Server error occurred");
+          console.error(error.response.data);
+        } else if (error.request) {
+          // Lỗi khi thực hiện yêu cầu
+          message.error("No response received from server");
+          console.error(error.request);
+        } else {
+          // Lỗi khác
+          message.error(error.message);
+          console.error('Error:', error.message);
+        }
       }
     };
+
     const goBack = () => {
       // Navigate back to the previous page
       if (history.length > 1) {
