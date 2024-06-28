@@ -1,21 +1,15 @@
 <template>
   <div id="wrapper">
-    <Header/>
+    <Header />
     <div id="main">
       <!--san pham khuyen mai-->
       <div class="f box-tit" id="headpro">
         <div class="flexJus wrap" style="height: 40px">
-          <label @click="addMyFarvors()" class="btn" style="font: 15px arial"
-            >yêu thích</label
-          >
+          <label @click="addMyFarvors()" class="btn" style="font: 15px arial">yêu thích</label>
           <div class="flexJus">
-            <ul
-              v-for="user in typeStore.productTypeName"
-              :key="user.id"
-              class="othpro flexL"
-            >
+            <ul v-for="productType in typeStore" :key="productType.id" class="othpro flexL">
               <li style="padding-right: 10px">
-                <label>{{ user }}</label>
+                <label>{{ productType }}</label>
               </li>
             </ul>
           </div>
@@ -27,49 +21,37 @@
             <h2>TOP sản phẩm trong cửa hàng</h2>
           </div>
 
-          <div
-            class="dhpro owl-carousel owl-theme"
-            id="dealhot"
-            style="opacity: 1; display: block"
-          >
+
+
+
+          <div class="dhpro owl-carousel owl-theme" id="dealhot" style="opacity: 1; display: block">
             <div class="owl-wrapper-outer">
-              <div
-                class="owl-wrapper"
-                style="
+              <div class="owl-wrapper" style="
                   width: 3936px;
                   left: 0px;
                   display: block;
                   background-color: #bfbfbf !important;
-                "
-              >
-                <div
-                  v-for="user in users"
-                  :key="user.id"
-                  class="owl-item active"
-                  style="width: 256px; margin-left: 2px; height: 400px"
-                >
-                  <router-link
-                    :to="{
-                      name: 'trang-chu-chi-tiet-san-pham',
-                      params: { id: user.productId },
-                    }"
-                  >
+                ">
+                <div v-for="user in users" :key="user.id" class="owl-item active"
+                  style="width: 256px; margin-left: 2px; height: 400px">
+                  <router-link :to="{
+            name: 'trang-chu-chi-tiet-san-pham',
+            params: { id: user.productId },
+            query: { storePhone: phone }
+          }">
                     <!-- /trang-chu/chi-tiet-san-pham -->
                     <a class="item pi" :title="user.title" :href="user.href">
                       <div>
-                        <img
-                          :src="user.avatarProduct"
-                          :alt="user.avatarProduct"
-                        />
+                        <img :src="user.avatarProduct" :alt="user.avatarProduct" />
                       </div>
                       <h3>{{ user.productName }}</h3>
                       <strong>
                         {{
-                          (
-                            (user.price * (100 - user.discount)) /
-                            100
-                          )?.toLocaleString()
-                        }}₫
+            (
+              (user.price * (100 - user.discount)) /
+              100
+            )?.toLocaleString()
+          }}₫
                         <u>{{ user.price?.toLocaleString() }}₫</u>
                       </strong>
 
@@ -85,96 +67,78 @@
 
       <div class="wrap flexCol">
         <div class="f boxtit flexJus">
-          <label>Các sản phẩm khác</label>
-          <div class="row mb-3">
-              <div class="col-12">
-                <a-form @submit.prevent="onSearch2">
-                  <a-form-item>
-                    <a-input
-                      style="width: 300px; border:1px solid #ccc"
-                      placeholder="Tìm kiếm sản phẩm"
-                      v-model:value="searchKeyword2"
-                      @pressEnter="onSearch2"
-                    />
-                  </a-form-item>
-                  <a-button type="primary" @click="onSearch2">Tìm kiếm</a-button>
-                </a-form>
-              </div>
+          <label style="font: bold 15px arial">Các sản phẩm khác</label>
+
+          <div class="row mb-3 d-flex">
+            <div class="col-12">
+              <a-input-search v-model:value="searchKeyword2" placeholder="Tìm kiếm sản phẩm" size="medium"
+                @search="onSearch2" style="width: 300px; border: 1px solid #ccc">
+                <template #enterButton>
+                  <a-button type="primary" style="background-color: #ffd52f; border-color: yellow; color: #555;"
+                    @click="onSearch2">
+                    Tìm kiếm
+                  </a-button>
+                </template>
+              </a-input-search>
             </div>
-          <div class="bst">
-            <h2>
-              <a href="den-led-am-tran" title="Đèn Led âm trần"
-                >Đèn Led âm trần</a
-              >
-            </h2>
+            <div class="col-12">
 
-            <h2><a href="den-ban" title="Đèn bàn">Đèn bàn</a></h2>
+              <a-select v-model:value="selectedType" style="width: 200px" @change="handleChange"
+                placeholder="Chọn loại sản phẩm">
+                <a-select-option :value="allType">
+                  Tất cả
+                </a-select-option>
+                <a-select-option v-for="productType in typeStore" :key="productType" :value="productType">
+                  {{ productType }}
+                </a-select-option>
+              </a-select>
 
-            <h2>
-              <a href="den-led-thanh" title="Đèn led thanh">Đèn led thanh</a>
-            </h2>
-
-            <h2>
-              <a href="den-led-tuyp" title="Đèn Tuýp Led">Đèn Tuýp Led</a>
-            </h2>
-
-            <h2><a href="den-led-day" title="Đèn LED Dây">Đèn LED Dây</a></h2>
+            </div>
           </div>
+
+
         </div>
-        <div
-          style="
+        <div style="
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 10px;
             background-color: #eee !important;
-          "
-        >
-          <ul
-            v-for="user in users2.slice(0, 8)"
-            :key="user.id"
-            class="pb Product"
-          >
+          ">
+          <ul v-for="product in filteredProducts" :key="product.id" class="pb Product">
             <li style="width: 100% !important" class="pi">
-              <router-link
-                :to="{
-                  name: 'trang-chu-chi-tiet-san-pham',
-                  params: { id: user.productId },
-                }"
-              >
-                <a :title="user.title">
+              <router-link :to="{
+            name: 'trang-chu-chi-tiet-san-pham',
+            params: { id: product.productId },
+            query: { storePhone: phone }
+
+          }">
+                <a :title="product.title">
                   <div data-l="kaadas">
-                    <img :src="user.avatarProduct" :alt="user.avatarProduct" />
+                    <img :src="product.avatarProduct" :alt="product.avatarProduct" />
                   </div>
-                  <h3>{{ user.productName }}</h3>
+                  <h3>{{ product.productName }}</h3>
                   <strong>
                     {{
-                      (
-                        (user.price * (100 - user.discount)) /
-                        100
-                      )?.toLocaleString()
-                    }}₫
-                    <u>{{ user.price?.toLocaleString() }}₫</u>
+            (
+              (product.price * (100 - product.discount)) /
+              100
+            )?.toLocaleString()
+          }}₫
+                    <u>{{ product.price?.toLocaleString() }}₫</u>
                   </strong>
-                  <span class="s s5">{{ user.view }}(Lượt xem)</span>
+                  <span class="s s5">{{ product.view }}(Lượt xem)</span>
                 </a>
               </router-link>
             </li>
           </ul>
-          
+
         </div>
         <div class="col-12">
-            <a-pagination
-              @change="onChange2"
-              v-model:current="pageParam2.currentPage"
-              :total="pageParam2.totalItems"
-              :pageSize="pageParam2.pageSize"
-              :show-total="
-                (total, range) =>
-                  `${range[0]}-${range[1]} của ${total} sản phẩm`
-              "
-              class="mt-2 text-end"
-            />
-          </div>
+          <a-pagination @change="onChange2" v-model:current="pageParam2.currentPage" :total="pageParam2.totalItems"
+            :pageSize="pageParam2.pageSize" :show-total="(total, range) =>
+            `${range[0]}-${range[1]} của ${total} sản phẩm`
+            " class="mt-2 text-end" />
+        </div>
       </div>
 
       <!--bai viet-->
@@ -182,11 +146,7 @@
       <div class="f dichvu">
         <ul class="wrap">
           <li>
-            <i
-              ><img
-                src="https://denled.com/Content/img/Home/hoi.png"
-                title="Hỏi chúng tôi"
-            /></i>
+            <i><img src="https://denled.com/Content/img/Home/hoi.png" title="Hỏi chúng tôi" /></i>
             <span>Hỏi chúng tôi</span>
             <p>
               Nếu bạn không chắc chắn về những thiết bị nào phù hợp với bạn và
@@ -195,11 +155,7 @@
             </p>
           </li>
           <li>
-            <i
-              ><img
-                src="https://denled.com/Content/img/Home/tim.png"
-                title="Hỏi chúng tôi"
-            /></i>
+            <i><img src="https://denled.com/Content/img/Home/tim.png" title="Hỏi chúng tôi" /></i>
             <span>Tìm sản phẩm</span>
             <p>
               Với nhiều sản phẩm để lựa chọn, đây là một nơi tuyệt vời để bắt
@@ -207,11 +163,7 @@
             </p>
           </li>
           <li>
-            <i
-              ><img
-                src="https://denled.com/Content/img/Home/loca.png"
-                title="Hỏi chúng tôi"
-            /></i>
+            <i><img src="https://denled.com/Content/img/Home/loca.png" title="Hỏi chúng tôi" /></i>
             <span>Ghé thăm cửa hàng</span>
             <p>
               Chào mừng bạn đến với các cửa hàng đèn led hàng đầu Việt Nam -
@@ -219,11 +171,7 @@
             </p>
           </li>
           <li>
-            <i
-              ><img
-                src="https://denled.com/Content/img/Home/dichvu.png"
-                title="Hỏi chúng tôi"
-            /></i>
+            <i><img src="https://denled.com/Content/img/Home/dichvu.png" title="Hỏi chúng tôi" /></i>
             <span>Dịch vụ của chúng tôi</span>
             <p>
               Dịch vụ khách hàng là nền tảng trong hoạt động kinh doanh của
@@ -241,12 +189,7 @@
         <div class="wrap flexJus">
           <div class="f flex">
             <div class="fotb" style="width: 30%; padding-right: 30px">
-              <img
-                src="https://denled.com/Content/img/logo-foot.png"
-                alt="Denled.com"
-                width="286"
-                height="60"
-              />
+              <img src="https://denled.com/Content/img/logo-foot.png" alt="Denled.com" width="286" height="60" />
             </div>
             <div class="fotb" style="width: 50%; padding: 0 40px 0 60px">
               <label>SHOWROOM</label>
@@ -258,8 +201,7 @@
                       <span>Địa chỉ 1 : </span>21C Trần Duy Hưng, Cầu Giấy, HN
                     </li>
                     <li>
-                      <span>Hotline : </span
-                      ><a href="tel:0933665115">0933.66.5115</a>
+                      <span>Hotline : </span><a href="tel:0933665115">0933.66.5115</a>
                     </li>
                   </ul>
                 </div>
@@ -269,27 +211,19 @@
               <label>THÔNG TIN - HƯỚNG DẪN</label>
               <ul>
                 <li>
-                  <a title="Giới Thiệu Hệ Thống" rel="nofollow" href="/"
-                    >Giới Thiệu Hệ Thống</a
-                  >
+                  <a title="Giới Thiệu Hệ Thống" rel="nofollow" href="/">Giới Thiệu Hệ Thống</a>
                 </li>
 
                 <li>
-                  <a title="Giao hàng &amp; Thanh toán" rel="nofollow" href="/"
-                    >Giao hàng &amp; Thanh toán</a
-                  >
+                  <a title="Giao hàng &amp; Thanh toán" rel="nofollow" href="/">Giao hàng &amp; Thanh toán</a>
                 </li>
 
                 <li>
-                  <a title="Hướng dẫn mua hàng Online" rel="nofollow" href="/"
-                    >Hướng dẫn mua hàng Online</a
-                  >
+                  <a title="Hướng dẫn mua hàng Online" rel="nofollow" href="/">Hướng dẫn mua hàng Online</a>
                 </li>
 
                 <li>
-                  <a title="Quy chế hoạt động" rel="nofollow" href="/"
-                    >Quy chế hoạt động</a
-                  >
+                  <a title="Quy chế hoạt động" rel="nofollow" href="/">Quy chế hoạt động</a>
                 </li>
               </ul>
             </div>
@@ -302,46 +236,25 @@
       </div>
       <ul id="panel">
         <li>
-          <img
-            src="https://denled.com/Content/img/totop.svg"
-            alt="To top"
-            width="45"
-            height="45"
-          />
+          <img src="https://denled.com/Content/img/totop.svg" alt="To top" width="45" height="45" />
         </li>
         <li style="padding-top: 10px; padding-bottom: 10px">
-          <img
-            alt="Messenger"
-            src="https://denled.com/Content/img/messenger.svg"
-            width="45"
-            height="45"
-          />
+          <img alt="Messenger" src="https://denled.com/Content/img/messenger.svg" width="45" height="45" />
         </li>
 
         <li>
-          <img
-            alt="Phone"
-            src="https://denled.com/Content/img/phone.svg"
-            width="45"
-            height="45"
-          />
+          <img alt="Phone" src="https://denled.com/Content/img/phone.svg" width="45" height="45" />
         </li>
       </ul>
-      <div
-        class="zalo-chat-widget"
-        data-oaid="2839194858446814357"
+      <div class="zalo-chat-widget" data-oaid="2839194858446814357"
         data-welcome-message="Rất vui khi được hỗ trợ bạn!. Nếu bạn không thể chờ thì hãy gọi hoặc nhắn tin đến số điện thoại này 0973.66.5115."
-        data-autopopup="1800"
-        data-width="500"
-        data-height="500"
-        style="right: 12px"
-      ></div>
+        data-autopopup="1800" data-width="500" data-height="500" style="right: 12px"></div>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, computed, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
 import { message } from "ant-design-vue";
@@ -372,9 +285,12 @@ export default defineComponent({
     const storeId = route.params.id;
     const storeId2 = ref(route.params.id);
     const searchKeyword = ref("");
+    const selectedType = ref("");
+    const allType = ref("")
+    const phone = ref("")
     const pageParam = reactive({
       currentPage: 1,
-      pageSize: 5,
+      pageSize: 10,
       totalItems: 0,
       totalPages: 0,
     });
@@ -393,13 +309,13 @@ export default defineComponent({
           params: { page, size, keyword },
         })
         .then((response) => {
-          
-          const data = response.data;
-    // Lấy danh sách các cửa hàng và sắp xếp theo thuộc tính view giảm dần
-    const sortedStores = data.data.sort((a, b) => b.view - a.view);
 
-    // Lấy 5 cửa hàng có nhiều view nhất
-    users.value = sortedStores.slice(0, 5);
+          const data = response.data;
+          // Lấy danh sách các cửa hàng và sắp xếp theo thuộc tính view giảm dần
+          const sortedStores = data.data.sort((a, b) => b.view - a.view);
+
+          // Lấy 5 cửa hàng có nhiều view nhất
+          users.value = sortedStores;
           pageParam.totalItems = data.pagination.totalItems;
           pageParam.totalPages = data.pagination.totalPages;
         })
@@ -416,6 +332,8 @@ export default defineComponent({
         .then((response) => {
           const data = response.data;
           users2.value = response.data.data;
+
+
           pageParam2.totalItems = data.pagination.totalItems;
           pageParam2.totalPages = data.pagination.totalPages;
         })
@@ -446,14 +364,27 @@ export default defineComponent({
         })
         .then((response) => {
           console.log(response.data.data);
-          typeStore.value = response.data.data;
-          console.log(typeStore.value.productTypeName);
+          typeStore.value = response.data.data.productTypeName;
+          phone.value = response.data.data.phoneNumber;
+          console.log(typeStore.value);
         })
         .catch((error) => {
           console.error(error);
         });
     };
-    console.log(typeStore.value.productTypeName, "cs");
+    const filteredProducts = computed(() => {
+      if (!selectedType.value) {
+        return users2.value;
+      }
+      return users2.value.filter(product => product.productType === selectedType.value);
+    });
+    const handleChange = value => {
+
+
+
+      console.log(value);
+    };
+
     const onSearch = () => {
       pageParam.currentPage = 1;
       getUsers(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
@@ -481,17 +412,21 @@ export default defineComponent({
 
     return {
       route,
+      selectedType,
+      allType,
       router,
       users,
       users2,
-
+      phone,
+      filteredProducts,
+      handleChange,
       storeId2,
       userLocal,
       typeStore,
       addMyFarvors,
       onSearch,
       pageParam,
-
+      filteredProducts,
       searchKeyword,
       onChange,
       onSearch2,
@@ -665,13 +600,11 @@ export default defineComponent({
 @font-face {
   font-family: "FontAwesome";
   src: url("/Content/awesome/fontawesome-webfont.eot?v=4.4.0");
-  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0")
-      format("embedded-opentype"),
+  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0") format("embedded-opentype"),
     url("/Content/awesome/fontawesome-webfont.woff2?v=4.4.0") format("woff2"),
     url("/Content/awesome/fontawesome-webfont.woff?v=4.4.0") format("woff"),
     url("/Content/awesome/fontawesome-webfont.ttf?v=4.4.0") format("truetype"),
-    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular")
-      format("svg");
+    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -1320,8 +1253,7 @@ a:focus {
   width: 40%;
 }
 
-.prol img {
-}
+.prol img {}
 
 .propertyhead label {
   font: bold 18px/60px arial;
@@ -1411,7 +1343,7 @@ a:focus {
   border-radius: 5px;
 }
 
-.othpro li:hover > div {
+.othpro li:hover>div {
   display: block;
 }
 
@@ -1635,6 +1567,7 @@ a:focus {
 }
 
 @media screen and (max-width: 415px) {
+
   .tiplist h2,
   .tiplist h3,
   .tiplist h4 {
@@ -1875,6 +1808,7 @@ textarea {
   position: relative;
   font-size: 18px;
 }
+
 .nav li {
   position: static;
 }
@@ -2107,8 +2041,7 @@ textarea {
 }
 
 /*beadcrum*/
-.beadcrum {
-}
+.beadcrum {}
 
 .beadcrum li {
   display: inline-block;
@@ -2391,8 +2324,7 @@ body {
 }
 
 .brands {
-  background: url("https://denled.com/Data/upload/files/Home/BG-hang.jpg")
-    no-repeat 0 0;
+  background: url("https://denled.com/Data/upload/files/Home/BG-hang.jpg") no-repeat 0 0;
   padding: 40px 0;
   color: #fff;
   margin-top: 50px;

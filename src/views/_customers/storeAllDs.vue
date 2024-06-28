@@ -63,14 +63,14 @@
           <div class="dhpro owl-carousel owl-theme" id="dealhot" style="opacity: 1; display: block">
             <div class="owl-wrapper-outer">
               <div class="owl-wrapper">
-                <div v-for="store in stores.slice(0, 5)" :key="store.storeId" class="owl-item active" style="">
-                  <router-link :to="{
+                <div v-for="store in stores" :key="store.storeId" class="owl-item active" style="">
+                  <router-link  :to="{
                 name: 'trang-chu',
                 params: { id: store.storeId },
               }">
-                    <a style="height: 344px !important" class="item pi">
-                      <div>
-                        <img :src="store.image" :alt="store.image" />
+                    <a class="item pi" style="height: 350px; width: 234px !important;">
+                      <div style="padding: 10px 10px ;" >
+                        <img :src="store.image" :alt="store.image" style="object-fit: fill; width: 100%;  height: 100%;"/>
                       </div>
                       <h3>{{ store.storeName }}</h3>
                       <strong style="padding-right: 5px">{{
@@ -90,36 +90,45 @@
         <div class="wrap flexCol">
           <div class="f boxtit flexJus">
             <label style="font: bold 15px arial">Các cửa hàng uy tín khác</label>
-            <div class="bst">
-              <h2>
-                <a href="den-led-am-tran" title="Đèn Led âm trần">Đèn Led âm trần</a>
-              </h2>
-
-              <h2><a href="den-ban" title="Đèn bàn">Đèn bàn</a></h2>
-
-              <h2>
-                <a href="den-led-thanh" title="Đèn led thanh">Đèn led thanh</a>
-              </h2>
-
-              <h2>
-                <a href="den-led-tuyp" title="Đèn Tuýp Led">Đèn Tuýp Led</a>
-              </h2>
-
-              <h2><a href="den-led-day" title="Đèn LED Dây">Đèn LED Dây</a></h2>
+            <div class="row mb-3 d-flex">
+            <div class="col-12">
+              <a-input-search v-model:value="searchKeyword2" placeholder="Tìm kiếm sản phẩm" size="medium"
+                @search="onSearch2" style="width: 300px; border: 1px solid #ccc">
+                <template #enterButton>
+                  <a-button type="primary" style="background-color: #ffd52f; border-color: yellow; color: #555;"
+                    @click="onSearch2">
+                    Tìm kiếm
+                  </a-button>
+                </template>
+              </a-input-search>
             </div>
+            <div class="col-12">
+
+              <a-select v-model:value="selectedType" style="width: 200px" @change="handleChange"
+                placeholder="Chọn loại sản phẩm">
+                <a-select-option  :value="allType">
+                  Tất cả
+                </a-select-option>
+                <a-select-option v-for="productType in typeStore" :key="productType" :value="productType">
+                  {{ productType }}
+                </a-select-option>
+              </a-select>
+
+            </div>
+          </div>
           </div>
 
           <div class="dhpro owl-carousel owl-theme" id="dealhot2" style="opacity: 1; display: block">
             <div class="owl-wrapper-outer">
               <div class="owl-wrapper">
-                <div v-for="store in allStores.slice(0, 5)" :key="store.storeId" class="owl-item active" style="">
-                  <router-link :to="{
+                <div v-for="store in allStores" :key="store.storeId" class="owl-item active" >
+                  <router-link  :to="{
                 name: 'trang-chu',
                 params: { id: store.storeId },
               }">
-                    <a style="height: 344px !important" class="item pi">
-                      <div>
-                        <img :src="store.image" :alt="store.image" />
+                    <a class="item pi" style="height: 350px; width: 234px !important;">
+                      <div style="padding: 10px 10px ;" >
+                        <img :src="store.image" :alt="store.image" style="object-fit: fill; width: 100%;  height: 100%;"/>
                       </div>
                       <h3>{{ store.storeName }}</h3>
                       <strong style="padding-right: 5px">{{

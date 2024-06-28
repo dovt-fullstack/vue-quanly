@@ -3,7 +3,7 @@
     <div class="row mb-3">
       <div class="col-6">
         <a-breadcrumb>
-          <a-breadcrumb-item>Danh sách đơn</a-breadcrumb-item>
+          <a-breadcrumb-item>Danh sách đơn đã giao</a-breadcrumb-item>
         </a-breadcrumb>
       </div>
     </div>

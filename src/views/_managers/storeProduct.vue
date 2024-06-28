@@ -6,9 +6,9 @@
                     <a-breadcrumb-item>Sản phẩm của Cửa hàng</a-breadcrumb-item>
                 </a-breadcrumb>
             </div>
-            
 
-            <div class="col-6 d-flex justify-content-end" v-if="role === 'MANAGER'" >
+
+            <div class="col-6 d-flex justify-content-end" v-if="role === 'MANAGER'">
                 <a-button class="me-2">
                     <router-link :to="{ name: 'product-type/them-moi', params: { id: storeId2 } }">
                         Loại sản phẩm
@@ -77,39 +77,40 @@
                             </a-popconfirm>
                         </template>
                         <template v-if="column.key === 'ADMIN' && authStoreClaim !== null">
-    <router-link :to="{ name: 'admin-chi-tiet-san-pham', params: { id: record.productId } }">
-        <a-button title="Xem chi tiết" type="dashed" size="small" shape=""
-            class="me-2 text-warning">Xem
-        </a-button>
-    </router-link>
+                            <router-link :to="{ name: 'admin-chi-tiet-san-pham', params: { id: record.productId } }">
+                                <a-button title="Xem chi tiết" type="dashed" size="small" shape=""
+                                    class="me-2 text-warning">Xem
+                                </a-button>
+                            </router-link>
 
 
-        <a-button v-if="record.status!=2" @click="showBanModal(record.productId)" title="Khóa sản phẩm" type="dashed" size="small" shape="" danger>
-            <p class="me-2 text-danger">Khóa</p>
-        </a-button>
+                            <a-button v-if="record.status != 2" @click="showBanModal(record.productId)"
+                                title="Khóa sản phẩm" type="dashed" size="small" shape="" danger>
+                                <p class="me-2 text-danger">Khóa</p>
+                            </a-button>
 
 
-    
-    <a-popconfirm v-if="record.status===2" title="Bạn có muốn mở khóa sản phẩm?" ok-text="Yes"
-        cancel-text="No" @confirm="confirmUnBan(record.productId)">
-        <a-button title="Khóa sản phẩm" type="dashed" size="small" shape="" >
-            <p class="me-2 text-green">Mở</p>
-        </a-button>
-    </a-popconfirm>
 
-    <!-- <a-modal class="custom-modal" v-model:visible="isBanModalVisible" title="Nhập lý do khóa sản phẩm" ok-text="Khóa"
+                            <a-popconfirm v-if="record.status === 2" title="Bạn có muốn mở khóa sản phẩm?" ok-text="Yes"
+                                cancel-text="No" @confirm="confirmUnBan(record.productId)">
+                                <a-button title="Khóa sản phẩm" type="dashed" size="small" shape="">
+                                    <p class="me-2 text-green">Mở</p>
+                                </a-button>
+                            </a-popconfirm>
+
+                            <!-- <a-modal class="custom-modal" v-model:visible="isBanModalVisible" title="Nhập lý do khóa sản phẩm" ok-text="Khóa"
         cancel-text="Hủy" @ok="handleBanConfirm">
         <a-input v-model:value="banReason" placeholder="Nhập lý do" />
     </a-modal> -->
 
-    
-    <a-modal v-model:visible="isBanModalVisible" title="Nhập lý do khóa sản phẩm" ok-text="Khóa"
-    cancel-text="Hủy" @ok="handleBanConfirm">
-    <a-input v-model:value="banReason" placeholder="Nhập lý do" />
 
-  </a-modal>
+                            <a-modal v-model:visible="isBanModalVisible" title="Nhập lý do khóa sản phẩm" ok-text="Khóa"
+                                cancel-text="Hủy" @ok="handleBanConfirm">
+                                <a-input v-model:value="banReason" placeholder="Nhập lý do" />
 
-</template>
+                            </a-modal>
+
+                        </template>
                     </template>
                 </a-table>
                 <div class="col-12">
@@ -215,14 +216,14 @@ export default defineComponent({
             // };
 
             const firebaseConfig = {
-          apiKey: "AIzaSyBTotN9vQoBZlxQY2UG1TuGEZ7rpkWZt70",
-          authDomain: "be-for-gr-180e7.firebaseapp.com",
-          projectId: "be-for-gr-180e7",
-          storageBucket: "be-for-gr-180e7.appspot.com",
-          messagingSenderId: "483915681179",
-          appId: "1:483915681179:web:bcc760df56ee3c5044a53e",
-          measurementId: "G-0FG12P4QPH"
-        };
+                apiKey: "AIzaSyBTotN9vQoBZlxQY2UG1TuGEZ7rpkWZt70",
+                authDomain: "be-for-gr-180e7.firebaseapp.com",
+                projectId: "be-for-gr-180e7",
+                storageBucket: "be-for-gr-180e7.appspot.com",
+                messagingSenderId: "483915681179",
+                appId: "1:483915681179:web:bcc760df56ee3c5044a53e",
+                measurementId: "G-0FG12P4QPH"
+            };
 
 
             const app = initializeApp(firebaseConfig);
@@ -230,7 +231,7 @@ export default defineComponent({
 
             getToken(messaging, { vapidKey: 'BAffji7PkXTfbxfExeCdiORnNzDdfG-nYcSX-MKZ_t29PlmV87swAMV7MsN7n3tohTW6K2saSCXLS31wkR-A36o' })
 
-            // getToken(messaging, { vapidKey: 'BEjH694CDnh2Hx__9CFs3bTo9v4Ti7uJq4ohSgN3LN8EVrfn9-dY8m7vTcsiLycQsH8Q9JyKQ0jZeu71fwblmEQ' })
+                // getToken(messaging, { vapidKey: 'BEjH694CDnh2Hx__9CFs3bTo9v4Ti7uJq4ohSgN3LN8EVrfn9-dY8m7vTcsiLycQsH8Q9JyKQ0jZeu71fwblmEQ' })
                 .then((currentToken) => {
                     if (currentToken) {
                         // Send the token to your server and update the UI if necessary
@@ -335,7 +336,7 @@ export default defineComponent({
 
         onMounted(() => {
             fetchProducts(pageParam.currentPage, pageParam.pageSize);
-            fetchFireBase();
+            // fetchFireBase();
 
         });
         return {
@@ -379,11 +380,14 @@ export default defineComponent({
     border: 1px solid;
 
 }
+
 .custom-modal .ant-modal-content {
-    background-color: white; /* Hoặc màu nền bạn muốn */
+    background-color: white;
+    /* Hoặc màu nền bạn muốn */
 }
 
 .custom-modal .ant-modal-mask {
-    background-color: rgba(0, 0, 0, 0.5); /* Màu nền mờ bạn muốn khi modal hiện lên */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Màu nền mờ bạn muốn khi modal hiện lên */
 }
 </style>

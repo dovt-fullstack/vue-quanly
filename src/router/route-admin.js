@@ -32,19 +32,19 @@ const adminRoutes = [
         path: "danh-sach-don",
         name: "danh-sach-don",
         meta: { title: "Dánh sách đơn" },
-        component: () => import("../views/_shippers/dsDorder.vue"),
+        component: () => import("../views/_shippers/danhsachdonhang.vue"),
       },
       {
         path: "danh-sach-don-da-nhan",
         name: "danh-sach-don-da-nhan",
         meta: { title: "Dánh sách đơn đã nhận" },
-        component: () => import("../views/_shippers/dsAccept.vue"),
+        component: () => import("../views/_shippers/danhsachdanhan.vue"),
       },
       {
         path: "danh-sach-don-da-giao",
         name: "danh-sach-don-da-giao",
         meta: { title: "Dánh sách đơn đã giao" },
-        component: () => import("../views/_shippers/dsOrdero.vue"),
+        component: () => import("../views/_shippers/danhsachdagiao.vue"),
       },
 
       {
@@ -151,7 +151,7 @@ const adminRoutes = [
       },
       {
         path: "store/customer/:id",
-        name: "admin-store-all-staff",
+        name: "admin-store-all-customer",
         meta: { title: "Thêm mới - product-type" },
         component: () => import("../views/_managers/detailCustomerByStore.vue"),
       },

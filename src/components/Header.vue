@@ -47,7 +47,7 @@
 
                 <a-menu-item>
                   <router-link :to="{ name: 'profile-user' }">
-                    <a>Trang cá nhân</a>
+                    <span>Trang cá nhân</span>
                   </router-link>
                 </a-menu-item>
 
@@ -165,20 +165,6 @@ export default defineComponent({
       localStorage.removeItem("access_token");
       localStorage.removeItem("token");
       window.location.href = "http://localhost:5173/login"
-      // if (authStore.user) {
-
-      //   return authStore.logout(authStore.user.userName).catch(error => {
-      //     if (error.response.status === 401) {
-      //       message.error("Lỗi! Đăng xuất không thành công.");
-      //     } else {
-      //       message.error(`Lỗi! ${error.response.statusText}`);
-      //     }
-      //   });
-      // } else {
-      //   message.error("Lỗi! Hệ thống không tìm thấy thông tin người dùng.");
-      // }
-
-
 
     };
 

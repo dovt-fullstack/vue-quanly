@@ -7,19 +7,10 @@
 
       <div class="orderbox">
         <div class="dieuhuong">
-          <a>Giỏ hàng của bạn</a>
+          <a @click="goBack" >Giỏ hàng của bạn</a>
         </div>
         <div class="giohang orderhome">
-          <div class="row mb-3">
-            <div class="col-12">
-              <a-form @submit.prevent="onSearch">
-                <a-form-item>
-                  <a-input placeholder="Tìm kiếm sản phẩm" v-model:value="searchKeyword" @pressEnter="onSearch" />
-                </a-form-item>
-                <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
-              </a-form>
-            </div>
-          </div>
+
           <form method="post" name="giohang" id="cart">
             <ul class="listcart">
               <li v-for="product in product" :key="product.id" class="cartitem">
@@ -385,6 +376,16 @@ export default defineComponent({
       totalItems: 0,
       totalPages: 0
     });
+    const goBack = () => {
+      // Navigate back to the previous page
+      if (history.length > 1) {
+        // If there's history available, go back
+        history.go(-1);
+      } else {
+        // Otherwise, fallback to home or another default route
+        this.$router.push("/");
+      }
+    };
     const showDrawer = () => {
       isDrawerVisible.value = true;
       fetchMyOrder();
@@ -622,6 +623,7 @@ return {
   increment,
   allTotal,
   byProductCart,
+  goBack,
   isDrawerVisible,
   showDrawer,
   handleClose,

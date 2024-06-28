@@ -15,7 +15,7 @@
               itemscope=""
               itemtype="https://schema.org/ListItem"
             >
-              <a itemprop="item" href="/"
+              <a itemprop="item" @click="goBack" 
                 ><span itemprop="name">{{
                   product.storeName ? product.storeName.toUpperCase() : ""
                 }}</span></a
@@ -28,10 +28,10 @@
               itemscope=""
               itemtype="https://schema.org/ListItem"
             >
-              <a itemprop="item" href="/"
+              <p itemprop="item" 
                 ><span itemprop="name">{{
                   product.productType ? product.productType.toUpperCase() : ""
-                }}</span></a
+                }}</span></p
               >
               <meta itemprop="position" content="2" />
             </li>
@@ -91,8 +91,7 @@
 
                   <li class="ron">Số lượng : {{ product.quantity }}</li>
 
-                  <li class="ron">
-                    Mô tả sản phẩm : {{ product.description }}
+                  <li class="ron">Mô tả sản phẩm : {{ product.description }}
                   </li>
 
                   <li class="ron">Đổi sản phẩm lỗi trong vòng 30 ngày</li>
@@ -114,7 +113,7 @@
                 </span>
               </div>
               <ul class="bphone">
-                <li>Hotline 1(24/7)<b>097366.5115</b></li>
+                <li>Số điện thoại của cửa hàng <b>{{ phone }}</b></li>
               </ul>
             </div>
           </div>
@@ -264,6 +263,7 @@ export default defineComponent({
     const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const route = useRoute();
     const productId = route.params.id;
+    const phone = route.query.storePhone;
     const router = useRouter();
     const userLocal = JSON.parse(localStorage.getItem("auth"));
     const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
@@ -285,6 +285,16 @@ export default defineComponent({
         }
       } catch (error) {
         console.error(error);
+      }
+    };
+    const goBack = () => {
+      // Navigate back to the previous page
+      if (history.length > 1) {
+        // If there's history available, go back
+        history.go(-1);
+      } else {
+        // Otherwise, fallback to home or another default route
+        this.$router.push("/");
       }
     };
     const handelAddCart = () => {
@@ -353,6 +363,8 @@ export default defineComponent({
       userLocal,
       handelAddCart,
       handelByNow,
+      phone,
+      goBack
     };
   },
 });

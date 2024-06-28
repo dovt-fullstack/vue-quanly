@@ -3,16 +3,26 @@
     <div class="row mb-3">
       <div class="col-6">
         <a-breadcrumb>
-          <a-breadcrumb-item>Danh sách đơn </a-breadcrumb-item>
+          <a-breadcrumb-item>Danh sách đơn chưa giao</a-breadcrumb-item>
         </a-breadcrumb>
       </div>
     </div>
     <div class="row">
+      <div class="row mb-3">
+        <div class="col-12">
+          <a-form @submit.prevent="onSearch">
+            <a-form-item>
+              <a-input placeholder="Tìm kiếm" v-model:value="searchKeyword" @pressEnter="onSearch" />
+            </a-form-item>
+            <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
+          </a-form>
+        </div>
+      </div>
       <div class="col-12">
         <a-table :dataSource="users" :columns="columns" :scroll="{ x: 576 }" :pagination="false">
           <template #bodyCell="{ column, index, record }">
             <template v-if="column.key === 'index'">
-              <span>{{ index + 1 }}</span>
+              <span>{{ index + 1 +(pageParam.currentPage-1)*10 }}</span>
             </template>
             <template v-if="column.key === 'userName'">
               <span>{{ record.storeName }}</span>
@@ -24,7 +34,10 @@
               <span>{{ record.quantity }}</span>
             </template>
             <template v-if="column.key === 'email2'">
-              <span>{{ record.productName }}</span>
+              <span>{{ record.storeAddress }}</span>
+            </template>
+            <template v-if="column.key === 'email5'">
+              <span>{{ record.storePhone }}</span>
             </template>
             <template v-if="column.key === 'email3'">
               <img :style="{ width: '50px !important' }" :src="record.productImg" :alt="record.productImg" />
@@ -56,9 +69,9 @@
           </template>
         </a-table>
         <div class="col-12">
-          <a-pagination @change="onChange" v-model:current="pageParam.current" :total="pageParam.totalRecord"
-            :pageSize="pageParam.pageSize" :show-total="(total, range) => `${range[0]}-${range[1]} of ${total} items`
-          " class="mt-2 text-end" />
+          <a-pagination @change="onChange" v-model:current="pageParam.currentPage" :total="pageParam.totalItems"
+            :pageSize="pageParam.pageSize"
+            :show-total="(total, range) => `${range[0]}-${range[1]} của ${total} đơn hàng`" class="mt-2 text-end" />
         </div>
       </div>
     </div>
@@ -106,16 +119,18 @@ export default defineComponent({
     const dataId = ref({});
     const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
 
-    const isDrawerVisible = ref(false);
+
+    const searchKeyword = ref("");
+
     const pageParam = reactive({
-      current: Object.keys(route.query).length > 0 ? route.query.PageNumber : 1,
-      pageNumber:
-        Object.keys(route.query).length > 0 ? route.query.PageNumber : 1,
-      pageSize: Object.keys(route.query).length > 0 ? route.query.PageSize : 10,
-      totalRecord: 0,
-      userName: Object.keys(route.query).length > 0 ? route.query.UserName : "",
-      statusFilter: false,
+      currentPage: 1,
+      pageSize: 10,
+      totalItems: 0,
+      totalPages: 0,
     });
+
+    const isDrawerVisible = ref(false);
+
 
     const showDrawer = () => {
       isDrawerVisible.value = true;
@@ -158,8 +173,12 @@ export default defineComponent({
         key: "email",
       },
       {
-        title: "Tên sản phẩm",
+        title: "Địa chỉ cửa hàng",
         key: "email2",
+      },
+      {
+        title: "Số cửa hàng",
+        key: "email5",
       },
       {
         title: "Ảnh",
@@ -176,11 +195,12 @@ export default defineComponent({
       },
     ];
 
-    const getUsers = (args) => {
+    const getUsers = (page, size, keyword = "") => {
       axios
         .get(
           `${apiPrefix}/api/v1/shipper/orderlist/view`,
           {
+            params: { page, size, keyword },
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -189,72 +209,23 @@ export default defineComponent({
         .then((response) => {
           console.log(response.data.data, "response");
           users.value = response.data.data;
+          pageParam.totalItems = response.data.pagination.totalItems;
+          pageParam.totalPages = response.data.pagination.totalPages;
         })
         .catch((error) => {
           console.error(error);
         });
-      // ApiUser.GetAllByLimit(args).then((response) => {
-      //     // // list ban ghi
 
-      //     // tham so
-      //     pageParam.current = response.data.pageNumber;
-      //     pageParam.pageNumber = response.data.pageNumber;
-      //     pageParam.pageSize = response.data.pageSize;
-      //     pageParam.totalRecord = response.data.totalRecords;
-      //     //
-      //     pageParam.userName = args.userName;
-      //     if (pageParam.statusFilter) {
-      //         if (response.data.totalPages < response.data.pageNumber && response.data.totalRecords > 0) {
-      //             pageParam.current = 1;
-      //             pageParam.pageNumber = 1;
-      //             getUsers(pageParam);
-      //             router.push({ name: "admin-users", query: { PageNumber: 1, PageSize: pageParam.pageSize, UserName: pageParam.userName } })
-      //         } else {
-      //             router.push({ name: "admin-users", query: { PageNumber: pageParam.pageNumber, PageSize: pageParam.pageSize, UserName: pageParam.userName } })
-      //         }
-      //     }
-      //     //
-      // }).catch((error) => {
-      //     message.error(`Lỗi! ${error.response.statusText}`);
-      // });
     };
-    const confirmRemove = (id) => {
-      ApiUser.DeleteById(id)
-        .then((response) => {
-          console.log(response);
-          if (response.status == 200) {
-            message.success("Xóa thành công!");
-            // router.push({ name: "admin-users" });
-          }
-          getUsers(pageParam);
-        })
-        .catch((error) => {
-          message.error(error.message);
-          if (error.response.data.hasOwnProperty("errors")) {
-            errors.value = error.response.data.errors;
-          } else {
-            errors.value = error.response.data;
-          }
-        });
+
+    const onChange = (page, pageSize) => {
+      pageParam.currentPage = page;
+      pageParam.pageSize = pageSize;
+      getUsers(page, pageSize, searchKeyword.value);
     };
-    const confirmBanned = (id) => {
-      ApiUser.BannedById(id)
-        .then((response) => {
-          if (response.status == 200) {
-            message.success("Khóa thành công!");
-          } else {
-            message.error("Lỗi! Tác vụ thực hiện không thành công.");
-          }
-          getUsers(pageParam);
-        })
-        .catch((error) => {
-          message.error(error.message);
-          if (error.response.data.hasOwnProperty("errors")) {
-            errors.value = error.response.data.errors;
-          } else {
-            errors.value = error.response.data;
-          }
-        });
+
+    const navigateTo = (route) => {
+      router.push({ name: route });
     };
     const giveOrder = async (orderId) => {
       try {
@@ -269,8 +240,8 @@ export default defineComponent({
           }
         );
         console.log(data)
-        window.location.href = "/danh-sach-don-da-nhan";
-        message.success("success");
+        navigateTo("danh-sach-don-da-nhan");
+        message.success("Nhận đơn thành công");
       } catch (e) {
         message.error(e.response.data);
       }
@@ -286,57 +257,38 @@ export default defineComponent({
             },
           }
         );
-        message.success("success");
+        message.success("Hoàn thành đơn");
+        navigateTo("danh-sach-don-da-giao");
+
       } catch (e) {
         message.error(e.response.data.message);
       }
     };
     //
-    onUpdated(() => {
-      //
-      if (Object.keys(route.query).length === 0) {
-        pageParam.current =
-          Object.keys(route.query).length > 0 ? route.query.PageNumber : 1;
-        pageParam.pageNumber =
-          Object.keys(route.query).length > 0 ? route.query.PageNumber : 1;
-        pageParam.pageSize =
-          Object.keys(route.query).length > 0 ? route.query.PageSize : 10;
-        pageParam.userName =
-          Object.keys(route.query).length > 0 ? route.query.UserName : "";
-        pageParam.statusFilter = true;
-        getUsers(pageParam);
-      }
-    });
+
     onMounted(() => {
       // chay lan dau tien
-      getUsers(pageParam);
+      getUsers(pageParam.currentPage, pageParam.pageSize);
     });
-    //
-    function onChange(page, pageSize) {
-      pageParam.pageNumber = page;
-      pageParam.pageSize = pageSize;
-      //
-      pageParam.statusFilter = true;
-      getUsers(pageParam);
-    }
-    //
-    const clickFrmFilter = (event) => {
-      pageParam.statusFilter = true;
-      getUsers(pageParam);
+    //        
+    const onSearch = () => {
+      pageParam.currentPage = 1;
+      getUsers(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
     };
+
+
     //
     return {
       route,
+      onSearch,
       router,
       authStoreClaim,
+      searchKeyword,
       errors,
       users,
       columns,
       pageParam,
       onChange,
-      clickFrmFilter,
-      confirmRemove,
-      confirmBanned,
       giveOrder,
       doneOrder,
       isDrawerVisible,

@@ -3,16 +3,27 @@
         <div class="row mb-3">
             <div class="col-6">
                 <a-breadcrumb>
-                    <a-breadcrumb-item>Danh sách đơn </a-breadcrumb-item>
+                    <a-breadcrumb-item>Danh sách đơn đã nhận</a-breadcrumb-item>
                 </a-breadcrumb>
             </div>
         </div>
         <div class="row">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <a-form @submit.prevent="onSearch">
+                        <a-form-item>
+                            <a-input placeholder="Tìm kiếm" v-model:value="searchKeyword" @pressEnter="onSearch" />
+                        </a-form-item>
+                        <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
+                    </a-form>
+                </div>
+            </div>
+
             <div class="col-12">
                 <a-table :dataSource="users" :columns="columns" :scroll="{ x: 576 }" :pagination="false">
                     <template #bodyCell="{ column, index, record }">
                         <template v-if="column.key === 'index'">
-                            <span>{{ index + 1 }}</span>
+                            <span>{{ index + 1 + (pageParam.currentPage-1)*10 }}</span>
                         </template>
                         <template v-if="column.key === 'userName'">
                             <span>{{ record.storeName }}</span>
@@ -24,7 +35,10 @@
                             <span>{{ record.quantity }}</span>
                         </template>
                         <template v-if="column.key === 'email2'">
-                            <span>{{ record.productName }}</span>
+                            <span>{{ record.storeAddress }}</span>
+                        </template>
+                        <template v-if="column.key === 'email5'">
+                            <span>{{ record.storePhone }}</span>
                         </template>
                         <template v-if="column.key === 'email3'">
                             <img :style="{ width: '50px !important' }" :src="record.productImg"
@@ -37,20 +51,21 @@
                         </template>
                         <template v-if="column.key === 'action' && authStoreClaim !== null">
 
-                            <a-button @click="getIdDh(record.orderDetailId)" type="dashed" size="small" >
+                            <a-button @click="getIdDh(record.orderDetailId)" type="dashed" size="small">
                                 Chi tiết
                             </a-button>
-                            <a-button title="Hoàn thành đơn" @click="doneOrder(record.orderDetailId)" type="dashed" size="small"
-                                shape="">
+                            <a-button title="Hoàn thành đơn" @click="doneOrder(record.orderDetailId)" type="dashed"
+                                size="small" shape="">
                                 Hoàn thành
                             </a-button>
                         </template>
                     </template>
                 </a-table>
                 <div class="col-12">
-                    <a-pagination @change="onChange" v-model:current="pageParam.current" :total="pageParam.totalRecord"
-                        :pageSize="pageParam.pageSize" :show-total="(total, range) => `${range[0]}-${range[1]} of ${total} items`
-                    " class="mt-2 text-end" />
+                    <a-pagination @change="onChange" v-model:current="pageParam.currentPage"
+                        :total="pageParam.totalItems" :pageSize="pageParam.pageSize"
+                        :show-total="(total, range) => `${range[0]}-${range[1]} của ${total} đơn hàng`"
+                        class="mt-2 text-end" />
                 </div>
             </div>
         </div>
@@ -62,7 +77,7 @@
             <p>Tổng tiền :{{ dataId.priceTotal }}</p>
             <p>Tên sản phẩm :{{ dataId.productName }}</p>
             <p>Số lượng :{{ dataId.quantity }}</p>
-            <p>Địa chỉ :{{ dataId.address }}</p>
+            <p>Địa chỉ giao hàng:{{ dataId.address }}</p>
         </div>
     </a-drawer>
 </template>
@@ -94,19 +109,18 @@ export default defineComponent({
         const errors = ref([]);
         const users = ref([]);
         const dataId = ref({});
+        const searchKeyword = ref("");
+
+        const pageParam = reactive({
+            currentPage: 1,
+            pageSize: 10,
+            totalItems: 0,
+            totalPages: 0,
+        });
 
         const isDrawerVisible = ref(false);
         const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
 
-        const pageParam = reactive({
-            current: Object.keys(route.query).length > 0 ? route.query.PageNumber : 1,
-            pageNumber:
-                Object.keys(route.query).length > 0 ? route.query.PageNumber : 1,
-            pageSize: Object.keys(route.query).length > 0 ? route.query.PageSize : 10,
-            totalRecord: 0,
-            userName: Object.keys(route.query).length > 0 ? route.query.UserName : "",
-            statusFilter: false,
-        });
         const showDrawer = () => {
             isDrawerVisible.value = true;
         };
@@ -115,7 +129,7 @@ export default defineComponent({
         };
         const getIdDh = async (idI) => {
             showDrawer()
-            const { data } = await axios.get( `${apiPrefix}/api/v1/shipper/orderdetail?orderid=${idI}`, {
+            const { data } = await axios.get(`${apiPrefix}/api/v1/shipper/orderdetail?orderid=${idI}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -128,7 +142,7 @@ export default defineComponent({
             }
 
         }
-       
+
 
         const columns = [
             {
@@ -150,8 +164,12 @@ export default defineComponent({
                 key: "email",
             },
             {
-                title: "Tên sản phẩm",
+                title: "Đia chỉ cửa hàng",
                 key: "email2",
+            },
+            {
+                title: "Số cửa hàng",
+                key: "email5",
             },
             {
                 title: "Ảnh",
@@ -168,85 +186,38 @@ export default defineComponent({
             },
         ];
 
-        const getUsers = (args) => {
+        const getUsers = (page, size, keyword = "") => {
             axios
                 .get(
                     `${apiPrefix}/api/v1/shipper/orderlist/taken`,
                     {
+                        params: { page, size, keyword },
                         headers: {
                             Authorization: `Bearer ${token}`,
+                            
+
                         },
                     }
                 )
                 .then((response) => {
-                    console.log(response.data.data, "response");
-                    users.value = response.data.data;
+                    const sortedData = response.data.data.sort((a, b) => {
+                        return new Date(b.updateAt) - new Date(a.updateAt);
+                    });
+                    console.log(sortedData, "response");
+                    users.value = sortedData;
+                    pageParam.totalItems = response.data.pagination.totalItems;
+                    pageParam.totalPages = response.data.pagination.totalPages;
                 })
                 .catch((error) => {
                     console.error(error);
                 });
-            // ApiUser.GetAllByLimit(args).then((response) => {
-            //     // // list ban ghi
 
-            //     // tham so
-            //     pageParam.current = response.data.pageNumber;
-            //     pageParam.pageNumber = response.data.pageNumber;
-            //     pageParam.pageSize = response.data.pageSize;
-            //     pageParam.totalRecord = response.data.totalRecords;
-            //     //
-            //     pageParam.userName = args.userName;
-            //     if (pageParam.statusFilter) {
-            //         if (response.data.totalPages < response.data.pageNumber && response.data.totalRecords > 0) {
-            //             pageParam.current = 1;
-            //             pageParam.pageNumber = 1;
-            //             getUsers(pageParam);
-            //             router.push({ name: "admin-users", query: { PageNumber: 1, PageSize: pageParam.pageSize, UserName: pageParam.userName } })
-            //         } else {
-            //             router.push({ name: "admin-users", query: { PageNumber: pageParam.pageNumber, PageSize: pageParam.pageSize, UserName: pageParam.userName } })
-            //         }
-            //     }
-            //     //
-            // }).catch((error) => {
-            //     message.error(`Lỗi! ${error.response.statusText}`);
-            // });
         };
-        const confirmRemove = (id) => {
-            ApiUser.DeleteById(id)
-                .then((response) => {
-                    console.log(response);
-                    if (response.status == 200) {
-                        message.success("Xóa thành công!");
-                        // router.push({ name: "admin-users" });
-                    }
-                    getUsers(pageParam);
-                })
-                .catch((error) => {
-                    message.error(error.message);
-                    if (error.response.data.hasOwnProperty("errors")) {
-                        errors.value = error.response.data.errors;
-                    } else {
-                        errors.value = error.response.data;
-                    }
-                });
-        };
-        const confirmBanned = (id) => {
-            ApiUser.BannedById(id)
-                .then((response) => {
-                    if (response.status == 200) {
-                        message.success("Khóa thành công!");
-                    } else {
-                        message.error("Lỗi! Tác vụ thực hiện không thành công.");
-                    }
-                    getUsers(pageParam);
-                })
-                .catch((error) => {
-                    message.error(error.message);
-                    if (error.response.data.hasOwnProperty("errors")) {
-                        errors.value = error.response.data.errors;
-                    } else {
-                        errors.value = error.response.data;
-                    }
-                });
+
+        const onChange = (page, pageSize) => {
+            pageParam.currentPage = page;
+            pageParam.pageSize = pageSize;
+            getUsers(page, pageSize, searchKeyword.value);
         };
         const giveOrder = async (orderId) => {
             try {
@@ -263,6 +234,10 @@ export default defineComponent({
                 message.error(e.response.data.message);
             }
         };
+        const onSearch = () => {
+            pageParam.currentPage = 1;
+            getUsers(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
+        };
         const doneOrder = async (orderId) => {
             try {
                 const data = await axios.get(
@@ -273,47 +248,26 @@ export default defineComponent({
                         },
                     }
                 );
+
+                router.push("danh-sach-don-da-giao")
                 message.success("success");
             } catch (e) {
                 message.error(e.response.data.message);
             }
         };
         //
-        onUpdated(() => {
-            //
-            if (Object.keys(route.query).length === 0) {
-                pageParam.current =
-                    Object.keys(route.query).length > 0 ? route.query.PageNumber : 1;
-                pageParam.pageNumber =
-                    Object.keys(route.query).length > 0 ? route.query.PageNumber : 1;
-                pageParam.pageSize =
-                    Object.keys(route.query).length > 0 ? route.query.PageSize : 10;
-                pageParam.userName =
-                    Object.keys(route.query).length > 0 ? route.query.UserName : "";
-                pageParam.statusFilter = true;
-                getUsers(pageParam);
-            }
-        });
+
         onMounted(() => {
             // chay lan dau tien
-            getUsers(pageParam);
+            getUsers(pageParam.currentPage, pageParam.pageSize);
         });
-        //
-        function onChange(page, pageSize) {
-            pageParam.pageNumber = page;
-            pageParam.pageSize = pageSize;
-            //
-            pageParam.statusFilter = true;
-            getUsers(pageParam);
-        }
-        //
-        const clickFrmFilter = (event) => {
-            pageParam.statusFilter = true;
-            getUsers(pageParam);
-        };
-        //
+        
+
+
         return {
             route,
+            onSearch,
+            searchKeyword,
             router,
             authStoreClaim,
             errors,
@@ -321,9 +275,6 @@ export default defineComponent({
             columns,
             pageParam,
             onChange,
-            clickFrmFilter,
-            confirmRemove,
-            confirmBanned,
             giveOrder,
             doneOrder,
             isDrawerVisible,
