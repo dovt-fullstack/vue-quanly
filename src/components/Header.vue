@@ -64,45 +64,40 @@
         </svg>
       </div>
       <div class="">
-
         <div>
           <div>
             <a-button style="background-color: #182537;border-color: #182537;" type="primary" @click="showDrawer">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" font-size="24" style="color: rgb(0, 136, 255)">
-        <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M18 10.5c0-3.07-1.14-5.64-4-6.32V2h-4v2.18c-2.87.68-4 3.24-4 6.32V16l-2 1v2h16v-2l-2-1v-5.5Zm-5.6 11.46A2.014 2.014 0 0 1 9.99 20h4c0 .28-.05.54-.15.78-.26.6-.79 1.04-1.44 1.18Z"
-          fill="currentColor"></path>
-      </svg>
-      <a-badge :count="unreadCount" offset="[10, 0]" >
-      </a-badge>
-    </a-button>
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                font-size="24" style="color: rgb(0, 136, 255)">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M18 10.5c0-3.07-1.14-5.64-4-6.32V2h-4v2.18c-2.87.68-4 3.24-4 6.32V16l-2 1v2h16v-2l-2-1v-5.5Zm-5.6 11.46A2.014 2.014 0 0 1 9.99 20h4c0 .28-.05.54-.15.78-.26.6-.79 1.04-1.44 1.18Z"
+                  fill="currentColor"></path>
+              </svg>
+              <a-badge :count="unreadCount" offset="[10, 0]">
+              </a-badge>
+            </a-button>
           </div>
-          <a-drawer title="Thông báo của bạn" placement="right" :closable="false" :visible="open" :get-container="false" :style="{ position: 'absolute' }" @close="onClose">
-    <a-list item-layout="horizontal" :data-source="sortedNotiList">
-      <template #renderItem="{ item }">
-        <a-list-item :style="{ backgroundColor: item.notiStatus ?  '#ffffff' :'#d3d3d3' }">
-          <a-list-item-meta>
-            <template #title>
-              <h6>{{ item.description }}</h6>
-            </template>
-            <template #avatar>
-              <a-avatar src="https://joeschmoe.io/api/v1/random" />
-            </template>
-            <template #description>
-              {{ item.description }}
-            </template>
-          </a-list-item-meta>
-          <a-button type="link" @click="deleteNoti(item.notiId)" style="color: red;">Delete</a-button>
-        </a-list-item>
-      </template>
-    </a-list>
-  </a-drawer>
-
+          <a-drawer title="Thông báo của bạn" placement="right" :closable="false" :visible="open" :get-container="false"
+            :style="{ position: 'absolute' }" @close="onClose">
+            <a-list item-layout="horizontal" :data-source="sortedNotiList">
+              <template #renderItem="{ item }">
+                <a-list-item :style="{ 
+                                  marginTop: '10px',
+                                  backgroundColor: item.notiStatus ? '#ffffff' : '#d3d3d3' }">
+                  <a-list-item-meta>
+                    <template #title>
+                      <h6>{{ item.description }}</h6>
+                    </template>
+                    <template #description>
+                      {{ item.description }}
+                    </template>
+                  </a-list-item-meta>
+                  <a-button type="link" @click="deleteNoti(item.notiId)" style="color: red;">Delete</a-button>
+                </a-list-item>
+              </template>
+            </a-list>
+          </a-drawer>
         </div>
-
-
-
-
       </div>
     </div>
   </div>
@@ -130,6 +125,9 @@ export default defineComponent({
 
     const notiLists = ref([]);
     const open = ref(false);
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
+    const userLocal = JSON.parse(localStorage.getItem("auth"));
+    const token = JSON.parse(localStorage.getItem("token"));
     const showDrawer = () => {
       open.value = true;
       getNoti();
@@ -138,7 +136,7 @@ export default defineComponent({
       open.value = false;
       notiLists.value.forEach(item => {
         item.notiStatus = true; // Mark all notifications as read
-      });    
+      });
       axios
         .get(`${apiPrefix}/api/v1/notifications/seen`, {
           headers: {
@@ -154,11 +152,9 @@ export default defineComponent({
 
 
     };
-    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const authStore = useAuthStore();
     const route = useRoute();
-    const userLocal = JSON.parse(localStorage.getItem("auth"));
-    const token = JSON.parse(localStorage.getItem("token"));
+
 
     const handleClickLogout = () => {
       localStorage.removeItem("auth");
@@ -168,7 +164,7 @@ export default defineComponent({
 
     };
 
-    const getNoti = () =>{
+    const getNoti = () => {
       axios
         .get(`${apiPrefix}/api/v1/notifications/view`, {
           headers: {
@@ -198,6 +194,7 @@ export default defineComponent({
         .then((response) => {
           notiLists.value = response.data.data;
           console.log(response.data.data, "noti");
+          getNoti();
 
         })
         .catch((error) => {
@@ -213,13 +210,13 @@ export default defineComponent({
       return notiLists.value.slice().sort((a, b) => b.notiId - a.notiId);
     });
 
-    
+
 
     onMounted(() => {
       // chay lan dau tien
       getNoti();
     });
-    
+
     const unreadCount = computed(() => {
       return notiLists.value.filter(item => !item.notiStatus).length;
     });
@@ -2022,8 +2019,6 @@ body::backdrop {
 
 
 <style data-jss="" data-meta="MuiAvatar">
-
-
 .MuiAvatar-colorDefault {
   color: #fafafa;
   background-color: #bdbdbd;
@@ -2443,4 +2438,3 @@ body::backdrop {
   webkit-transform: scale(1.2);
 }
 </style>
-

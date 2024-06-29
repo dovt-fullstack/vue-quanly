@@ -52,13 +52,13 @@
                             <span>{{ record.price }}</span>
                         </template>
                         <template v-if="column.key === 'status'">
-                            <a-tag :class="record.status ? 'status-selling' : 'status-stopped'">
-                                {{ record.status ? 'Đang bán' : 'Ngừng bán' }}
-                            </a-tag>
+                            <a-tag :class="getStatusClass(record.status)">
+        {{ getStatusText(record.status) }}
+    </a-tag>
                         </template>
                         <template v-if="column.key === 'MANAGER' && authStoreClaim !== null">
                             <a-space warp>
-                                <router-link :to="{ name: 'admin-product-edit', params: { id: record.productId } }">
+                                <router-link v-if="record.status!==2" :to="{ name: 'admin-product-edit', params: { id: record.productId } }">
                                     <a-button type="dashed" class="me-2 text-primary" size="small" title="Sửa">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a-button>
@@ -166,7 +166,24 @@ export default defineComponent({
             { title: "Tác vụ", key: role, fixed: "right" }
         ];
 
-
+        const getStatusClass = (status)=> {
+            if (status === 0) {
+                return 'status-stopped';
+            } else if (status === 1) {
+                return 'status-selling';
+            } else if (status === 2) {
+                return 'status-locked';
+            }
+        };
+        const getStatusText = (status) => {
+            if (status === 0) {
+                return 'Ngừng bán';
+            } else if (status === 1) {
+                return 'Đang bán';
+            } else if (status === 2) {
+                return 'Bị khóa';
+            }
+        };
         const showBanModal = (productId) => {
             currentProductId.value = productId;
             isBanModalVisible.value = true;
@@ -341,6 +358,8 @@ export default defineComponent({
         });
         return {
             authStoreClaim,
+            getStatusClass,
+            getStatusText,
             users,
             columns,
             pageParam,
@@ -373,7 +392,16 @@ export default defineComponent({
 }
 
 .status-stopped {
-    background-color: #f5222d;
+    background-color: #eaa50f;
+    /* Màu đỏ */
+    color: black;
+    border-radius: 3px;
+    border: 1px solid;
+
+}
+
+.status-locked {
+    background-color: #f11010;
     /* Màu đỏ */
     color: black;
     border-radius: 3px;

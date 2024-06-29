@@ -10,38 +10,81 @@
               alt="Siêu thị đèn LED" />
           </span>
         </router-link>
+        <div class="d-flex">
+          <div class="open">
+            <label style="cursor: pointer" class="oh">
+              <router-link v-if="!userLocal" to="/login">
+                <span> Đăng nhập </span>
+              </router-link>
+              <a-dropdown>
+                <span class="ant-dropdown-link " @click.prevent>
+                  <span class="me-1">Xin chào {{ userLocal?.lastname }}</span>
+                  <i class="fa-solid "></i>
+                </span>
+                <template #overlay>
+                  <a-menu>
 
-        <div class="open">
-          <label style="cursor: pointer" class="oh">
-            <router-link v-if="!userLocal" to="/login">
-              <span> Đăng nhập </span>
-            </router-link>
-            <a-dropdown>
-              <span class="ant-dropdown-link " @click.prevent>
-                <span class="me-1">Xin chào {{ userLocal?.lastname }}</span>
-                <i class="fa-solid "></i>
-              </span>
-              <template #overlay>
-                <a-menu>
+                    <a-menu-item>
+                      <router-link :to="{ name: 'profile-client' }">
+                        <span>Trang cá nhân</span>
+                      </router-link>
+                    </a-menu-item>
 
-                  <a-menu-item>
-                    <router-link :to="{ name: 'profile-client' }">
-                      <span>Trang cá nhân</span>
-                    </router-link>
-                  </a-menu-item>
+                    <a-menu-item>
+                      <a @click="handleClickLogout" style="color: red;">Đăng xuất</a>
+                    </a-menu-item>
 
-                  <a-menu-item>
-                    <a @click="handleClickLogout" style="color: red;">Đăng xuất</a>
-                  </a-menu-item>
-
-                </a-menu>
-              </template>
-            </a-dropdown>
-            <!-- <router-link to="/profile-client" v-else class="me-1">
+                  </a-menu>
+                </template>
+              </a-dropdown>
+              <!-- <router-link to="/profile-client" v-else class="me-1">
                             <span>Xin chào {{ userLocal.lastname }}</span>
                         </router-link> -->
-          </label>
+            </label>
+          </div>
+
+
+          <div class="">
+            <div>
+              <div>
+                <a-button style="background-color: #182537;border-color: #182537;" type="primary" @click="showDrawer">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    font-size="24" style="color: rgb(0, 136, 255)">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M18 10.5c0-3.07-1.14-5.64-4-6.32V2h-4v2.18c-2.87.68-4 3.24-4 6.32V16l-2 1v2h16v-2l-2-1v-5.5Zm-5.6 11.46A2.014 2.014 0 0 1 9.99 20h4c0 .28-.05.54-.15.78-.26.6-.79 1.04-1.44 1.18Z"
+                      fill="currentColor"></path>
+                  </svg>
+                  <a-badge :count="unreadCount" offset="[10, 0]">
+                  </a-badge>
+                </a-button>
+              </div>
+              <a-drawer title="Thông báo của bạn" placement="right" :closable="false" :visible="open"
+                :get-container="false" :style="{ position: 'absolute', height: '900px' }" @close="onClose">
+                <a-list item-layout="horizontal" :data-source="notiLists">
+                  <template #renderItem="{ item }">
+                    <a-list-item :style="{
+                marginTop: '10px',
+                backgroundColor: item.notiStatus ? '#ffffff' : '#d3d3d3',
+              }"> <a-list-item-meta>
+                        <template #title>
+                          <h6>{{ item.description }}</h6>
+                        </template>
+                        <template #description>
+                          {{ item.description }}
+                        </template>
+                      </a-list-item-meta>
+                      <a-button type="link" @click="deleteNoti(item.notiId)" style="color: red;">Delete</a-button>
+                    </a-list-item>
+                  </template>
+                </a-list>
+              </a-drawer>
+            </div>
+          </div>
         </div>
+
+
+
+
       </div>
     </div>
     <div class="head2">
@@ -67,6 +110,10 @@
               <i class="fa-regular fa-rectangle-list"></i>
             </div>
           </router-link>
+
+
+
+
         </div>
       </div>
     </div>
@@ -74,10 +121,23 @@
 </template>
 
 <script>
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, ref, reactive, computed, onMounted } from "vue";
+import { message, Badge, Button, Drawer, List, Avatar } from "ant-design-vue";
+
 export default defineComponent({
+  components: {
+    'a-button': Button,
+    'a-badge': Badge,
+    'a-drawer': Drawer,
+    'a-list': List,
+    'a-list-item': List.Item,
+    'a-list-item-meta': List.Item.Meta,
+    'a-avatar': Avatar,
+  },
   setup() {
+    const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const userLocal = JSON.parse(localStorage.getItem("auth"));
+    const token = JSON.parse(localStorage.getItem("token"));
     const handleClickLogout = () => {
       localStorage.removeItem("auth");
       localStorage.removeItem("access_token");
@@ -85,9 +145,91 @@ export default defineComponent({
       window.location.href = "http://localhost:5173/login"
 
     };
+    const notiLists = ref([]);
+    const open = ref(false);
+    const showDrawer = () => {
+      open.value = true;
+      getNoti();
+    };
+    const onClose = () => {
+      open.value = false;
+      notiLists.value.forEach(item => {
+        item.notiStatus = true; // Mark all notifications as read
+      });
+      axios
+        .get(`${apiPrefix}/api/v1/notifications/seen`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        })
+        .then((response) => {
+          console.log(response.data.data, "noti");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+
+    };
+    const getNoti = () => {
+      axios
+        .get(`${apiPrefix}/api/v1/notifications/view`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        })
+        .then((response) => {
+          notiLists.value = response.data.data;
+          console.log(response.data.data, "noti");
+
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
+    const deleteNoti = (notiId) => {
+      // Perform deletion logic here
+      console.log(`Deleting notification with id ${notiId}`);
+
+      axios
+        .get(`${apiPrefix}/api/v1/notifications/delete/${notiId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        })
+        .then((response) => {
+          notiLists.value = response.data.data;
+          console.log(response.data.data, "noti");
+          getNoti();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      open.value = false;
+
+    };
+
+
+
+    onMounted(() => {
+      getNoti();
+    });
+
+    const unreadCount = computed(() => {
+      return notiLists.value.filter(item => !item.notiStatus).length;
+    });
+
     return {
       handleClickLogout,
       userLocal,
+      userLocal,
+      showDrawer,
+      onClose,
+      open,
+      notiLists,
+      unreadCount,
+      deleteNoti,
     };
   },
 });
@@ -144,7 +286,7 @@ export default defineComponent({
 }
 
 .open label span {
-  text-align: left;
+  text-align: center;
   color: #ffd52f;
   font: bold 15px arial;
   display: block;

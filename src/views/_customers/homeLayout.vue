@@ -5,14 +5,8 @@
       <!--san pham khuyen mai-->
       <div class="f box-tit" id="headpro">
         <div class="flexJus wrap" style="height: 40px">
-          <label @click="addMyFarvors()" class="btn" style="font: 15px arial">yêu thích</label>
-          <div class="flexJus">
-            <ul v-for="productType in typeStore" :key="productType.id" class="othpro flexL">
-              <li style="padding-right: 10px">
-                <label>{{ productType }}</label>
-              </li>
-            </ul>
-          </div>
+          <label @click="addMyFarvors()" class="btn" style="font: 15px arial">Thêm vào yêu thích</label>
+          
         </div>
       </div>
       <div class="f dealhot">

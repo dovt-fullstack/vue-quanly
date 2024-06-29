@@ -106,12 +106,42 @@
                   <i> </i>
                 </span>
               </div>
-              <div @click="handelByNow()" class="action">
+
+
+              <span class="btn2 bcam btnorder"  @click="updatePurchaseData"
+                  ><b>MUA NGAY</b>
+                  <i>Mua ngay để hưởng nhiều ưu đãi</i>
+                </span>
+                <template>
+    <a-modal
+      v-model:visible="open"
+      :title="titlee"
+      @ok="handleOk"
+    >
+      <p><strong>Khách hàng:</strong> {{ purchaseData.customerName }}</p>
+      <p><strong>Số điện thoại:</strong> {{ purchaseData.phoneNumber }}</p>
+      <p><strong>Địa chỉ:</strong> {{ purchaseData.address }}</p>
+      <p><strong>Tên sản phẩm:</strong> {{ purchaseData.productName }}</p>
+      <p><strong>Giá tiền (cho một sản phẩm):</strong> {{ formatCurrency(purchaseData.price) }}</p>
+      <p><strong>Giảm giá của sản phẩm:</strong> {{ purchaseData.discount}}%</p>
+      <p><strong>Giá sau giảm:</strong> {{ formatCurrency(purchaseData.price * (1 - purchaseData.discount/100)) }}</p>
+      <p><strong>Số lượng:</strong> {{ purchaseData.quantityBuy }}</p>
+      <p><strong>Phí vận chuyển:</strong> {{ formatCurrency(purchaseData.shippingFee) }}</p>
+      <p><strong>Tổng tiền:</strong> {{ formatCurrency(purchaseData.shippingFee+ purchaseData.price * (1 - purchaseData.discount/100) * purchaseData.quantityBuy) }}</p>
+
+      <p><strong>Hình thức thanh toán:</strong> {{ purchaseData.paymentMethod }}</p>
+    </a-modal>
+  </template>
+              <!-- <BuyButton :data="purchaseData" /> -->
+
+
+
+              <!-- <div @click="handelByNow()" class="action">
                 <span class="btn2 bcam btnorder"
                   ><b>MUA NGAY</b>
                   <i>Mua ngay để hưởng nhiều ưu đãi</i>
                 </span>
-              </div>
+              </div> -->
               <ul class="bphone">
                 <li>Số điện thoại của cửa hàng <b>{{ phone }}</b></li>
               </ul>
@@ -234,6 +264,7 @@ import {
   ref,
   reactive,
   toRefs,
+  watch
 } from "vue";
 import { cloneDeep } from "lodash-es";
 import { useRouter } from "vue-router";
@@ -255,9 +286,13 @@ import Header from "../../components/HeaderCustomer.vue";
 export default defineComponent({
   components: {
     Header,
+
   },
 
   setup() {
+    const titlee = ref("Xác nhận đặt hàng");
+    const buyButton = ref(null);
+    const numberItem = ref(1)
     const product = ref({});
     const quantity = ref(0);
     const apiPrefix = import.meta.env.VITE_API_PREFIX;
@@ -267,7 +302,32 @@ export default defineComponent({
     const router = useRouter();
     const userLocal = JSON.parse(localStorage.getItem("auth"));
     const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
+    const userData = ref(null);
+    const open = ref(false);
+    const confirmLoading = ref(false);
 
+    const purchaseData = reactive({
+      productId: null,
+      quantityBuy: null,
+      quantityStoke: null,
+      customerName: null,
+      phoneNumber: null,
+      address: null,
+      productName: null,
+      price: null,
+      discount: null,
+      open: false,
+      typee: null,
+      shippingFee: 30000,
+      paymentMethod: "Thanh toán khi nhận hàng"
+    });
+
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat('vi-VN', {
+          style: 'currency',
+          currency: 'VND'
+        }).format(value);
+      };
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
@@ -307,16 +367,60 @@ export default defineComponent({
         addToCart(newData);
       }
     };
-    const handelByNow = async () => {
-      const newData = Number(numberItem.value);
-      if (newData < 1) {
-        alert("Số lượng tối thiểu là 1");
-      } else if (newData > product.value.quantity) {
-        alert(`Số lượng không được vượt quá ${product.value.quantity}`);
-      } else {
+
+    const updatePurchaseData = () => {
+
+
+      const quantityBuy = numberItem.value;
+      const quantityStoke = product.quantity;
+
+      if (quantityBuy < 1) {
+          alert("Số lượng tối thiểu là 1");
+        } else if (quantityBuy > quantityStoke) {
+          alert(`Số lượng không được vượt quá ${quantityStoke}`);
+        } else{
+          purchaseData.productId = productId;
+      purchaseData.quantityBuy = numberItem.value;
+      purchaseData.quantityStoke = product.value.quantity;
+      purchaseData.customerName = `${userLocal.firstname} ${userLocal.lastname}`;
+      purchaseData.phoneNumber = userData.value.phoneNumber; // Set as needed
+      purchaseData.address = userData.value.address; // Set as needed
+      purchaseData.productName = product.value.productName;
+      purchaseData.price = product.value.price;
+      purchaseData.discount = product.value.discount;
+      purchaseData.open = true;
+      purchaseData.typee = "mua-truc-tiep";
+      open.value = true
+        }
+  
+
+
+    };
+
+    watch(numberItem, (newValue) => {
+      purchaseData.quantity = newValue;
+    });
+
+
+    const handleOk = () => {
+        confirmLoading.value = true;
+        titlee.value = "Đang xử lí đơn hàng của bạn";
+        setTimeout(() => {
+          open.value = false;
+          confirmLoading.value = false;
+        }, 2000);
+  
+        handelByNow();
+      };
+  
+      const handelByNow = async () => {
+        const productId = purchaseData.productId;
+        const quantityBuy = purchaseData.quantityBuy;
+  
+
         const formData = new FormData();
         formData.append("productid", productId);
-        formData.append("quantity", newData);
+        formData.append("quantity", quantityBuy);
         axios
           .post(`${apiPrefix}/api/v1/customer/order/insert`, formData, {
             headers: {
@@ -331,6 +435,22 @@ export default defineComponent({
           .catch((error) => {
             console.log(error);
           });
+      };
+
+    const getUserData = async () => {
+      try {
+        const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
+        const response = await axios.get(
+          `${apiPrefix}/api/v1/account/profile/view`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Thêm token vào headers
+            },
+          }
+        );
+        userData.value = response.data.data;
+      } catch (error) {
+        console.error(error);
       }
     };
 
@@ -354,9 +474,18 @@ export default defineComponent({
 
     onMounted(() => {
       fetchProduct();
+      getUserData();
+      
     });
     return {
-      numberItem: 1,
+      updatePurchaseData,
+      formatCurrency,
+      titlee,
+      open,
+      handleOk,
+      purchaseData,
+      numberItem,
+      purchaseData,
       product,
       router,
       route,

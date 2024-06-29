@@ -3,50 +3,12 @@
     <div class="row mb-3">
       <div class="col-6">
         <a-breadcrumb>
-          <a-breadcrumb-item>Cửa hàng</a-breadcrumb-item>
+          <a-breadcrumb-item>Danh sách cửa hàng</a-breadcrumb-item>
         </a-breadcrumb>
       </div>
-      <div class="col-6 d-flex justify-content-end">
-        <a-button class="me-2">
-          <i class="fa-solid fa-vials"></i>
-        </a-button>
-        <a-button class="me-2">
-          <i class="fa-solid fa-vial-virus"></i>
-        </a-button>
-        <a-button type="primary" title="Thêm mới">
-          <router-link :to="{ name: 'admin-store-create' }">
-            <i class="fa-solid fa-plus"></i>
-          </router-link>
-        </a-button>
-      </div>
+      
     </div>
-    <!-- <div class="row">
-            <div class="col-12">
-                <a-form @keyup.enter="clickFrmFilter($event)" layout="inline" class="p-3 border">
-                    <div class="col-3">
-                        <label for="exampleFormControlInput1" class="form-label">Tài khoản</label>
-                        <a-form-item>
-                            <a-input v-model:value="pageParam.userName" placeholder="Username"
-                                class="form-control form-control-sm" size="small"></a-input>
-                        </a-form-item>
-                    </div>
-                    <div class="col-3">
-                        <label for="exampleFormControlInput1" class="form-label">.</label>
-                        <a-form-item>
-                           <a-button v-on:click="clickFrmFilter($event)" class="bg-success text-light btn btn-sm"
-                                size="small" type="button" html-type="button">
-                                Tìm kiếm
-                            </a-button>
-                            <a-button v-on:click="clickFrmFilter($event)" class="bg-success text-light btn btn-sm"
-                                size="small" type="submit" html-type="button">
-                                Tìm kiếm
-                            </a-button>
-                        </a-form-item>
-                    </div>
-                </a-form>
 
-            </div>
-        </div> -->
     <div class="row">
       <div class="col-12">
         <a-table

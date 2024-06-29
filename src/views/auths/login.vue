@@ -244,7 +244,7 @@ export default defineComponent({
         localStorage.setItem("auth", JSON.stringify(res.data));
         localStorage.setItem("token", JSON.stringify(res.data.accesstoken));
 
-        // await fetchFireBase(res.data.accesstoken, res.data.userId); // Đợi fetchFireBase hoàn thành
+        await fetchFireBase(res.data.accesstoken, res.data.userId); // Đợi fetchFireBase hoàn thành
 
         if (res.data.role == "USER") {
           window.location.href = "/trang-chu-stores";
