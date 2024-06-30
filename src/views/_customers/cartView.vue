@@ -7,7 +7,7 @@
 
       <div class="orderbox">
         <div class="dieuhuong">
-          <a @click="goBack" >Giỏ hàng của bạn</a>
+          <a @click="goBack">Giỏ hàng của bạn</a>
         </div>
         <div class="giohang orderhome">
 
@@ -26,7 +26,8 @@
 
                   <label>{{ product.priceTotal?.toLocaleString() }}₫</label>
                   <h6>Cửa hàng: {{ product.storeName }}</h6>
-                  <span class="bynow" @click="byProductCart(product.cartItemId)"
+                  <span class="bynow"
+                    @click="updatePurchaseData(product.cartItemId, product.productId, product.quantity)"
                     style="float: right; padding-top: 10px; cursor: 'pointer'">Mua ngay</span>
 
                   <div class="ArrCount">
@@ -53,111 +54,26 @@
               :pageSize="pageParam.pageSize"
               :show-total="(total, range) => `${range[0]}-${range[1]} của ${total} sản phẩm`" class="mt-2 text-end" />
           </div>
-          <!--.box_27-->
-          <!-- <form method="post" name="order" id="fod">
-            <div class="fpanel">
-              <div class="option">
-                <input name="Sex" type="radio" value="1" />Anh
-              </div>
-              <div class="option">
-                <input name="Sex" checked="" type="radio" value="0" />Chị
-              </div>
-              <div class="group">
-                <input
-                  type="text"
-                  name="Name"
-                  value=""
-                  placeholder="Họ và tên"
-                />
-                <input
-                  name="Phone"
-                  type="text"
-                  value=""
-                  placeholder="Số điện thoại"
-                />
-                <input
-                  name="Note"
-                  type="text"
-                  placeholder="Yêu cầu khác (không bắt buộc)"
-                  value=""
-                />
-              </div>
-            </div>
-
-            <div class="fpanel">
-              <label><b>Để được phục vụ nhanh hơn,</b> hãy chọn thêm:</label>
-              <div class="option opanel" data-rel="dcgh">
-                <input name="Panel" checked="" type="radio" />Địa chỉ giao hàng
-              </div>
-              <div class="option opanel" data-rel="ntst">
-                <input name="Panel" type="radio" />Nhận tại cửa hàng
-              </div>
-              <div id="dcgh" class="paytype" style="display: block">
-                <input
-                  type="text"
-                  name="Address"
-                  value=""
-                  placeholder="Số nhà, tên đường, phường/xã/huyện/tỉnh"
-                />
-
-                <div class="daily">
-                  <input type="checkbox" name="PayType" />Cà thẻ tại nhà
-                </div>
-                <div class="daily">
-                  <input type="checkbox" name="PayType" />Xuất hóa đơn công ty
-                </div>
-              </div>
-              <div id="ntst" class="paytype">
-                <div class="daily">
-                  <input name="Agent" type="radio" value="1" />21C Trần Duy
-                  Hưng, Cầu Giấy, HN
-                </div>
-                <div class="daily">
-                  <input name="Agent" type="radio" value="2" />107 Thảo Nguyên,
-                  Ecopark, HN
-                </div>
-                <div class="daily">
-                  <input name="Agent" type="radio" value="3" />148 Nguyễn Hoàng,
-                  P. AN Phú, Quận 2, HCM
-                </div>
-                <div class="daily">
-                  <input name="Agent" type="radio" value="4" />245 Đường 30/4,
-                  Dương Đông, Phú Quốc
-                </div>
-              </div>
-            </div>
-            <div class="fpanel">
-              <div class="da">
-                <p class="state">Đơn hàng đang được gửi ...</p>
-                <p class="od" id="gui" onclick="guidonhang();">
-                  ĐẶT HÀNG <span>(Xem hàng, không mua không sao)</span>
-                </p>
-              </div>
-              <input
-                type="submit"
-                name="_w_action[OrderPOST]"
-                style="display: none"
-              />
-              <input type="hidden" name="_w_action" value="OrderPOST" />
-            </div>
-          </form> -->
-          <!-- <div class="fpanel">
-            <div class="da">
-              <p @click="showDrawer" class="od" id="gui">Xem các đơn đã đặt</p>
-            </div>
-            <p @click="showDrawer2" class="od" id="gui">
-              Xem cửa hàng yêu thích
-            </p>
-            <input
-              type="submit"
-              name="_w_action[OrderPOST]"
-              style="display: none"
-            />
-            <input type="hidden" name="_w_action" value="OrderPOST" />
-          </div> -->
         </div>
       </div>
     </div>
+
+    <a-modal v-model:visible="open" :title="titlee" @ok="handleOk(purchaseData.cartItemId)">
+      <p><strong>Khách hàng:</strong> {{ purchaseData.customerName }}</p>
+      <p><strong>Số điện thoại:</strong> {{ purchaseData.phoneNumber }}</p>
+      <p><strong>Địa chỉ:</strong> {{ purchaseData.address }}</p>
+      <p><strong>Tên sản phẩm:</strong> {{ purchaseData.productName }}</p>
+      <p><strong>Giá tiền (cho một sản phẩm):</strong> {{ formatCurrency(purchaseData.price) }}</p>
+      <p><strong>Giảm giá của sản phẩm:</strong> {{ purchaseData.discount }}%</p>
+      <p><strong>Giá sau giảm:</strong> {{ formatCurrency(purchaseData.price * (1 - purchaseData.discount / 100)) }}</p>
+      <p><strong>Số lượng:</strong> {{ purchaseData.quantityBuy }}</p>
+      <p><strong>Phí vận chuyển:</strong> {{ formatCurrency(purchaseData.shippingFee) }}</p>
+      <p><strong>Tổng tiền:</strong> {{ formatCurrency(purchaseData.shippingFee + purchaseData.price * (1 -
+            purchaseData.discount / 100) * purchaseData.quantityBuy) }}</p>
+
+      <p><strong>Hình thức thanh toán:</strong> {{ purchaseData.paymentMethod }}</p>
+    </a-modal>
+
     <div id="footer">
       <div class="f" style="padding: 40px 0">
         <div class="wrap flexJus">
@@ -268,20 +184,6 @@
             <input type="hidden" name="_w_action" value="UpdatePOST" />
           </form>
 
-          <!-- <div class="fpanel">
-            <div class="da">
-              <p class="state">Đơn hàng đang được gửi ...</p>
-              <p @click="showDrawer" class="od" id="gui">
-                Xem các đơn đã đặt
-              </p>
-            </div>
-            <input
-              type="submit"
-              name="_w_action[OrderPOST]"
-              style="display: none"
-            />
-            <input type="hidden" name="_w_action" value="OrderPOST" />
-          </div> -->
         </div>
       </a-drawer>
       <a-drawer title="Danh sách cửa hàng bạn thích" :visible="isDrawerVisible2" :width="850" @close="handleClose2"
@@ -358,7 +260,11 @@ export default defineComponent({
     const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const productId = route.params.id;
     const product = ref([]);
+    const productInfo = ref()
     const myFarve = ref([]);
+    const open = ref(false);
+    const titlee = ref("Xác nhận đặt hàng");
+    const userData = ref(null);
 
     const isDrawerVisible = ref(false);
     const isDrawerVisible2 = ref(false);
@@ -376,6 +282,102 @@ export default defineComponent({
       totalItems: 0,
       totalPages: 0
     });
+    const confirmLoading = ref(false);
+
+
+    const purchaseData = reactive({
+      productId: null,
+      quantityBuy: null,
+      quantityStoke: null,
+      customerName: null,
+      phoneNumber: null,
+      address: null,
+      productName: null,
+      price: null,
+      discount: null,
+      open: false,
+      typee: null,
+      cartItemId: null,
+      shippingFee: 30000,
+      paymentMethod: "Thanh toán khi nhận hàng"
+    });
+    const fetchProductInfo = async (pid) => {
+      try {
+        const response = await axios.get(
+          `${apiPrefix}/api/v1/product/info/${pid}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+        );
+
+        if (response.data.status === "OK") {
+          productInfo.value = response.data.data;
+        } else {
+          // Xử lý khi status không thành công
+          console.log('Lỗi từ server:', response.data.message);
+          productInfo.value = null;
+          message.error(response.data.message);
+        }
+      } catch (error) {
+        if (error.response && error.response.data) {
+          // Xử lý khi có lỗi từ phản hồi của API
+          productInfo.value = null;
+
+          console.error('Lỗi khi gọi API:', error.response.data.message);
+          message.error(error.response.data.message);
+        } else {
+          productInfo.value = null;
+
+          // Xử lý khi có lỗi khác, chẳng hạn mạng chập chờn
+          console.error('Đã xảy ra lỗi:', error.message);
+          message.error('Đã xảy ra lỗi');
+        }
+      }
+    };
+
+    const updatePurchaseData = async (cartItemId, pId, buyQuantity) => {
+      try {
+        await fetchProductInfo(pId);
+
+        if (!productInfo.value) {
+          // Không có thông tin sản phẩm, có thể do lỗi trong fetchProductInfo
+          return;
+        }
+
+
+        const quantityBuy = buyQuantity;
+        const quantityStoke = productInfo.value.quantity;
+        console.log(productInfo.value.quantity)
+        if (quantityBuy < 1) {
+          alert("Số lượng tối thiểu là 1");
+        } else if (quantityBuy > quantityStoke) {
+          alert(`Số lượng không được vượt quá ${quantityStoke}`);
+        } else {
+          purchaseData.cartItemId = cartItemId;
+          purchaseData.productId = pId;
+          purchaseData.quantityBuy = buyQuantity;
+          purchaseData.quantityStoke = productInfo.value.quantity;
+          purchaseData.customerName = `${userLocal.firstname} ${userLocal.lastname}`;
+          purchaseData.phoneNumber = userData.value.phoneNumber; // Set as needed
+          purchaseData.address = userData.value.address; // Set as needed
+          purchaseData.productName = productInfo.value.productName;
+          purchaseData.price = productInfo.value.price;
+          purchaseData.discount = productInfo.value.discount;
+          purchaseData.open = true;
+          purchaseData.typee = "mua-qua-gio-hang";
+          open.value = true
+        }
+      }
+
+      catch (error) {
+        // Xử lý lỗi nếu cần thiết
+        console.error('Lỗi khi cập nhật dữ liệu mua hàng:', error);
+      }
+
+
+
+    };
     const goBack = () => {
       // Navigate back to the previous page
       if (history.length > 1) {
@@ -384,6 +386,23 @@ export default defineComponent({
       } else {
         // Otherwise, fallback to home or another default route
         this.$router.push("/");
+      }
+    };
+
+    const getUserData = async () => {
+      try {
+        const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
+        const response = await axios.get(
+          `${apiPrefix}/api/v1/account/profile/view`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Thêm token vào headers
+            },
+          }
+        );
+        userData.value = response.data.data;
+      } catch (error) {
+        console.error(error);
       }
     };
     const showDrawer = () => {
@@ -434,6 +453,12 @@ export default defineComponent({
     const onSearch = () => {
       pageParam.currentPage = 1;
       fetchProduct(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
+    };
+    const formatCurrency = (value) => {
+      return new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+      }).format(value);
     };
     const getMyfavorite = async () => {
       const response = await axios.get(
@@ -498,6 +523,20 @@ export default defineComponent({
         console.error(error);
       }
     };
+
+
+    const handleOk = (idCart) => {
+      console.log(idCart)
+      confirmLoading.value = true;
+      titlee.value = "Đang xử lí đơn hàng của bạn";
+      setTimeout(() => {
+        open.value = false;
+        confirmLoading.value = false;
+      }, 2000);
+
+      byProductCart(idCart);
+    };
+
     // https://charismatic-friendship-production.up.railway.app/api/v1/customer/orderdetail/view
     const byProductCart = async (idCart) => {
       const formData = new FormData();
@@ -513,7 +552,9 @@ export default defineComponent({
           },
         }
       );
-      alert("Mua thành công");
+      message.success(
+        "Đặt hàng thành công, hãy xem trạng thái đơn hàng của bạn"
+      );
       fetchProduct();
     };
     console.log(allTotal, "1");
@@ -602,44 +643,52 @@ export default defineComponent({
     };
 
 
-onMounted(() => {
-  fetchProduct(pageParam.currentPage, pageParam.pageSize);
-  getMyfavorite();
+    onMounted(() => {
+      fetchProduct(pageParam.currentPage, pageParam.pageSize);
+      getMyfavorite();
+      getUserData();
 
-  const channel = new window.BroadcastChannel("sw-messages");
+      const channel = new window.BroadcastChannel("sw-messages");
       channel.addEventListener('message', (event) => {
         console.log(123);
         message.success(event);
       });
 
-});
-return {
-  router,
-  route,
-  product,
-  userLocal,
-  deleteProduct,
-  decrement,
-  increment,
-  allTotal,
-  byProductCart,
-  goBack,
-  isDrawerVisible,
-  showDrawer,
-  handleClose,
-  handleSubmit,
-  isDrawerVisible2,
-  handleClose2,
-  showDrawer2,
-  cancelOderMyFarvor,
-  myOrder,
-  myFarve,
-  cancelOder,
-  searchKeyword,
-  pageParam,
-  onChange,
-  onSearch,
-};
+    });
+    return {
+      titlee,
+      formatCurrency,
+      purchaseData,
+      router,
+      route,
+      product,
+      handleOk,
+      open,
+      updatePurchaseData,
+
+      userLocal,
+      deleteProduct,
+      decrement,
+      increment,
+      allTotal,
+      byProductCart,
+      goBack,
+      isDrawerVisible,
+      showDrawer,
+      handleClose,
+      handleSubmit,
+      isDrawerVisible2,
+      handleClose2,
+      showDrawer2,
+      cancelOderMyFarvor,
+      myOrder,
+      myFarve,
+      cancelOder,
+      searchKeyword,
+      pageParam,
+      onChange,
+      onSearch,
+    };
   },
 });
 </script>
@@ -2091,11 +2140,12 @@ textarea {
 
 .listcart .cartitem .oimg {
   width: 10%;
-  height: 100%;
+  height: 70%;
   position: relative;
   float: left;
   margin: 0 5% 0 0;
   text-align: center;
+  font-size: medium;
 }
 
 .listcart .cartitem .oimg img {

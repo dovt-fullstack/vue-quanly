@@ -9,9 +9,8 @@
             >
           </a-breadcrumb-item>
           <a-breadcrumb-item>
-            <router-link :to="{ name: 'admin-users' }"
-              >Product type</router-link
-            >
+              Loại sản phẩm
+          
           </a-breadcrumb-item>
           <a-breadcrumb-item>Thêm mới</a-breadcrumb-item>
         </a-breadcrumb>
@@ -73,7 +72,6 @@ import { useRoute, useRouter } from "vue-router";
 import { message } from "ant-design-vue";
 import { DeleteOutlined } from "@ant-design/icons-vue";
 import { useMenu } from "../../stores/use-menu.js";
-import ApiViewData from "../../api/ApiViewData.js";
 import BaseCommon from "../../api/BaseCommon.js";
 import ApiUser from "../../api/ApiUser.js";
 import { useAuthStore } from "../../stores/auth.store.js";
@@ -113,10 +111,10 @@ export default defineComponent({
 
 
     const rules = {
-      producttypeName: [
+      productType: [
         {
           required: true,
-          message: "name không để trống.",
+          message: "không để trống.",
           trigger: "change",
         },
       ],
@@ -150,33 +148,6 @@ export default defineComponent({
       formRef.value.resetFields();
     };
     //
-    const getOptionsLevelManage = () => {
-      ApiViewData.GetOptionsLevelManage()
-        .then((response) => {
-          users.optionsLevelManage = response.data;
-          formState.levelManage = response.data[0].value;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-
-    const filterOptionLevelManage = (input, option) => {
-      return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
-    };
-    const getOptionsRole = () => {
-      ApiViewData.GetOptionsRole()
-        .then((response) => {
-          users.optionsRole = response.data;
-          formState.roleID = response.data[0].value;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    const filterOptionRole = (input, option) => {
-      return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
-    };
 
     const previewFiles = (event) => {
       const file = event.target.files[0];
@@ -201,19 +172,8 @@ export default defineComponent({
       reader.readAsDataURL(file);
     };
 
-    const getOptionsStatus = () => {
-      ApiViewData.GetOptionsStatus()
-        .then((response) => {
-          users.optionsStatus = response.data;
-          formState.status = response.data[0].value;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    const filterOptionStatus = (input, option) => {
-      return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
-    };
+
+
     //
     const handleFileUpload = (event) => {
       const file = event.target.files[0];
@@ -224,25 +184,12 @@ export default defineComponent({
     const newImage = ref('');
 
 
-    const fetchProduct = async () => {
-      try {
-        const response = await axios.get(
-          `${apiPrefix}/api/v1/management/${storeId}/producttype/view`
-        );
-        console.log(response.data.data, "response");
-        const data = response.data.data;
-
-      } catch (error) {
-        console.error(error);
-      }
-
-    };
 
     const createUsers = () => {
       const formData = new FormData();
       formState.loading = true;
-      formData.append("name", formState.producttypeName);
-      formData.append("avatar", formState.avatarFile); // avatarFile will hold the file object
+      formData.append("name", formState.productType);
+      formData.append("avatar", newImage); // avatarFile will hold the file object
       axios
         .post(
            `${apiPrefix}/api/v1/management/${id}/producttype/insert`,
@@ -257,6 +204,7 @@ export default defineComponent({
           }
         )
         .then((response) => {
+          formState.loading = false;
           message.success("Tạo mới thành công!");
           router.push({
             name: "ProductByStore",
@@ -266,17 +214,24 @@ export default defineComponent({
           });
         })
         .catch((error) => {
-          console.log(error);
+          formState.loading = false;
+          if (error.response && error.response.data) {
+          // Xử lý khi có lỗi từ phản hồi của API
+          console.error('Lỗi khi gọi API:', error.response.data.message);
+          message.error(error.response.data.message);
+        } else {
+
+          // Xử lý khi có lỗi khác, chẳng hạn mạng chập chờn
+          console.error('Đã xảy ra lỗi:', error.message);
+          message.error('Đã xảy ra lỗi');
+        }
         });
     };
     onMounted(() => {
       //
-      fetchProduct();
 
       resetForm();
-      getOptionsLevelManage();
-      getOptionsStatus();
-      getOptionsRole();
+
     });
     const handleChangeUpload = (e) => {
       var p = BaseCommon.GetBase64(e.target.files[0]);
@@ -307,12 +262,6 @@ export default defineComponent({
       previewFiles,
       //
       handleFileUpload,
-      getOptionsLevelManage,
-      getOptionsStatus,
-      getOptionsRole,
-      filterOptionLevelManage,
-      filterOptionRole,
-      filterOptionStatus,
       users,
       createUsers,
       // preview

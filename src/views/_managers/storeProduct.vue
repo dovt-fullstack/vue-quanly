@@ -9,11 +9,28 @@
 
 
             <div class="col-6 d-flex justify-content-end" v-if="role === 'MANAGER'">
-                <a-button class="me-2">
+                <!-- <a-button class="me-2"> -->
+
+                <a-select class="me-2" v-model:value="selectedType" style="width: 100%"
+                    placeholder="Chọn loại sản phẩm" @change="handleChange" title="Chọn loại sản phẩm">
+                    <a-select-option :value="allType">
+                  Tất cả
+                </a-select-option>
+                    <a-select-option v-for="typee in productTypes" :key="typee"
+                        :value="typee.productTypeName">
+                        {{ typee.productTypeName }}
+                    </a-select-option>
+                    <a-select-option  key="addNew" @click="handleAddNewType">
+                        Thêm mới
+                    </a-select-option>
+                </a-select>
+
+
+                <!-- 
                     <router-link :to="{ name: 'product-type/them-moi', params: { id: storeId2 } }">
                         Loại sản phẩm
-                    </router-link>
-                </a-button>
+                    </router-link> -->
+                <!-- </a-button> -->
                 <a-button type="primary" title="Thêm mới sản phẩm">
                     <router-link :to="{ name: 'product/them-moi', params: { id: storeId2 } }">
                         <i class="fa-solid fa-plus"></i>
@@ -53,12 +70,13 @@
                         </template>
                         <template v-if="column.key === 'status'">
                             <a-tag :class="getStatusClass(record.status)">
-        {{ getStatusText(record.status) }}
-    </a-tag>
+                                {{ getStatusText(record.status) }}
+                            </a-tag>
                         </template>
                         <template v-if="column.key === 'MANAGER' && authStoreClaim !== null">
                             <a-space warp>
-                                <router-link v-if="record.status!==2" :to="{ name: 'admin-product-edit', params: { id: record.productId } }">
+                                <router-link v-if="record.status !== 2"
+                                    :to="{ name: 'admin-product-edit', params: { id: record.productId } }">
                                     <a-button type="dashed" class="me-2 text-primary" size="small" title="Sửa">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a-button>
@@ -125,7 +143,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, reactive, onMounted } from "vue";
+import { defineComponent, ref, reactive, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import axios from "axios";
 import { useAuthStore } from "../../stores/auth.store.js";
@@ -147,6 +165,10 @@ export default defineComponent({
         const storeId2 = ref(route.params.id);
         const users = ref([]);
         const searchKeyword = ref("");
+const allType = ref("")
+        const selectedType = ref("");
+        const productTypes = ref([]);
+
         const pageParam = reactive({
             currentPage: 1,
             pageSize: 10,
@@ -166,7 +188,7 @@ export default defineComponent({
             { title: "Tác vụ", key: role, fixed: "right" }
         ];
 
-        const getStatusClass = (status)=> {
+        const getStatusClass = (status) => {
             if (status === 0) {
                 return 'status-stopped';
             } else if (status === 1) {
@@ -183,6 +205,17 @@ export default defineComponent({
             } else if (status === 2) {
                 return 'Bị khóa';
             }
+        };
+        const handleChange = (value) => {
+            console.log('Selected productTypeName:', value);
+            selectedType.value = value;
+
+            pageParam.currentPage = 1;
+            fetchProducts(pageParam.currentPage, pageParam.pageSize, searchKeyword.value,value);
+        }
+        const handleAddNewType = () => {
+            router.push({ name: 'product-type/them-moi', params: { id: storeId2.value } });
+
         };
         const showBanModal = (productId) => {
             currentProductId.value = productId;
@@ -202,11 +235,11 @@ export default defineComponent({
                 console.error('Lý do không được để trống');
             }
         }
-        const fetchProducts = (page, size, keyword = "") => {
+        const fetchProducts = (page, size, keyword = "" ,productTypeName = "") => {
             axios
                 .get(`${apiPrefix}/api/v1/management/${storeId2.value}/product/view`, {
                     headers: { Authorization: `Bearer ${token}` },
-                    params: { page, size, keyword }
+                    params: { page, size, keyword,productTypeName }
                 })
                 .then((response) => {
                     const data = response.data;
@@ -219,6 +252,29 @@ export default defineComponent({
                 });
         };
 
+        const fetchProductType = async () => {
+            try {
+
+                const response = await axios.get(
+                    `${apiPrefix}/api/v1/management/${storeId2.value}/producttype/view`,
+                    {
+                        headers: {
+
+                            "Content-Type": "multipart/form-data",
+                            Authorization: `Bearer ${token}`,
+
+                        },
+                    });
+                if (response.data.status === "OK") {
+                    console.log(response.data.data,"producttype")
+                    productTypes.value = response.data.data;
+                } else {
+                    console.error(response.data.message);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
         const fetchFireBase = () => {
 
 
@@ -298,7 +354,7 @@ export default defineComponent({
                     })
                 .then((response) => {
                     message.success("Khóa thành công!");
-                    fetchProducts(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
+                    fetchProducts(pageParam.currentPage, pageParam.pageSize, searchKeyword.value,selectedType.value);
                 })
                 .catch((error) => {
                     message.error("Khóa không thành công!");
@@ -318,7 +374,7 @@ export default defineComponent({
                     })
                 .then((response) => {
                     message.success("Mở khóa thành công!");
-                    fetchProducts(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
+                    fetchProducts(pageParam.currentPage, pageParam.pageSize, searchKeyword.value,selectedType.value);
                 })
                 .catch((error) => {
                     message.error("Mở khóa không thành công!");
@@ -333,7 +389,7 @@ export default defineComponent({
                 })
                 .then((response) => {
                     message.success("Xóa thành công!");
-                    fetchProducts(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
+                    fetchProducts(pageParam.currentPage, pageParam.pageSize, searchKeyword.value,selectedType.value);
                 })
                 .catch((error) => {
                     message.error("Xóa không thành công!");
@@ -343,20 +399,36 @@ export default defineComponent({
         const onChange = (page, pageSize) => {
             pageParam.currentPage = page;
             pageParam.pageSize = pageSize;
-            fetchProducts(page, pageSize, searchKeyword.value);
+            fetchProducts(page, pageSize, searchKeyword.value,selectedType.value);
         };
         const onSearch = () => {
             pageParam.currentPage = 1;
-            fetchProducts(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
+            fetchProducts(pageParam.currentPage, pageParam.pageSize, searchKeyword.value,selectedType.value);
         };
+        const filteredProducts = computed(() => {
+    if (!selectedType.value) {
+        // pageParam.totalItems = users.value.length;
+        return users.value;
+    }
+    const filtered = users.value.filter(product => product.productType === selectedType.value);
+    // pageParam.totalItems = filtered.length;
+    return filtered;
+});
 
 
         onMounted(() => {
             fetchProducts(pageParam.currentPage, pageParam.pageSize);
+            fetchProductType();
             // fetchFireBase();
 
         });
         return {
+            productTypes,
+            filteredProducts,
+            handleAddNewType,
+            selectedType,
+            handleChange,
+            allType,
             authStoreClaim,
             getStatusClass,
             getStatusText,

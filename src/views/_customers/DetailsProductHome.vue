@@ -5,34 +5,18 @@
     <div id="main">
       <div class="wrap">
         <div id="seo" class="f flexJus">
-          <ul
-            class="beadcrum"
-            itemscope=""
-            itemtype="https://schema.org/BreadcrumbList"
-          >
-            <li
-              itemprop="itemListElement"
-              itemscope=""
-              itemtype="https://schema.org/ListItem"
-            >
-              <a itemprop="item" @click="goBack" 
-                ><span itemprop="name">{{
-                  product.storeName ? product.storeName.toUpperCase() : ""
-                }}</span></a
-              >
+          <ul class="beadcrum" itemscope="" itemtype="https://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+              <a itemprop="item" @click="goBack"><span itemprop="name">{{
+                product.storeName ? product.storeName.toUpperCase() : ""
+              }}</span></a>
               <meta itemprop="position" content="1" />
             </li>
 
-            <li
-              itemprop="itemListElement"
-              itemscope=""
-              itemtype="https://schema.org/ListItem"
-            >
-              <p itemprop="item" 
-                ><span itemprop="name">{{
+            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+              <p itemprop="item"><span itemprop="name">{{
                   product.productType ? product.productType.toUpperCase() : ""
-                }}</span></p
-              >
+                }}</span></p>
               <meta itemprop="position" content="2" />
             </li>
           </ul>
@@ -55,15 +39,15 @@
                 <u>{{ product.price?.toLocaleString() }}₫</u>
                 <b v-if="product.discount && product.discount !== 0">
                   {{
-                    (
-                      (product.price * (100 - product.discount)) /
-                      100
-                    )?.toLocaleString()
-                  }}₫
+                (
+                  (product.price * (100 - product.discount)) /
+                  100
+                )?.toLocaleString()
+              }}₫
                 </b>
                 <b v-else>
-    {{ (product.price) }}₫
-  </b>
+                  {{ (product.price) }}₫
+                </b>
               </span>
 
               <!--tieu ban-->
@@ -73,14 +57,8 @@
               </div>
               <div class="edit-number">
                 <p>Số lượng:</p>
-                <input
-                  id="numberItem"
-                  type="number"
-                  class="input"
-                  v-model="numberItem"
-                  :min="1"
-                  style="padding: 5px 8px; border-radius: 5px; width: 70x"
-                />
+                <input id="numberItem" type="number" class="input" v-model="numberItem" :min="1"
+                  style="padding: 5px 8px; border-radius: 5px; width: 70x" />
               </div>
               <!--het tieu ban-->
 
@@ -101,37 +79,33 @@
               </div>
 
               <div @click="handelAddCart()" class="action">
-                <span class="btn2 bcam btnorder"
-                  ><b>THÊM VÀO GIỎ HÀNG</b>
+                <span class="btn2 bcam btnorder"><b>THÊM VÀO GIỎ HÀNG</b>
                   <i> </i>
                 </span>
               </div>
 
 
-              <span class="btn2 bcam btnorder"  @click="updatePurchaseData"
-                  ><b>MUA NGAY</b>
-                  <i>Mua ngay để hưởng nhiều ưu đãi</i>
-                </span>
-                <template>
-    <a-modal
-      v-model:visible="open"
-      :title="titlee"
-      @ok="handleOk"
-    >
-      <p><strong>Khách hàng:</strong> {{ purchaseData.customerName }}</p>
-      <p><strong>Số điện thoại:</strong> {{ purchaseData.phoneNumber }}</p>
-      <p><strong>Địa chỉ:</strong> {{ purchaseData.address }}</p>
-      <p><strong>Tên sản phẩm:</strong> {{ purchaseData.productName }}</p>
-      <p><strong>Giá tiền (cho một sản phẩm):</strong> {{ formatCurrency(purchaseData.price) }}</p>
-      <p><strong>Giảm giá của sản phẩm:</strong> {{ purchaseData.discount}}%</p>
-      <p><strong>Giá sau giảm:</strong> {{ formatCurrency(purchaseData.price * (1 - purchaseData.discount/100)) }}</p>
-      <p><strong>Số lượng:</strong> {{ purchaseData.quantityBuy }}</p>
-      <p><strong>Phí vận chuyển:</strong> {{ formatCurrency(purchaseData.shippingFee) }}</p>
-      <p><strong>Tổng tiền:</strong> {{ formatCurrency(purchaseData.shippingFee+ purchaseData.price * (1 - purchaseData.discount/100) * purchaseData.quantityBuy) }}</p>
+              <span class="btn2 bcam btnorder" @click="updatePurchaseData"><b>MUA NGAY</b>
+                <i>Mua ngay để hưởng nhiều ưu đãi</i>
+              </span>
+              <template>
+                <a-modal v-model:visible="open" :title="titlee" @ok="handleOk">
+                  <p><strong>Khách hàng:</strong> {{ purchaseData.customerName }}</p>
+                  <p><strong>Số điện thoại:</strong> {{ purchaseData.phoneNumber }}</p>
+                  <p><strong>Địa chỉ:</strong> {{ purchaseData.address }}</p>
+                  <p><strong>Tên sản phẩm:</strong> {{ purchaseData.productName }}</p>
+                  <p><strong>Giá tiền (cho một sản phẩm):</strong> {{ formatCurrency(purchaseData.price) }}</p>
+                  <p><strong>Giảm giá của sản phẩm:</strong> {{ purchaseData.discount }}%</p>
+                  <p><strong>Giá sau giảm:</strong> {{ formatCurrency(purchaseData.price * (1 -
+                purchaseData.discount / 100)) }}</p>
+                  <p><strong>Số lượng:</strong> {{ purchaseData.quantityBuy }}</p>
+                  <p><strong>Phí vận chuyển:</strong> {{ formatCurrency(purchaseData.shippingFee) }}</p>
+                  <p><strong>Tổng tiền:</strong> {{ formatCurrency(purchaseData.shippingFee + purchaseData.price * (1 -
+                purchaseData.discount / 100) * purchaseData.quantityBuy) }}</p>
 
-      <p><strong>Hình thức thanh toán:</strong> {{ purchaseData.paymentMethod }}</p>
-    </a-modal>
-  </template>
+                  <p><strong>Hình thức thanh toán:</strong> {{ purchaseData.paymentMethod }}</p>
+                </a-modal>
+              </template>
               <!-- <BuyButton :data="purchaseData" /> -->
 
 
@@ -156,12 +130,7 @@
         <div class="wrap flexJus">
           <div class="f flex">
             <div class="fotb" style="width: 30%; padding-right: 30px">
-              <img
-                src="https://denled.com/Content/img/logo-foot.png"
-                alt="Denled.com"
-                width="286"
-                height="60"
-              />
+              <img src="https://denled.com/Content/img/logo-foot.png" alt="Denled.com" width="286" height="60" />
             </div>
             <div class="fotb" style="width: 50%; padding: 0 40px 0 60px">
               <label>SHOWROOM</label>
@@ -173,8 +142,7 @@
                       <span>Địa chỉ 1 : </span>21C Trần Duy Hưng, Cầu Giấy, HN
                     </li>
                     <li>
-                      <span>Hotline : </span
-                      ><a href="tel:0933665115">0933.66.5115</a>
+                      <span>Hotline : </span><a href="tel:0933665115">0933.66.5115</a>
                     </li>
                   </ul>
                 </div>
@@ -184,27 +152,19 @@
               <label>THÔNG TIN - HƯỚNG DẪN</label>
               <ul>
                 <li>
-                  <a title="Giới Thiệu Hệ Thống" rel="nofollow" href="/"
-                    >Giới Thiệu Hệ Thống</a
-                  >
+                  <a title="Giới Thiệu Hệ Thống" rel="nofollow" href="/">Giới Thiệu Hệ Thống</a>
                 </li>
 
                 <li>
-                  <a title="Giao hàng &amp; Thanh toán" rel="nofollow" href="/"
-                    >Giao hàng &amp; Thanh toán</a
-                  >
+                  <a title="Giao hàng &amp; Thanh toán" rel="nofollow" href="/">Giao hàng &amp; Thanh toán</a>
                 </li>
 
                 <li>
-                  <a title="Hướng dẫn mua hàng Online" rel="nofollow" href="/"
-                    >Hướng dẫn mua hàng Online</a
-                  >
+                  <a title="Hướng dẫn mua hàng Online" rel="nofollow" href="/">Hướng dẫn mua hàng Online</a>
                 </li>
 
                 <li>
-                  <a title="Quy chế hoạt động" rel="nofollow" href="/"
-                    >Quy chế hoạt động</a
-                  >
+                  <a title="Quy chế hoạt động" rel="nofollow" href="/">Quy chế hoạt động</a>
                 </li>
               </ul>
             </div>
@@ -218,40 +178,19 @@
 
       <ul id="panel">
         <li>
-          <img
-            src="https://denled.com/Content/img/totop.svg"
-            alt="To top"
-            width="45"
-            height="45"
-          />
+          <img src="https://denled.com/Content/img/totop.svg" alt="To top" width="45" height="45" />
         </li>
         <li style="padding-top: 10px; padding-bottom: 10px">
-          <img
-            alt="Messenger"
-            src="https://denled.com/Content/img/messenger.svg"
-            width="45"
-            height="45"
-          />
+          <img alt="Messenger" src="https://denled.com/Content/img/messenger.svg" width="45" height="45" />
         </li>
 
         <li>
-          <img
-            alt="Phone"
-            src="https://denled.com/Content/img/phone.svg"
-            width="45"
-            height="45"
-          />
+          <img alt="Phone" src="https://denled.com/Content/img/phone.svg" width="45" height="45" />
         </li>
       </ul>
-      <div
-        class="zalo-chat-widget"
-        data-oaid="2839194858446814357"
+      <div class="zalo-chat-widget" data-oaid="2839194858446814357"
         data-welcome-message="Rất vui khi được hỗ trợ bạn!. Nếu bạn không thể chờ thì hãy gọi hoặc nhắn tin đến số điện thoại này 0973.66.5115."
-        data-autopopup="1800"
-        data-width="500"
-        data-height="500"
-        style="right: 12px"
-      ></div>
+        data-autopopup="1800" data-width="500" data-height="500" style="right: 12px"></div>
     </div>
   </div>
 </template>
@@ -323,19 +262,19 @@ export default defineComponent({
     });
 
     const formatCurrency = (value) => {
-        return new Intl.NumberFormat('vi-VN', {
-          style: 'currency',
-          currency: 'VND'
-        }).format(value);
-      };
+      return new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+      }).format(value);
+    };
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
           `${apiPrefix}/api/v1/product/info/${productId}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
 
         );
         if (response.data.status === "OK") {
@@ -375,24 +314,24 @@ export default defineComponent({
       const quantityStoke = product.quantity;
 
       if (quantityBuy < 1) {
-          alert("Số lượng tối thiểu là 1");
-        } else if (quantityBuy > quantityStoke) {
-          alert(`Số lượng không được vượt quá ${quantityStoke}`);
-        } else{
-          purchaseData.productId = productId;
-      purchaseData.quantityBuy = numberItem.value;
-      purchaseData.quantityStoke = product.value.quantity;
-      purchaseData.customerName = `${userLocal.firstname} ${userLocal.lastname}`;
-      purchaseData.phoneNumber = userData.value.phoneNumber; // Set as needed
-      purchaseData.address = userData.value.address; // Set as needed
-      purchaseData.productName = product.value.productName;
-      purchaseData.price = product.value.price;
-      purchaseData.discount = product.value.discount;
-      purchaseData.open = true;
-      purchaseData.typee = "mua-truc-tiep";
-      open.value = true
-        }
-  
+        alert("Số lượng tối thiểu là 1");
+      } else if (quantityBuy > quantityStoke) {
+        alert(`Số lượng không được vượt quá ${quantityStoke}`);
+      } else {
+        purchaseData.productId = productId;
+        purchaseData.quantityBuy = numberItem.value;
+        purchaseData.quantityStoke = product.value.quantity;
+        purchaseData.customerName = `${userLocal.firstname} ${userLocal.lastname}`;
+        purchaseData.phoneNumber = userData.value.phoneNumber; // Set as needed
+        purchaseData.address = userData.value.address; // Set as needed
+        purchaseData.productName = product.value.productName;
+        purchaseData.price = product.value.price;
+        purchaseData.discount = product.value.discount;
+        purchaseData.open = true;
+        purchaseData.typee = "mua-truc-tiep";
+        open.value = true
+      }
+
 
 
     };
@@ -403,39 +342,39 @@ export default defineComponent({
 
 
     const handleOk = () => {
-        confirmLoading.value = true;
-        titlee.value = "Đang xử lí đơn hàng của bạn";
-        setTimeout(() => {
-          open.value = false;
-          confirmLoading.value = false;
-        }, 2000);
-  
-        handelByNow();
-      };
-  
-      const handelByNow = async () => {
-        const productId = purchaseData.productId;
-        const quantityBuy = purchaseData.quantityBuy;
-  
+      confirmLoading.value = true;
+      titlee.value = "Đang xử lí đơn hàng của bạn";
+      setTimeout(() => {
+        open.value = false;
+        confirmLoading.value = false;
+      }, 2000);
 
-        const formData = new FormData();
-        formData.append("productid", productId);
-        formData.append("quantity", quantityBuy);
-        axios
-          .post(`${apiPrefix}/api/v1/customer/order/insert`, formData, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((response) => {
-            message.success(
-              "Đặt hàng thành công, hãy xem trạng thái đơn hàng của bạn"
-            );
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      };
+      handelByNow();
+    };
+
+    const handelByNow = async () => {
+      const productId = purchaseData.productId;
+      const quantityBuy = purchaseData.quantityBuy;
+
+
+      const formData = new FormData();
+      formData.append("productid", productId);
+      formData.append("quantity", quantityBuy);
+      axios
+        .post(`${apiPrefix}/api/v1/customer/order/insert`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          message.success(
+            "Đặt hàng thành công, hãy xem trạng thái đơn hàng của bạn"
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
 
     const getUserData = async () => {
       try {
@@ -475,7 +414,7 @@ export default defineComponent({
     onMounted(() => {
       fetchProduct();
       getUserData();
-      
+
     });
     return {
       updatePurchaseData,
@@ -512,13 +451,11 @@ export default defineComponent({
 @font-face {
   font-family: "FontAwesome";
   src: url("/Content/awesome/fontawesome-webfont.eot?v=4.4.0");
-  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0")
-      format("embedded-opentype"),
+  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0") format("embedded-opentype"),
     url("/Content/awesome/fontawesome-webfont.woff2?v=4.4.0") format("woff2"),
     url("/Content/awesome/fontawesome-webfont.woff?v=4.4.0") format("woff"),
     url("/Content/awesome/fontawesome-webfont.ttf?v=4.4.0") format("truetype"),
-    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular")
-      format("svg");
+    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -1282,6 +1219,7 @@ a:focus {
 }
 
 @media screen and (max-width: 415px) {
+
   .tiplist h2,
   .tiplist h3,
   .tiplist h4 {
@@ -1624,8 +1562,7 @@ textarea {
 }
 
 /*beadcrum*/
-.beadcrum {
-}
+.beadcrum {}
 
 .beadcrum li {
   display: inline-block;
@@ -1728,8 +1665,7 @@ textarea {
   width: 40%;
 }
 
-.prol img {
-}
+.prol img {}
 
 .propertyhead label {
   font: bold 18px/60px arial;
@@ -1827,7 +1763,7 @@ textarea {
   border-radius: 5px;
 }
 
-.othpro li:hover > div {
+.othpro li:hover>div {
   display: block;
 }
 
@@ -1944,7 +1880,7 @@ textarea {
   margin: 2px;
 }
 
-.box-zoom:hover > .zoom {
+.box-zoom:hover>.zoom {
   display: block;
 }
 
@@ -2118,8 +2054,7 @@ textarea {
   margin-top: 10px;
 }
 
-.gift li {
-}
+.gift li {}
 
 .gift li:before {
   content: "\f111";
@@ -2313,7 +2248,7 @@ table tr td:nth-child(2n) {
   font-weight: bold;
 }
 
-table tbody > tr:nth-child(2n + 1) > td {
+table tbody>tr:nth-child(2n + 1)>td {
   background: #f9f9f9;
 }
 
@@ -2663,8 +2598,7 @@ table tbody > tr:nth-child(2n + 1) > td {
   padding-bottom: 5px;
 }
 
-.tieuban {
-}
+.tieuban {}
 
 .tieuban li {
   border: 1px solid #ddd;
@@ -3196,9 +3130,10 @@ table tbody > tr:nth-child(2n + 1) > td {
 }
 
 @media (-webkit-min-device-pixel-ratio: 1.1),
-  (-webkit-min-device-pixel-ratio: 1.09375),
-  (min-resolution: 105dpi),
-  (min-resolution: 1.1dppx) {
+(-webkit-min-device-pixel-ratio: 1.09375),
+(min-resolution: 105dpi),
+(min-resolution: 1.1dppx) {
+
   .pswp--svg .pswp__button,
   .pswp--svg .pswp__button--arrow--left:before,
   .pswp--svg .pswp__button--arrow--right:before {

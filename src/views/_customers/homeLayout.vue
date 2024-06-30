@@ -1,9 +1,9 @@
 <template>
   <div id="wrapper">
     <Header />
-    <div id="main">
+    <div id="">
       <!--san pham khuyen mai-->
-      <div class="f box-tit" id="headpro">
+      <div class="f box-tit">
         <div class="flexJus wrap" style="height: 40px">
           <label @click="addMyFarvors()" class="btn" style="font: 15px arial">Thêm vào yêu thích</label>
           
@@ -18,7 +18,7 @@
 
 
 
-          <div class="dhpro owl-carousel owl-theme" id="dealhot" style="opacity: 1; display: block">
+          <div class="dhpro owl-carousel" id="" style="opacity: 1; display: block">
             <div class="owl-wrapper-outer">
               <div class="owl-wrapper" style="
                   width: 3936px;
@@ -34,7 +34,7 @@
             query: { storePhone: phone }
           }">
                     <!-- /trang-chu/chi-tiet-san-pham -->
-                    <a class="item pi" :title="user.title" :href="user.href">
+                    <a class=" pi" :title="user.title" :href="user.href">
                       <div>
                         <img :src="user.avatarProduct" :alt="user.avatarProduct" />
                       </div>
@@ -49,7 +49,7 @@
                         <u>{{ user.price?.toLocaleString() }}₫</u>
                       </strong>
 
-                      <span class="s s5">{{ user.view }}(Lượt xem)</span>
+                      <span class="s">{{ user.view }}(Lượt xem)</span>
                     </a>
                   </router-link>
                 </div>
@@ -120,7 +120,7 @@
           }}₫
                     <u>{{ product.price?.toLocaleString() }}₫</u>
                   </strong>
-                  <span class="s s5">{{ product.view }}(Lượt xem)</span>
+                  <span class="s">{{ product.view }}(Lượt xem)</span>
                 </a>
               </router-link>
             </li>
@@ -135,9 +135,10 @@
         </div>
       </div>
 
+
       <!--bai viet-->
       <!--dichvu-->
-      <div class="f dichvu">
+      <!-- <div class="f dichvu">
         <ul class="wrap">
           <li>
             <i><img src="https://denled.com/Content/img/Home/hoi.png" title="Hỏi chúng tôi" /></i>
@@ -174,11 +175,12 @@
             </p>
           </li>
         </ul>
-      </div>
+      </div> -->
 
       <!--thuong hieu-->
     </div>
-    <div id="footer">
+    
+    <!-- <div id="footer">
       <div class="f" style="padding: 40px 0">
         <div class="wrap flexJus">
           <div class="f flex">
@@ -243,8 +245,10 @@
       <div class="zalo-chat-widget" data-oaid="2839194858446814357"
         data-welcome-message="Rất vui khi được hỗ trợ bạn!. Nếu bạn không thể chờ thì hãy gọi hoặc nhắn tin đến số điện thoại này 0973.66.5115."
         data-autopopup="1800" data-width="500" data-height="500" style="right: 12px"></div>
-    </div>
+    </div> -->
   </div>
+  <footter/>
+
 </template>
 
 <script>
@@ -259,11 +263,13 @@ import ApiUser from "../../api/ApiUser.js";
 import { useAuthStore } from "../../stores/auth.store.js";
 import axios from "axios";
 import Header from "../../components/HeaderCustomer.vue";
+import footter from "../../layouts/footter.vue";
 
 
 export default defineComponent({
   components: {
     Header,
+    footter
   },
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
@@ -284,7 +290,7 @@ export default defineComponent({
     const phone = ref("")
     const pageParam = reactive({
       currentPage: 1,
-      pageSize: 10,
+      pageSize: 5,
       totalItems: 0,
       totalPages: 0,
     });
@@ -292,7 +298,7 @@ export default defineComponent({
     const searchKeyword2 = ref("");
     const pageParam2 = reactive({
       currentPage: 1,
-      pageSize: 10,
+      pageSize: 8,
       totalItems: 0,
       totalPages: 0,
     });
@@ -326,7 +332,7 @@ export default defineComponent({
         .then((response) => {
           const data = response.data;
           users2.value = response.data.data;
-
+          users.value = response.data.data.sort((a, b) => b.view - a.view);
 
           pageParam2.totalItems = data.pagination.totalItems;
           pageParam2.totalPages = data.pagination.totalPages;
@@ -379,15 +385,6 @@ export default defineComponent({
       console.log(value);
     };
 
-    const onSearch = () => {
-      pageParam.currentPage = 1;
-      getUsers(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
-    };
-    const onChange = (page, pageSize) => {
-      pageParam.currentPage = page;
-      pageParam.pageSize = pageSize;
-      getUsers(page, pageSize, searchKeyword.value);
-    };
     const onSearch2 = () => {
       pageParam2.currentPage = 1;
       getUsers2(pageParam2.currentPage, pageParam2.pageSize, searchKeyword2.value);
@@ -398,7 +395,6 @@ export default defineComponent({
       getUsers2(page, pageSize, searchKeyword2.value);
     };
     onMounted(() => {
-      getUsers(pageParam.currentPage, pageParam.pageSize);
       getUsers2(pageParam2.currentPage, pageParam2.pageSize);
 
       getTypeStore();
@@ -418,11 +414,8 @@ export default defineComponent({
       userLocal,
       typeStore,
       addMyFarvors,
-      onSearch,
       pageParam,
-      filteredProducts,
       searchKeyword,
-      onChange,
       onSearch2,
       pageParam2,
 
@@ -435,6 +428,466 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+.box-shadow,
+.btn,
+.iv,
+.saleof,
+.psitem label,
+.fone,
+#header,
+.btn2 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.btn {
+  font: bold 11px/30px arial;
+  padding: 0 7px;
+  background-color: #fbac51;
+  color: #fff;
+  display: inline-block;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.btn:hover {
+  color: #fff;
+}
+
+.flexCol {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+.wrap {
+  width: 98%;
+  margin: 0 auto;
+  max-width: 1300px;
+}
+
+
+.dhpro {
+  background: #fff;
+  border: 5px solid #bf2121;
+  border-radius: 0 0 4px 4px;
+}
+
+
+
+.f,
+.iv div {
+  width: 100%;
+  float: left;
+}
+.dhtit {
+  padding: 13px 0 8px;
+  background: #bf2121;
+  margin: 5px 0 0;
+  text-align: center;
+  border-radius: 4px 4px 0 0;
+}
+
+.dhtit h2 {
+  font: bold 17px arial;
+  color: #555;
+  display: block;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.dealhot {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.dealhot a {
+  padding: 10px;
+  color: #333;
+  width: auto !important;
+}
+
+.dealhot a div {
+  height: 240px;
+}
+
+.dealhot a h3 {
+  font-size: 15px;
+}
+
+.dealhot figure img {
+  width: auto !important;
+  clear: both;
+  margin: 0 auto;
+}
+
+.dealhot .bq u {
+  font: 13px/14px arial;
+}
+
+.bgtit,
+.box-tit {
+  background: #eee;
+  color: #333;
+  text-indent: 10px;
+}
+
+.box-tit {
+  height: 40px;
+  padding: 0 10px;
+}
+.flexJus,
+.waranty {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.box-tit .tit {
+  font: bold 14px/25px arial;
+  display: block;
+}
+
+.box-tit .tit:after {
+  font: 15px/25px "FontAwesome";
+  content: "\f0da";
+  margin-left: 5px;
+}
+
+
+.owl-carousel .owl-wrapper:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+#category .img-responsive {
+  width: 100%;
+}
+
+.owl-carousel {
+  display: none;
+  position: relative;
+  width: 100%;
+  -ms-touch-action: pan-y;
+}
+
+.owl-carousel .owl-wrapper {
+  display: none;
+  position: relative;
+  -webkit-transform: translate3d(0px, 0px, 0px);
+}
+
+.owl-carousel .owl-wrapper-outer {
+  overflow: hidden !important;
+  position: relative;
+  width: 100%;
+}
+
+.owl-carousel .owl-wrapper-outer.autoHeight {
+  -webkit-transition: height 500ms ease-in-out;
+  -moz-transition: height 500ms ease-in-out;
+  -ms-transition: height 500ms ease-in-out;
+  -o-transition: height 500ms ease-in-out;
+  transition: height 500ms ease-in-out;
+}
+
+.owl-carousel .owl-item {
+  float: left;
+}
+
+.owl-carousel .owl-wrapper,
+.owl-carousel .owl-item {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+}
+
+.owl-carousel .owl-controls {
+  margin: 0 !important;
+  position: absolute;
+  width: 100%;
+  top: 48%;
+  left: 0;
+  height: 50%;
+}
+
+.owl-carousel .owl-controls .owl-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.owl-carousel .owl-controls .owl-buttons div {
+  font-size: 26px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  margin: 0 10px !important;
+  opacity: 0;
+}
+
+.owl-carousel:hover .owl-controls .owl-buttons div {
+  opacity: 1;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: #fff;
+  font-family: -webkit-body;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.owl-carousel .owl-controls .owl-buttons div i:before {
+  font: 36px/20px FontAwesome;
+  color: #444;
+}
+
+.owl-carousel .owl-controls .owl-buttons .owl-prev i:before {
+  content: "\f104";
+}
+
+.owl-carousel .owl-controls .owl-buttons .owl-next i:before {
+  content: "\f105";
+}
+.owl-carousel .owl-wrapper,
+.owl-carousel .owl-item img {
+  width: 100%;
+  display: block;
+  float: left;
+}
+
+
+.owl-theme .owl-controls {
+  margin-top: 40px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.owl-theme .owl-controls .owl-buttons div {
+  color: #fff;
+  display: inline-block;
+  margin: 5px;
+  padding: 3px 10px;
+  font-size: 12px;
+  border-radius: 30px;
+  background: #869791;
+  opacity: 0.5;
+}
+
+.owl-theme .owl-controls.clickable .owl-buttons div:hover {
+  filter: Alpha(Opacity=100);
+  opacity: 1;
+  text-decoration: none;
+}
+
+.owl-theme .owl-controls .owl-page {
+  display: inline-block;
+}
+
+.owl-theme .owl-controls .owl-page span {
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin: 5px 7px;
+  opacity: 0.5;
+  border-radius: 20px;
+  background: #869791;
+}
+
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span {
+  opacity: 1;
+}
+
+.owl-theme .owl-controls .owl-page span.owl-numbers {
+  height: auto;
+  width: auto;
+  color: #fff;
+  padding: 2px 10px;
+  font-size: 12px;
+  border-radius: 30px;
+}
+
+.owl-item.loading {
+  min-height: 150px;
+  background: url(AjaxLoader.gif) no-repeat center center;
+}
+
+.nav li .c1:hover,
+.active {
+  color: #ea9b40 !important;
+}
+
+.pi {
+  width: 19%;
+  height: 350px;
+  float: left;
+  padding: 10px;
+  position: relative;
+  margin: 0.5%;
+  background: #fff;
+  color: #333;
+  border-radius: 5%;
+  border: 1px solid #333;
+}
+
+.pi a {
+  color: #333;
+}
+
+.pi div {
+  height: 222px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.pi div img {
+  max-height: 90%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+.pi label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  color: #333;
+  border-radius: 0 0 0 8px;
+  background: #eee;
+  width: 70px;
+  height: 25px;
+  font: 12px/25px arial;
+}
+
+.pi label:before {
+  font: 12px/24px "FontAwesome";
+  content: "\f055";
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+.pi figure {
+  height: 40px;
+  float: left;
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.pi figure img {
+  height: 40px;
+}
+
+.pi strong {
+  display: block;
+  color: red;
+  font: bold 16px/18px arial;
+  margin-top: 5px;
+  float: left;
+}
+
+.pi strong i {
+  color: #666;
+  font: 13px/18px arial;
+  padding-left: 10px;
+}
+
+.pi strong u {
+  color: #666;
+  font: 13px/18px arial;
+  text-decoration: line-through;
+  display: block;
+}
+
+.pi h3 {
+  font: 17px/18px arial;
+  float: left;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.pi p {
+  color: #fff;
+  font: 12px/20px arial;
+  padding: 0 5px;
+  background: #06f;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 5px;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.pi ul {
+  max-height: 70px;
+  font: 12px/16px arial;
+  color: #888;
+  float: left;
+  overflow: hidden;
+  width: 100%;
+  margin: 8px 0 10px;
+}
+
+.pi ul li {
+  display: inline-block;
+  padding-right: 3px;
+}
+
+.pi ul li:before {
+  font: 12px/16px "FontAwesome";
+  content: "\f046";
+  vertical-align: top;
+  color: #06f;
+  padding-right: 2px;
+}
+
+.pi ol {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  float: left;
+  width: 100%;
+}
+
+.pi ol li:nth-child(1) {
+  border-right: 1px solid #ddd;
+  padding-right: 5px;
+  margin-right: 5px;
+}
+
+.pi ol li b {
+  font: bold 12px/26px arial;
+  display: block;
+  background: #0c5a87;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 0 5px;
+}
+
+.pi ol li i {
+  font: bold 16px/26px arial;
+  color: red;
+  display: block;
+}
+.s {
+  height: 20px;
+  padding-left: 110px;
+  display: block;
+  float: left;
+  width: 100%;
+  font-weight: normal;
+}
+
 #panel {
   position: fixed;
   z-index: 999;
@@ -794,17 +1247,7 @@ a:focus {
 }
 
 /*box-shadow*/
-.box-shadow,
-.btn,
-.iv,
-.saleof,
-.psitem label,
-.fone,
-#header,
-.btn2 {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
+
 
 /*background*/
 .bgwhite {
@@ -986,11 +1429,7 @@ a:focus {
 }
 
 /*layout*/
-.f,
-.iv div {
-  width: 100%;
-  float: left;
-}
+
 
 .w10 {
   width: 10%;
@@ -1104,12 +1543,7 @@ a:focus {
   display: block;
 }
 
-.flexJus,
-.waranty {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 
 .flexCen,
 .waranty {
@@ -1131,22 +1565,14 @@ a:focus {
   align-items: center;
 }
 
-.flexCol {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-}
+
 
 .flexC {
   display: flex;
   flex-direction: column;
 }
 
-.flex {
-  display: flex;
-  justify-content: space-between;
-}
+
 
 /*position*/
 .rl {
@@ -1158,12 +1584,6 @@ a:focus {
 }
 
 /*box*/
-.bgtit,
-.box-tit {
-  background: #eee;
-  color: #333;
-  text-indent: 10px;
-}
 
 .bgtit a {
   color: #0f839c;
@@ -1373,22 +1793,7 @@ a:focus {
   content: "\f10c";
 }
 
-/*box-tit*/
-.box-tit {
-  height: 40px;
-  padding: 0 10px;
-}
 
-.box-tit .tit {
-  font: bold 14px/25px arial;
-  display: block;
-}
-
-.box-tit .tit:after {
-  font: 15px/25px "FontAwesome";
-  content: "\f0da";
-  margin-left: 5px;
-}
 
 .td {
   display: block;
@@ -1406,19 +1811,8 @@ a:focus {
 }
 
 /*button*/
-.btn {
-  font: bold 11px/30px arial;
-  padding: 0 7px;
-  background-color: #fbac51;
-  color: #fff;
-  display: inline-block;
-  text-transform: uppercase;
-  cursor: pointer;
-}
 
-.btn:hover {
-  color: #fff;
-}
+
 
 .bcam {
   background-color: #f59023;
@@ -1666,11 +2060,7 @@ textarea {
   width: 100%;
 }
 
-.wrap {
-  width: 98%;
-  margin: 0 auto;
-  max-width: 1300px;
-}
+
 
 #footer {
   width: 100%;
@@ -1785,10 +2175,6 @@ textarea {
   border-right: none;
 }
 
-.nav li .c1:hover,
-.active {
-  color: #ea9b40 !important;
-}
 
 .vcart2:before {
   font: 21px/1 FontAwesome;
@@ -2363,49 +2749,6 @@ body {
   margin-top: 30px;
 }
 
-.owl-carousel .owl-wrapper:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
-}
-
-#category .img-responsive {
-  width: 100%;
-}
-
-.owl-carousel {
-  display: none;
-  position: relative;
-  width: 100%;
-  -ms-touch-action: pan-y;
-}
-
-.owl-carousel .owl-wrapper {
-  display: none;
-  position: relative;
-  -webkit-transform: translate3d(0px, 0px, 0px);
-}
-
-.owl-carousel .owl-wrapper-outer {
-  overflow: hidden !important;
-  position: relative;
-  width: 100%;
-}
-
-.owl-carousel .owl-wrapper-outer.autoHeight {
-  -webkit-transition: height 500ms ease-in-out;
-  -moz-transition: height 500ms ease-in-out;
-  -ms-transition: height 500ms ease-in-out;
-  -o-transition: height 500ms ease-in-out;
-  transition: height 500ms ease-in-out;
-}
-
-.owl-carousel .owl-item {
-  float: left;
-}
 
 .owl-controls .owl-page,
 .owl-controls .owl-buttons div {
@@ -2416,36 +2759,6 @@ body {
   cursor: url(grabbing.png) 8 8, move;
 }
 
-.owl-carousel .owl-wrapper,
-.owl-carousel .owl-item {
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -ms-transform: translate3d(0, 0, 0);
-}
-
-.owl-carousel .owl-controls {
-  margin: 0 !important;
-  position: absolute;
-  width: 100%;
-  top: 48%;
-  left: 0;
-  height: 50%;
-}
-
-.owl-carousel .owl-controls .owl-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.owl-carousel .owl-controls .owl-buttons div {
-  font-size: 26px;
-  padding: 8px 10px;
-  display: flex;
-  align-items: center;
-  margin: 0 10px !important;
-  opacity: 0;
-}
 
 .owl-pagination {
   position: absolute;
@@ -2453,47 +2766,8 @@ body {
   width: 100%;
 }
 
-.owl-carousel:hover .owl-controls .owl-buttons div {
-  opacity: 1;
-  border-radius: 5px;
-  background: rgba(0, 0, 0, 0.3);
-  text-align: center;
-  color: #fff;
-  font-family: -webkit-body;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
 
-.owl-carousel .owl-controls .owl-buttons div i:before {
-  font: 36px/20px FontAwesome;
-  color: #444;
-}
 
-.owl-carousel .owl-controls .owl-buttons .owl-prev i:before {
-  content: "\f104";
-}
-
-.owl-carousel .owl-controls .owl-buttons .owl-next i:before {
-  content: "\f105";
-}
-
-#home .owl-wrapper-outer {
-  padding-bottom: 0 !important;
-}
-
-#category .owl-wrapper-outer {
-  padding-bottom: 25px !important;
-}
-
-#category2 .owl-wrapper-outer {
-  padding-bottom: 0 !important;
-}
-
-#sync2 .owl-wrapper-outer {
-  overflow: inherit;
-}
 
 #sync2 {
   border-top: none;
@@ -2514,32 +2788,9 @@ body {
   color: #656565;
 }
 
-#sync2 .owl-item.synced .item:before {
-  content: "";
-  position: absolute;
-  top: -8px;
-  left: calc((100% - 10px) / 2);
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 5px 8px;
-  border-color: transparent transparent #d6321c;
-  z-index: 9;
-}
 
-#sync2 .owl-item.synced .item {
-  background-color: #ff6000;
-  color: #fff;
-}
 
-#sync2 .owl-item.synced .item h3 {
-  font-size: 13px;
-  font-weight: 700;
-}
 
-#sync2.c2 .owl-item:first-child .item {
-  border-left: 1px solid #d4d4d4;
-}
 
 #sync2 .item h3,
 #sync2 .item span {
@@ -2562,12 +2813,6 @@ body {
   max-width: 100%;
 }
 
-.owl-carousel .owl-wrapper,
-.owl-carousel .owl-item img {
-  width: 100%;
-  display: block;
-  float: left;
-}
 
 #mslidedetail .owl-item {
   display: table-cell;
@@ -2580,278 +2825,14 @@ body {
   height: 10% !important;
 }
 
-@media screen and (max-width: 769px) {
-  .owl-wrapper-outer {
-    padding-bottom: 40px;
-  }
 
-  .owl-pagination {
-    text-align: center;
-    width: 100%;
-  }
-
-  #mslidedetail .owl-pagination {
-    bottom: 0;
-  }
-
-  .owl-page {
-    display: inline-block;
-  }
-
-  .owl-page span {
-    display: block;
-    width: 22px;
-    height: 14px;
-    border: 0;
-    margin: 0 3px 0 0;
-    float: left;
-    text-align: center;
-    background: none !important;
-  }
-
-  .owl-page span:before {
-    content: "\f111";
-    font: 6px/1px FontAwesome;
-    color: #ccc;
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-  }
-
-  .active span:before {
-    color: #666;
-  }
-}
-
-.owl-theme .owl-controls {
-  margin-top: 40px;
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.owl-theme .owl-controls .owl-buttons div {
-  color: #fff;
-  display: inline-block;
-  margin: 5px;
-  padding: 3px 10px;
-  font-size: 12px;
-  border-radius: 30px;
-  background: #869791;
-  opacity: 0.5;
-}
-
-.owl-theme .owl-controls.clickable .owl-buttons div:hover {
-  filter: Alpha(Opacity=100);
-  opacity: 1;
-  text-decoration: none;
-}
-
-.owl-theme .owl-controls .owl-page {
-  display: inline-block;
-}
-
-.owl-theme .owl-controls .owl-page span {
-  display: block;
-  width: 12px;
-  height: 12px;
-  margin: 5px 7px;
-  opacity: 0.5;
-  border-radius: 20px;
-  background: #869791;
-}
-
-.owl-theme .owl-controls .owl-page.active span,
-.owl-theme .owl-controls.clickable .owl-page:hover span {
-  opacity: 1;
-}
-
-.owl-theme .owl-controls .owl-page span.owl-numbers {
-  height: auto;
-  width: auto;
-  color: #fff;
-  padding: 2px 10px;
-  font-size: 12px;
-  border-radius: 30px;
-}
-
-.owl-item.loading {
-  min-height: 150px;
-  background: url(AjaxLoader.gif) no-repeat center center;
-}
 
 .Product {
   width: 100%;
   float: left;
 }
 
-.pi {
-  width: 19%;
-  height: 350px;
-  float: left;
-  padding: 10px;
-  position: relative;
-  margin: 0.5%;
-  background: #fff;
-  color: #333;
-  border-radius: 5%;
-  border: 1px solid #333;
-}
 
-.pi a {
-  color: #333;
-}
-
-.pi div {
-  height: 222px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.pi div img {
-  max-height: 90%;
-  max-width: 100%;
-  width: auto;
-  height: auto;
-}
-
-.pi label {
-  position: absolute;
-  top: 0;
-  right: 0;
-  text-align: center;
-  display: block;
-  cursor: pointer;
-  color: #333;
-  border-radius: 0 0 0 8px;
-  background: #eee;
-  width: 70px;
-  height: 25px;
-  font: 12px/25px arial;
-}
-
-.pi label:before {
-  font: 12px/24px "FontAwesome";
-  content: "\f055";
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-.pi figure {
-  height: 40px;
-  float: left;
-  width: 100%;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-.pi figure img {
-  height: 40px;
-}
-
-.pi strong {
-  display: block;
-  color: red;
-  font: bold 16px/18px arial;
-  margin-top: 5px;
-  float: left;
-}
-
-.pi strong i {
-  color: #666;
-  font: 13px/18px arial;
-  padding-left: 10px;
-}
-
-.pi strong u {
-  color: #666;
-  font: 13px/18px arial;
-  text-decoration: line-through;
-  display: block;
-}
-
-.pi h3 {
-  font: 17px/18px arial;
-  float: left;
-  width: 100%;
-  margin: 5px 0;
-}
-
-.pi p {
-  color: #fff;
-  font: 12px/20px arial;
-  padding: 0 5px;
-  background: #06f;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-right: 5px;
-  display: inline-block;
-  margin-bottom: 5px;
-}
-
-.pi ul {
-  max-height: 70px;
-  font: 12px/16px arial;
-  color: #888;
-  float: left;
-  overflow: hidden;
-  width: 100%;
-  margin: 8px 0 10px;
-}
-
-.pi ul li {
-  display: inline-block;
-  padding-right: 3px;
-}
-
-.pi ul li:before {
-  font: 12px/16px "FontAwesome";
-  content: "\f046";
-  vertical-align: top;
-  color: #06f;
-  padding-right: 2px;
-}
-
-.pi ol {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-  float: left;
-  width: 100%;
-}
-
-.pi ol li:nth-child(1) {
-  border-right: 1px solid #ddd;
-  padding-right: 5px;
-  margin-right: 5px;
-}
-
-.pi ol li b {
-  font: bold 12px/26px arial;
-  display: block;
-  background: #0c5a87;
-  color: #fff;
-  text-align: center;
-  border-radius: 4px;
-  padding: 0 5px;
-}
-
-.pi ol li i {
-  font: bold 16px/26px arial;
-  color: red;
-  display: block;
-}
-
-.s {
-  background-image: url(/Content/img/sao.png);
-  background-repeat: no-repeat;
-  height: 20px;
-  padding-left: 110px;
-  display: block;
-  float: left;
-  width: 100%;
-  font-weight: normal;
-}
 
 .s1 {
   background-position: 0 0;
@@ -2922,56 +2903,8 @@ body {
 }
 
 /*deal hot*/
-.dealhot {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
 
-.dhtit {
-  padding: 13px 0 8px;
-  background: #bf2121;
-  margin: 5px 0 0;
-  text-align: center;
-  border-radius: 4px 4px 0 0;
-}
 
-.dhtit h2 {
-  font: bold 17px arial;
-  color: #555;
-  display: block;
-  color: #fff;
-  text-transform: uppercase;
-}
-
-.dhpro {
-  background: #fff;
-  border: 5px solid #bf2121;
-  border-radius: 0 0 4px 4px;
-}
-
-.dealhot a {
-  padding: 10px;
-  color: #333;
-  width: auto !important;
-}
-
-.dealhot a div {
-  height: 240px;
-}
-
-.dealhot a h3 {
-  font-size: 15px;
-}
-
-.dealhot figure img {
-  width: auto !important;
-  clear: both;
-  margin: 0 auto;
-}
-
-.dealhot .bq u {
-  font: 13px/14px arial;
-}
 
 .boxtit ul {
   display: flex;

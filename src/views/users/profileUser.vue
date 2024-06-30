@@ -28,53 +28,17 @@
     <div v-else class="loading">Loading...</div>
 
     <a-modal v-model:visible="isModalVisible2" title="Đổi mật khẩu" @ok="handleChangePass" @cancel="handleCancel">
-    <a-form :form="form2" layout="vertical">
-      <a-form-item
-        label="Mật khẩu cũ"
-        :validateStatus="getOldPassStatus"
-        :help="oldPassHelpMessage"
-      >
-        <a-input
-          :type="isOldPassVisible ? 'text' : 'password'"
-          v-model:value="formDataChangePass.oldPass"
-          @input="handleInputChange2('oldPass', $event)"
-        />
-        <a-icon
-          :type="isOldPassVisible ? 'eye-invisible' : 'eye'"
-          @click="togglePasswordVisibility('oldPass')"
-        />
-      </a-form-item>
-      <a-form-item
-        label="Mật khẩu mới"
-        :validateStatus="getNewPassStatus"
-        :help="newPassHelpMessage"
-      >
-        <a-input
-          :type="isNewPassVisible ? 'text' : 'password'"
-          v-model:value="formDataChangePass.newPass"
-          @input="handleInputChange2('newPass', $event)"
-        />
-        <a-icon
-          :type="isNewPassVisible ? 'eye-invisible' : 'eye'"
-          @click="togglePasswordVisibility('newPass')"
-        />
-      </a-form-item>
-      <a-form-item
-        label="Xác nhận mật khẩu mới"
-        :validateStatus="getConfirmNewPassStatus"
-        :help="confirmNewPassHelpMessage"
-      >
-        <a-input
-          :type="isConfirmNewPassVisible ? 'text' : 'password'"
-          v-model:value="formDataChangePass.confirmNewPass"
-          @input="handleInputChange2('confirmNewPass', $event)"
-        />
-        <a-icon
-          :type="isConfirmNewPassVisible ? 'eye-invisible' : 'eye'"
-          @click="togglePasswordVisibility('confirmNewPass')"
-        />
-      </a-form-item>
-    </a-form>
+      <a-form :form="form2" layout="vertical">
+    <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 26 }">
+      <a-input-password v-model:value="formDataChangePass.oldPass" label="Mật khẩu cũ" placeholder="Mật khẩu cũ" />
+    </a-form-item>
+    <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 26 }">
+      <a-input-password v-model:value="formDataChangePass.newPass" label="Mật khẩu mới" placeholder="Mật khẩu mới" />
+    </a-form-item>
+    <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 26 }">
+      <a-input-password v-model:value="formDataChangePass.confirmNewPass" label="Nhập lại mật khẩu mới" placeholder="Nhập lại mật khẩu mới" />
+    </a-form-item>
+  </a-form>
   </a-modal>
 
 
@@ -162,85 +126,85 @@ export default {
       formData.value[fieldName] = event.target.value;
     };
 
-    const handleInputChange2 =(fieldName, event) => {
-      formDataChangePass.value[fieldName] = event.target.value;
-    };
+    // const handleInputChange2 =(fieldName, event) => {
+    //   formDataChangePass.value[fieldName] = event.target.value;
+    // };
 
 
-    const togglePasswordVisibility = (field) => {
-      if (field === 'oldPass') {
-        isOldPassVisible.value = !isOldPassVisible.value;
-      } else if (field === 'newPass') {
-        isNewPassVisible.value = !isNewPassVisible.value;
-      } else if (field === 'confirmNewPass') {
-        isConfirmNewPassVisible.value = !isConfirmNewPassVisible.value;
-      }
-    };
+    // const togglePasswordVisibility = (field) => {
+    //   if (field === 'oldPass') {
+    //     isOldPassVisible.value = !isOldPassVisible.value;
+    //   } else if (field === 'newPass') {
+    //     isNewPassVisible.value = !isNewPassVisible.value;
+    //   } else if (field === 'confirmNewPass') {
+    //     isConfirmNewPassVisible.value = !isConfirmNewPassVisible.value;
+    //   }
+    // };
 
 
-    const validateForm = () => {
-      if (formDataChangePass.value.newPass.length < 8) {
-        message.error('Mật khẩu mới phải có tối thiểu 8 ký tự');
-        return false;
-      }
-      if (formDataChangePass.value.newPass === formDataChangePass.value.oldPass) {
-        message.error('Mật khẩu mới phải khác mật khẩu cũ');
-        return false;
-      }
-      if (formDataChangePass.value.newPass !== formDataChangePass.value.confirmNewPass) {
-        message.error('Xác nhận mật khẩu mới không khớp');
-        return false;
-      }
-      return true;
-    };
+    // const validateForm = () => {
+    //   if (formDataChangePass.value.newPass.length < 8) {
+    //     message.error('Mật khẩu mới phải có tối thiểu 8 ký tự');
+    //     return false;
+    //   }
+    //   if (formDataChangePass.value.newPass === formDataChangePass.value.oldPass) {
+    //     message.error('Mật khẩu mới phải khác mật khẩu cũ');
+    //     return false;
+    //   }
+    //   if (formDataChangePass.value.newPass !== formDataChangePass.value.confirmNewPass) {
+    //     message.error('Xác nhận mật khẩu mới không khớp');
+    //     return false;
+    //   }
+    //   return true;
+    // };
 
-    const getOldPassStatus = computed(() => {
-      return formDataChangePass.value.oldPass.length >= 8 ? 'success' : 'error';
-    });
+    // const getOldPassStatus = computed(() => {
+    //   return formDataChangePass.value.oldPass.length >= 8 ? 'success' : 'error';
+    // });
 
-    const oldPassHelpMessage = computed(() => {
-      return formDataChangePass.value.oldPass.length >= 8 ? '' : 'Mật khẩu phải có tối thiểu 8 ký tự';
-    });
+    // const oldPassHelpMessage = computed(() => {
+    //   return formDataChangePass.value.oldPass.length >= 8 ? '' : 'Mật khẩu phải có tối thiểu 8 ký tự';
+    // });
 
-    const getNewPassStatus = computed(() => {
-      if (formDataChangePass.value.newPass.length < 8) {
-        return 'error';
-      }
-      if (formDataChangePass.value.newPass === formDataChangePass.value.oldPass) {
-        return 'error';
-      }
-      return 'success';
-    });
+    // const getNewPassStatus = computed(() => {
+    //   if (formDataChangePass.value.newPass.length < 8) {
+    //     return 'error';
+    //   }
+    //   if (formDataChangePass.value.newPass === formDataChangePass.value.oldPass) {
+    //     return 'error';
+    //   }
+    //   return 'success';
+    // });
 
-    const newPassHelpMessage = computed(() => {
-      if (formDataChangePass.value.newPass.length < 8) {
-        return 'Mật khẩu phải có tối thiểu 8 ký tự';
-      }
-      if (formDataChangePass.value.newPass === formDataChangePass.value.oldPass) {
-        return 'Mật khẩu mới phải khác mật khẩu cũ';
-      }
-      return '';
-    });
+    // const newPassHelpMessage = computed(() => {
+    //   if (formDataChangePass.value.newPass.length < 8) {
+    //     return 'Mật khẩu phải có tối thiểu 8 ký tự';
+    //   }
+    //   if (formDataChangePass.value.newPass === formDataChangePass.value.oldPass) {
+    //     return 'Mật khẩu mới phải khác mật khẩu cũ';
+    //   }
+    //   return '';
+    // });
 
-    const getConfirmNewPassStatus = computed(() => {
-      if (formDataChangePass.value.confirmNewPass.length < 8) {
-        return 'error';
-      }
-      if (formDataChangePass.value.newPass !== formDataChangePass.value.confirmNewPass) {
-        return 'error';
-      }
-      return 'success';
-    });
+    // const getConfirmNewPassStatus = computed(() => {
+    //   if (formDataChangePass.value.confirmNewPass.length < 8) {
+    //     return 'error';
+    //   }
+    //   if (formDataChangePass.value.newPass !== formDataChangePass.value.confirmNewPass) {
+    //     return 'error';
+    //   }
+    //   return 'success';
+    // });
 
-    const confirmNewPassHelpMessage = computed(() => {
-      if (formDataChangePass.value.confirmNewPass.length < 8) {
-        return 'Mật khẩu phải có tối thiểu 8 ký tự';
-      }
-      if (formDataChangePass.value.newPass !== formDataChangePass.value.confirmNewPass) {
-        return 'Xác nhận mật khẩu mới không khớp';
-      }
-      return '';
-    });
+    // const confirmNewPassHelpMessage = computed(() => {
+    //   if (formDataChangePass.value.confirmNewPass.length < 8) {
+    //     return 'Mật khẩu phải có tối thiểu 8 ký tự';
+    //   }
+    //   if (formDataChangePass.value.newPass !== formDataChangePass.value.confirmNewPass) {
+    //     return 'Xác nhận mật khẩu mới không khớp';
+    //   }
+    //   return '';
+    // });
 
     const fetchProvinces = async () => {
       try {
@@ -339,6 +303,24 @@ export default {
       isModalVisible2.value = true;
     };
     const handleChangePass =  async () => {
+      const oldPass = formDataChangePass.value.oldPass;
+      const newPass = formDataChangePass.value.newPass;
+      const confirmNewPass = formDataChangePass.value.confirmNewPass;
+      console.log(oldPass);
+      if (newPass === oldPass) {
+        message.error('Mật khẩu mới phải khác mật khẩu cũ');
+        return;
+      }
+      if (newPass !== confirmNewPass) {
+        message.error('Mật khẩu nhập lại không khớp với mật khẩu mới');
+        return;
+      }
+      // Kiểm tra mật khẩu mới có ít nhất 6 ký tự và có ít nhất một chữ số
+      if (newPass.length < 6 || !/[a-zA-Z]/.test(newPass) || !/\d/.test(newPass)) {
+        message.error('Mật khẩu mới phải có ít nhất 6 ký tự và chứa ít nhất một chữ số và một chữ cái');
+        return;
+      }
+
       try {
         
         const token = JSON.parse(localStorage.getItem('token'));
@@ -425,14 +407,6 @@ export default {
       handleChangePass,
       handleCancel,
       handleInputChange,
-      handleInputChange2,
-      togglePasswordVisibility,
-      getOldPassStatus,
-      oldPassHelpMessage,
-      getNewPassStatus,
-      newPassHelpMessage,
-      getConfirmNewPassStatus,
-      confirmNewPassHelpMessage,
       provinces,
       districts,
       wards,

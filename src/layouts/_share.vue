@@ -3,17 +3,17 @@
   <div class="">
     <div class="row">
       <div class="col-sm-2 d-none d-sm-flex">
-        <div style="height: 100vh" class="MuiBox-root jss156 jss93 menuExpand" id="menuRoot">
+        <div style="height: 100vh" class=" jss93">
           <nav style="height: 100vh">
-            <div class="MuiBox-root jss157 menuTopHeader">
-              <div class="MuiBox-root jss158 menuTopLogo">
+            <div class="">
+              <div class="">
                 <span @click="navigateTo('admin-dashboards')" style="color: white; padding-left: 20px; cursor: pointer;"
                   class="MuiTypography-root MuiTypography-h3">Tổng quan</span>
               </div>
             </div>
-            <hr class="menuDivider" />
-            <div class="MuiBox-root jss180 menuInnerWrapper">
-              <div class="MuiBox-root jss181 menuPrimaryInner" id="menuPrimaryInner" style="overflow-y: auto">
+            <hr class="" />
+            <div class="  menuInnerWrapper">
+              <div class="  menuPrimaryInner" id="menuPrimaryInner" style="overflow-y: auto">
                 <nav class="MuiList-root menuList MuiList-padding">
                   <div v-if="role == 'SHIPPER'"
                     class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
@@ -84,7 +84,7 @@
                   <div class="MuiCollapse-container MuiCollapse-hidden" style="min-height: 0px">
                     <div class="MuiCollapse-wrapper">
                       <div class="MuiCollapse-wrapperInner jss187">
-                        <div class="MuiBox-root jss243 menuListSubMenuItem menuListSubMenuItemLevel-0">
+                        <div class=" jss243 menuListSubMenuItem menuListSubMenuItemLevel-0">
                           <a class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
                             tabindex="0" role="button" aria-disabled="false">
                             <div class="MuiListItemText-root menuItemTitle">
@@ -116,44 +116,10 @@
                       </div>
                     </div>
                   </div>
-                  <!-- <div
-                    class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                    tabindex="0"
-                    role="button"
-                    aria-disabled="false"
-                  >
-                    <div class="MuiListItemIcon-root">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M17.453 9.323a.605.605 0 0 0-.829 0l-2.617 2.503-1.006-.963a.605.605 0 0 0-.83 0 .544.544 0 0 0 0 .793l1.422 1.36c.114.109.264.164.414.164.15 0 .3-.055.415-.165l3.031-2.9a.544.544 0 0 0 0-.792Z"
-                          fill="currentColor"
-                          stroke="currentColor"
-                          stroke-width="0.5"
-                        ></path>
-                        <path
-                          d="M20.442 5H9.308c-.86 0-1.558.668-1.558 1.49v1.343H4.44C3.096 7.833 2 8.88 2 10.167v5.935c0 .725.617 1.315 1.375 1.315h1.157c.268 1.153 1.346 2.019 2.632 2.019s2.364-.866 2.632-2.02h4.402c.268 1.154 1.346 2.02 2.632 2.02 1.285 0 2.363-.866 2.632-2.02h.98c.86 0 1.558-.668 1.558-1.49V6.49C22 5.668 21.301 5 20.442 5ZM4.532 16.296H3.375a.199.199 0 0 1-.203-.194v-5.935c0-.67.569-1.214 1.269-1.214H7.75v5.386a2.81 2.81 0 0 0-.586-.062c-1.286 0-2.364.866-2.632 2.02Zm2.632 2.02c-.841 0-1.525-.655-1.525-1.46 0-.804.684-1.458 1.525-1.458.84 0 1.525.654 1.525 1.459 0 .804-.684 1.458-1.525 1.458Zm9.666 0c-.841 0-1.525-.655-1.525-1.46 0-.804.684-1.458 1.525-1.458.84 0 1.525.654 1.525 1.459 0 .804-.684 1.458-1.525 1.458Zm3.612-2.02h-.98c-.269-1.153-1.347-2.019-2.633-2.019-1.285 0-2.363.866-2.631 2.02H9.796a2.564 2.564 0 0 0-.874-1.394V6.49c0-.204.173-.37.386-.37h11.134c.213 0 .386.166.386.37v9.437c0 .204-.173.37-.386.37Z"
-                          fill="currentColor"
-                          stroke="currentColor"
-                          stroke-width="0.5"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div class="MuiListItemText-root menuItemTitle">
-                      <span
-                        @click="navigateTo('admin-member-create')"
-                        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                        >Đăng kí user</span
-                      >
-                    </div>
-                  </div> -->
                   <div class="MuiCollapse-container MuiCollapse-hidden" style="min-height: 0px">
                     <div class="MuiCollapse-wrapper">
                       <div class="MuiCollapse-wrapperInner jss187">
-                        <div class="MuiBox-root jss244 menuListSubMenuItem menuListSubMenuItemLevel-0">
+                        <div class=" jss244 menuListSubMenuItem menuListSubMenuItemLevel-0">
                           <a class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button MuiTypography-colorPrimary"
                             tabindex="0" role="button" aria-disabled="false" to="/trang-chu-stores">
                             <div class="MuiListItemText-root menuItemTitle">
@@ -162,157 +128,12 @@
                                 quan
                               </span>
                             </div>
-                          </a><a
-                            class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                            tabindex="0" role="button" aria-disabled="false" href="/admin/shipments">
-                            <div class="MuiListItemText-root menuItemTitle">
-                              <span
-                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Quản
-                                lý vận đơn
-                              </span>
-                            </div>
-                          </a><a
-                            class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                            tabindex="0" role="button" aria-disabled="false" href="/admin/delivery_collations">
-                            <div class="MuiListItemText-root menuItemTitle">
-                              <span
-                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Đối
-                                soát COD và phí
-                              </span>
-                            </div>
-                          </a><a
-                            class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                            tabindex="0" role="button" aria-disabled="false" href="/admin/shippers">
-                            <div class="MuiListItemText-root menuItemTitle">
-                              <span
-                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Kết
-                                nối đối tác
-                              </span>
-                            </div>
-                          </a><a
-                            class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                            tabindex="0" role="button" aria-disabled="false" href="/admin/settings/shippings">
-                            <div class="MuiListItemText-root menuItemTitle">
-                              <span
-                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Cấu
-                                hình giao hàng
-                              </span>
-                            </div>
                           </a>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!--
-                  <div
-                    class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                    tabindex="0"
-                    role="button"
-                    aria-disabled="false"
-                  >
-                    <div class="MuiListItemIcon-root">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="m21.24 6.62-8.832-4.474-.003-.002a1.38 1.38 0 0 0-1.25.012l-3.789 2.01a.59.59 0 0 0-.088.047l-4.54 2.41A1.373 1.373 0 0 0 2 7.841v8.316c0 .514.283.981.738 1.22l8.413 4.465.003.002a1.377 1.377 0 0 0 1.25.011l8.836-4.477c.47-.235.761-.706.761-1.231V7.852c0-.525-.291-.997-.76-1.231Zm-9.543-3.426a.205.205 0 0 1 .184-.002l8.267 4.189-3.217 1.602-8.083-4.277 2.85-1.512Zm-.5 17.347-7.911-4.2-.004-.001a.204.204 0 0 1-.11-.182V8.371l8.025 4.184v7.986Zm.592-8.998L3.808 7.38l3.79-2.012 8.042 4.256-3.851 1.918Zm9.04 4.605a.204.204 0 0 1-.113.183l-8.348 4.23v-7.998l3.844-1.914v2.007a.586.586 0 0 0 1.171 0v-2.59L20.83 8.35v7.798Z"
-                          fill="currentColor"
-                          stroke="currentColor"
-                          stroke-width="0.5"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div class="MuiListItemText-root menuItemTitle">
-                      <span
-                        @click="navigateTo('admin-manager-create')"
-                        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                        >Đăng kí manager</span
-                      >
-                    </div>
-                  </div> -->
-                  <div class="MuiCollapse-container MuiCollapse-hidden" style="min-height: 0px">
-                    <div class="MuiCollapse-wrapper">
-                      <div class="MuiCollapse-wrapperInner jss187">
-                        <div class="MuiBox-root jss251 menuListSubMenuItem menuListSubMenuItemLevel-0">
-                          <a class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                            tabindex="0" role="button" aria-disabled="false" href="/admin/products">
-                            <div class="MuiListItemText-root menuItemTitle">
-                              <span
-                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Danh
-                                sách sản phẩm
-                              </span>
-                            </div>
-                          </a><a
-                            class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                            tabindex="0" role="button" aria-disabled="false" href="/admin/variants">
-                            <div class="MuiListItemText-root menuItemTitle">
-                              <span
-                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Quản
-                                lý kho
-                              </span>
-                            </div>
-                          </a><a
-                            class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                            tabindex="0" role="button" aria-disabled="false" href="/admin/order_suppliers">
-                            <div class="MuiListItemText-root menuItemTitle">
-                              <span
-                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Đặt
-                                hàng nhập
-                              </span>
-                            </div>
-                          </a><a
-                            class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                            tabindex="0" role="button" aria-disabled="false" href="/admin/purchase_orders">
-                            <div class="MuiListItemText-root menuItemTitle">
-                              <span
-                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Nhập
-                                hàng
-                              </span>
-                            </div>
-                          </a><a
-                            class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                            tabindex="0" role="button" aria-disabled="false" href="/admin/stock_adjustments">
-                            <div class="MuiListItemText-root menuItemTitle">
-                              <span
-                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Kiểm
-                                hàng
-                              </span>
-                            </div>
-                          </a><a
-                            class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                            tabindex="0" role="button" aria-disabled="false" href="/admin/stock_transfers">
-                            <div class="MuiListItemText-root menuItemTitle">
-                              <span
-                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Chuyển
-                                hàng
-                              </span>
-                            </div>
-                          </a><a
-                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button MuiTypography-colorPrimary"
-                            tabindex="0" role="button" aria-disabled="false" to="/admin/suppliers"
-                            href="/admin/suppliers">
-                            <div class="MuiListItemText-root menuItemTitle">
-                              <span
-                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Nhà
-                                cung cấp
-                              </span>
-                            </div>
-                          </a><a
-                            class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
-                            tabindex="0" role="button" aria-disabled="false" href="/admin/price_adjustments">
-                            <div class="MuiListItemText-root menuItemTitle">
-                              <span
-                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Điều
-                                chỉnh giá vốn
-                              </span>
-                            </div>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  
                   <div v-if="role == 'ADMIN'"
                     class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
                     tabindex="0" role="button" aria-disabled="false">
@@ -417,7 +238,7 @@
                   <div class="MuiCollapse-container MuiCollapse-hidden" style="min-height: 0px">
                     <div class="MuiCollapse-wrapper">
                       <div class="MuiCollapse-wrapperInner jss187">
-                        <div class="MuiBox-root jss252 menuListSubMenuItem menuListSubMenuItemLevel-0">
+                        <div class=" jss252 menuListSubMenuItem menuListSubMenuItemLevel-0">
                           <a class="MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button"
                             tabindex="0" role="button" aria-disabled="false" href="/admin/customers">
                             <div class="MuiListItemText-root menuItemTitle">
@@ -440,50 +261,6 @@
                       </div>
                     </div>
                   </div>
-                  <!-- <div
-                    class="MuiTypography-root MuiButtonBase-root MuiListItem-root jss186 rootMenuItem MuiListItem-gutters MuiListItem-button MuiTypography-body1"
-                    tabindex="0"
-                    role="button"
-                    aria-disabled="false"
-                    to="/admin/api/auth?api_key=6f71b0b3f866db0d7bf7ef3d8a1f32b6"
-                  >
-                    <div class="MuiListItemIcon-root">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="m10.806 11.113-1.799-.274-.804-1.707a.223.223 0 0 0-.407 0l-.803 1.707-1.8.274a.223.223 0 0 0-.129.069.244.244 0 0 0 .005.336l1.3 1.329-.307 1.876a.247.247 0 0 0 .014.13.236.236 0 0 0 .077.102.22.22 0 0 0 .238.018L8 14.087l1.609.886a.216.216 0 0 0 .144.023.236.236 0 0 0 .185-.273l-.308-1.877 1.301-1.328a.24.24 0 0 0 .066-.136.235.235 0 0 0-.19-.27Z"
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                        ></path>
-                        <rect
-                          x="1.875"
-                          y="5.875"
-                          width="20.25"
-                          height="13.25"
-                          rx="2.125"
-                          stroke="currentColor"
-                          stroke-width="1.75"
-                        ></rect>
-                        <path
-                          d="M14 11h5M14 14h3"
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                        ></path>
-                      </svg>
-                    </div>
-                    <div class="MuiListItemText-root menuItemTitle">
-                      <span
-                        @click="navigateTo('store/info-them-moi')"
-                        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                      >
-                        Thêm info store
-                      </span>
-                    </div>
-                  </div> -->
                 </nav>
               </div>
             </div>
@@ -556,6 +333,422 @@ export default {
 </script>
 
 <style scoped>
+
+.MuiTypography-root {
+  margin: 0;
+}
+.jss93 {
+  top: 0;
+  left: 0;
+  width: 230px;
+  bottom: 0;
+  display: block;
+  z-index: 1002;
+  background: #ffffff;
+  transition: width 200ms;
+}
+
+.jss93>nav {
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+
+  background-color: #182537;
+}
+
+.jss93.menuCollapse {
+  width: 52px;
+}
+
+.jss93.menuCollapse>nav .menuTopToogle {
+  right: 8px;
+}
+
+.jss93.menuCollapse>nav .menuList>.MuiListItem-root>.MuiListItemText-root {
+  display: none;
+}
+
+.jss93.menuCollapse>nav .menuList>.MuiListItem-root>.icon-collapse {
+  display: none;
+}
+
+.jss93.menuCollapse>nav .menuTopLogo img.logo--full {
+  display: none;
+}
+
+
+
+.jss93>nav .menuTopLogo {
+  height: 55px;
+}
+
+.jss93>nav .menuTopToogle {
+  top: 8px;
+  right: 4px;
+  display: block;
+  padding: 8px;
+}
+
+.jss93>nav .menuDivider {
+  border: 0;
+  margin: 0;
+  border-top: 1px solid #15202c;
+  border-bottom: 1px solid #263d53;
+}
+
+.jss93>nav .menuInnerWrapper {
+  height: calc(100% - 60px);
+}
+
+.jss93>nav .menuPrimaryInner {
+  height: 100%;
+  display: flex;
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex-direction: column;
+  overscroll-behavior: contain;
+}
+
+.jss93>nav .menuList {
+  fill: #f3f4f5;
+  color: #f3f4f5;
+  padding: 0;
+}
+
+.jss93>nav .menuPrimaryInner::-webkit-scrollbar {
+  width: 5px;
+  background: #202d3f;
+}
+
+.jss93>nav .menuPrimaryInner::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: #2b4263;
+}
+
+.jss93>nav .menuTopToogle svg {
+  color: #fff;
+  font-size: 24px;
+}
+
+
+.MuiTypography-body2 {
+  font-size: 0.9rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 400;
+  line-height: 19px;
+}
+
+.MuiTypography-body1 {
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.MuiTypography-caption {
+  font-size: 0.71rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 400;
+  line-height: 12px;
+}
+
+.MuiTypography-button {
+  font-size: 0.875rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 500;
+  line-height: 1.75;
+  text-transform: uppercase;
+}
+
+.MuiTypography-h1 {
+  font-size: 6rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 300;
+  line-height: 1.167;
+}
+
+.MuiTypography-h2 {
+  font-size: 3.75rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.MuiTypography-h3 {
+  font-size: 1.7rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.MuiTypography-h4 {
+  font-size: 1.4rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.MuiTypography-h5 {
+  font-size: 1.25rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.MuiTypography-h6 {
+  font-size: 1.125rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.MuiTypography-subtitle1 {
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.MuiTypography-subtitle2 {
+  font-size: 0.875rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 500;
+  line-height: 15px;
+}
+
+.MuiTypography-overline {
+  font-size: 0.75rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  font-weight: 400;
+  line-height: 2.66;
+  text-transform: uppercase;
+}
+
+.MuiTypography-srOnly {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.MuiTypography-alignLeft {
+  text-align: left;
+}
+
+.MuiTypography-alignCenter {
+  text-align: center;
+}
+
+.MuiTypography-alignRight {
+  text-align: right;
+}
+
+.MuiTypography-alignJustify {
+  text-align: justify;
+}
+
+.MuiTypography-noWrap {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.MuiTypography-gutterBottom {
+  margin-bottom: 0.35em;
+}
+
+.MuiTypography-paragraph {
+  margin-bottom: 16px;
+}
+
+.MuiTypography-colorInherit {
+  color: inherit;
+}
+
+.MuiTypography-colorPrimary {
+  color: #0088ff;
+}
+
+.MuiTypography-colorSecondary {
+  color: #747c87;
+}
+
+.MuiTypography-colorTextPrimary {
+  color: #0f1824;
+}
+
+.MuiTypography-colorTextSecondary {
+  color: #747c87;
+}
+
+.MuiTypography-colorError {
+  color: #f44336;
+}
+
+.MuiTypography-displayInline {
+  display: inline;
+}
+
+.MuiTypography-displayBlock {
+  display: block;
+}
+.MuiMenu-list.MuiList-padding {
+  padding: 6px 5px;
+}
+.MuiList-padding {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+
+.MuiListItemText-root {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.MuiListItemText-multiline {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.MuiListItemText-inset {
+  padding-left: 56px;
+}
+
+.MuiButtonBase-root {
+  color: inherit;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  display: inline-flex;
+  outline: 0;
+  padding: 0;
+
+  align-items: center;
+  user-select: none;
+  border-radius: 0;
+  vertical-align: middle;
+  -moz-appearance: none;
+  justify-content: center;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.MuiButtonBase-root::-moz-focus-inner {
+  border-style: none;
+}
+
+.MuiButtonBase-root.Mui-disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+
+.jss186 {
+  color: #f3f4f5;
+  width: auto;
+  height: 48px;
+  margin: 4px;
+  padding: 0;
+  min-width: 44px;
+  border-radius: 3px;
+}
+
+.jss186.active {
+  fill: #fff;
+  color: #fff;
+  background: #0088ff;
+}
+
+.jss186>.MuiListItemIcon-root {
+  color: #a3a8af;
+  width: 34px;
+  display: flex;
+  min-width: unset;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.jss186.active>.MuiListItemIcon-root {
+  fill: #fff;
+  color: #fff;
+}
+
+.jss186>.MuiListItemText-root {
+  flex: unset;
+  width: 155px;
+  margin-top: -2px;
+  font-weight: 400;
+  margin-bottom: unset;
+}
+
+.jss186>.icon-collapse {
+  color: #a3a8af;
+  font-size: 24px;
+  transition: transform 0.2s linear;
+  margin-right: 4px;
+}
+
+.jss186>.icon-collapse:hover {
+  color: #fff;
+  font-size: 24px;
+  transition: transform 0.2s linear;
+  margin-right: 4px;
+}
+
+.jss186.open>.icon-collapse {
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+
+.jss186:not(.active).MuiListItem-button:hover {
+  fill: #fff;
+  color: #fff;
+  background: #243041;
+  text-decoration: none;
+}
+
+.jss186:not(.active).MuiListItem-button:hover>.MuiListItemIcon-root,
+.jss186:not(.active).MuiListItem-button:hover .MuiListItemText-root {
+  color: #f3f4f5;
+}
+
+.jss186>.MuiListItemIcon-root>svg {
+  font-size: 24px;
+  max-height: 24px;
+}
+
 .menu {
   width: 100%;
   border: 1px solid #e8e8e8;
@@ -817,200 +1010,7 @@ body::backdrop {
   background-color: #fafafa;
 }
 
-.MuiMenu-list.MuiList-padding {
-  padding: 6px 5px;
-}
 
-.MuiTypography-root {
-  margin: 0;
-}
-
-.MuiTypography-body2 {
-  font-size: 0.9rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 400;
-  line-height: 19px;
-}
-
-.MuiTypography-body1 {
-  font-size: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 400;
-  line-height: 20px;
-}
-
-.MuiTypography-caption {
-  font-size: 0.71rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 400;
-  line-height: 12px;
-}
-
-.MuiTypography-button {
-  font-size: 0.875rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 500;
-  line-height: 1.75;
-  text-transform: uppercase;
-}
-
-.MuiTypography-h1 {
-  font-size: 6rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 300;
-  line-height: 1.167;
-}
-
-.MuiTypography-h2 {
-  font-size: 3.75rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 300;
-  line-height: 1.2;
-}
-
-.MuiTypography-h3 {
-  font-size: 1.7rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 500;
-  line-height: 30px;
-}
-
-.MuiTypography-h4 {
-  font-size: 1.4rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 500;
-  line-height: 24px;
-}
-
-.MuiTypography-h5 {
-  font-size: 1.25rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 500;
-  line-height: 22px;
-}
-
-.MuiTypography-h6 {
-  font-size: 1.125rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 500;
-  line-height: 20px;
-}
-
-.MuiTypography-subtitle1 {
-  font-size: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 500;
-  line-height: 20px;
-}
-
-.MuiTypography-subtitle2 {
-  font-size: 0.875rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 500;
-  line-height: 15px;
-}
-
-.MuiTypography-overline {
-  font-size: 0.75rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-weight: 400;
-  line-height: 2.66;
-  text-transform: uppercase;
-}
-
-.MuiTypography-srOnly {
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-.MuiTypography-alignLeft {
-  text-align: left;
-}
-
-.MuiTypography-alignCenter {
-  text-align: center;
-}
-
-.MuiTypography-alignRight {
-  text-align: right;
-}
-
-.MuiTypography-alignJustify {
-  text-align: justify;
-}
-
-.MuiTypography-noWrap {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.MuiTypography-gutterBottom {
-  margin-bottom: 0.35em;
-}
-
-.MuiTypography-paragraph {
-  margin-bottom: 16px;
-}
-
-.MuiTypography-colorInherit {
-  color: inherit;
-}
-
-.MuiTypography-colorPrimary {
-  color: #0088ff;
-}
-
-.MuiTypography-colorSecondary {
-  color: #747c87;
-}
-
-.MuiTypography-colorTextPrimary {
-  color: #0f1824;
-}
-
-.MuiTypography-colorTextSecondary {
-  color: #747c87;
-}
-
-.MuiTypography-colorError {
-  color: #f44336;
-}
-
-.MuiTypography-displayInline {
-  display: inline;
-}
-
-.MuiTypography-displayBlock {
-  display: block;
-}
 
 .MuiTouchRipple-root {
   top: 0;
@@ -1095,35 +1095,6 @@ body::backdrop {
   }
 }
 
-.MuiButtonBase-root {
-  color: inherit;
-  border: 0;
-  cursor: pointer;
-  margin: 0;
-  display: inline-flex;
-  outline: 0;
-  padding: 0;
-
-  align-items: center;
-  user-select: none;
-  border-radius: 0;
-  vertical-align: middle;
-  -moz-appearance: none;
-  justify-content: center;
-  text-decoration: none;
-  background-color: transparent;
-  -webkit-appearance: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.MuiButtonBase-root::-moz-focus-inner {
-  border-style: none;
-}
-
-.MuiButtonBase-root.Mui-disabled {
-  cursor: default;
-  pointer-events: none;
-}
 
 .MuiListItem-root {
   width: 100%;
@@ -1249,10 +1220,6 @@ body::backdrop {
   list-style: none;
 }
 
-.MuiList-padding {
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
 
 .MuiList-subheader {
   padding-top: 0;
@@ -1852,100 +1819,7 @@ body::backdrop {
   margin-left: -30px;
 }
 
-.MuiListItemText-root {
-  flex: 1 1 auto;
-  min-width: 0;
-  margin-top: 4px;
-  margin-bottom: 4px;
-}
 
-.MuiListItemText-multiline {
-  margin-top: 6px;
-  margin-bottom: 6px;
-}
-
-.MuiListItemText-inset {
-  padding-left: 56px;
-}
-
-.jss186 {
-  color: #f3f4f5;
-  width: auto;
-  height: 48px;
-  margin: 4px;
-  padding: 0;
-  min-width: 44px;
-  border-radius: 3px;
-}
-
-.jss186.active {
-  fill: #fff;
-  color: #fff;
-  background: #0088ff;
-}
-
-.jss186>.MuiListItemIcon-root {
-  color: #a3a8af;
-  width: 34px;
-  display: flex;
-  min-width: unset;
-  align-items: center;
-  margin-left: 10px;
-}
-
-.jss186.active>.MuiListItemIcon-root {
-  fill: #fff;
-  color: #fff;
-}
-
-.jss186>.MuiListItemText-root {
-  flex: unset;
-  width: 155px;
-  margin-top: -2px;
-  font-weight: 400;
-  margin-bottom: unset;
-}
-
-.jss186>.icon-collapse {
-  color: #a3a8af;
-  font-size: 24px;
-  transition: transform 0.2s linear;
-  margin-right: 4px;
-}
-
-.jss186>.icon-collapse:hover {
-  color: #fff;
-  font-size: 24px;
-  transition: transform 0.2s linear;
-  margin-right: 4px;
-}
-
-.jss186.open>.icon-collapse {
-  color: #fff;
-  transform: rotate(90deg);
-}
-
-.jss186>.MuiListItemText-root .MuiTypography-root {
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.jss186:not(.active).MuiListItem-button:hover {
-  fill: #fff;
-  color: #fff;
-  background: #243041;
-  text-decoration: none;
-}
-
-.jss186:not(.active).MuiListItem-button:hover>.MuiListItemIcon-root,
-.jss186:not(.active).MuiListItem-button:hover .MuiListItemText-root {
-  color: #f3f4f5;
-}
-
-.jss186>.MuiListItemIcon-root>svg {
-  font-size: 24px;
-  max-height: 24px;
-}
 
 .jss187 .active {
   background: none;
@@ -2068,106 +1942,6 @@ body::backdrop {
   margin: 0;
   border-top: 1px solid #46515f;
   border-bottom: 1px solid #46515f;
-}
-
-.jss93 {
-  top: 0;
-  left: 0;
-  width: 230px;
-  bottom: 0;
-  display: block;
-  z-index: 1002;
-  background: #ffffff;
-  transition: width 200ms;
-}
-
-.jss93>nav {
-  top: 0;
-  left: 0;
-  width: 100%;
-  bottom: 0;
-
-  background-color: #182537;
-}
-
-.jss93.menuCollapse {
-  width: 52px;
-}
-
-.jss93.menuCollapse>nav .menuTopToogle {
-  right: 8px;
-}
-
-.jss93.menuCollapse>nav .menuList>.MuiListItem-root>.MuiListItemText-root {
-  display: none;
-}
-
-.jss93.menuCollapse>nav .menuList>.MuiListItem-root>.icon-collapse {
-  display: none;
-}
-
-.jss93.menuCollapse>nav .menuTopLogo img.logo--full {
-  display: none;
-}
-
-.jss93>nav .menuTopHeader {
-  height: 55px;
-}
-
-.jss93>nav .menuTopLogo {
-  height: 55px;
-}
-
-.jss93>nav .menuTopToogle {
-  top: 8px;
-  right: 4px;
-  display: block;
-  padding: 8px;
-}
-
-.jss93>nav .menuDivider {
-  border: 0;
-  margin: 0;
-  border-top: 1px solid #15202c;
-  border-bottom: 1px solid #263d53;
-}
-
-.jss93>nav .menuInnerWrapper {
-  height: calc(100% - 60px);
-}
-
-.jss93>nav .menuPrimaryInner {
-  height: 100%;
-  display: flex;
-  overflow-x: hidden;
-  overflow-y: auto;
-  flex-direction: column;
-  overscroll-behavior: contain;
-}
-
-.jss93>nav .menuList {
-  fill: #f3f4f5;
-  color: #f3f4f5;
-  padding: 0;
-}
-
-.jss93>nav .menuPrimaryInner::-webkit-scrollbar {
-  width: 5px;
-  background: #202d3f;
-}
-
-.jss93>nav .menuPrimaryInner::-webkit-scrollbar-thumb {
-  border-radius: 6px;
-  background-color: #2b4263;
-}
-
-.jss93>nav .menuTopToogle svg {
-  color: #fff;
-  font-size: 24px;
-}
-
-.jss93>nav .menuTopLogo img.logo--full {
-  padding: 12px 12px 0;
 }
 
 .jss94 {
@@ -2338,6 +2112,9 @@ body::backdrop {
   font-weight: 500;
 }
 </style>
+
+
+
 <style data-jss="" data-meta="MuiGrid">
 .MuiGrid-container {
   width: 100%;
@@ -3247,12 +3024,6 @@ body::backdrop {
   height: 62px;
 }
 
-.jss287 .MuiTypography-root {
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 28px;
-}
 
 .jss288 {
   margin-top: 5px;
