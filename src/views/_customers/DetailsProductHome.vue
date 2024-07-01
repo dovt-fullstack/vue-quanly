@@ -372,8 +372,15 @@ export default defineComponent({
           );
         })
         .catch((error) => {
-          console.log(error);
-        });
+          if (error.response && error.response.data) {
+          // Xử lý khi có lỗi từ phản hồi của API
+          console.error('Lỗi khi gọi API:', error.response.data.message);
+          message.error(error.response.data.message);
+        } else {
+          // Xử lý khi có lỗi khác, chẳng hạn mạng chập chờn
+          console.error('Đã xảy ra lỗi:', error.message);
+          message.error('Đã xảy ra lỗi');
+        }        });
     };
 
     const getUserData = async () => {

@@ -12,7 +12,7 @@
       <div class="f dealhot">
         <div class="wrap flexCol">
           <div class="f dhtit">
-            <h2>TOP sản phẩm trong cửa hàng</h2>
+            <h2>TOP 5 sản phẩm trong cửa hàng</h2>
           </div>
 
 
@@ -25,18 +25,20 @@
                   left: 0px;
                   display: block;
                   background-color: #bfbfbf !important;
+                  padding-left: 15px;
+                  padding-bottom: 15px;
                 ">
                 <div v-for="user in users" :key="user.id" class="owl-item active"
-                  style="width: 256px; margin-left: 2px; height: 400px">
+                  >
                   <router-link :to="{
             name: 'trang-chu-chi-tiet-san-pham',
             params: { id: user.productId },
             query: { storePhone: phone }
           }">
                     <!-- /trang-chu/chi-tiet-san-pham -->
-                    <a class=" pi" :title="user.title" :href="user.href">
-                      <div>
-                        <img :src="user.avatarProduct" :alt="user.avatarProduct" />
+                    <a class=" pi" :title="user.title" :href="user.href"  style="height: 350px; width: 235px !important; border-radius: 5%; border: 1px solid black;">
+                      <div style="padding: 10px 10px ;">
+                        <img :src="user.avatarProduct" :alt="user.avatarProduct" style="object-fit: fill; width: 100%;  height: 100%;"/>
                       </div>
                       <h3>{{ user.productName }}</h3>
                       <strong>
@@ -58,13 +60,101 @@
           </div>
         </div>
       </div>
+      <div class="f dealhot">
+        <div class="wrap flexCol">
+          <div class="f boxtit flexJus">
+            <label style="font: bold 15px arial">Các sản phẩm khác</label>
+            <div class=" mb-3 d-flex">
+            <div class="">
 
-      <div class="wrap flexCol">
+
+
+                <a-input-search v-model:value="searchKeyword2" placeholder="Tìm kiếm sản phẩm" size="medium"
+                @search="onSearch2" style="width: 300px; border: 1px solid #ccc">
+                <template #enterButton>
+                  <a-button type="primary" style="background-color: #ffd52f; border-color: yellow; color: #555;"
+                    @click="onSearch2">
+                    Tìm kiếm
+                  </a-button>
+                </template>
+              </a-input-search>
+
+
+
+            </div>
+            <div class="">
+
+              <a-select v-model:value="selectedType" style="width: 150px; margin-left: 20px; " @change="handleChange"
+                placeholder="Chọn loại sản phẩm">
+                <a-select-option  :value="allType">
+                  Tất cả
+                </a-select-option>
+                <a-select-option v-for="productType in typeStore" :key="productType" :value="productType">
+                  {{ productType }}
+                </a-select-option>
+              </a-select>
+
+            </div>
+          </div>
+          </div>
+
+          <div class="dhpro owl-carousel owl-theme" id="dealhot2" style="opacity: 1; display: block">
+            <div class="owl-wrapper-outer">
+              <div class="owl-wrapper" style="
+                  left: 0px;
+                  display: block;
+                  background-color: #bfbfbf !important;
+                  padding-left: 15px;
+                  padding-bottom: 15px;
+                ">
+                <div v-for="user in users2" :key="user.id" class="owl-item active"
+                  >
+                  <router-link :to="{
+            name: 'trang-chu-chi-tiet-san-pham',
+            params: { id: user.productId },
+            query: { storePhone: phone }
+          }">
+                    <!-- /trang-chu/chi-tiet-san-pham -->
+                    <a class=" pi" :title="user.title" :href="user.href"  style="height: 350px; width: 235px !important; border-radius: 5%; border: 1px solid black;">
+                      <div style="padding: 10px 10px ;">
+                        <img :src="user.avatarProduct" :alt="user.avatarProduct" style="object-fit: fill; width: 100%;  height: 100%;"/>
+                      </div>
+                      <h3>{{ user.productName }}</h3>
+                      <strong>
+                        {{
+            (
+              (user.price * (100 - user.discount)) /
+              100
+            )?.toLocaleString()
+          }}₫
+                        <u>{{ user.price?.toLocaleString() }}₫</u>
+                      </strong>
+
+                      <span class="s">{{ user.view }}(Lượt xem)</span>
+                    </a>
+                  </router-link>
+                </div>
+              </div>
+              <div style="margin-top: 10px;" >
+          <a-pagination @change="onChange2" v-model:current="pageParam2.currentPage" :total="pageParam2.totalItems"
+            :pageSize="pageParam2.pageSize" :show-total="(total, range) =>
+            `${range[0]}-${range[1]} của ${total} sản phẩm`
+            " class="mt-2 text-end" />
+        </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="wrap flexCol">
         <div class="f boxtit flexJus">
           <label style="font: bold 15px arial">Các sản phẩm khác</label>
 
-          <div class="row mb-3 d-flex">
-            <div class="col-12">
+
+
+
+          <div class=" mb-3 d-flex" >
+            <div class="">
               <a-input-search v-model:value="searchKeyword2" placeholder="Tìm kiếm sản phẩm" size="medium"
                 @search="onSearch2" style="width: 300px; border: 1px solid #ccc">
                 <template #enterButton>
@@ -75,9 +165,9 @@
                 </template>
               </a-input-search>
             </div>
-            <div class="col-12">
+            <div class="" >
 
-              <a-select v-model:value="selectedType" style="width: 200px" @change="handleChange"
+              <a-select v-model:value="selectedType" style="width: 150px; margin-left: 20px; " @change="handleChange"
                 placeholder="Chọn loại sản phẩm">
                 <a-select-option :value="allType">
                   Tất cả
@@ -92,6 +182,8 @@
 
 
         </div>
+
+        
         <div style="
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -133,7 +225,7 @@
             `${range[0]}-${range[1]} của ${total} sản phẩm`
             " class="mt-2 text-end" />
         </div>
-      </div>
+      </div> -->
 
 
       <!--bai viet-->
@@ -310,29 +402,22 @@ export default defineComponent({
         })
         .then((response) => {
 
-          const data = response.data;
-          // Lấy danh sách các cửa hàng và sắp xếp theo thuộc tính view giảm dần
-          const sortedStores = data.data.sort((a, b) => b.view - a.view);
-
-          // Lấy 5 cửa hàng có nhiều view nhất
-          users.value = sortedStores;
-          pageParam.totalItems = data.pagination.totalItems;
-          pageParam.totalPages = data.pagination.totalPages;
+          users.value = response.data.data.sort((a, b) => b.view - a.view).slice(0,5);
         })
         .catch((error) => {
           console.error(error);
         });
     };
-    const getUsers2 = (page, size, keyword = "") => {
+    const getUsers2 = (page, size, keyword = "",productTypeName="") => {
       axios
         .get(`${apiPrefix}/api/v1/customer/store/view/${storeId}`, {
           headers: { Authorization: `Bearer ${token}` },
-          params: { page, size, keyword },
+          params: { page, size, keyword, productTypeName },
         })
         .then((response) => {
           const data = response.data;
           users2.value = response.data.data;
-          users.value = response.data.data.sort((a, b) => b.view - a.view);
+          // users.value = response.data.data.sort((a, b) => b.view - a.view).slice(0,5);
 
           pageParam2.totalItems = data.pagination.totalItems;
           pageParam2.totalPages = data.pagination.totalPages;
@@ -352,6 +437,18 @@ export default defineComponent({
         });
         message.success("đã thêm yêu thích");
       } catch (error) {
+
+
+        if (error.response && error.response.data) {
+          // Xử lý khi có lỗi từ phản hồi của API
+          console.error('Lỗi khi gọi API:', error.response.data.message);
+          message.success(error.response.data.message);
+        } else {
+          // Xử lý khi có lỗi khác, chẳng hạn mạng chập chờn
+          console.error('Đã xảy ra lỗi:', error.message);StringUtils.isEmpty(profileDetail.getAddress()) || StringUtils.isEmpty(profileDetail.getPhoneNumber())
+          message.error('Đã xảy ra lỗi');
+
+        }
         console.error(error);
       }
     };
@@ -378,10 +475,14 @@ export default defineComponent({
       }
       return users2.value.filter(product => product.productType === selectedType.value);
     });
-    const handleChange = value => {
+    const handleChange = (value) => {
 
 
+      console.log('Selected productTypeName:', value);
+            selectedType.value = value;
 
+            pageParam2.currentPage = 1;
+            getUsers2(pageParam2.currentPage, pageParam2.pageSize, searchKeyword2.value,value);
       console.log(value);
     };
 
@@ -396,7 +497,7 @@ export default defineComponent({
     };
     onMounted(() => {
       getUsers2(pageParam2.currentPage, pageParam2.pageSize);
-
+      getUsers();
       getTypeStore();
     });
 
@@ -584,6 +685,7 @@ export default defineComponent({
   position: relative;
   width: 100%;
 }
+
 
 .owl-carousel .owl-wrapper-outer.autoHeight {
   -webkit-transition: height 500ms ease-in-out;

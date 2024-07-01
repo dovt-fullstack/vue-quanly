@@ -19,9 +19,22 @@
           @finish="createUsers()">
           <div class="">
             <div class="">
+
+
+
+
+
               <a-form-item ref="userName" label="Tên sản phẩm" required name="userName">
-                <a-input v-model:value="formState.userName" />
-                <small v-if="errors && errors.UserName" class="text-danger">{{ errors.UserName[0] }}</small>
+                <a-auto-complete
+    v-model:value="formState.userName"
+    :options="autoCompleteOptions"
+    placeholder="input here"
+    :filter-option="filterOption"
+  />
+
+
+                <!-- <a-input v-model:value="formState.userName" />
+                <small v-if="errors && errors.UserName" class="text-danger">{{ errors.UserName[0] }}</small> -->
               </a-form-item>
               <a-form-item ref="fullName" label="Giá nhập" required name="fullName">
                 <a-input v-model:value="formState.fullName" />
@@ -66,7 +79,7 @@
 <script>
 import { onMounted, defineComponent, ref, reactive, toRefs } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { message } from 'ant-design-vue';
+import { message, InputNumber ,Button, AutoComplete } from 'ant-design-vue';
 import { DeleteOutlined } from '@ant-design/icons-vue';
 import { useMenu } from "../../stores/use-menu.js";
 import ApiViewData from '../../api/ApiViewData.js';
@@ -77,7 +90,10 @@ import axios from "axios";
 
 export default defineComponent({
   components: {
-    DeleteOutlined
+    DeleteOutlined,
+    'a-input-number': InputNumber,
+    'a-button': Button,
+    'a-auto-complete': AutoComplete
   },
   setup() {
     useMenu().onSelectedKeys(["admin-users"]);
@@ -111,6 +127,13 @@ export default defineComponent({
       //
       change_password: false,
     });
+
+    const filterOption = (input, option) => {
+  return option.value.toUpperCase().indexOf(input.toUpperCase()) >= 0;
+};
+const value = ref('');
+const autoCompleteOptions = ref([]);
+
     const productTypes = ref([]);
 
     const fileAvatar = ref(null)
@@ -143,7 +166,20 @@ export default defineComponent({
       // })
       formRef.value.resetFields();
     };
-
+    const fetchProducts = (page = 1, size = 1000, keyword = "" ,productTypeName = "") => {
+            axios
+                .get(`${apiPrefix}/api/v1/management/${id}/product/view`, {
+                  params: { page, size, keyword,productTypeName },
+                    headers: { Authorization: `Bearer ${token}` },
+                })
+                .then((response) => {
+                  const data = response.data.data;
+                  autoCompleteOptions.value = data.map(product => ({ value: product.productName }));
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
 
     const handleChange = (value) => {
       console.log('Selected productTypeName:', value);
@@ -214,6 +250,7 @@ export default defineComponent({
       //
       // resetForm();
       fetchProduct();
+      fetchProducts();
 
     })
 
@@ -222,8 +259,10 @@ export default defineComponent({
     return {
       ...toRefs(users),
       authStoreClaim,
+      filterOption,
       errors,
       formState,
+      autoCompleteOptions,
       fileAvatar,
       productTypes,
       formRef,

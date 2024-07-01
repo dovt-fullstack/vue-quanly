@@ -1,56 +1,6 @@
 <template>
   <div id="wrapper">
-    <!-- <div id="header">
-      <div class="head1" >
-        
-        <div class="wrap flexJus">
-          <router-link to="/trang-chu-stores">
-            <a title="Siêu thị Agogo" >
-              <img width="60" height="60"
-                src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718287579/ftld80xpfribbbfhp1qu.png"
-                alt="Siêu thị đèn LED" />
-            </a>
-          </router-link>
 
-          <div class="open">
-            <label style="cursor: pointer" class="oh">
-              <router-link v-if="!userLocal" to="/login">
-                <span> Đăng nhập </span>
-              </router-link>
-              <router-link to="/profile-client" v-else class="me-1">
-                <span>Xin chào {{ userLocal.lastname }}</span>
-              </router-link>
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="head2">
-        <div class="wrap flexJus">
-          <div>
-            <span style="font: bold 15px arial">Hãy cùng mua sắm nào!</span>
-          </div>
-          <div class="flexJus">
-            <router-link to="/frivStore">
-              <div class="vcart2">
-                <i class="fa-solid fa-store"></i>
-              </div>
-            </router-link>
-
-            <router-link to="/trang-chu/gio-hang">
-              <div class="vcart2">
-                <i class="fa-solid fa-cart-shopping"></i>
-              </div>
-            </router-link>
-
-            <router-link to="/ordered">
-              <div class="vcart2">
-                <i class="fa-regular fa-rectangle-list"></i>
-              </div>
-            </router-link>
-          </div>
-        </div>
-      </div>
-    </div> -->
     <Header />
 
     <div id="main">
@@ -62,13 +12,18 @@
           </div>
           <div class="dhpro owl-carousel owl-theme" id="dealhot" style="opacity: 1; display: block">
             <div class="owl-wrapper-outer">
-              <div class="owl-wrapper">
+              <div class="owl-wrapper" style="
+                  width: 3936px;
+                  left: 0px;
+                  display: block;
+                  background-color: #bfbfbf !important;
+                ">
                 <div v-for="store in stores" :key="store.storeId" class="owl-item active" style="">
                   <router-link  :to="{
                 name: 'trang-chu',
                 params: { id: store.storeId },
               }">
-                    <a class="item pi" style="height: 350px; width: 234px !important;">
+                    <a class="item pi" style="height: 350px; width: 234px !important; border-radius: 5%; border: 1px solid black;">
                       <div style="padding: 10px 10px ;" >
                         <img :src="store.image" :alt="store.image" style="object-fit: fill; width: 100%;  height: 100%;"/>
                       </div>
@@ -82,6 +37,12 @@
                   </router-link>
                 </div>
               </div>
+              <div class="col-12">
+                    <a-pagination @change="onChange2" v-model:current="pageParam2.currentPage"
+                        :total="pageParam2.totalItems" :pageSize="pageParam2.pageSize"
+                        :show-total="(total, range) => `${range[0]}-${range[1]} của ${total} cửa hàng`"
+                        class="mt-2 text-end" />
+                </div>
             </div>
           </div>
         </div>
@@ -90,27 +51,39 @@
         <div class="wrap flexCol">
           <div class="f boxtit flexJus">
             <label style="font: bold 15px arial">Các cửa hàng uy tín khác</label>
-            <div class="row mb-3 d-flex">
-            <div class="col-12">
-              <a-input-search v-model:value="searchKeyword2" placeholder="Tìm kiếm sản phẩm" size="medium"
-                @search="onSearch2" style="width: 300px; border: 1px solid #ccc">
+            <div class=" mb-3 d-flex">
+            <div class="">
+
+
+              <!-- <a-form @submit.prevent="onSearch">
+                    <a-form-item>
+                        <a-input placeholder="Tìm kiếm sản phẩm" v-model:value="searchKeyword" @pressEnter="onSearch" />
+                    </a-form-item>
+                    <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
+                </a-form> -->
+
+                <a-input-search v-model:value="searchKeyword" placeholder="Tìm kiếm sản phẩm" size="medium"
+                @search="onSearch" style="width: 300px; border: 1px solid #ccc">
                 <template #enterButton>
                   <a-button type="primary" style="background-color: #ffd52f; border-color: yellow; color: #555;"
-                    @click="onSearch2">
+                    @click="onSearch">
                     Tìm kiếm
                   </a-button>
                 </template>
               </a-input-search>
-            </div>
-            <div class="col-12">
 
-              <a-select v-model:value="selectedType" style="width: 200px" @change="handleChange"
+
+
+            </div>
+            <div class="">
+
+              <a-select v-model:value="selectedType" style="width: 150px; margin-left: 20px; " @change="handleChange"
                 placeholder="Chọn loại sản phẩm">
                 <a-select-option  :value="allType">
                   Tất cả
                 </a-select-option>
-                <a-select-option v-for="productType in typeStore" :key="productType" :value="productType">
-                  {{ productType }}
+                <a-select-option v-for="productType in typeStore" :key="productType.storeTypeName" :value="productType.storeTypeName">
+                  {{ productType.storeTypeName }}
                 </a-select-option>
               </a-select>
 
@@ -120,13 +93,20 @@
 
           <div class="dhpro owl-carousel owl-theme" id="dealhot2" style="opacity: 1; display: block">
             <div class="owl-wrapper-outer">
-              <div class="owl-wrapper">
-                <div v-for="store in allStores" :key="store.storeId" class="owl-item active" >
+              <div class="owl-wrapper" style="
+
+                  left: 0px;
+                  display: block;
+                  background-color: #bfbfbf !important;
+                  padding-left: 11px;
+                  padding-bottom: 15px;
+                ">
+                <div v-for="store in allStores" :key="store.storeId" class="owl-item active" style="" >
                   <router-link  :to="{
                 name: 'trang-chu',
                 params: { id: store.storeId },
               }">
-                    <a class="item pi" style="height: 350px; width: 234px !important;">
+                    <a class="item pi" style="height: 350px; width: 234px !important; border-radius: 5%; border: 1px solid black;">
                       <div style="padding: 10px 10px ;" >
                         <img :src="store.image" :alt="store.image" style="object-fit: fill; width: 100%;  height: 100%;"/>
                       </div>
@@ -140,6 +120,12 @@
                   </router-link>
                 </div>
               </div>
+              <div class="col-12"  >
+                    <a-pagination @change="onChange" v-model:current="pageParam.currentPage"
+                        :total="pageParam.totalItems" :pageSize="pageParam.pageSize"
+                        :show-total="(total, range) => `${range[0]}-${range[1]} của ${total} sản phẩm`"
+                        class="mt-2 text-end"  style="margin-right: 20px; padding-top:10px;"/>
+                </div>
             </div>
           </div>
         </div>
@@ -286,9 +272,13 @@ export default defineComponent({
       }
     };
     const userNOW = JSON.parse(localStorage.getItem("auth"));
-
+const selectedType = ref("") ;
     const apiPrefix = import.meta.env.VITE_API_PREFIX;
     console.log(token);
+    const typeStore = ref([]);
+    const allType = ref("")
+    const searchKeyword = ref("");
+
 
     // try {
       // const eventSource = new EventSource(`${apiPrefix}/notifications?userId=${userLocal.userId}`);
@@ -317,27 +307,82 @@ export default defineComponent({
       const errors = ref([]);
       const stores = ref([]);
       const allStores = ref([]);
+      const pageParam = reactive({
+            currentPage: 1,
+            pageSize: 10,
+            totalItems: 0,
+            totalPages: 0
+        });
+        const pageParam2 = reactive({
+            currentPage: 1,
+            pageSize: 5,
+            totalItems: 0,
+            totalPages: 0
+        });
 
-      const getAllStores = () => {
+      const getTypeStore = () => {
+      axios
+        .get(`${apiPrefix}/api/v1/auth/storetype/view`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data.data);
+          typeStore.value = response.data.data;
+          // phone.value = response.data.data.phoneNumber;
+          console.log(typeStore.value);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+    const onSearch = () => {
+            pageParam.currentPage = 1;
+            getAllStores(pageParam.currentPage, pageParam.pageSize, searchKeyword.value,selectedType.value);
+        };
+      const getAllStores = (page, size, keyword = "" ,storeTypeName = "") => {
         console.log(token);
         axios
-          .get(`${apiPrefix}/api/v1/admin/store/view`, {
+          .get(`${apiPrefix}/api/v1/customer/store/view`, {
+            params: { page, size, keyword,storeTypeName },
             headers: {
-              Authorization: `Bearer ${token}`, // Thêm token vào headers
+              Authorization: `Bearer ${token}`,
+               // Thêm token vào headers
             },
           })
           .then((response) => {
             console.log(response.data.data, "response");
             allStores.value = response.data.data;
+            pageParam.totalItems = response.data.pagination.totalItems;
+            pageParam.totalPages = response.data.pagination.totalPages;
           })
           .catch((error) => {
             console.error(error);
           });
       };
+      const handleChange = (value) => {
+            console.log('Selected productTypeName:', value);
+            selectedType.value = value;
 
-      const getUsers = () => {
+            pageParam.currentPage = 1;
+            getAllStores(pageParam.currentPage, pageParam.pageSize, searchKeyword.value,value);
+        }
+
+        const onChange = (page, pageSize) => {
+            pageParam.currentPage = page;
+            pageParam.pageSize = pageSize;
+            getAllStores(page, pageSize, searchKeyword.value,selectedType.value);
+        };
+        const onChange2 = (page, pageSize) => {
+            pageParam2.currentPage = page;
+            pageParam2.pageSize = pageSize;
+            getUsers(page, pageSize);
+        };
+      const getUsers = (page, size, keyword = "") => {
         axios
           .get(`${apiPrefix}/api/v1/customer/favor/view`, {
+            params: { page, size },
             headers: {
               Authorization: `Bearer ${token}`, // Thêm token vào headers
             },
@@ -345,6 +390,8 @@ export default defineComponent({
           .then((response) => {
             console.log(response.data.data, "response");
             stores.value = response.data.data;
+            pageParam2.totalItems = response.data.pagination.totalItems;
+            pageParam2.totalPages = response.data.pagination.totalPages;
           })
           .catch((error) => {
             console.error(error);
@@ -403,9 +450,10 @@ export default defineComponent({
 
       };
       onMounted(() => {
-        getAllStores();
+        getAllStores(pageParam.currentPage, pageParam.pageSize);
+        getTypeStore();
         // fetchFireBase();
-        getUsers();
+        getUsers(pageParam2.currentPage, pageParam2.pageSize);
         if (!token) {
           // Xóa localStorage
           localStorage.removeItem("token");
@@ -415,11 +463,21 @@ export default defineComponent({
         }
       });
       return {
+        typeStore,
+        onChange2,
+        searchKeyword,
+        onSearch,
+        selectedType,
+        allType,
         route,
         router,
         allStores,
         stores,
         userLocal,
+        pageParam,
+        pageParam2,
+        handleChange,
+        onChange
       };
     },
   });

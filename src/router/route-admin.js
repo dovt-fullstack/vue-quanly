@@ -97,7 +97,12 @@ const adminRoutes = [
         meta: { title: "Thông tin cá nhân" },
         component: () => import("../views/users/profileUser.vue"),
       },
-
+      {
+        path: "profile-store",
+        name: "profile-store",
+        meta: { title: "Thông tin cửa hàng" },
+        component: () => import("../views/_managers/storeProfile.vue"),
+      },
       // importExport
       {
         path: "danh-sach-order-store/:id",

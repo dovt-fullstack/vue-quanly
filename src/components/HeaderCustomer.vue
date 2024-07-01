@@ -10,15 +10,15 @@
               alt="Siêu thị đèn LED" />
           </span>
         </router-link>
-        <div class="d-flex">
+        <div class="d-flex align-items-center">
           <div class="open">
             <label style="cursor: pointer" class="oh">
               <router-link v-if="!userLocal" to="/login">
                 <span> Đăng nhập </span>
               </router-link>
-              <a-dropdown>
-                <span class="ant-dropdown-link " @click.prevent>
-                  <span class="me-1">Xin chào {{ userLocal?.lastname }}</span>
+              <a-dropdown >
+                <span class="ant-dropdown-link d-block" style="height: 40px;" @click.prevent>
+                  <span class="me-1 " style="padding-top: 14px;" >Xin chào {{ userLocal?.lastname }}</span>
                   <i class="fa-solid "></i>
                 </span>
                 <template #overlay>
@@ -47,9 +47,9 @@
           <div class="">
             <div>
               <div>
-                <a-button style="background-color: #182537;border-color: #182537;" type="primary" @click="showDrawer">
+                <a-button style="background-color: black;border-color: black;" type="primary" @click="showDrawer">
                   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    font-size="24" style="color: rgb(0, 136, 255)">
+                    font-size="24" style="color: #ffd52f">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M18 10.5c0-3.07-1.14-5.64-4-6.32V2h-4v2.18c-2.87.68-4 3.24-4 6.32V16l-2 1v2h16v-2l-2-1v-5.5Zm-5.6 11.46A2.014 2.014 0 0 1 9.99 20h4c0 .28-.05.54-.15.78-.26.6-.79 1.04-1.44 1.18Z"
                       fill="currentColor"></path>

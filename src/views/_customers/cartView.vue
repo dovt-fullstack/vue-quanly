@@ -22,7 +22,7 @@
                     :title="`Xóa ${product.title} khỏi đơn hàng`">XÓA</a>
                 </div>
                 <div class="oname">
-                  <h3>{{ product.productName }}</h3>
+                  <h3 style="font-size: 20px;">{{ product.productName }}</h3>
 
                   <label>{{ product.priceTotal?.toLocaleString() }}₫</label>
                   <h6>Cửa hàng: {{ product.storeName }}</h6>
@@ -551,11 +551,24 @@ export default defineComponent({
             Authorization: `Bearer ${token}`,
           },
         }
-      );
-      message.success(
-        "Đặt hàng thành công, hãy xem trạng thái đơn hàng của bạn"
-      );
-      fetchProduct();
+      ).then((response) => {
+          message.success(
+            "Đặt hàng thành công, hãy xem trạng thái đơn hàng của bạn"
+          );
+          fetchProduct();
+        })
+        .catch((error) => {
+          if (error.response && error.response.data) {
+          // Xử lý khi có lỗi từ phản hồi của API
+          console.error('Lỗi khi gọi API:', error.response.data.message);
+          message.error(error.response.data.message);
+        } else {
+          // Xử lý khi có lỗi khác, chẳng hạn mạng chập chờn
+          console.error('Đã xảy ra lỗi:', error.message);StringUtils.isEmpty(profileDetail.getAddress()) || StringUtils.isEmpty(profileDetail.getPhoneNumber())
+          message.error('Đã xảy ra lỗi');
+        }        
+      });
+
     };
     console.log(allTotal, "1");
     const deleteProduct = async (id) => {
@@ -1490,7 +1503,7 @@ a:focus {
   .tiplist h2,
   .tiplist h3,
   .tiplist h4 {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .blog {

@@ -3,18 +3,16 @@
     <CRow>
       <CCol :md="6" class="mb-4">
         <label for="month">Tháng:</label>
-        <input v-model="month" type="number" min="1" max="12" id="month" />
-
+        <a-input-number class="m-2" id="inputNumber" v-model:value="month" :min="1" :max="12" />  
         <label for="year">Năm:</label>
-        <input v-model="year" type="number" min="2000" id="year" />
-
-        <button @click="updateData">Cập nhật</button>
+        <a-input-number  class="m-2" id="inputNumber" v-model:value="year" :min="2000" :max="2024" />
+        <a-button type="primary" @click="updateData">Cập nhật</a-button>
       </CCol>
     </CRow>
     <CRow>
       <CCol :sm="12" class="mb-4">
         <CCard>
-          <CCardHeader>Thống kê doanh thu hàng ngày trong tháng:</CCardHeader>
+          <CCardHeader>Thống kê doanh thu hàng ngày trong tháng {{ month }} / {{ year }}</CCardHeader>
           <CCardBody>
             <CChart type="line" :data="chartData" :options="options" ref="mainChartRef"
               style="height: 300px; max-height: 300px; margin-top: 40px" />
@@ -56,7 +54,7 @@ export default defineComponent({
       labels: Array.from({ length: 31 }, (_, i) => (i + 1).toString()),
       datasets: [
         {
-          label: 'Doanh thu trong ngày',
+          label: `Doanh thu trong ngày `,
           backgroundColor: `rgba(${getStyle('--cui-info-rgb')}, .1)`,
           borderColor: getStyle('--cui-info'),
           pointHoverBackgroundColor: getStyle('--cui-info'),
@@ -75,6 +73,10 @@ export default defineComponent({
       },
       scales: {
         x: {
+          title: {
+            display: true,
+            text: 'Ngày',
+          },
           grid: {
             color: getStyle('--cui-border-color-translucent'),
             drawOnChartArea: false,
@@ -84,6 +86,10 @@ export default defineComponent({
           },
         },
         y: {
+          title: {
+            display: true,
+            text: 'VNĐ',
+          },
           beginAtZero: true,
           border: {
             color: getStyle('--cui-border-color-translucent'),

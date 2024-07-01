@@ -11,7 +11,7 @@
             <div class="col-6 d-flex justify-content-end" v-if="role === 'MANAGER'">
                 <!-- <a-button class="me-2"> -->
 
-                <a-select class="me-2" v-model:value="selectedType" style="width: 100%"
+                <a-select class="me-2" v-model:value="selectedType" style="width: 200px"
                     placeholder="Chọn loại sản phẩm" @change="handleChange" title="Chọn loại sản phẩm">
                     <a-select-option :value="allType">
                   Tất cả
@@ -20,8 +20,8 @@
                         :value="typee.productTypeName">
                         {{ typee.productTypeName }}
                     </a-select-option>
-                    <a-select-option  key="addNew" @click="handleAddNewType">
-                        Thêm mới
+                    <a-select-option style="background-color: azure;" key="addNew" @click="handleAddNewType">
+                        Thêm mới loại sản phẩm
                     </a-select-option>
                 </a-select>
 

@@ -1,29 +1,15 @@
 <template>
   <div id="wrapper">
-    <Header/>
+    <Header />
 
     <div id="main">
       <!--CSS-->
       <div class="orderbox">
         <h1 style="padding: 30px">Danh sách đơn đã đặt</h1>
         <div class="giohang orderhome">
-          <div class="row mb-3">
-          <div class="col-12">
-              <a-form @submit.prevent="onSearch">
-                  <a-form-item>
-                      <a-input placeholder="Tìm kiếm sản phẩm" v-model:value="searchKeyword" @pressEnter="onSearch" />
-                  </a-form-item>
-                  <a-button type="primary" @click="onSearch">Tìm kiếm</a-button>
-              </a-form>
-          </div>
-      </div>
           <form name="giohang" id="cart">
             <ul class="listcart">
-              <li
-                v-for="order in myOrder"
-                :key="order.orderDetailId"
-                class="cartitem"
-              >
+              <li v-for="order in myOrder" :key="order.orderDetailId" class="cartitem">
                 <div class="oimg">
                   <a>
                     <img :src="order.productImg" :alt="product.title" />
@@ -37,21 +23,12 @@
                   > -->
                 </div>
                 <div class="oname">
-                  <h3>{{ order.productName }}</h3>
+                  <h3 style="font-size: 20px;">{{ order.productName }}</h3>
                   <label>{{ order.orderStatusName }}</label>
 
-                  <label style="float: left"
-                    >{{ order.priceTotal?.toLocaleString() }}₫</label
-                  >
-                  <div
-                    v-if="order.orderStatusName == 'Đặt hàng thành công'"
-                    style="float: right"
-                  >
-                    <button
-                      type="button"
-                      @click="cancelOder(order.orderDetailId)"
-                      class="btn"
-                    >
+                  <p>{{ order.priceTotal?.toLocaleString() }}₫</p>
+                  <div v-if="order.orderStatusName == 'Đặt hàng thành công'" style="float: right">
+                    <button type="button" @click="cancelOder(order.orderDetailId)" class="btn">
                       Hủy đơn
                     </button>
                   </div>
@@ -65,19 +42,14 @@
               </div>
             </div> -->
 
-            <input
-              type="submit"
-              name="_w_action[UpdatePOST]"
-              style="display: none"
-            />
+            <input type="submit" name="_w_action[UpdatePOST]" style="display: none" />
             <input type="hidden" name="_w_action" value="UpdatePOST" />
           </form>
           <div class="col-12">
-                  <a-pagination @change="onChange" v-model:current="pageParam.currentPage" 
-                                :total="pageParam.totalItems" :pageSize="pageParam.pageSize"
-                                :show-total="(total, range) => `${range[0]}-${range[1]} của ${total} sản phẩm`"
-                                class="mt-2 text-end" />
-              </div>
+            <a-pagination @change="onChange" v-model:current="pageParam.currentPage" :total="pageParam.totalItems"
+              :pageSize="pageParam.pageSize"
+              :show-total="(total, range) => `${range[0]}-${range[1]} của ${total} sản phẩm`" class="mt-2 text-end" />
+          </div>
           <!-- <div class="fpanel">
             <div class="da">
               <p class="state">Đơn hàng đang được gửi ...</p>
@@ -100,12 +72,7 @@
         <div class="wrap flexJus">
           <div class="f flex">
             <div class="fotb" style="width: 30%; padding-right: 30px">
-              <img
-                src="https://denled.com/Content/img/logo-foot.png"
-                alt="Denled.com"
-                width="286"
-                height="60"
-              />
+              <img src="https://denled.com/Content/img/logo-foot.png" alt="Denled.com" width="286" height="60" />
             </div>
             <div class="fotb" style="width: 50%; padding: 0 40px 0 60px">
               <label>SHOWROOM</label>
@@ -117,8 +84,7 @@
                       <span>Địa chỉ 1 : </span>21C Trần Duy Hưng, Cầu Giấy, HN
                     </li>
                     <li>
-                      <span>Hotline : </span
-                      ><a href="tel:0933665115">0933.66.5115</a>
+                      <span>Hotline : </span><a href="tel:0933665115">0933.66.5115</a>
                     </li>
                   </ul>
                 </div>
@@ -128,27 +94,19 @@
               <label>THÔNG TIN - HƯỚNG DẪN</label>
               <ul>
                 <li>
-                  <a title="Giới Thiệu Hệ Thống" rel="nofollow" href="/"
-                    >Giới Thiệu Hệ Thống</a
-                  >
+                  <a title="Giới Thiệu Hệ Thống" rel="nofollow" href="/">Giới Thiệu Hệ Thống</a>
                 </li>
 
                 <li>
-                  <a title="Giao hàng &amp; Thanh toán" rel="nofollow" href="/"
-                    >Giao hàng &amp; Thanh toán</a
-                  >
+                  <a title="Giao hàng &amp; Thanh toán" rel="nofollow" href="/">Giao hàng &amp; Thanh toán</a>
                 </li>
 
                 <li>
-                  <a title="Hướng dẫn mua hàng Online" rel="nofollow" href="/"
-                    >Hướng dẫn mua hàng Online</a
-                  >
+                  <a title="Hướng dẫn mua hàng Online" rel="nofollow" href="/">Hướng dẫn mua hàng Online</a>
                 </li>
 
                 <li>
-                  <a title="Quy chế hoạt động" rel="nofollow" href="/"
-                    >Quy chế hoạt động</a
-                  >
+                  <a title="Quy chế hoạt động" rel="nofollow" href="/">Quy chế hoạt động</a>
                 </li>
               </ul>
             </div>
@@ -162,57 +120,27 @@
 
       <ul id="panel">
         <li>
-          <img
-            src="https://denled.com/Content/img/totop.svg"
-            alt="To top"
-            width="45"
-            height="45"
-          />
+          <img src="https://denled.com/Content/img/totop.svg" alt="To top" width="45" height="45" />
         </li>
         <li style="padding-top: 10px; padding-bottom: 10px">
-          <img
-            alt="Messenger"
-            src="https://denled.com/Content/img/messenger.svg"
-            width="45"
-            height="45"
-          />
+          <img alt="Messenger" src="https://denled.com/Content/img/messenger.svg" width="45" height="45" />
         </li>
 
         <li>
-          <img
-            alt="Phone"
-            src="https://denled.com/Content/img/phone.svg"
-            width="45"
-            height="45"
-          />
+          <img alt="Phone" src="https://denled.com/Content/img/phone.svg" width="45" height="45" />
         </li>
       </ul>
-      <div
-        class="zalo-chat-widget"
-        data-oaid="2839194858446814357"
+      <div class="zalo-chat-widget" data-oaid="2839194858446814357"
         data-welcome-message="Rất vui khi được hỗ trợ bạn!. Nếu bạn không thể chờ thì hãy gọi hoặc nhắn tin đến số điện thoại này 0973.66.5115."
-        data-autopopup="1800"
-        data-width="500"
-        data-height="500"
-        style="right: 12px"
-      ></div>
+        data-autopopup="1800" data-width="500" data-height="500" style="right: 12px"></div>
     </div>
     <div>
-      <a-drawer
-        title="Danh sách đơn hàng đã đặt"
-        :visible="isDrawerVisible"
-        :width="850"
-        @close="handleClose"
-        :destroyOnClose="true"
-      >
+      <a-drawer title="Danh sách đơn hàng đã đặt" :visible="isDrawerVisible" :width="850" @close="handleClose"
+        :destroyOnClose="true">
         <div class="giohang orderhome">
           <form name="giohang" id="cart">
             <ul class="listcart">
-              <li
-                v-for="order in myOrder"
-                :key="order.orderDetailId"
-                class="cartitem"
-              >
+              <li v-for="order in myOrder" :key="order.orderDetailId" class="cartitem">
                 <div class="oimg">
                   <a>
                     <img :src="order.productImg" :alt="product.title" />
@@ -229,18 +157,9 @@
                   <h3>{{ order.productName }}</h3>
                   <label>{{ order.orderStatusName }}</label>
 
-                  <label style="float: left"
-                    >{{ order.priceTotal?.toLocaleString() }}₫</label
-                  >
-                  <div
-                    v-if="order.orderStatusName == 'Đặt hàng thành công'"
-                    style="float: right"
-                  >
-                    <button
-                      type="button"
-                      @click="cancelOder(order.orderDetailId)"
-                      class="btn"
-                    >
+                  <label style="float: left">{{ order.priceTotal?.toLocaleString() }}₫</label>
+                  <div v-if="order.orderStatusName == 'Đặt hàng thành công'" style="float: right">
+                    <button type="button" @click="cancelOder(order.orderDetailId)" class="btn">
                       Hủy đơn
                     </button>
                   </div>
@@ -254,11 +173,7 @@
               </div>
             </div> -->
 
-            <input
-              type="submit"
-              name="_w_action[UpdatePOST]"
-              style="display: none"
-            />
+            <input type="submit" name="_w_action[UpdatePOST]" style="display: none" />
             <input type="hidden" name="_w_action" value="UpdatePOST" />
           </form>
 
@@ -278,21 +193,12 @@
           </div> -->
         </div>
       </a-drawer>
-      <a-drawer
-        title="Danh sách cửa hàng bạn thích"
-        :visible="isDrawerVisible2"
-        :width="850"
-        @close="handleClose2"
-        :destroyOnClose="true"
-      >
+      <a-drawer title="Danh sách cửa hàng bạn thích" :visible="isDrawerVisible2" :width="850" @close="handleClose2"
+        :destroyOnClose="true">
         <div class="giohang orderhome">
           <form name="giohang" id="cart">
             <ul class="listcart">
-              <li
-                v-for="product in myFarve"
-                :key="product.orderDetailId"
-                class="cartitem"
-              >
+              <li v-for="product in myFarve" :key="product.orderDetailId" class="cartitem">
                 <div class="oimg">
                   <a>
                     <img :src="product.image" :alt="product.title" />
@@ -304,22 +210,14 @@
                   <p>{{ product.storeAddress }}</p>
 
                   <div style="float: right">
-                    <button
-                      type="button"
-                      @click="cancelOderMyFarvor(product.storeId)"
-                      class="btn"
-                    >
+                    <button type="button" @click="cancelOderMyFarvor(product.storeId)" class="btn">
                       Hủy thích
                     </button>
                   </div>
                 </div>
               </li>
             </ul>
-            <input
-              type="submit"
-              name="_w_action[UpdatePOST]"
-              style="display: none"
-            />
+            <input type="submit" name="_w_action[UpdatePOST]" style="display: none" />
             <input type="hidden" name="_w_action" value="UpdatePOST" />
           </form>
         </div>
@@ -380,12 +278,12 @@ export default defineComponent({
     const myOrder = ref([]);
     // https://charismatic-friendship-production.up.railway.app/api/v1/customer/cartitem/view
     const searchKeyword = ref("");
-  const pageParam = reactive({
-    currentPage: 1,
-    pageSize: 10,
-    totalItems: 0,
-    totalPages: 0
-  });
+    const pageParam = reactive({
+      currentPage: 1,
+      pageSize: 10,
+      totalItems: 0,
+      totalPages: 0
+    });
     const showDrawer = () => {
       isDrawerVisible.value = true;
     };
@@ -477,7 +375,7 @@ export default defineComponent({
           `${apiPrefix}/api/v1/customer/orderdetail/view`,
           {
             headers: { Authorization: `Bearer ${token}` },
-        params: { page, size, keyword }
+            params: { page, size, keyword }
           }
         );
         console.log(response.data, "data");
@@ -489,14 +387,14 @@ export default defineComponent({
       }
     };
     const onChange = (page, pageSize) => {
-    pageParam.currentPage = page;
-    pageParam.pageSize = pageSize;
-    fetchMyOrder(page, pageSize, searchKeyword.value);
-  };
-  const onSearch = () => {
-    pageParam.currentPage = 1;
-    fetchMyOrder(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
-  };
+      pageParam.currentPage = page;
+      pageParam.pageSize = pageSize;
+      fetchMyOrder(page, pageSize, searchKeyword.value);
+    };
+    const onSearch = () => {
+      pageParam.currentPage = 1;
+      fetchMyOrder(pageParam.currentPage, pageParam.pageSize, searchKeyword.value);
+    };
     // https://charismatic-friendship-production.up.railway.app/api/v1/customer/orderdetail/view
     const byProductCart = async (idCart) => {
       const formData = new FormData();
@@ -627,8 +525,8 @@ export default defineComponent({
       myFarve,
       cancelOder,
       searchKeyword,
-    onChange,
-    onSearch,
+      onChange,
+      onSearch,
     };
   },
 });
@@ -647,13 +545,11 @@ export default defineComponent({
 @font-face {
   font-family: "FontAwesome";
   src: url("/Content/awesome/fontawesome-webfont.eot?v=4.4.0");
-  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0")
-      format("embedded-opentype"),
+  src: url("/Content/awesome/fontawesome-webfont.eot?#iefix&v=4.4.0") format("embedded-opentype"),
     url("/Content/awesome/fontawesome-webfont.woff2?v=4.4.0") format("woff2"),
     url("/Content/awesome/fontawesome-webfont.woff?v=4.4.0") format("woff"),
     url("/Content/awesome/fontawesome-webfont.ttf?v=4.4.0") format("truetype"),
-    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular")
-      format("svg");
+    url("/Content/awesome/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -1357,6 +1253,7 @@ a:focus {
   flex: 0 0 100px;
   display: inline-block;
 }
+
 .vcart2:before {
   font: 21px/1 FontAwesome;
   padding-right: 2px;
@@ -1369,6 +1266,7 @@ a:focus {
   position: relative;
   font-size: 18px;
 }
+
 /*list*/
 .tiplist {
   display: table;
@@ -1427,6 +1325,7 @@ a:focus {
 }
 
 @media screen and (max-width: 415px) {
+
   .tiplist h2,
   .tiplist h3,
   .tiplist h4 {
@@ -1886,8 +1785,7 @@ textarea {
 }
 
 /*beadcrum*/
-.beadcrum {
-}
+.beadcrum {}
 
 .beadcrum li {
   display: inline-block;
@@ -1971,16 +1869,17 @@ textarea {
   border-radius: 5px;
   color: #fff;
   text-align: center;
-  cursor: pointer; /* Thêm con trỏ dạng bàn tay */
-  transition: background 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt */
+  cursor: pointer;
+  /* Thêm con trỏ dạng bàn tay */
+  transition: background 0.3s ease;
+  /* Thêm hiệu ứng chuyển đổi mượt */
 }
 
 .bynow:hover {
-  background: -webkit-linear-gradient(
-    top,
-    #fb7d0f,
-    #ffa103
-  ); /* Thay đổi màu khi trỏ chuột vào */
+  background: -webkit-linear-gradient(top,
+      #fb7d0f,
+      #ffa103);
+  /* Thay đổi màu khi trỏ chuột vào */
 }
 
 .od span {

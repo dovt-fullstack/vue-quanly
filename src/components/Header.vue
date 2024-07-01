@@ -47,9 +47,17 @@
 
                 <a-menu-item>
                   <router-link :to="{ name: 'profile-user' }">
-                    <span>Trang cá nhân</span>
+                    <span v-if=" userLocal.role == 'MANAGER' ">Thông tin cửa hàng</span>
+                    <span v-else >Trang cá nhân</span>
                   </router-link>
                 </a-menu-item>
+
+                <!-- <a-menu-item v-if="userLocal.role === 'MANAGER'">
+                  <router-link :to="{ name: 'profile-store' }">
+                    <span>Thông tin cửa hàng</span>
+                  </router-link>
+                </a-menu-item> -->
+
 
                 <a-menu-item>
                   <a @click="handleClickLogout" style="color: red;">Đăng xuất</a>

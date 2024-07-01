@@ -3,18 +3,17 @@
     <CRow>
       <CCol :md="6" class="mb-4">
         <label for="month">Tháng:</label>
-        <input v-model="month" type="number" min="1" max="12" id="month" />
-        
+        <a-input-number class="m-2" id="inputNumber" v-model:value="month" :min="1" :max="12" />  
         <label for="year">Năm:</label>
-        <input v-model="year" type="number" min="2000" id="year" />
-        
-        <button @click="updateData">Cập nhật</button>
+        <a-input-number  class="m-2" id="inputNumber" v-model:value="year" :min="2000" :max="2024" />
+        <a-button type="primary" @click="updateData">Cập nhật</a-button>
+
       </CCol>
     </CRow>
     <CRow>
       <CCol :md="6" class="mb-4">
         <CCard>
-          <CCardHeader>Thống kê sản phẩm trong tháng:</CCardHeader>
+          <CCardHeader>Thống kê sản phẩm trong tháng {{ month }} / {{ year }}</CCardHeader>
           <CCardBody>
             <CChartDoughnut :data="chartData" />
           </CCardBody>

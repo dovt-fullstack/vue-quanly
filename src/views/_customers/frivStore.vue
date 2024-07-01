@@ -21,7 +21,7 @@
                   </a>
                 </div>
                 <div class="oname">
-                  <h3>{{ product.storeName }}</h3>
+                  <h3 style="font-size: 20px;">{{ product.storeName }}</h3>
                   <label>{{ product.orderStatusName }}</label>
                   <p>{{ product.storeAddress }}</p>
 
@@ -46,7 +46,7 @@
           </form>
         </div>
       </div>
-      <div class="col-12">
+      <!-- <div class="col-12">
         <a-pagination
           @change="onChange"
           v-model:current="pageParam.currentPage"
@@ -57,7 +57,7 @@
           "
           class="mt-2 text-end"
         />
-      </div>
+      </div> -->
     </div>
     <div id="footer">
       <div class="f" style="padding: 40px 0">
@@ -348,7 +348,7 @@ export default defineComponent({
     const searchKeyword = ref("");
     const pageParam = reactive({
       currentPage: 1,
-      pageSize: 10,
+      pageSize: 100,
       totalItems: 0,
       totalPages: 0,
     });

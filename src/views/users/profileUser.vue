@@ -7,20 +7,21 @@
       <div class="card-body">
         <h2 class="user-name">{{ userData.firstname }} {{ userData.lastname }}</h2>
         <div class="user-info">
-          <p><strong>Họ:</strong> {{ userData.firstname || 'N/A' }}</p>
-          <p><strong>Tên:</strong> {{ userData.lastname || 'N/A' }}</p>
+          <p v-if="userNow.role == 'MANAGER' "><strong >Tên cửa hàng: </strong>{{ storeInfo != null ? storeInfo.storeName : 'N/A' }}</p>
+          <p  v-if="userNow.role != 'MANAGER' "><strong>Họ:</strong> {{ userData.firstname || 'N/A' }}</p>
+          <p  v-if="userNow.role != 'MANAGER' "><strong>Tên:</strong> {{ userData.lastname || 'N/A' }}</p>
           <p><strong>Số điện thoại:</strong> {{ userData.phoneNumber || 'N/A' }}</p>
-          <p><strong>Địa chỉ:</strong> {{ userData.address || 'N/A' }}</p>
+          <p><strong v-if="userNow.role !== 'MANAGER' ">Địa chỉ :</strong> <strong v-else>Địa chỉ cửa hàng:</strong> {{ userData.address || 'N/A' }}</p>
           <p><strong>Mạng xã hội:</strong> {{ userData.socialContact || 'N/A' }}</p>
         </div>
       </div>
       <div class="d-flex">
         <div class="card-footer">
-        <button @click="showModal" class="edit-button">Chỉnh sửa</button>
-      </div>
-      <div class="card-footer">
-        <button @click="showModal2" class="edit-button">Đổi mật khẩu</button>
-      </div>
+          <button @click="showModal" class="edit-button">Chỉnh sửa</button>
+        </div>
+        <div class="card-footer">
+          <button @click="showModal2" class="edit-button">Đổi mật khẩu</button>
+        </div>
       </div>
 
 
@@ -29,17 +30,19 @@
 
     <a-modal v-model:visible="isModalVisible2" title="Đổi mật khẩu" @ok="handleChangePass" @cancel="handleCancel">
       <a-form :form="form2" layout="vertical">
-    <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 26 }">
-      <a-input-password v-model:value="formDataChangePass.oldPass" label="Mật khẩu cũ" placeholder="Mật khẩu cũ" />
-    </a-form-item>
-    <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 26 }">
-      <a-input-password v-model:value="formDataChangePass.newPass" label="Mật khẩu mới" placeholder="Mật khẩu mới" />
-    </a-form-item>
-    <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 26 }">
-      <a-input-password v-model:value="formDataChangePass.confirmNewPass" label="Nhập lại mật khẩu mới" placeholder="Nhập lại mật khẩu mới" />
-    </a-form-item>
-  </a-form>
-  </a-modal>
+        <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 26 }">
+          <a-input-password v-model:value="formDataChangePass.oldPass" label="Mật khẩu cũ" placeholder="Mật khẩu cũ" />
+        </a-form-item>
+        <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 26 }">
+          <a-input-password v-model:value="formDataChangePass.newPass" label="Mật khẩu mới"
+            placeholder="Mật khẩu mới" />
+        </a-form-item>
+        <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 26 }">
+          <a-input-password v-model:value="formDataChangePass.confirmNewPass" label="Nhập lại mật khẩu mới"
+            placeholder="Nhập lại mật khẩu mới" />
+        </a-form-item>
+      </a-form>
+    </a-modal>
 
 
     <a-modal v-model:visible="isModalVisible" title="Chỉnh sửa thông tin" @ok="handleOk" @cancel="handleCancel">
@@ -53,29 +56,55 @@
         <a-form-item label="Số điện thoại">
           <a-input v-model:value="formData.phoneNumber" @input="handleInputChange('phoneNumber', $event)" />
         </a-form-item>
+
         <a-form-item label="Địa chỉ">
+      <a-select v-model:value="selectedProvince" show-search placeholder="Chọn tỉnh thành" 
+        :options="provinceOptions" :filter-option="filterOption" @focus="handleFocus" @blur="handleBlur"
+        @change="fetchProvinces" style="margin-bottom: 10px;"></a-select> 
+
+        <a-select v-model:value="selectedDistrict" show-search placeholder="Chọn quận huyện" 
+        :options="districtOptions" :filter-option="filterOption" @focus="handleFocus" @blur="handleBlur"
+        @change="fetchDistricts" style="margin-bottom: 10px;"></a-select> 
+
+        
+        <a-select v-model:value="selectedWard" show-search placeholder="Chọn phường xã" 
+        :options="wardOptions" :filter-option="filterOption" @focus="handleFocus" @blur="handleBlur"
+        @change="fetchWards" style="margin-bottom: 10px;"></a-select> 
+
+        <a-input v-model:value="houseNumber" placeholder="Số nhà" @input="updateAddress"/>
+
+
+
+    </a-form-item>
+
+
+
+
+        <!-- <a-form-item label="Địa chỉ">
           <div class="css_select_div">
-  <select class="css_select" v-model="selectedProvince" @change="fetchDistricts" title="Chọn Tỉnh Thành">
-    <option value="0">Tỉnh Thành</option>
-    <option v-for="province in provinces" :key="province.id" :value="province.id">{{ province.full_name }}</option>
-  </select>
-  <select class="css_select" v-model="selectedDistrict" @change="fetchWards" title="Chọn Quận Huyện">
-    <option value="0">Quận Huyện</option>
-    <option v-for="district in districts" :key="district.id" :value="district.id">{{ district.full_name }}</option>
-  </select>
-  <select class="css_select" v-model="selectedWard" @change="updateAddress" title="Chọn Phường Xã">
-    <option value="0">Phường Xã</option>
-    <option v-for="ward in wards" :key="ward.id" :value="ward.id">{{ ward.full_name }}</option>
-  </select>
-  <input type="text" v-model="houseNumber" @input="updateAddress" placeholder="Số nhà" />
-</div>
-</a-form-item>
-        <a-form-item label="Ảnh đại diện mới" >
+            <select class="css_select" v-model="selectedProvince" @change="fetchDistricts" title="Chọn Tỉnh Thành">
+              <option value="0">Tỉnh Thành</option>
+              <option v-for="province in provinces" :key="province.id" :value="province.id">{{ province.full_name }}
+              </option>
+            </select>
+            <select class="css_select" v-model="selectedDistrict" @change="fetchWards" title="Chọn Quận Huyện">
+              <option value="0">Quận Huyện</option>
+              <option v-for="district in districts" :key="district.id" :value="district.id">{{ district.full_name }}
+              </option>
+            </select>
+            <select class="css_select" v-model="selectedWard" @change="updateAddress" title="Chọn Phường Xã">
+              <option value="0">Phường Xã</option>
+              <option v-for="ward in wards" :key="ward.id" :value="ward.id">{{ ward.full_name }}</option>
+            </select>
+            <input type="text" v-model="houseNumber" @input="updateAddress" placeholder="Số nhà" />
+          </div>
+        </a-form-item> -->
+        <a-form-item label="Ảnh đại diện mới">
           <input type="file" @change="previewFiles" />
-  <div class="avatar-container">
-    <img v-if="newImage" :src="newImage" class="avatar" alt="avatar" />
-    <img v-else :src="userData.avatar" class="avatar" alt="avatar" />
-  </div>
+          <div class="avatar-container">
+            <img v-if="newImage" :src="newImage" class="avatar" alt="avatar" />
+            <img v-else :src="userData.avatar" class="avatar" alt="avatar" />
+          </div>
         </a-form-item>
       </a-form>
     </a-modal>
@@ -83,7 +112,7 @@
 </template>
 
 <script>
-import { ref, onMounted,computed  } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import { message } from 'ant-design-vue';
 
@@ -93,6 +122,25 @@ export default {
     const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const isModalVisible = ref(false);
     const isModalVisible2 = ref(false);
+    const userNow = JSON.parse(localStorage.getItem('auth')); 
+    const token = JSON.parse(localStorage.getItem('token'));  // Lấy token từ localStorage
+
+    // Lấy token từ localStorage
+    const storeInfo = ref();
+    const getStoreInfo = async () => {
+      if(userNow.role == 'MANAGER'){
+        const response = await axios.get(
+           `${apiPrefix}/api/v1/management/${userNow.storeId}/info/view`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        storeInfo.value = response.data.data;
+
+      }
+    }
 
     const form = ref(null);
     const form2 = ref(null);
@@ -108,16 +156,45 @@ export default {
       newPass: '',
       confirmNewPass: '',
     });
+    const options = ref([
+  {
+    value: 'jack',
+    label: 'Jack',
+  },
+  {
+    value: 'lucy',
+    label: 'Lucy',
+  },
+  {
+    value: 'tom',
+    label: 'Tom',
+  },
+]);
+
+
+const handleChange = value => {
+  console.log(`selected ${value}`);
+};
+const handleBlur = () => {
+  console.log('blur');
+};
+const handleFocus = () => {
+  console.log('focus');
+};
+const filterOption = (input, option) => {
+  return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+};
+const value = ref(undefined);
 
     const avatarFile = ref(null); // Store the file object
     const newImage = ref(''); // Store the base64 URL
     const provinces = ref([]);
     const districts = ref([]);
     const wards = ref([]);
-    const selectedProvince = ref('0');
-    const selectedDistrict = ref('0');
-    const selectedWard = ref('0');
-    const houseNumber = ref('');
+    const selectedProvince = ref(null);
+    const selectedDistrict = ref(null);
+    const selectedWard = ref(null);
+    const houseNumber = ref(null);
     const isOldPassVisible = ref(false);
     const isNewPassVisible = ref(false);
     const isConfirmNewPassVisible = ref(false);
@@ -205,27 +282,37 @@ export default {
     //   }
     //   return '';
     // });
-
+    const provinceOptions = ref([]);
     const fetchProvinces = async () => {
       try {
         const response = await axios.get("https://esgoo.net/api-tinhthanh/1/0.htm");
         if (response.data.error === 0) {
-          provinces.value = response.data.data;
+          // provinces.value = response.data.data;
+          // provinces.value = data.map(province => ({ value: province.full_name }));
+          provinceOptions.value = response.data.data.map(province => ({
+            value: province.id,
+            label: province.full_name,
+          }));
+          fetchDistricts();
         }
       } catch (error) {
         console.error(error);
       }
     };
-
+    const districtOptions = ref([]);
     const fetchDistricts = async () => {
       if (selectedProvince.value !== '0') {
         try {
           const response = await axios.get(`https://esgoo.net/api-tinhthanh/2/${selectedProvince.value}.htm`);
           if (response.data.error === 0) {
-            districts.value = response.data.data;
-            wards.value = [];
-            selectedDistrict.value = '0';
-            selectedWard.value = '0';
+            districtOptions.value = response.data.data.map(district => ({
+            value: district.id,
+            label: district.full_name,
+          }));
+            // wards.value = [];
+            // selectedDistrict.value = '0';
+            // selectedWard.value = '0';
+            fetchWards();
             updateAddress();
           }
         } catch (error) {
@@ -233,14 +320,18 @@ export default {
         }
       }
     };
+    const wardOptions = ref([]);
 
     const fetchWards = async () => {
       if (selectedDistrict.value !== '0') {
         try {
           const response = await axios.get(`https://esgoo.net/api-tinhthanh/3/${selectedDistrict.value}.htm`);
           if (response.data.error === 0) {
-            wards.value = response.data.data;
-            selectedWard.value = '0';
+            wardOptions.value = response.data.data.map(ward => ({
+            value: ward.id,
+            label: ward.full_name,
+          }));            
+          
             updateAddress();
           }
         } catch (error) {
@@ -250,15 +341,16 @@ export default {
     };
 
     const updateAddress = () => {
-      const provinceName = provinces.value.find(p => p.id === selectedProvince.value)?.full_name || '';
-      const districtName = districts.value.find(d => d.id === selectedDistrict.value)?.full_name || '';
-      const wardName = wards.value.find(w => w.id === selectedWard.value)?.full_name || '';
+      const provinceName = provinceOptions.value.find(p => p.value === selectedProvince.value)?.label || '';
+
+
+      const districtName = districtOptions.value.find(d => d.value === selectedDistrict.value)?.label || '';
+      const wardName = wardOptions.value.find(w => w.value === selectedWard.value)?.label || '';
       formData.value.address = `${houseNumber.value}, ${wardName}, ${districtName}, ${provinceName}`.trim();
     };
 
     const getUserData = async () => {
       try {
-        const token = JSON.parse(localStorage.getItem('token'));  // Lấy token từ localStorage
         const response = await axios.get(`${apiPrefix}/api/v1/account/profile/view`, {
           headers: {
             Authorization: `Bearer ${token}`  // Thêm token vào headers
@@ -302,7 +394,7 @@ export default {
     const showModal2 = () => {
       isModalVisible2.value = true;
     };
-    const handleChangePass =  async () => {
+    const handleChangePass = async () => {
       const oldPass = formDataChangePass.value.oldPass;
       const newPass = formDataChangePass.value.newPass;
       const confirmNewPass = formDataChangePass.value.confirmNewPass;
@@ -322,12 +414,12 @@ export default {
       }
 
       try {
-        
+
         const token = JSON.parse(localStorage.getItem('token'));
         const newValue = {
           oldPassword: formDataChangePass.value.oldPass,
           newPassword: formDataChangePass.value.newPass,
-      };
+        };
 
         await axios.post(`${apiPrefix}/api/v1/auth/changepassword`, newValue, {
           headers: {
@@ -342,7 +434,7 @@ export default {
         formDataChangePass.value.confirmNewPass = '';
 
 
-      }catch (error) {
+      } catch (error) {
         if (error.response && error.response.data) {
           message.error(error.response.data);
         } else {
@@ -385,6 +477,7 @@ export default {
     };
 
     onMounted(() => {
+      getStoreInfo();
       getUserData();
       fetchProvinces();
 
@@ -392,6 +485,16 @@ export default {
 
     return {
       userData,
+      handleChange,
+      provinceOptions,
+      wardOptions,
+      districtOptions,
+      storeInfo,
+      options,
+      value,
+      handleBlur,
+      handleFocus,
+      filterOption,
       isModalVisible,
       isModalVisible2,
       form,
@@ -404,6 +507,7 @@ export default {
       showModal,
       showModal2,
       handleOk,
+      userNow,
       handleChangePass,
       handleCancel,
       handleInputChange,
