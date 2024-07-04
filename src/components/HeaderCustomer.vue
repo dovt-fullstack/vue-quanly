@@ -4,11 +4,11 @@
 
       <div class="wrap flexJus">
         <router-link to="/trang-chu-stores">
-          <span title="Siêu thị Agogo">
-            <img width="60" height="60"
-              src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1718287579/ftld80xpfribbbfhp1qu.png"
-              alt="Siêu thị đèn LED" />
-          </span>
+          <div class="logo-container">
+      <div class="logo-icon">
+        <img src="https://res.cloudinary.com/dqvr7kat6/image/upload/v1720022364/yyqubml5cvkswkuqxcfd.webp" alt="Logo Icon">
+      </div>
+    </div>
         </router-link>
         <div class="d-flex align-items-center">
           <div class="open">
@@ -16,9 +16,9 @@
               <router-link v-if="!userLocal" to="/login">
                 <span> Đăng nhập </span>
               </router-link>
-              <a-dropdown >
+              <a-dropdown>
                 <span class="ant-dropdown-link d-block" style="height: 40px;" @click.prevent>
-                  <span class="me-1 " style="padding-top: 14px;" >Xin chào {{ userLocal?.lastname }}</span>
+                  <span class="me-1 " style="padding-top: 14px;">Xin chào {{ userLocal?.lastname }}</span>
                   <i class="fa-solid "></i>
                 </span>
                 <template #overlay>
@@ -47,14 +47,14 @@
           <div class="">
             <div>
               <div>
-                <a-button style="background-color: black;border-color: black;" type="primary" @click="showDrawer">
+                <a-button style="background-color: #1a1d2a;border-color: #1a1d2a;" type="primary" @click="showDrawer">
                   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     font-size="24" style="color: #ffd52f">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M18 10.5c0-3.07-1.14-5.64-4-6.32V2h-4v2.18c-2.87.68-4 3.24-4 6.32V16l-2 1v2h16v-2l-2-1v-5.5Zm-5.6 11.46A2.014 2.014 0 0 1 9.99 20h4c0 .28-.05.54-.15.78-.26.6-.79 1.04-1.44 1.18Z"
                       fill="currentColor"></path>
                   </svg>
-                  <a-badge :count="unreadCount" offset="[10, 0]">
+                  <a-badge :count="unreadCount">
                   </a-badge>
                 </a-button>
               </div>
@@ -63,9 +63,10 @@
                 <a-list item-layout="horizontal" :data-source="notiLists">
                   <template #renderItem="{ item }">
                     <a-list-item :style="{
+                border: '1px solid',
                 marginTop: '10px',
                 backgroundColor: item.notiStatus ? '#ffffff' : '#d3d3d3',
-              }"> <a-list-item-meta>
+              }"> <a-list-item-meta style="padding-left: 10px;">
                         <template #title>
                           <h6>{{ item.description }}</h6>
                         </template>
@@ -93,19 +94,19 @@
           <span style="font: bold 15px arial">Hãy cùng mua sắm nào!</span>
         </div>
         <div class="flexJus">
-          <router-link to="/frivStore">
+          <router-link to="/favstore" title="Cửa hàng yêu thích của bạn">
             <div class="vcart2">
               <i class="fa-solid fa-store"></i>
             </div>
           </router-link>
 
-          <router-link to="/trang-chu/gio-hang">
+          <router-link to="/trang-chu/gio-hang" title="Giỏ hàng của bạn">
             <div class="vcart2">
               <i class="fa-solid fa-cart-shopping"></i>
             </div>
           </router-link>
 
-          <router-link to="/ordered">
+          <router-link to="/ordered" title="Đơn hàng của bạn">
             <div class="vcart2">
               <i class="fa-regular fa-rectangle-list"></i>
             </div>
@@ -164,6 +165,7 @@ export default defineComponent({
         })
         .then((response) => {
           console.log(response.data.data, "noti");
+          unreadCount = 0;
         })
         .catch((error) => {
           console.error(error);
@@ -236,11 +238,25 @@ export default defineComponent({
 </script>
 
 <style scoped>
-#header,
-.btn2 {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+a {
+  text-decoration: none;
+  /* Bỏ gạch chân */
 }
+.logo-container {
+      display: flex;
+      align-items: center;
+    }
+    .logo-icon img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+
+    a {
+      text-decoration: none; /* Bỏ gạch chân */
+    }
 
 #header {
   width: 100%;
@@ -250,12 +266,12 @@ export default defineComponent({
 
 .head1 {
   padding: 15px 0;
-  background: #000;
+  background: #1a1d2a;
   position: relative;
 }
 
 .head2 {
-  background: #ffd52f;
+  background: #ffcc00;
 }
 
 .wrap {
@@ -303,7 +319,7 @@ export default defineComponent({
 }
 
 .vcart2 {
-  color: #000;
+  color: #1a1d2a;
   padding-left: 14px;
   cursor: pointer;
   position: relative;

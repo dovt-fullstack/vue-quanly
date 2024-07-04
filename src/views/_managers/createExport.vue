@@ -24,9 +24,9 @@
 
 
 
-              <a-form-item ref="userName" label="Tên sản phẩm" required name="userName">
+              <a-form-item ref="ProductName" label="Tên sản phẩm" required name="ProductName">
                 <a-auto-complete
-    v-model:value="formState.userName"
+    v-model:value="formState.ProductName"
     :options="autoCompleteOptions"
     placeholder="input here"
     :filter-option="filterOption"
@@ -36,8 +36,8 @@
                 <!-- <a-input v-model:value="formState.userName" />
                 <small v-if="errors && errors.UserName" class="text-danger">{{ errors.UserName[0] }}</small> -->
               </a-form-item>
-              <a-form-item ref="fullName" label="Giá nhập" required name="fullName">
-                <a-input v-model:value="formState.fullName" />
+              <a-form-item ref="ImportPrice" label="Giá nhập" required name="ImportPrice">
+                <a-input v-model:value="formState.ImportPrice" />
                 <small v-if="errors && errors.FullName" class="text-danger">{{ errors.FullName[0] }}</small>
               </a-form-item>
 
@@ -51,7 +51,7 @@
                 <small v-if="errors && errors.priceOut" class="text-danger">{{ errors.priceOut[0] }}</small>
               </a-form-item>
 
-              <a-form-item ref="productTypeName" label="Loại sản phẩm" name="productTypeId">
+              <a-form-item ref="productTypeName" label="Loại sản phẩm" required name="productTypeName">
                 <a-select v-model:value="formState.productTypeName" style="width: 100%" placeholder="Chọn loại sản phẩm"
                   @change="handleChange">
                   <a-select-option v-for="typee in productTypes" :key="typee.productTypeName"
@@ -113,8 +113,8 @@ export default defineComponent({
     const id = route.params.id
     const formState = reactive({
       productTypeId: "",
-      userName: '',
-      fullName: '',
+      ProductName: '',
+      ImportPrice: '',
       email: '',
       passWord: '',
       quantity: '',
@@ -218,15 +218,15 @@ const autoCompleteOptions = ref([]);
     //
     const createUsers = () => {
       const newDataPost = {
-        productname: formState.userName,
-        priceIn: formState.fullName,
+        productname: formState.ProductName,
+        priceIn: formState.ImportPrice,
         quantity: formState.quantity,
         priceOut: formState.priceOut,
         productTypename: formState.productTypename
       }
       const formData = new FormData();
-      formData.append("productname", formState.userName);
-      formData.append("priceIn", formState.fullName);
+      formData.append("productname", formState.ProductName);
+      formData.append("priceIn", formState.ImportPrice);
       formData.append("quantity", formState.quantity);
       formData.append("priceOut", formState.priceOut);
       formData.append("producttypename", formState.productTypeName);

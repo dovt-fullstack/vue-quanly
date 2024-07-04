@@ -6,19 +6,7 @@
           <a-breadcrumb-item>Danh sách khách hàng cửa hàng</a-breadcrumb-item>
         </a-breadcrumb>
       </div>
-      <div class="col-6 d-flex justify-content-end">
-        <a-button class="me-2">
-          <i class="fa-solid fa-vials"></i>
-        </a-button>
-        <a-button class="me-2">
-          <i class="fa-solid fa-vial-virus"></i>
-        </a-button>
-        <a-button type="primary" title="Thêm mới">
-          <router-link :to="{ name: 'admin-store-create' }">
-            <i class="fa-solid fa-plus"></i>
-          </router-link>
-        </a-button>
-      </div>
+
     </div>
     <div class="row mb-3">
       <div class="col-12">

@@ -7,11 +7,13 @@
       <div class="card-body">
         <h2 class="user-name">{{ userData.firstname }} {{ userData.lastname }}</h2>
         <div class="user-info">
-          <p v-if="userNow.role == 'MANAGER' "><strong >Tên cửa hàng: </strong>{{ storeInfo != null ? storeInfo.storeName : 'N/A' }}</p>
-          <p  v-if="userNow.role != 'MANAGER' "><strong>Họ:</strong> {{ userData.firstname || 'N/A' }}</p>
-          <p  v-if="userNow.role != 'MANAGER' "><strong>Tên:</strong> {{ userData.lastname || 'N/A' }}</p>
+          <p v-if="userNow.role == 'MANAGER'"><strong>Tên cửa hàng: </strong>{{ storeInfo != null ? storeInfo.storeName
+      : 'N/A' }}</p>
+          <p v-if="userNow.role != 'MANAGER'"><strong>Họ:</strong> {{ userData.firstname || 'N/A' }}</p>
+          <p v-if="userNow.role != 'MANAGER'"><strong>Tên:</strong> {{ userData.lastname || 'N/A' }}</p>
           <p><strong>Số điện thoại:</strong> {{ userData.phoneNumber || 'N/A' }}</p>
-          <p><strong v-if="userNow.role !== 'MANAGER' ">Địa chỉ :</strong> <strong v-else>Địa chỉ cửa hàng:</strong> {{ userData.address || 'N/A' }}</p>
+          <p><strong v-if="userNow.role !== 'MANAGER'">Địa chỉ :</strong> <strong v-else>Địa chỉ cửa hàng:</strong> {{
+      userData.address || 'N/A' }}</p>
           <p><strong>Mạng xã hội:</strong> {{ userData.socialContact || 'N/A' }}</p>
         </div>
       </div>
@@ -58,24 +60,24 @@
         </a-form-item>
 
         <a-form-item label="Địa chỉ">
-      <a-select v-model:value="selectedProvince" show-search placeholder="Chọn tỉnh thành" 
-        :options="provinceOptions" :filter-option="filterOption" @focus="handleFocus" @blur="handleBlur"
-        @change="fetchProvinces" style="margin-bottom: 10px;"></a-select> 
+          <a-select v-model:value="selectedProvince" show-search placeholder="Chọn tỉnh thành"
+            :options="provinceOptions" :filter-option="filterOption" @focus="handleFocus" @blur="handleBlur"
+            @change="fetchProvinces" style="margin-bottom: 10px;"></a-select>
 
-        <a-select v-model:value="selectedDistrict" show-search placeholder="Chọn quận huyện" 
-        :options="districtOptions" :filter-option="filterOption" @focus="handleFocus" @blur="handleBlur"
-        @change="fetchDistricts" style="margin-bottom: 10px;"></a-select> 
-
-        
-        <a-select v-model:value="selectedWard" show-search placeholder="Chọn phường xã" 
-        :options="wardOptions" :filter-option="filterOption" @focus="handleFocus" @blur="handleBlur"
-        @change="fetchWards" style="margin-bottom: 10px;"></a-select> 
-
-        <a-input v-model:value="houseNumber" placeholder="Số nhà" @input="updateAddress"/>
+          <a-select v-model:value="selectedDistrict" show-search placeholder="Chọn quận huyện"
+            :options="districtOptions" :filter-option="filterOption" @focus="handleFocus" @blur="handleBlur"
+            @change="fetchDistricts" style="margin-bottom: 10px;"></a-select>
 
 
+          <a-select v-model:value="selectedWard" show-search placeholder="Chọn phường xã" :options="wardOptions"
+            :filter-option="filterOption" @focus="handleFocus" @blur="handleBlur" @change="fetchWards"
+            style="margin-bottom: 10px;"></a-select>
 
-    </a-form-item>
+          <a-input v-model:value="houseNumber" placeholder="Số nhà" @input="updateAddress" />
+
+
+
+        </a-form-item>
 
 
 
@@ -122,15 +124,15 @@ export default {
     const apiPrefix = import.meta.env.VITE_API_PREFIX;
     const isModalVisible = ref(false);
     const isModalVisible2 = ref(false);
-    const userNow = JSON.parse(localStorage.getItem('auth')); 
+    const userNow = JSON.parse(localStorage.getItem('auth'));
     const token = JSON.parse(localStorage.getItem('token'));  // Lấy token từ localStorage
 
     // Lấy token từ localStorage
     const storeInfo = ref();
     const getStoreInfo = async () => {
-      if(userNow.role == 'MANAGER'){
+      if (userNow.role == 'MANAGER') {
         const response = await axios.get(
-           `${apiPrefix}/api/v1/management/${userNow.storeId}/info/view`,
+          `${apiPrefix}/api/v1/management/${userNow.storeId}/info/view`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -157,34 +159,34 @@ export default {
       confirmNewPass: '',
     });
     const options = ref([
-  {
-    value: 'jack',
-    label: 'Jack',
-  },
-  {
-    value: 'lucy',
-    label: 'Lucy',
-  },
-  {
-    value: 'tom',
-    label: 'Tom',
-  },
-]);
+      {
+        value: 'jack',
+        label: 'Jack',
+      },
+      {
+        value: 'lucy',
+        label: 'Lucy',
+      },
+      {
+        value: 'tom',
+        label: 'Tom',
+      },
+    ]);
 
 
-const handleChange = value => {
-  console.log(`selected ${value}`);
-};
-const handleBlur = () => {
-  console.log('blur');
-};
-const handleFocus = () => {
-  console.log('focus');
-};
-const filterOption = (input, option) => {
-  return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0;
-};
-const value = ref(undefined);
+    const handleChange = value => {
+      console.log(`selected ${value}`);
+    };
+    const handleBlur = () => {
+      console.log('blur');
+    };
+    const handleFocus = () => {
+      console.log('focus');
+    };
+    const filterOption = (input, option) => {
+      return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+    };
+    const value = ref(undefined);
 
     const avatarFile = ref(null); // Store the file object
     const newImage = ref(''); // Store the base64 URL
@@ -306,9 +308,9 @@ const value = ref(undefined);
           const response = await axios.get(`https://esgoo.net/api-tinhthanh/2/${selectedProvince.value}.htm`);
           if (response.data.error === 0) {
             districtOptions.value = response.data.data.map(district => ({
-            value: district.id,
-            label: district.full_name,
-          }));
+              value: district.id,
+              label: district.full_name,
+            }));
             // wards.value = [];
             // selectedDistrict.value = '0';
             // selectedWard.value = '0';
@@ -328,10 +330,10 @@ const value = ref(undefined);
           const response = await axios.get(`https://esgoo.net/api-tinhthanh/3/${selectedDistrict.value}.htm`);
           if (response.data.error === 0) {
             wardOptions.value = response.data.data.map(ward => ({
-            value: ward.id,
-            label: ward.full_name,
-          }));            
-          
+              value: ward.id,
+              label: ward.full_name,
+            }));
+
             updateAddress();
           }
         } catch (error) {

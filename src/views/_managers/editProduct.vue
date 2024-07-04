@@ -6,9 +6,9 @@
           <a-breadcrumb-item>
             <router-link :to="{ name: 'admin-dashboards' }">Trang chủ</router-link>
           </a-breadcrumb-item>
-          <a-breadcrumb-item>
-            <router-link :to="{ name: 'admin-users' }">Product</router-link>
-          </a-breadcrumb-item>
+          <a-breadcrumb-item @click="navigateToProduct" style="cursor: pointer;">
+  Sản phẩm
+</a-breadcrumb-item>
           <a-breadcrumb-item>sửa</a-breadcrumb-item>
         </a-breadcrumb>
         <h1>Sửa sản phẩm</h1>
@@ -120,6 +120,8 @@ export default defineComponent({
     const formRef = ref();
     const errors = ref({});
     const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
+    const auth = JSON.parse(localStorage.getItem("auth")); 
+
     let storeId;
     let productTypeId;
     const product = ref();
@@ -258,7 +260,10 @@ export default defineComponent({
       }
 
     };
+    const navigateToProduct = () => {
 
+router.push({ name: "ProductByStore", params: { id: auth.storeId } });
+}
     const previewFiles = (event) => {
       const file = event.target.files[0];
       if (!file) return;
@@ -343,7 +348,7 @@ export default defineComponent({
         router.push({ name: "ProductByStore", params: { id: storeId } });
       } catch (error) {
         console.error("Error during form submission:", error);
-        message.error("Có lỗi xảy ra khi sửa sản phẩm: " + error.message);
+        message.error(error.response.data.message);
       } finally {
         formState.loading = false; // Tắt trạng thái chờ khi hoàn thành
       }
@@ -368,7 +373,7 @@ export default defineComponent({
       previewFiles,
       productTypes,
       handleChange,
-
+      navigateToProduct,
       goBack,
       newImage,
       handleFileUpload

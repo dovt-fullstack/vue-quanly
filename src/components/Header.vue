@@ -38,10 +38,17 @@
         </div>
         <p class="MuiTypography-root  ">
           <a-dropdown>
-            <a class="ant-dropdown-link " @click.prevent>
-              <span class="me-1">Xin chào {{ userLocal?.lastname }}</span>
-              <i class="fa-solid "></i>
-            </a>
+            <span class="ant-dropdown-link d-block" style="height: 40px; 
+            margin-top:25px;  
+            margin-left: 5px;  
+            text-align: center;
+    color: white;
+    font: bold 15px arial;
+    display: block;
+    " @click.prevent>
+                  <span class="me-1 " style="padding-top: 14px;" >Xin chào {{ userLocal?.lastname }}</span>
+                  <i class="fa-solid "></i>
+                </span>
             <template #overlay>
               <a-menu>
 
@@ -90,9 +97,10 @@
             <a-list item-layout="horizontal" :data-source="sortedNotiList">
               <template #renderItem="{ item }">
                 <a-list-item :style="{ 
+                  border: '1px solid ' ,
                                   marginTop: '10px',
-                                  backgroundColor: item.notiStatus ? '#ffffff' : '#d3d3d3' }">
-                  <a-list-item-meta>
+                                  backgroundColor: item.notiStatus ?  '#ffffff' :'#d3d3d3' }">
+                  <a-list-item-meta style="padding-left: 10px;">
                     <template #title>
                       <h6>{{ item.description }}</h6>
                     </template>
@@ -305,7 +313,7 @@ export default defineComponent({
 }
 
 .jss263:hover {
-  background: #f2f9ff;
+  background: #a2a8af;
 }
 
 .jss263:hover svg {

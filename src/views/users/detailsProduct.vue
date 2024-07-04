@@ -25,7 +25,7 @@
             {{ product.status ? " Đang bán" : " Ngừng bán" }}
           </span> -->
         </p>
-        <p class="mb-1" v-if="product.status ==2"  ><strong>Lí do bị cấm: </strong><span :class=" 'text-danger' : true"> {{ product.banReason }}</span></p>
+        <p class="mb-1" v-if="product.status === 2"><strong>Lý do bị cấm: </strong><span class="text-danger">{{ product.banReason }}</span></p>
 
         <p class="mb-1"><strong>Số lượt xem sản phẩm:</strong> {{ product.view }}</p>
         <p class="mb-1">
@@ -43,10 +43,14 @@
 import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
-import { message } from "ant-design-vue";
+import { message,Space, Tag } from "ant-design-vue";
 
 export default defineComponent({
   name: "ProductDetail",
+  components: {
+    'a-space': Space,
+    'a-tag': Tag,
+  },
 
   setup() {
     const product = ref({});

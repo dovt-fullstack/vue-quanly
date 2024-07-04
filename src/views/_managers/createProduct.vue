@@ -3,12 +3,12 @@
     <div class="row mb-3">
       <div class="col-12">
         <a-breadcrumb>
-          <a-breadcrumb-item>
+          <a-breadcrumb-item style="cursor: pointer; text-decoration: none;">
             <router-link :to="{ name: 'admin-dashboards' }">Trang chủ</router-link>
           </a-breadcrumb-item>
-          <a-breadcrumb-item>
-            <router-link :to="{ name: 'admin-users' }">Product</router-link>
-          </a-breadcrumb-item>
+          <a-breadcrumb-item @click="navigateToProduct" style="cursor: pointer;">
+  Sản phẩm
+</a-breadcrumb-item>
           <a-breadcrumb-item>Thêm mới</a-breadcrumb-item>
         </a-breadcrumb>
         <h1></h1>
@@ -21,10 +21,11 @@
             <div class="col-12 ">
               <a-form-item ref="productName" label="Tên sản phẩm" required name="productName">
                 <a-input v-model:value="formState.productName" />
-                <small v-if="errors && errors.UserName" class="text-danger">{{ errors.UserName[0] }}</small>
+                <small v-if="errors && errors.price" class="text-danger">{{ errors.price[0] }}</small>
               </a-form-item>
               <a-form-item ref="price" label="Giá bán" required name="price">
-                <a-input v-model:value="formState.price" />
+                <a-input v-model:value="formState.price"
+                  v-rules="[{ required: true, message: 'Giá bán là bắt buộc' }, { pattern: /^\d+$/, message: 'Chỉ được nhập số' }]" />
                 <small v-if="errors && errors.price" class="text-danger">{{ errors.price[0] }}</small>
               </a-form-item>
               <a-form-item ref="description" label="Mô tả" required name="description">
@@ -33,7 +34,7 @@
               </a-form-item>
 
 
-              <a-form-item ref="productTypeName" label="Loại sản phẩm" name="productTypeId">
+              <a-form-item ref="productTypeName" label="Loại sản phẩm" required name="productTypeName">
                 <a-select v-model:value="formState.productTypeName" style="width: 100%" placeholder="Chọn loại sản phẩm"
                   @change="handleChange">
                   <a-select-option v-for="typee in productTypes" :key="typee.productTypeName"
@@ -97,7 +98,10 @@ export default defineComponent({
     const errors = ref({});
     const formRef = ref();
     const route = useRoute();
-    const token = JSON.parse(localStorage.getItem("token")); // Lấy token từ localStorage
+    const token = JSON.parse(localStorage.getItem("token"));
+    const auth = JSON.parse(localStorage.getItem("auth"));
+
+     // Lấy token từ localStorage
 
     const id = route.params.id
     const formState = reactive({
@@ -128,17 +132,38 @@ export default defineComponent({
       productName: [
         {
           required: true,
-          message: 'name không để trống.',
+          message: 'Tên sản phẩm không để trống.',
           trigger: 'change',
         }
       ],
-      fullName: [
+      description: [
         {
-          required: false,
-          message: ' không để trống.',
+          required: true,
+          message: 'Mô tả không để trống.',
           trigger: 'change',
         }
       ],
+      productTypeName: [
+        {
+          required: true,
+          message: 'Loại sản phẩm không để trống.',
+          trigger: 'change',
+        }
+      ],
+
+
+      price: [
+        {
+          required: true,
+          message: 'Giá bán là bắt buộc.',
+          trigger: 'change',
+        },
+        {
+          pattern: /^\d+$/,
+          message: 'Chỉ được nhập số.',
+          trigger: 'change',
+        }
+      ]
 
     };
     const layout = {
@@ -169,6 +194,7 @@ export default defineComponent({
           console.log(response.data)
           productTypes.value = response.data.data;
         } else {
+
           console.error(response.data.message);
         }
       } catch (error) {
@@ -194,6 +220,11 @@ export default defineComponent({
           console.log(error);
         });
     };
+    const navigateToProduct = () => {
+
+      router.push({ name: "ProductByStore", params: { id: auth.storeId } });
+    }
+
     const filterOptionLevelManage = (input, option) => {
       return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
     };
@@ -259,7 +290,7 @@ export default defineComponent({
         }
 
 
-        
+
 
         axios.post(`${apiPrefix}/api/v1/management/${id}/product/insert`, formData, {
           headers: {
@@ -268,16 +299,22 @@ export default defineComponent({
           }
         })
           .then((response) => {
-            message.success("Tạo mới thành công!");
-            router.push({ name: "ProductByStore", params: { id: id } });
+            if (response.data.status === "OK") {
+              message.success("Tạo mới thành công!");
+              router.push({ name: "ProductByStore", params: { id: id } });
+            }
+            else if (response.data.status === "FAILED") {
+        message.error(response.data.message || "Có lỗi xảy ra, vui lòng thử lại.");
+      }
+
           })
           .catch((error) => {
-            console.log(error);
+            message.error(error.response.data.message);
           });
 
+
       } catch (error) {
-        console.error("Error during form submission:", error);
-        message.error("Có lỗi xảy ra: " + error.message);
+
       } finally {
         formState.loading = false; // Tắt trạng thái chờ khi hoàn thành
       }
@@ -342,7 +379,7 @@ export default defineComponent({
       resetForm,
       productTypes,
       handleChange,
-
+      navigateToProduct,
 
       handleFileUpload,
       getOptionsLevelManage,

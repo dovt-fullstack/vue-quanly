@@ -261,9 +261,9 @@ const adminRoutes = [
     component: () => import("../views/_customers/DetailsProductHome.vue"),
   },
   {
-    path: "/frivStore",
-    name: "frivStore",
-    meta: { title: "frivStore" },
+    path: "/favstore",
+    name: "favstore",
+    meta: { title: "favstore" },
     component: () => import("../views/_customers/frivStore.vue"),
   },
   {

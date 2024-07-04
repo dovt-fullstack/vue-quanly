@@ -147,13 +147,17 @@ import { defineComponent, ref, reactive, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import axios from "axios";
 import { useAuthStore } from "../../stores/auth.store.js";
-import { message } from "ant-design-vue";
+import { message,Space, Tag } from "ant-design-vue";
 
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 
 export default defineComponent({
+    components: {
+    'a-space': Space,
+    'a-tag': Tag,
+  },
     setup() {
         const authStoreClaim = ref(useAuthStore().user.roleClaimDetail);
         const router = useRouter();

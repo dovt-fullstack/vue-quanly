@@ -17,8 +17,28 @@
             }}</small>
               </a-form-item>
 
+
+
+
               <a-form-item ref="address" label="Địa chỉ" required name="address">
-                <a-input v-model:value="formState.address" />
+
+                <a-select v-model:value="selectedProvince" show-search placeholder="Chọn tỉnh thành"
+            :options="provinceOptions" :filter-option="filterOption" @focus="handleFocus" @blur="handleBlur"
+            @change="fetchProvinces" style="margin-bottom: 10px;"></a-select>
+
+          <a-select v-model:value="selectedDistrict" show-search placeholder="Chọn quận huyện"
+            :options="districtOptions" :filter-option="filterOption" @focus="handleFocus" @blur="handleBlur"
+            @change="fetchDistricts" style="margin-bottom: 10px;"></a-select>
+
+
+          <a-select v-model:value="selectedWard" show-search placeholder="Chọn phường xã" :options="wardOptions"
+            :filter-option="filterOption" @focus="handleFocus" @blur="handleBlur" @change="fetchWards"
+            style="margin-bottom: 10px;"></a-select>
+
+          <a-input v-model:value="houseNumber" style="margin-bottom: 10px;" placeholder="Số nhà" @input="updateAddress" />
+
+
+                <a-input v-model:value="formState.address" readonly="true"/>
                 <small v-if="errors && errors.address" class="text-danger">{{
               errors.UserName[0]
             }}</small>
@@ -43,11 +63,10 @@
               </a-form-item>
 
 
-              <a-form-item label="Ảnh đại diện mới">
+              <a-form-item label="Ảnh đại diện cửa hàng">
                 <input type="file" @change="previewFiles" />
                 <div class="avatar-container">
                   <img v-if="newImage" :src="newImage" class="avatar" alt="avatar" />
-                  <img v-else :src="formState.avatarProduct" class="avatar" alt="avatar" />
                 </div>
               </a-form-item>
 
@@ -108,11 +127,96 @@ export default defineComponent({
 
       //
     });
-    const avatarFile = ref(null); // Store the file object
-    const newImage = ref(''); // Store the base64 URL
+
     const handleChange = value => {
       console.log(`selected ${value}`);
     };
+    const handleBlur = () => {
+      console.log('blur');
+    };
+    const handleFocus = () => {
+      console.log('focus');
+    };
+    const provinces = ref([]);
+    const districts = ref([]);
+    const wards = ref([]);
+    const selectedProvince = ref(null);
+    const selectedDistrict = ref(null);
+    const selectedWard = ref(null);
+    const houseNumber = ref(null);
+    const filterOption = (input, option) => {
+      return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+    };
+
+    const provinceOptions = ref([]);
+    const fetchProvinces = async () => {
+      try {
+        const response = await axios.get("https://esgoo.net/api-tinhthanh/1/0.htm");
+        if (response.data.error === 0) {
+          // provinces.value = response.data.data;
+          // provinces.value = data.map(province => ({ value: province.full_name }));
+          provinceOptions.value = response.data.data.map(province => ({
+            value: province.id,
+            label: province.full_name,
+          }));
+          fetchDistricts();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    const districtOptions = ref([]);
+    const fetchDistricts = async () => {
+      if (selectedProvince.value !== '0') {
+        try {
+          const response = await axios.get(`https://esgoo.net/api-tinhthanh/2/${selectedProvince.value}.htm`);
+          if (response.data.error === 0) {
+            districtOptions.value = response.data.data.map(district => ({
+              value: district.id,
+              label: district.full_name,
+            }));
+            // wards.value = [];
+            // selectedDistrict.value = '0';
+            // selectedWard.value = '0';
+            fetchWards();
+            updateAddress();
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+    const wardOptions = ref([]);
+
+    const fetchWards = async () => {
+      if (selectedDistrict.value !== '0') {
+        try {
+          const response = await axios.get(`https://esgoo.net/api-tinhthanh/3/${selectedDistrict.value}.htm`);
+          if (response.data.error === 0) {
+            wardOptions.value = response.data.data.map(ward => ({
+              value: ward.id,
+              label: ward.full_name,
+            }));
+
+            updateAddress();
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+
+    const updateAddress = () => {
+      const provinceName = provinceOptions.value.find(p => p.value === selectedProvince.value)?.label || '';
+
+
+      const districtName = districtOptions.value.find(d => d.value === selectedDistrict.value)?.label || '';
+      const wardName = wardOptions.value.find(w => w.value === selectedWard.value)?.label || '';
+      formState.address = `${houseNumber.value}, ${wardName}, ${districtName}, ${provinceName}`.trim();
+    };
+    const avatarFile = ref(null); // Store the file object
+    const newImage = ref(''); // Store the base64 URL
+
     const storeTypes = ref([]);
     const rules = {
 
@@ -143,9 +247,8 @@ export default defineComponent({
       try {
         console.log(13132223)
 
-        const response = await axios.get(
-          ` ${apiPrefix}/api/v1/storetype/view`,
-          {
+        const response = await axios
+        .get(`${apiPrefix}/api/v1/auth/storetype/view`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -347,7 +450,7 @@ export default defineComponent({
       //
       fetchProduct();
 
-
+      fetchProvinces();
       resetForm();
       getOptionsLevelManage();
       getOptionsStatus();
@@ -369,9 +472,27 @@ export default defineComponent({
     //
     return {
       ...toRefs(users),
+      handleBlur,
+      handleFocus,
+      provinces,
+      districts,
+      wards,
+      fetchProvinces,
+      updateAddress,
+      houseNumber,
+      fetchWards,
+      wardOptions,
+      selectedWard,
+      fetchDistricts,
+      districtOptions,
+      selectedDistrict,
+      newImage,
+
+
       authStoreClaim,
       handleChange,
       previewFiles,
+      filterOption,
       errors,
       formState,
       storeTypes,
@@ -393,9 +514,19 @@ export default defineComponent({
       // preview
       handleChangeUpload,
       handleRemoveAvatar,
+      selectedProvince,
+      provinceOptions,
       goBack
 
     };
   },
 });
 </script>
+<style scoped>
+.avatar {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #cbcbcb;
+  margin-top: 10px;
+}
+</style>

@@ -124,8 +124,8 @@
         </div>
       </div>
     </div>
-
-    <div id="footer">
+    <Footer/>
+    <!-- <div id="footer">
       <div class="f" style="padding: 40px 0">
         <div class="wrap flexJus">
           <div class="f flex">
@@ -191,7 +191,7 @@
       <div class="zalo-chat-widget" data-oaid="2839194858446814357"
         data-welcome-message="Rất vui khi được hỗ trợ bạn!. Nếu bạn không thể chờ thì hãy gọi hoặc nhắn tin đến số điện thoại này 0973.66.5115."
         data-autopopup="1800" data-width="500" data-height="500" style="right: 12px"></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -221,10 +221,12 @@ import BaseCommon from "../../api/BaseCommon.js";
 import ApiMeasuringTool from "../../api/ApiMeasuringTool.js";
 import { useAuthStore } from "../../stores/auth.store.js";
 import Header from "../../components/HeaderCustomer.vue";
+import Footer from "../../components/footer2.vue";
 
 export default defineComponent({
   components: {
     Header,
+    Footer
 
   },
 

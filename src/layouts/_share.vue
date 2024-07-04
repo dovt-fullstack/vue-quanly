@@ -7,7 +7,7 @@
           <nav style="height: 100vh">
             <div class="">
               <div class="">
-                <span @click="navigateTo('admin-dashboards')" style="color: white; padding-left: 20px; cursor: pointer;"
+                <span @click="navigateByRole(role)" style="color: white; padding-left: 20px; cursor: pointer;"
                   class="MuiTypography-root MuiTypography-h3">Tổng quan</span>
               </div>
             </div>
@@ -276,6 +276,7 @@
 
 <script>
 import Header from "../components/Header.vue";
+import { Form, Drawer, Button, InputNumber, message } from "ant-design-vue";
 
 export default {
   components: {
@@ -285,25 +286,57 @@ export default {
     navigateTo(route) {
       this.$router.push({ name: route });
     },
+    navigateByRole(role) {
+      if(role == 'ADMIN'){
+        return this.$router.push({ name: "admin-store" });
+      }
+      if(role == 'SHIPPER'){
+        return this.$router.push({ name: "danh-sach-don" });
+
+      }
+      if(role == 'MANAGER'){
+        return this.$router.push({ name: "admin-dashboards" });
+
+      }
+    },
 
     navigateToExport(storeId) {
-      console.log(storeId, "store")
+      if(storeId == 0){
+        message.error('Bạn cần hoàn tất thông tin của hàng trước')
+        return;
+      }
       this.$router.push({ name: "importExport", params: { id: storeId } });
     },
     
     navigateToCustomer(storeId) {
+      if(storeId == 0){
+        message.error('Bạn cần hoàn tất thông tin của hàng trước')
+        return;
+      }
       console.log(storeId, "store")
       this.$router.push({ name: "admin-store-all-customer", params: { id: storeId } });
     },
     navigateToRevenue(storeId) {
+      if(storeId == 0){
+        message.error('Bạn cần hoàn tất thông tin của hàng trước')
+        return;
+      }
       console.log(storeId, "store")
       this.$router.push({ name: "doanh-thu-store", params: { id: storeId } });
     },
     navigateToProduct(storeId) {
+      if(storeId == 0){
+        message.error('Bạn cần hoàn tất thông tin của hàng trước')
+        return;
+      }
       console.log(storeId, "store")
       this.$router.push({ name: "ProductByStore", params: { id: storeId } });
     },
     navigateToOrder(storeId) {
+      if(storeId == 0){
+        message.error('Bạn cần hoàn tất thông tin của hàng trước')
+        return;
+      }
       console.log(storeId, "store")
       this.$router.push({ name: "danh-sach-order-store", params: { id: storeId } });
     },
@@ -321,6 +354,9 @@ export default {
   mounted() {
     try {
       const data = JSON.parse(localStorage.getItem("auth"));
+      if(data == null ){
+        window.location.href = "/login";
+      }
       this.role = data.role;
       console.log(data.role);
       console.log("Retrieved role:", this.role);
